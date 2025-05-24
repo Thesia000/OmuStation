@@ -297,8 +297,8 @@ namespace Content.Server.Entry
             _admin.Initialize();
             _afk.Initialize();
             _rules.Initialize();
-            //_discordLink.Initialize();
-            //_discordChatLink.Initialize();
+            _discordLink.Initialize();
+            _discordChatLink.Initialize();
             _euiManager.Initialize();
             _gameMap.Initialize();
             _entSys.GetEntitySystem<GameTicker>().PostInitialize();
