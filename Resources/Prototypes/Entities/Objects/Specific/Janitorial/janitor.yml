@@ -177,6 +177,7 @@
     size: Large
     sprite: Objects/Specific/Janitorial/mop.rsi
   - type: Absorbent
+    useAbsorberSolution: true
   - type: SolutionContainerManager
     solutions:
       absorbed:
@@ -225,6 +226,9 @@
       sprite: Objects/Specific/Janitorial/advmop.rsi
     - type: Absorbent
       pickupAmount: 100
+      useAbsorberSolution: true
+    - type: UseDelay
+      delay: 1.0
     - type: SolutionRegeneration
       solution: absorbed
       generated:
@@ -496,6 +500,7 @@
       sprite: Objects/Specific/Janitorial/rag.rsi
     - type: Absorbent
       pickupAmount: 15
+      useAbsorberSolution: true
     - type: Construction
       graph: Rag
       node: rag
