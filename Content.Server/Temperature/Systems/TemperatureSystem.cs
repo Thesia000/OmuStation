@@ -104,6 +104,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._DV.CosmicCult.Components; // DeltaV
 using Content.Shared._Goobstation.Wizard.Spellblade;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -127,7 +128,8 @@ public sealed class TemperatureSystem : SharedTemperatureSystem
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
+    private EntityQuery<TemperatureImmunityComponent> _immuneQuery; // DeltaV
+
     [Dependency] private readonly SpellbladeSystem _spellblade = default!; // Goobstation
 
     /// <summary>
@@ -168,6 +170,10 @@ public sealed class TemperatureSystem : SharedTemperatureSystem
             OnParentThresholdStartup);
         SubscribeLocalEvent<ContainerTemperatureDamageThresholdsComponent, ComponentShutdown>(
             OnParentThresholdShutdown);
+
+        _immuneQuery = GetEntityQuery<TemperatureImmunityComponent>(); // DeltaV
+
+        InitializeDamage();
     }
 
     public override void Update(float frameTime)
