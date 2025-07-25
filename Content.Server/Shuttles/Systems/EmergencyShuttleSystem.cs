@@ -82,7 +82,8 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
-using Content.Shared._DV.CustomObjectiveSummary; // DeltaV
+using Content.Shared._DV.CustomObjectiveSummary;
+using Content.Server._DV.Shuttles.Events;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -105,7 +106,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DeviceNetwork.Components;
-using Content.Shared._Omu.Shuttles.Components; // Omu, allow CC shuttles to FTL to CC
+using Content.Shared._Omu.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -529,6 +530,10 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
 
         _consoleAccumulator = ConfigManager.GetCVar(CCVars.EmergencyShuttleDockTime);
         EmergencyShuttleArrived = true;
+
+        RaiseLocalEvent(new EvacShuttleDockedEvent()); // DeltaV
+
+        var query = AllEntityQuery<StationEmergencyShuttleComponent>();
 
         var dockResults = new List<ShuttleDockResult>();
 
