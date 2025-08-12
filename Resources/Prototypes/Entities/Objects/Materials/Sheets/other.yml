@@ -53,6 +53,7 @@
   - type: Tag
     tags:
     - Sheet
+    - ConstructionMaterial
     - DroneUsable # Goobstation
   - type: Damageable
     damageContainer: Inorganic
@@ -152,8 +153,10 @@
   - type: Tag
     tags:
     - Sheet
-    - SheetPlasma
-  - type: UserInterface # Omu start - EE Port
+    - ConstructionMaterial
+    - SheetPlasma # Goobstation
+  # Omu start - EE Port
+  - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:
         type: AttachedRadialSelectorMenuBUI
@@ -165,7 +168,8 @@
     entries:
     - prototype: SheetPGlass
     - prototype: SheetRPGlass
-    - prototype: SheetRPGlass1 #Omu end - EE port
+    - prototype: SheetRPGlass1
+  # Omu end - EE port
 
 - type: entity
   parent: SheetPlasma
@@ -189,16 +193,6 @@
     count: 1
 
 - type: entity
-  parent: SheetPlasma
-  id: SheetPlasmaLingering0
-  name: plasma
-  suffix: 0, Lingering
-  components:
-  - type: Stack
-    lingering: true
-    count: 0
-
-- type: entity
   parent: SheetOtherBase
   id: SheetPlastic
   name: plastic
@@ -208,6 +202,7 @@
     tags:
     - Plastic
     - Sheet
+    - ConstructionMaterial
     - DroneUsable # Goobstation
   - type: Material
   - type: PhysicalComposition
