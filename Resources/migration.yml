@@ -1131,6 +1131,10 @@ FoodDonutJellySlugcat: FoodDonutJellyScurret
 
 # 2026-01-07 - Omu
 #SpawnPointCourier: null # Omu, add courier
+# 2025-08-11
+ClothingUniformJumpsuitChiefEngineerNT: ClothingUniformJumpsuitChiefEngineer
+ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
+
 # 2026-01-04
 # GhostBarSpawner: null # Omu
 
