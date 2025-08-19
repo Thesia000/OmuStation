@@ -8,7 +8,9 @@
   color: "#1c1624"
   recognizable: true
   physicalDesc: reagent-physical-desc-inky
+  standout: true
 
+# Omustation Start
 - type: reagent
   parent: Blood
   id: AcidBlood
@@ -86,3 +88,5 @@
             Brute: -1.5
           types:
             Heat: -0.4
+
+# Omustation End
