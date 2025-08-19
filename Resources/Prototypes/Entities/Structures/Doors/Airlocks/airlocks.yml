@@ -270,6 +270,8 @@
   components:
   - type: Sprite
     sprite: Structures/Doors/Airlocks/Standard/xenoborg.rsi
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: Airlock

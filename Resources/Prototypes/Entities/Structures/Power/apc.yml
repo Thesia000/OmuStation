@@ -299,6 +299,8 @@
   - type: Battery
     maxCharge: 200000
     startingCharge: 200000
+  - type: BatteryDrinkerSource # EE IPCs
+    maxAmount: 26000
 
 - type: entity
   parent: BaseAPC
