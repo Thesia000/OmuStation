@@ -128,3 +128,12 @@
   components:
   - type: PainNumbness
   globalCost: -2 # Omustation - Remake EE Traits system - global trait points cost
+
+- type: trait
+  id: ImpairedMobility
+  name: trait-impaired-mobility-name
+  description: trait-impaired-mobility-desc
+  traitGear: OffsetCane
+  category: Disabilities
+  components:
+    - type: ImpairedMobility
