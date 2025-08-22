@@ -438,7 +438,8 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Ion: 6
+        Heat: 0
+        Ion: 10 # DeltaV
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -481,6 +482,7 @@
     damage:
       types:
         Heat: 0
+        Ion: 5 # DeltaV
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -1356,7 +1358,8 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Ion: 8
+        Heat: 0
+        Ion: 4 # DeltaV
     soundHit:
       collection: WeakHit
     forceSound: true
