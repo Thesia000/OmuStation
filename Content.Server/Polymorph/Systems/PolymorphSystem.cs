@@ -475,7 +475,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         if (configuration.TransferHumanoidAppearance)
         {
-            _humanoid.CloneAppearance(uid, child);
+            _humanoid.CloneAppearance(child, uid);
         }
 
         if (configuration.ComponentsToTransfer.Count > 0) // Goobstation
