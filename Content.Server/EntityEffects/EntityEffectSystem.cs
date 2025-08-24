@@ -27,6 +27,8 @@ using Content.Shared._Mono.EntityEffects.Effects;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Audio;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates.Helpers;
