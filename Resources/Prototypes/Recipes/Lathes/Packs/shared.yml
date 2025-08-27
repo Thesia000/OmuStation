@@ -47,6 +47,12 @@
   - CableLVGranular1Stack # omu granular LV cables
   - CableLVGranular2Stack # omu granular LV cables
 
+- type: latheRecipePack
+  id: PaperworkStatic
+  recipes:
+  - BoxFolderClipboardEmpty
+  - BoxFolderPlasticClipboardEmpty
+
 ## Dynamic
 
 # Things you'd expect sci salv and engi to make use of

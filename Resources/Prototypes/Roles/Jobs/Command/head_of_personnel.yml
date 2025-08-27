@@ -214,7 +214,7 @@
     #id: HoPPDA - Omu, moved to loadouts
     #gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
-    belt: BoxFolderClipboard
+    belt: BoxFolderClipboardThreePapers
     eyes: ClothingEyesHudCommand
   storage:
     back:
