@@ -28,16 +28,16 @@ public sealed partial class CombatMetricComponent : Component
     ///   Cost for friendlies who are in crit
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public double CritScore = 10.0f;
+    public double CritScore = 20.0f;
 
     /// <summary>
     ///   Cost for friendlies who are dead
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public double DeadScore = 20.0f;
+    public double DeadScore = 40.0f;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public double maxItemThreat = 15.0f;
+    public double maxItemThreat = 10.0f;
 
     /// <summary>
     ///   ItemThreat - evaluate based on item tags how powerful a player is
