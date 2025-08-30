@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: BSSDEmitter
+  name: BSSD Emitter
+  description: This device Fires a concentrated energy beam to charge the BSD Core
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: RadiationSource
+    - type: Transform
+      anchored: true
+      noRot: true
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Sprite
+      drawdepth: WallMountedItems
+      sprite: _Goobstation/Supermatter/supermatter.rsi
+      state: supermatter
+    - type: Icon
+      sprite: _Goobstation/Supermatter/supermatter.rsi
+      state: supermatter
+    - type: WarpPoint
+      follow: true
+      location: BSSD Emitter

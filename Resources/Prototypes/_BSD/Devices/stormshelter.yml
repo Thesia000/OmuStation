@@ -1,0 +1,20 @@
+- type: entity
+  id: StormShelterEmitter
+  name: Storm Shelter Emitter
+  description: This device generates a strong shield to protect from anomalous swarm.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: RadiationSource
+    - type: Transform
+      anchored: true
+      noRot: true
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Sprite
+      drawdepth: WallMountedItems
+      sprite: _Goobstation/Supermatter/supermatter.rsi
+      state: supermatter
+    - type: Icon
+      sprite: _Goobstation/Supermatter/supermatter.rsi
+      state: supermatter
