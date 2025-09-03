@@ -1133,7 +1133,7 @@
   - type: Item
     sprite: Mobs/Pets/Smile/smile.rsi
     size: Ginormous # Omu
-  - type: SentienceTarget
+  - type: SentienceTarget # Omu?
     flavorKind: station-event-random-sentience-flavor-slime
   - type: MobPrice
     price: 3000 # it is a truly valuable creature
@@ -1185,7 +1185,7 @@
       settings: default
     requirements: # Goobstation - ghost roles requirements
     - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours - Omu 
+      time: 18000 #5 hours - Omu
     mindRoles:
     - MindRoleGhostRoleNeutral
   - type: GhostTakeoverAvailable
