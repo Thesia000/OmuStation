@@ -374,6 +374,10 @@
   - type: BureaucraticErrorRule
     ignoredJobs:
     - StationAi
+    - ResearchAssistant
+    - MedicalIntern
+    - SecurityCadet
+    - TechnicalAssistant
     - NanotrasenCareerTrainer #Omu
 
 - type: entity
