@@ -121,6 +121,7 @@ loadout-group-cargo-technician-backpack = Cargo Technician backpack
 loadout-group-cargo-technician-outerclothing = Cargo Technician outer clothing
 # omu,, i changed the name because all cargo jobs will use this shoe loadout group
 loadout-group-cargo-technician-shoes = Cargo shoes
+loadout-group-cargo-technician-id = Cargo Technician ID
 
 loadout-group-salvage-specialist-backpack = Salvage Specialist backpack
 loadout-group-salvage-specialist-outerclothing = Salvage Specialist outer clothing

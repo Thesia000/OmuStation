@@ -432,6 +432,8 @@
   - CargoTechnicianJumpsuit
   - CargoTechnicianBackpack
   - CargoTechnicianOuterClothing
+  #- CargoTechnicianShoes Omu
+  - CargoTechnicianID
   - CargoShoes # omu
   - Glasses
   - Survival
