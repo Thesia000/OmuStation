@@ -596,7 +596,6 @@
 #  - type: RandomSpawnRule
 #    prototype: MobRevenant      goobstation end
 
-# Goob - wiz of our own
 #- type: entity
 #  parent: BaseWizardRule
 #  id: WizardSpawn
@@ -606,9 +605,9 @@
 #    duration: 1
 #    earliestStart: 30
 #    reoccurrenceDelay: 60
-#    minimumPlayers: 10
+#    minimumPlayers: 30
 #  - type: AntagSelection
-#    agentName: wizard-round-end-name
+#   agentName: wizard-round-end-name
 #    definitions:
 #    - spawnerPrototype: SpawnPointGhostWizard
 #      min: 1
@@ -617,7 +616,7 @@
 #      pickPlayer: false
 #      startingGear: WizardBlueGear
 #      roleLoadout:
-#      - RoleSurvivalExtended
+#     - RoleSurvivalExtended
 #      briefing:
 #        text: wizard-role-greeting
 #        color: Turquoise
@@ -632,6 +631,7 @@
 #        nameSegments:
 #        - NamesWizardFirst
 #        - NamesWizardLast
+#        nameFormat: name-format-wizard
 #      mindRoles:
 #      - MindRoleWizard
 
