@@ -21,3 +21,6 @@
     - type: WarpPoint
       follow: true
       location: BSSD Core Harness
+    - type: Storm
+    - type: FireStorm
+      pulseDetonation: DemolitionCharge

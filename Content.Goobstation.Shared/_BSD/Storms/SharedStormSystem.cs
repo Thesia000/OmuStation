@@ -1,4 +1,5 @@
 using Content.Goobstation.Shared._BSD.Storms.Components;
+using Content.Goobstation.Shared._BSD.Storms.Events;
 using Robust.Shared.Timing;
 using Content.Shared.Actions;
 
@@ -15,12 +16,15 @@ public abstract class SharedStormSystem : EntitySystem
         base.Initialize();
     }
 
-    public void DoStromPulse(EntityUid uid, StormComponent? component = null)
+    public void DoStormPulse(EntityUid uid, StormComponent? component = null)
     {
         if (!Resolve(uid, ref component))
         {
             return;
         }
+        ResetPulseTimer(uid, component);
+        var ev = new StormPulseEvent();
+        RaiseLocalEvent(uid, ev, true);
     }
 
     public void ResetPulseTimer(EntityUid uid, StormComponent? component = null)
@@ -29,14 +33,21 @@ public abstract class SharedStormSystem : EntitySystem
         {
             return;
         }
-        component.NextPulseTime = Timing.CurTime + component.DefaultPulseTime;
+        component.NextPulseTime = Timing.CurTime + (component.DefaultPulseTime)/component.Intensity;
+        return;
     }
-    public override void Update(floar frameTime)
+    public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var StormList = EntityQueryEnumerator<StormPulseComponent>();
-        while (StormList.MoveNext(out var ent)) ;
+        var StormList = EntityQueryEnumerator<StormComponent>();
+        while (StormList.MoveNext(out var ent,out var storm))
+        {
+            if (Timing.CurTime > storm.NextPulseTime)
+            {
+                DoStormPulse(ent, storm);
+            }
+        }
     }
 }
 
-public sealed partial class StormPulseEvent : InstantActionEvent;
+public sealed partial class ActionStormPulseEvent : InstantActionEvent;

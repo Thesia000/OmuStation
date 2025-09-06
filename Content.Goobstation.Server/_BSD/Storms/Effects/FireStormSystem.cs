@@ -1,7 +1,12 @@
+using Content.Server.Administration.Logs;
 using Content.Server.Explosion.EntitySystems;
+using Content.Server.Station.Components;
+using Content.Server.Station.Systems;
+using Content.Shared.Database;
 using Content.Goobstation.Shared._BSD.Storms;
 using Content.Goobstation.Server._BSD.Storms.Components;
 using Content.Goobstation.Server._BSD.Shield.Components;
+using Content.Goobstation.Shared._BSD.Storms.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
@@ -16,6 +21,8 @@ public sealed class ShadowStormSystem : EntitySystem
     [Dependency] protected readonly IRobustRandom _random = default!;
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
+    [Dependency] protected readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly StationSystem _station = default!;
 
     public override void Initialize()
     {
@@ -25,10 +32,24 @@ public sealed class ShadowStormSystem : EntitySystem
 
     public void OnPulse(EntityUid uid, FireStormComponent component, ref StormPulseEvent args)
     {
-        if (!TryComp<MapGridComponent>(uid, out var gridComp))
+        _adminLog.Add(LogType.Explosion, LogImpact.High,$"Fire Storm pulsing");
+        if (component.StormIntensity < 1)
+        {
+            return;
+        }
+        var xform = Transform(uid);
+        if (_station.GetStationInMap(xform.MapID) is not { } station ||
+            !TryComp<StationDataComponent>(station, out var data) ||
+            _station.GetLargestGrid(data) is not { } grid)
+        {
+            if (xform.GridUid == null)
+                return;
+            grid = xform.GridUid.Value;
+        }
+        if (!TryComp<MapGridComponent>(grid, out var gridComp))
             return;
         //repeat the effect as often as we have strom intensity
-        for (var a = 0; a < component.StormIntensity; a++)
+        for (var a = 0; a < (component.StormIntensity); a++)
         {
             var boundBottom = (int)gridComp.LocalAABB.Bottom;
             var boundTop = (int)gridComp.LocalAABB.Top;

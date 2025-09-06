@@ -5,7 +5,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: RadiationSource
     - type: Transform
       anchored: true
       noRot: true

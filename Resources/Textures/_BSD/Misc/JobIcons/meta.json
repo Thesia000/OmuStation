@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "size": {
+        "x": 10,
+        "y": 10
+    },
+    "states": [
+        {
+            "name": "BSE"
+        },
+        {
+            "name": "BSEA"
+        }
+    ]
+}

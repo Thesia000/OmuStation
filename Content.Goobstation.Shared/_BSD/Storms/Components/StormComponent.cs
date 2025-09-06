@@ -12,10 +12,10 @@ public sealed partial class StormComponent : Component
     /// Exact effects of depth depend on strom type
     /// </summary> 
     /// <remarks>
-    /// Always a positive integer
+    /// Always a positive integer and above 0 or we devide by 0
     /// </remarks>      
     [ViewVariables(VVAccess.ReadWrite)]
-    public int Intensity = 0;
+    public int Intensity = 1;
 
     /// <summary>
     /// The time at which the next Storm pulse will occur. 
@@ -32,3 +32,4 @@ public sealed partial class StormComponent : Component
     public TimeSpan DefaultPulseTime = TimeSpan.FromSeconds(30);
 
 }
+
