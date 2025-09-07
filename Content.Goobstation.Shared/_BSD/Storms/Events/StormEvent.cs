@@ -8,5 +8,10 @@ namespace Content.Goobstation.Shared._BSD.Storms.Events;
 
 public sealed class StormPulseEvent : EntityEventArgs
 {
-    
+
+}
+
+public sealed class ElectricalStormPhaseEvent : EntityEventArgs
+{
+     
 }

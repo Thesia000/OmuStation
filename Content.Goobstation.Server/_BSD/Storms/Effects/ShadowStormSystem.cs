@@ -45,7 +45,7 @@ public sealed class ShadowStormSystem : EntitySystem
         if (!TryComp<MapGridComponent>(grid, out var gridComp))
             return;
         //repeat the effect as often as we have strom intensity
-        for (var a = 0; a < (component.StormIntensity); a++)
+        for (var a = 0; a < (component.StormIntensity * 2); a++)
         {
             var boundBottom = (int)gridComp.LocalAABB.Bottom;
             var boundTop = (int)gridComp.LocalAABB.Top;

@@ -15,7 +15,7 @@ public abstract class SharedStormSystem : EntitySystem
     {
         base.Initialize();
     }
-
+    #region generalStorms
     public void DoStormPulse(EntityUid uid, StormComponent? component = null)
     {
         if (!Resolve(uid, ref component))
@@ -36,15 +36,52 @@ public abstract class SharedStormSystem : EntitySystem
         component.NextPulseTime = Timing.CurTime + (component.DefaultPulseTime)/component.Intensity;
         return;
     }
+    #endregion
+    #region ElectricalStorm
+
+    public void PhaseTransEleInd(EntityUid uid, ElectricalStormIndicatorComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            return;
+        }
+        component.Phase++;
+        if (component.Phase < 6)
+        {
+            var ev = new ElectricalStormPhaseEvent();
+            RaiseLocalEvent(uid, ev, true);
+            return;
+        }
+        SetTimeNextPhase(uid, component);
+    }
+    public void SetTimeNextPhase(EntityUid uid, ElectricalStormIndicatorComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            return;
+        }
+        component.NextPhaseTime = Timing.CurTime + component.DefaultPhaseTime;
+    }
+    #endregion
+
+    //The gernal update class used to dictate all of the BSD drives systems
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
         var StormList = EntityQueryEnumerator<StormComponent>();
-        while (StormList.MoveNext(out var ent,out var storm))
+        while (StormList.MoveNext(out var ent, out var storm))
         {
             if (Timing.CurTime > storm.NextPulseTime)
             {
                 DoStormPulse(ent, storm);
+            }
+        }
+        var EntList = EntityQueryEnumerator<ElectricalStormIndicatorComponent>();
+        while (EntList.MoveNext(out var ent, out var component))
+        {
+            if (Timing.CurTime > component.NextPhaseTime)
+            {
+                PhaseTransEleInd(ent, component);
             }
         }
     }
