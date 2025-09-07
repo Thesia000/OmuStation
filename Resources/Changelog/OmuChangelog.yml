@@ -115,3 +115,187 @@ Entries:
       message: Changed mentions of goobcoin to EggCoin
   id: 13
   time: '2025-08-27T12:14:37.0000000+00:00'
+- author: Orion-416
+  changes:
+    - type: Add
+      message: >-
+        BSO now gets their own webbing with the syringe kit, with inbuilt blast
+        protection.
+  id: 14
+  time: '2025-08-29T13:26:23.0000000+00:00'
+- author: Cygnye
+  changes:
+    - type: Add
+      message: Brand new BSO Kimono! now with sleevies!!!
+    - type: Add
+      message: Inhand sprites for CMO gear.
+    - type: Fix
+      message: Fixed CMO Veteran Beret & Splashproof Jacket.
+  id: 15
+  time: '2025-08-29T16:43:35.0000000+00:00'
+- author: ShieldAcrados
+  changes:
+    - type: Tweak
+      message: Minor changes to the CC-557 centcomm shuttle.
+  id: 16
+  time: '2025-08-29T17:04:45.0000000+00:00'
+- author: Orion-416
+  changes:
+    - type: Add
+      message: Added the Centcomm Direggtor
+  id: 17
+  time: '2025-08-30T02:41:10.0000000+00:00'
+- author: Cygnye
+  changes:
+    - type: Add
+      message: Logos!!!
+  id: 18
+  time: '2025-08-30T20:45:17.0000000+00:00'
+- author: Diggy
+  changes:
+    - type: Add
+      message: Added two uniforms and a jacket to Cargo Technicians.
+    - type: Add
+      message: Added two uniforms for Quartermaster.
+    - type: Add
+      message: Added more outer clothing to the Blueshield Officer.
+    - type: Add
+      message: Added two uniforms and a jacket for Paramedic.
+    - type: Add
+      message: Added a new jacket for Brigmedic.
+    - type: Add
+      message: >-
+        Added the parade uniform and new jackets for Head of Security and Head
+        of Personnel.
+    - type: Add
+      message: Added a new cloak and jacket to the Centdrobe.
+    - type: Add
+      message: Added a new cloak for the research director.
+    - type: Tweak
+      message: >-
+        Parade Voidsuit is noew available with the Voidsuit Selector for Head of
+        Security.
+  id: 19
+  time: '2025-08-30T20:50:31.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Add
+      message: A load of commits from upstream
+  id: 20
+  time: '2025-08-30T21:16:22.0000000+00:00'
+- author: Cygnye
+  changes:
+    - type: Add
+      message: Added R6 Revolving trench shotgun!
+  id: 21
+  time: '2025-08-30T21:59:37.0000000+00:00'
+- author: NotActuallyMarty
+  changes:
+    - type: Remove
+      message: Removed Nuclear14 Assets
+  id: 22
+  time: '2025-08-30T22:51:40.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Add
+      message: >-
+        Upstream merge up to
+        https://github.com/Goob-Station/Goob-Station/pull/3950 
+  id: 23
+  time: '2025-08-31T15:41:32.0000000+00:00'
+- author: ShieldAcrados
+  changes:
+    - type: Add
+      message: Added a new shuttle, the CC-800X "Archangel"!
+    - type: Add
+      message: Added a new Bluespace thruster! (3x power, 2x draw)
+  id: 24
+  time: '2025-08-31T20:31:06.0000000+00:00'
+- author: Yarinoi
+  changes:
+    - type: Remove
+      message: Deleted Barratry from the map pool.
+  id: 25
+  time: '2025-09-02T19:22:14.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Add
+      message: Harpy can now Chitter, Squeak, and Flap
+  id: 26
+  time: '2025-09-02T21:38:08.0000000+00:00'
+- author: Cygnye
+  changes:
+    - type: Add
+      message: Director loadout!
+  id: 27
+  time: '2025-09-03T06:00:31.0000000+00:00'
+- author: Diggy0
+  changes:
+    - type: Add
+      message: Most markings from ADT, along with two new hairstyles.
+    - type: Tweak
+      message: Some of the shadowkin overlays didn't have glow, now they do.
+  id: 28
+  time: '2025-09-03T23:34:42.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Turrets can now be set to whitelist CentComm IDs
+  id: 29
+  time: '2025-09-03T23:35:35.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Adjusted Secret+ weightings, less chaos!
+    - type: Remove
+      message: Removed Revenant from spawning midround without Ninja.
+    - type: Remove
+      message: Removed Changeling and Heretics from midround spawn.
+  id: 30
+  time: '2025-09-03T23:50:10.0000000+00:00'
+- author: Diggy0
+  changes:
+    - type: Add
+      message: Ported over 20 hairstyles from Impstation.
+  id: 31
+  time: '2025-09-04T17:31:09.0000000+00:00'
+- author: XWasHere
+  changes:
+    - type: Tweak
+      message: Tajara can now be any color.
+  id: 32
+  time: '2025-09-06T09:38:10.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Terminus is back to being Oni only.
+    - type: Tweak
+      message: Terminus can now function as a crowbar again
+  id: 33
+  time: '2025-09-06T17:44:21.0000000+00:00'
+- author: CometVoid
+  changes:
+    - type: Tweak
+      message: Rules have been changed and updated to better fit OmuStation!
+  id: 34
+  time: '2025-09-07T02:04:44.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Add
+      message: Ported Funkystation's rev rework
+    - type: Add
+      message: Headrevs can now create and use revolutionary flashbangs
+    - type: Add
+      message: >-
+        Headrevs can now declare "Open Revolt", allowing normal revs to see each
+        other, and announcing the names of the headrevs.
+  id: 35
+  time: '2025-09-07T09:10:14.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: >-
+        Fixed flashes showing the headrev popup when it is not the headrev using
+        them.
+  id: 36
+  time: '2025-09-07T16:57:23.0000000+00:00'
