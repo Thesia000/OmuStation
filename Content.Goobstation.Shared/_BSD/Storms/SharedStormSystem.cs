@@ -46,7 +46,7 @@ public abstract class SharedStormSystem : EntitySystem
             return;
         }
         component.Phase++;
-        if (component.Phase < 6)
+        if (component.Phase > 6)
         {
             var ev = new ElectricalStormPhaseEvent();
             RaiseLocalEvent(uid, ev, true);
