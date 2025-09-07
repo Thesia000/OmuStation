@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+    {
+        "name": "phase1"
+    },
+    {
+        "name": "phase2"
+    },
+    {
+        "name": "phase3"
+    },
+    {
+        "name": "phase4"
+    },
+    {
+        "name": "phase5"
+    },
+    {
+        "name": "phase6"
+    }
+    ]
+}

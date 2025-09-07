@@ -1,0 +1,13 @@
+- type: entity
+  id: ElectricalStormIndicator
+  name: ElectricalStormIndicator
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Transform
+      anchored: true
+      noRot: true
+    - type: Sprite
+      sprite: _BSD/ElectricStorm.rsi
+      state: phase1
+    - type: ElectricalStormIndicator

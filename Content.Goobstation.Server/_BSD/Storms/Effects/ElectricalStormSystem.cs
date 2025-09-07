@@ -1,5 +1,4 @@
 using Content.Server.Administration.Logs;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Database;
@@ -9,30 +8,28 @@ using Content.Goobstation.Server._BSD.Shield.Components;
 using Content.Goobstation.Shared._BSD.Storms.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Collections;
+using Robust.Shared.Timing;
 using Robust.Shared.Map.Components;
-
 
 namespace Content.Goobstation.Server._BSD.Storms.Effects;
 
-public sealed class FireStormSystem : EntitySystem
+public sealed class ElectricalStormSystem : EntitySystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] protected readonly IRobustRandom _random = default!;
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] protected readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly StationSystem _station = default!;
-
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<FireStormComponent, StormPulseEvent>(OnPulse);
+        SubscribeLocalEvent<ElectricalStormComponent, StormPulseEvent>(OnPulse);
     }
 
-    public void OnPulse(EntityUid uid, FireStormComponent component, ref StormPulseEvent args)
+    public void OnPulse(EntityUid uid, ElectricalStormComponent component, ref StormPulseEvent args)
     {
-        _adminLog.Add(LogType.Explosion, LogImpact.High,$"Fire Storm pulsing");
+        _adminLog.Add(LogType.Explosion, LogImpact.High, $"Electrical Storm pulsing");
         if (component.StormIntensity < 1)
         {
             return;
@@ -62,7 +59,7 @@ public sealed class FireStormSystem : EntitySystem
             var pos = _mapSys.GridTileToLocal(uid, gridComp, tile);
             var targetMapPos = _trans.ToMapCoordinates(pos);
             //dont trigger inside a shielded area
-            var shieldZonesQuerry = AllEntityQuery<StormShieldComponent,TransformComponent>();
+            var shieldZonesQuerry = AllEntityQuery<StormShieldComponent, TransformComponent>();
             while (shieldZonesQuerry.MoveNext(out _, out var shielded, out var shieldtrans))
             {
                 if (shieldtrans.MapID != targetMapPos.MapId)
@@ -82,18 +79,59 @@ public sealed class FireStormSystem : EntitySystem
             {
                 continue;
             }
-            _explosion.QueueExplosion(
-                targetMapPos,
-                component.ExplosionPrototype,
-                component.ExplosionTotalIntensity,
-                component.ExplosionDropoff,
-                component.ExplosionMaxTileIntensity,
-                uid
-            );
+            //position found now time to electrify it
+            for (int i = -2; i < 3; i++)
+            {
+                for (int b = -2; b < 3; b++)
+                {
+                    var tileIterator = new Vector2i((randomX + i), (randomY + b));
+                    var posIterator = _mapSys.GridTileToLocal(uid, gridComp, tileIterator);
+                    var targetMapPosIterator = _trans.ToMapCoordinates(posIterator);
+                    Spawn(component.SpawnPrototype, targetMapPosIterator);
+                }
+            }
+
         }
         return;
 
     }
-
-
+}
+//consider moving this to shared as it does not work rn
+public abstract class ElectricalStormIndicatorSystem : EntitySystem
+{
+    [Dependency] protected readonly IGameTiming Timing = default!;
+    public void PhaseTrans(EntityUid uid, ElectricalStormIndicatorComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            return;
+        }
+        component.Phase++;
+        if (component.Phase < 6)
+        {
+            QueueDel(uid);
+            return;
+        }
+        SetTimeNextPhase(uid, component);
+    }
+    public void SetTimeNextPhase(EntityUid uid, ElectricalStormIndicatorComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+        {
+            return;
+        }
+        component.NextPhaseTime = Timing.CurTime + component.DefaultPhaseTime;
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        var EntList = EntityQueryEnumerator<ElectricalStormIndicatorComponent>();
+        while (EntList.MoveNext(out var ent, out var indic))
+        {
+            if (Timing.CurTime > indic.NextPhaseTime)
+            {
+                PhaseTrans(ent, indic);
+            }
+        }
+    }
 }

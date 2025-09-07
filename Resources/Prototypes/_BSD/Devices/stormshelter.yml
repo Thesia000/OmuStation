@@ -5,16 +5,14 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: RadiationSource
     - type: Transform
       anchored: true
       noRot: true
     - type: Clickable
     - type: InteractionOutline
     - type: Sprite
-      drawdepth: WallMountedItems
-      sprite: _Goobstation/Supermatter/supermatter.rsi
-      state: supermatter
+      sprite: _BSD/ElectricStorm.rsi
+      state: phase1
     - type: Icon
       sprite: _Goobstation/Supermatter/supermatter.rsi
       state: supermatter

@@ -24,3 +24,5 @@
     - type: Storm
     - type: FireStorm
       pulseDetonation: DemolitionCharge
+    - type: ShadowStorm
+    - type: ElectricalStorm
