@@ -48,8 +48,8 @@ public abstract class SharedStormSystem : EntitySystem
         component.Phase++;
         if (component.Phase > 6)
         {
-            var ev = new ElectricalStormPhaseEvent();
-            RaiseLocalEvent(uid, ev, true);
+            var evn = new ElectricalStormPhaseEvent();
+            RaiseLocalEvent(uid, evn, true);
             return;
         }
         SetTimeNextPhase(uid, component);
