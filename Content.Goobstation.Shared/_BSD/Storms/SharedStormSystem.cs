@@ -45,13 +45,15 @@ public abstract class SharedStormSystem : EntitySystem
         {
             return;
         }
-        component.Phase++;
+        
         if (component.Phase > 6)
         {
             var evn = new ElectricalStormPhaseEvent();
             RaiseLocalEvent(uid, evn, true);
+            QueueDel(uid);
             return;
         }
+        component.Phase++;
         SetTimeNextPhase(uid, component);
     }
     public void SetTimeNextPhase(EntityUid uid, ElectricalStormIndicatorComponent? component = null)
