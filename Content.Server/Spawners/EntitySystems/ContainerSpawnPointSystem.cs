@@ -144,6 +144,9 @@ public sealed class ContainerSpawnPointSystem : EntitySystem
             if (!_container.Insert(args.SpawnResult.Value, container, containerXform: xform))
                 continue;
 
+            var ev = new ContainerSpawnEvent(args.SpawnResult.Value);
+            RaiseLocalEvent(uid, ref ev);
+
             return;
         }
 
@@ -151,3 +154,9 @@ public sealed class ContainerSpawnPointSystem : EntitySystem
         args.SpawnResult = null;
     }
 }
+
+/// <summary>
+/// Raised on a container when a player is spawned into it.
+/// </summary>
+[ByRefEvent]
+public record struct ContainerSpawnEvent(EntityUid Player);
