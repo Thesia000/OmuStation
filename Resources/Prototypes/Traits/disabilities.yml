@@ -66,8 +66,10 @@
   category: MentalTraits # Omustation - Remake EE Traits system - EE traits categories
   components:
     - type: Narcolepsy
-      timeBetweenIncidents: 300, 600
-      durationOfIncident: 10, 30
+      maxTimeBetweenIncidents: 600
+      minTimeBetweenIncidents: 300
+      maxDurationOfIncident: 30
+      minDurationOfIncident: 10
   globalCost: -6 # Omustation - Remake EE Traits system - global trait points cost
 
 - type: trait
