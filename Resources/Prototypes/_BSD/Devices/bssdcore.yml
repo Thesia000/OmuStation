@@ -1,23 +1,23 @@
 - type: entity
-  id: BSSDCore
+  id: BSSDCoreHarness
   name: BSSD Core Harness
   description: This device holds the core of the Bluespace Station Drive. Handle with care.
   placement:
     mode: SnapgridCenter
   components:
-    - type: RadiationSource
     - type: Transform
       anchored: true
       noRot: true
     - type: Clickable
     - type: InteractionOutline
     - type: Sprite
-      drawdepth: WallMountedItems
-      sprite: _Goobstation/Supermatter/supermatter.rsi
-      state: supermatter
+      sprite: _BSD/Structures/BSSDHarness.rsi
+      layers:
+        - state: BSSD_core_harness
+        - state: CoreAnimation
     - type: Icon
-      sprite: _Goobstation/Supermatter/supermatter.rsi
-      state: supermatter
+      sprite: _BSD/Structures/BSSDHarness.rsi
+      state: BSSD_core_harness
     - type: WarpPoint
       follow: true
       location: BSSD Core Harness

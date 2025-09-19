@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "size": {
+        "x": 160,
+        "y": 160
+    },
+    "states": [
+    {
+        "name": "BSSD_core_harness"
+    },
+    {
+        "name": "CoreAnimation",
+        "delays": [
+                [
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+    }
+    ]
+}

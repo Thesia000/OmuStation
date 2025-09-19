@@ -1,5 +1,5 @@
 namespace Content.Goobstation.Shared._BSD.Storms.Components;
-
+using Robust.Shared.Serialization;
 
 [RegisterComponent]
 public sealed partial class ElectricalStormIndicatorComponent : Component
@@ -21,7 +21,7 @@ public sealed partial class ElectricalStormIndicatorComponent : Component
     /// The time between phase changes
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan DefaultPhaseTime = TimeSpan.FromSeconds(1);
+    public TimeSpan DefaultPhaseTime = TimeSpan.FromSeconds(0.25);
 
     /// <summary>
     /// ticks up at phase 6 we trigger the damage event 
@@ -29,4 +29,16 @@ public sealed partial class ElectricalStormIndicatorComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public int Phase = 0;
 
-}
+    /// <summary>
+    /// Damage type primary 
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string DamageTypePrimary = "Shock";
+    /// <summary>
+    /// Damage Type secondary 
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string DamageTypeSecondary = "Ion";
+
+};
+

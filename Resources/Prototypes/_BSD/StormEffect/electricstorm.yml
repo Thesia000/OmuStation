@@ -11,3 +11,32 @@
       sprite: _BSD/ElectricStorm.rsi
       state: phase1
     - type: ElectricalStormIndicator
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.StormIndicatorAppearanceKeys.Phase:
+         VisualLevel:
+            1:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase1
+              scale: 1.0,1.0
+            2:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase2
+              scale: 1.0,1.0
+            3:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase3
+              scale: 1.0,1.0
+            4:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase4
+              scale: 1.0,1.0
+            5:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase5
+              scale: 1.0,1.0
+            6:
+              sprite: _BSD/ElectricStorm.rsi
+              state: phase6
+              scale: 1.0,1.0
