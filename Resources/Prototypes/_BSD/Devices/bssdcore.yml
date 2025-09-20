@@ -26,3 +26,4 @@
       pulseDetonation: DemolitionCharge
     - type: ShadowStorm
     - type: ElectricalStorm
+    - type: BluespaceStationDrive

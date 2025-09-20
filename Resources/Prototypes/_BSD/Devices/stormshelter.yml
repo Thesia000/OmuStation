@@ -16,3 +16,4 @@
     - type: Icon
       sprite: _Goobstation/Supermatter/supermatter.rsi
       state: supermatter
+    - type: StormShield
