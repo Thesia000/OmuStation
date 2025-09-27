@@ -3,7 +3,7 @@ using Content.Goobstation.Shared._BSD.Drive.Components;
 
 namespace Content.Goobstation.Shared._BSD.Drive;
 
-public abstract class SharedStormSystem : EntitySystem
+public abstract class SharedBluespaceStationDriveSystem : EntitySystem
 {
     public override void Initialize()
     {
@@ -36,7 +36,11 @@ public abstract class SharedStormSystem : EntitySystem
         int totalNodes = component.NavMapUpwardsChoises + component.NavMapHorizontalChoises + component.NavMapDownwardsChoises;
         return;
     }
-
+    public void UpdateAcceleration(BluespaceStationDriveComponent component, float deltaChange)//move to server
+    {
+        component.Acceleration += deltaChange;
+        return;
+    }
 
     #endregion
 
