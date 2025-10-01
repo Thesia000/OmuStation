@@ -1706,6 +1706,9 @@
   id: Torch
 
 - type: Tag
+  id: ToteBase
+
+- type: Tag
   id: ToyRubberDuck
 
 - type: Tag
