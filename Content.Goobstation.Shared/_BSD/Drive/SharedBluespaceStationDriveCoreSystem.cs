@@ -27,13 +27,13 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
         component.Energy += deltaChange;
         //call event for acceleration change proportional to energy decay after all
     }
-    public void BeamEnergy(BluespaceStationDriveCoreComponent component, float BeamEnergy)
+    public void BeamEnergy(BluespaceStationDriveCoreComponent component, float beamEnergy)//needs to be moved into a event that is called and raised?
     {
         if (component == null)
         {
             return;
         }
-        component.Energy += BeamEnergy;
+        component.Energy += beamEnergy;
         return;
     }
     #endregion
@@ -71,6 +71,11 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
                 component.HardStability -= deltaChange;
             }
         }
+    }
+    //add some detection for consequences
+    public void EvaluateStability(BluespaceStationDriveCoreComponent component)
+    {
+        
     }
     #endregion
 }
