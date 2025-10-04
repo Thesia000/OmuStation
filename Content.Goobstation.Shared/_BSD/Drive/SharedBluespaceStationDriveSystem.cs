@@ -15,7 +15,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
 
     This part of the navmap is there to generate , save, manipulate and delete the options the station has. 
     */
-    private void UpdateDistance(BluespaceStationDriveComponent component, float deltaTime)
+    private void UpdateDistance(BluespaceStationDriveComponent component)
     {
         for (int iterator = 0; iterator < component.NavMapNodes.Length; iterator++)
         {
@@ -23,7 +23,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
             {
                 continue;
             }
-            component.NavMapNodes[iterator].Distance -= component.DriveVelocity * deltaTime;
+            component.NavMapNodes[iterator].Distance -= component.DriveVelocity;
             if (component.NavMapNodes[iterator].Distance <= 0)
             {
                 ArrivalAtNode(component);//needs to be added
@@ -41,7 +41,15 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
         component.Acceleration += deltaChange;
         return;
     }
-
     #endregion
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        var driveList = EntityQueryEnumerator<BluespaceStationDriveComponent>();
+        while (driveList.MoveNext(out var ent, out var drive))
+        {
+            UpdateDistance(ent, drive);
+        }
+    }
 
 }

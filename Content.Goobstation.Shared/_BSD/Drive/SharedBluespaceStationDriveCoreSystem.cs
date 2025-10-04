@@ -75,7 +75,18 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
     //add some detection for consequences
     public void EvaluateStability(BluespaceStationDriveCoreComponent component)
     {
-        
+
     }
     #endregion
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        var coreList = EntityQueryEnumerator<BluespaceStationDriveCoreComponent>();
+        while (coreList.MoveNext(out var ent, out var core))
+        {
+            EnergyDecay(core);
+            StabilityUpdate(core);
+            EvaluateStability(core);
+        }
+    }
 }
