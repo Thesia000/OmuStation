@@ -123,6 +123,7 @@
     - id: RemoteSignaller
       amount: 2
     - id: Binoculars
+    #- id: WeaponEnergyShotgun Omu selectors
     - id: WardenGunCase # Omu
     - id: ClothingHandsGlovesKravMaga # Goobstation - Martial Arts
     - id: BoxLethalInjection # Goobstation
