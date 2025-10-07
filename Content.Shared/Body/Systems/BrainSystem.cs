@@ -22,7 +22,9 @@
 
 using Content.Server.Body.Components;
 using Content.Server.Ghost.Components;
+using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
+using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
@@ -111,12 +113,12 @@ namespace Content.Server.Body.Systems
 
         var ghostOnMove = EnsureComp<GhostOnMoveComponent>(newEntity);
         ghostOnMove.MustBeDead = HasComp<MobStateComponent>(newEntity); // Don't ghost living players out of their bodies.
-        
+
         // EE Reverse MMI start
         if (HasComp<BorgBrainComponent>(newEntity))
             EntityManager.RemoveComponent<GhostOnMoveComponent>(newEntity);
         // EE Reverse MMI End
-        
+
         if (!_mindSystem.TryGetMind(oldEntity, out var mindId, out var mind))
             return;
 
