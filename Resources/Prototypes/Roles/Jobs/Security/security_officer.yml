@@ -91,7 +91,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 18000 #5 hours - Omu Edit: Coupled with the SecurityCadet req changes.
+      time: 5h # Omustation
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
