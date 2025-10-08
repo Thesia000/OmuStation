@@ -1178,5 +1178,8 @@ DVSmartFridgeMedical: SmartFridgeMedical
 # 2026-02-14 Goobstation, upstreaming. wild.
 MailTeleporter: CargoMailTeleporter
 
+# 2025-10-8
+ClothingBeltAssault: ClothingBeltMilitaryWebbing
+
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu
