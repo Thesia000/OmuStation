@@ -1180,6 +1180,7 @@ MailTeleporter: CargoMailTeleporter
 
 # 2025-10-8
 ClothingBeltAssault: ClothingBeltMilitaryWebbing
+WarpPointBombing: null
 
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu
