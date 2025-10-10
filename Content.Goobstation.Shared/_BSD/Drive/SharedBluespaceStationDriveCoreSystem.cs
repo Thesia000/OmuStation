@@ -5,18 +5,21 @@ namespace Content.Goobstation.Shared._BSD.Drive;
 
 public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
 {
+    [Dependency] protected readonly IGameTiming Timing = default!;
     public override void Initialize()
     {
         base.Initialize();
     }
     #region EnergyManagment
     //called by the associated drive every update tick, so thats where we getting the drives component
-    public void EnergyDecay(BluespaceStationDriveCoreComponent component, BluespaceStationDriveComponent drive)
+    public void EnergyDecay(BluespaceStationDriveCoreComponent component)
     {
+        var containerSys = _entityManager.System<SharedContainerSystem>();
         if (component == null)
         {
             return;
         }
+        BluespaceStationDriveComponent drive;
         var deltaChange = 0f;
         var stability = component.SoftStability + component.HardStability - 100f;
         if (drive.Traveling)

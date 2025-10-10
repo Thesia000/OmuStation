@@ -48,7 +48,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
         var driveList = EntityQueryEnumerator<BluespaceStationDriveComponent>();
         while (driveList.MoveNext(out var ent, out var drive))
         {
-            UpdateDistance(ent, drive);
+            UpdateDistance(drive);
         }
     }
 

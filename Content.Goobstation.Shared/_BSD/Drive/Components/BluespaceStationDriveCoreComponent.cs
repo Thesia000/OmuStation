@@ -49,5 +49,11 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     /// </summary>
     [DataField("travelEfficency")]
     public float TravelEfficency = 1f;
+
+    /// <summary>
+    /// ID of the related drive
+    /// </summary>
+    [DataField("driveID")]
+    public EntityUid DriveId = 0;
 }
 
