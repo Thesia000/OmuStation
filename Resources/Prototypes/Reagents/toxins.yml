@@ -137,32 +137,32 @@
         emote: Yawn
         showInChat: true
         probability: 0.1
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:ModifyStatusEffect
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
+        - !type:ReagentCondition
           reagent: ChloralHydrate
           min: 8    #OMU: 2 - 3 shots with a tranq to KO, syringe or hypo can still do work with it
         effectProto: StatusEffectDrowsiness
         time: 4
-        type: Add
+        type: Update
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: ChloralHydrate
           min: 20
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 1.5
@@ -186,13 +186,14 @@
           damage:
             types:
               Poison: 2
-        - !type:ChemVomit
+        - !type:Vomit
           conditions:
-          - !type:OrganType # Goobstation - Yowie
-            type: Yowie
-            shouldHave: false
-          - !type:ReagentThreshold
+          - !type:ReagentCondition
+            reagent: GastroToxin
             min: 2
+          - !type:MetabolizerTypeCondition # Goobstation - Yowie
+            type: [Yowie]
+            inverted: true
           probability: 0.2
 
 - type: reagent
@@ -239,7 +240,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: false
         damage:
           types:
@@ -278,7 +279,7 @@
       - !type:SatiateThirst
         factor: -1.5
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -301,7 +302,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: false
         damage:
           types:
@@ -351,7 +352,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: false
         damage:
           types:
@@ -481,11 +482,12 @@
       # todo: cough, sneeze
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Histamine
           min: 45
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           groups:
             Brute: 2
@@ -498,7 +500,8 @@
         probability: 0.1
       - !type:PopupMessage
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Histamine
           min: 45
         type: Local
         visualType: Medium
@@ -520,16 +523,16 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Animal # Applying damage to the mobs with lower metabolism capabilities
+        - !type:MetabolizerTypeCondition
+          type: [Animal] # Applying damage to the mobs with lower metabolism capabilities
         damage:
           types:
             Poison: 0.4
-      - !type:ChemVomit
+      - !type:Vomit
         probability: 0.04 #Scaled for time, not metabolismrate.
         conditions:
-          - !type:OrganType
-            type: Animal
+          - !type:MetabolizerTypeCondition
+            type: [Animal]
 
 - type: reagent
   id: Amatoxin
@@ -545,9 +548,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 3
@@ -565,12 +568,11 @@
       effects:
         - !type:HealthChange
           conditions:
-          - !type:OrganType # Goobstation - Yowie
-            type: Yowie
-            shouldHave: false
-          - !type:OrganType # Goob, Vox are stinky
-            type: Vox
-            shouldHave: false
+          - !type:MetabolizerTypeCondition
+            type:
+            - Yowie # Goobstation - Yowie
+            - Vox # Goob, Vox are stinky
+            inverted: true
           damage:
             types:
               Poison: 2
@@ -597,7 +599,8 @@
       effects:
         - !type:CauseZombieInfection
           conditions:
-            - !type:ReagentThreshold
+            - !type:ReagentCondition
+              reagent: Romerol
               min: 5
 
 - type: reagent
@@ -613,67 +616,46 @@
       effects:
       - !type:PopupMessage
         conditions:
-          - !type:OrganType
-            type: Animal
-            shouldHave: false
-          - !type:OrganType
-            type: Vox
-            shouldHave: false
-          - !type:OrganType # Goobstation - Yowie
-            type: Yowie
-            shouldHave: false
-          - !type:OrganType # Goobstation - XenobioSlime
-            type: XenobioSlime
-            shouldHave: false
-          - !type:OrganType # Omu, Letting xelthia eat raw meat
-            type: Xelthia
-            shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Animal
+          - Vox
+          - Yowie # Goobstation - Yowie
+          - XenobioSlime # Goobstation - XenobioSlime
+          - Xeltia # Omu Fuck you as well
+          inverted: true
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
         probability: 0.5
-      - !type:ChemVomit
+      - !type:Vomit
         probability: 0.1
         conditions:
-          - !type:OrganType
-            type: Animal
-            shouldHave: false
-          - !type:OrganType
-            type: Vox
-            shouldHave: false
-          - !type:OrganType # Goobstation - Yowie
-            type: Yowie
-            shouldHave: false
-          - !type:OrganType # Goobstation - XenobioSlime
-            type: XenobioSlime # slimes shouldn't vomit from blood and raw meat
-            shouldHave: false
-          - !type:OrganType # Omu, Letting xelthia eat raw meat
-            type: Xelthia
-            shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Animal
+          - Vox
+          - Yowie # Goobstation - Yowie
+          - XenobioSlime # Goobstation - XenobioSlime
+          - Xelthia # Fuck you as well
+          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Animal
-          shouldHave: false
-        - !type:OrganType
-          type: Vox
-          shouldHave: false
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:OrganType # Goobstation - XenobioSlime
-          type: XenobioSlime
-          shouldHave: false
-        - !type:OrganType # Omu, Letting xelthia eat more things
-          type: Xelthia
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Animal
+          - Vox
+          - Yowie # Goobstation - Yowie
+          - XenobioSlime # Goobstation - XenobioSlime
+          - Xelthia # Fuck you as well
+          inverted: true
         damage:
           types:
             Poison: 1
       - !type:AdjustReagent
         conditions:
-        - !type:OrganType
-          type: Animal
+        - !type:MetabolizerTypeCondition
+          type: [ Animal ]
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent # Omu, letting xelthia eat more things
@@ -690,8 +672,8 @@
         amount: 0.5
       - !type:AdjustReagent
         conditions:
-        - !type:OrganType
-          type: Vox
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
         reagent: Protein
         amount: 0.25
 
@@ -715,10 +697,11 @@
 #      effects: Goobstation end
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Allicin
           min: 1
-        - !type:OrganType
-          type: Animal
+        - !type:MetabolizerTypeCondition
+          type: [Animal]
         damage:
           types:
             Poison: 0.1 #goobstation, was 0.06
@@ -741,7 +724,6 @@
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
-        type: Add
         time: 4
       - !type:ImmunityModifier #Goobstation
         gainRateModifier: -0.00111111111111 #double spaceacilin penalty
@@ -773,10 +755,11 @@
         probability: 0.2
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Honk
           min: 1
-        - !type:OrganType
-          type: Animal
+        - !type:MetabolizerTypeCondition
+          type: [ Animal ]
         damage:
           types:
             Poison: 0.06
@@ -796,9 +779,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 0.6 # Makes it 20 damage per unit.
@@ -817,9 +800,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 1.8
@@ -838,16 +821,17 @@
       effects:
       - !type:Jitter
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Vestine
           min: 5
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           groups:
             Airloss: 2
@@ -882,11 +866,11 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:Hunger
+        - !type:HungerCondition
           max: 50
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 2
@@ -909,39 +893,36 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Arachnid
+          - Yowie # Goobstation - Yowie
+          inverted: true
         damage:
           types:
             Poison: 1.6
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Mechanotoxin
           min: 2
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Arachnid
+          - Yowie # Goobstation - Yowie
+          inverted: true
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Mechanotoxin
           min: 4
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Arachnid
+          - Yowie # Goobstation - Yowie
+          inverted: true
         walkSpeedModifier: 0.4
         sprintSpeedModifier: 0.4
 
@@ -958,5 +939,5 @@
       - !type:SatiateHunger
         factor: 1
         conditions:
-        - !type:OrganType
-          type: Vox
+        - !type:MetabolizerTypeCondition
+          type: [Vox]
