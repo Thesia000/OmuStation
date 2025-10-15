@@ -1182,5 +1182,10 @@ MailTeleporter: CargoMailTeleporter
 ClothingBeltAssault: ClothingBeltMilitaryWebbing
 WarpPointBombing: null
 
+# 2025-10-13
+ToyGriffin: ToyFigurineGriffin
+ToyOwlman: ToyFigurineOwlman
+ToySkeleton: ToyFigurineSkeleton
+
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu
