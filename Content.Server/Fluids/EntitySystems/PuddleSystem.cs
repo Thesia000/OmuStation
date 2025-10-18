@@ -99,35 +99,23 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Server.Administration.Logs;
-using Content.Server.Chemistry.TileReactions;
-using Content.Server.DoAfter;
 using Content.Server.Fluids.Components;
 using Content.Server.Spreader;
 using Content.Goobstation.Common.Footprints;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
-using Content.Shared.Friction;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Maps;
-using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Slippery;
-using Content.Shared.StepTrigger.Components;
-using Content.Shared.StepTrigger.Systems;
-using Robust.Server.Audio;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -135,7 +123,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Server._Funkystation.ReagentFires.Systems; // Funky
+using Content.Server._Funkystation.ReagentFires.Systems;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -144,21 +132,12 @@ namespace Content.Server.Fluids.EntitySystems;
 /// </summary>
 public sealed partial class PuddleSystem : SharedPuddleSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ReactiveSystem _reactive = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly StepTriggerSystem _stepTrigger = default!;
-    [Dependency] private readonly SpeedModifierContactsSystem _speedModContacts = default!;
-    [Dependency] private readonly TileFrictionController _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private ReagentFireSystem _fireSystem = default!; // Funky
@@ -181,11 +160,6 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
     private static string[] _standoutReagents = [Blood, Slime, CopperBlood, BloodChangeling, BlackBlood]; // goobstation - added BloodChangeling, BlackBlood
 
-
-    // Using local deletion queue instead of the standard queue so that we can easily "undelete" if a puddle
-    // loses & then gains reagents in a single tick.
-    private HashSet<EntityUid> _deletionQueue = [];
-
     private EntityQuery<PuddleComponent> _puddleQuery;
 
     /*
@@ -200,16 +174,11 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         _puddleQuery = GetEntityQuery<PuddleComponent>();
 
-        // Shouldn't need re-anchoring.
-        SubscribeLocalEvent<PuddleComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<PuddleComponent, SpreadNeighborsEvent>(OnPuddleSpread);
         SubscribeLocalEvent<PuddleComponent, SlipEvent>(OnPuddleSlip);
-
-        SubscribeLocalEvent<EvaporationComponent, MapInitEvent>(OnEvaporationMapInit);
-
-        InitializeTransfers();
     }
 
+    // TODO: This can be predicted once https://github.com/space-wizards/RobustToolbox/pull/5849 is merged
     private void OnPuddleSpread(Entity<PuddleComponent> entity, ref SpreadNeighborsEvent args)
     {
         // Overflow is the source of the overflowing liquid. This contains the excess fluid above overflow limit (20u)
@@ -396,6 +365,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         }
     }
 
+    // TODO: This can be predicted once https://github.com/space-wizards/RobustToolbox/pull/5849 is merged
     private void OnPuddleSlip(Entity<PuddleComponent> entity, ref SlipEvent args)
     {
         // Reactive entities have a chance to get a touch reaction from slipping on a puddle
@@ -412,12 +382,12 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
                 out var solution))
             return;
 
-        _popups.PopupEntity(Loc.GetString("puddle-component-slipped-touch-reaction", ("puddle", entity.Owner)),
+        Popups.PopupEntity(Loc.GetString("puddle-component-slipped-touch-reaction", ("puddle", entity.Owner)),
             args.Slipped, args.Slipped, PopupType.SmallCaution);
 
         // Take 15% of the puddle solution
         var splitSol = _solutionContainerSystem.SplitSolution(entity.Comp.Solution.Value, solution.Volume * 0.15f);
-        _reactive.DoEntityReaction(args.Slipped, splitSol, ReactionMethod.Touch);
+        Reactive.DoEntityReaction(args.Slipped, splitSol, ReactionMethod.Touch);
 
         // <Goobstation>
         // after we've had the puddle interact with skin, add back reagents that aren't supposed to stick
@@ -432,6 +402,9 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
     }
 
     /// <inheritdoc/>
+    ///
+    ///
+    todo omu find out what the fuck is going on here
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -647,7 +620,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
             return true;
         }
 
-        _audio.PlayPvs(puddleComponent.SpillSound, puddleUid);
+        Audio.PlayPvs(puddleComponent.SpillSound, puddleUid);
         return true;
     }
 
@@ -693,6 +666,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
     #region Spill
 
+    // TODO: This can be predicted once https://github.com/space-wizards/RobustToolbox/pull/5849 is merged
     /// <inheritdoc/>
     public override bool TrySplashSpillAt(EntityUid uid,
         EntityCoordinates coordinates,
@@ -722,13 +696,13 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
             if (user != null)
             {
-                _adminLogger.Add(LogType.Landed,
+                AdminLogger.Add(LogType.Landed,
                     $"{ToPrettyString(user.Value):user} threw {ToPrettyString(uid):entity} which splashed a solution {SharedSolutionContainerSystem.ToPrettyString(solution):solution} onto {ToPrettyString(owner):target}");
             }
 
             targets.Add(owner);
-            _reactive.DoEntityReaction(owner, splitSolution, ReactionMethod.Touch);
-            _popups.PopupEntity(
+            Reactive.DoEntityReaction(owner, splitSolution, ReactionMethod.Touch);
+            Popups.PopupEntity(
                 Loc.GetString("spill-land-spilled-on-other", ("spillable", uid),
                     ("target", Identity.Entity(owner, EntityManager))), owner, PopupType.SmallCaution);
         }
