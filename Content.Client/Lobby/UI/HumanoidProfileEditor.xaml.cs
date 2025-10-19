@@ -156,14 +156,14 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using Content.Client._Omu.Lobby.Ui.Roles; // Omustation - Remake EE Traits System - change TraitPreferenceSelector for TraitRequirementsSelector
+using Content.Client._Omu.Lobby.Ui.Roles;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
-using Content.Client.Sprite;
 using Content.Client.Stylesheets;
+using Content.Client.Sprite;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -1667,7 +1667,7 @@ namespace Content.Client.Lobby.UI
                 return;
 
             const string style = "SpeciesInfoDefault";
-            SpeciesInfoButton.StyleClasses.Add(style);
+            SpeciesInfoButton.StyleIdentifier = style;
         }
 
         private void UpdateMarkings()

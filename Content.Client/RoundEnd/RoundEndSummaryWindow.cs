@@ -108,7 +108,7 @@ namespace Content.Client.RoundEnd
             roundEndTabs.AddChild(MakeStationReportTab()); //goob
             roundEndTabs.AddChild(MakeSiliconSummaryTab(info)); // Omu
 
-            Contents.AddChild(roundEndTabs);
+            ContentsContainer.AddChild(roundEndTabs);
 
             OpenCenteredRight();
             MoveToFront();
