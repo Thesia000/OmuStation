@@ -319,9 +319,9 @@
           - Allulalo # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
           inverted: true
       - !type:Drunk
-        boozePower: 2
+        boozePower: 20
         conditions: # Omu start
-        - !type:OrganType
+        - !type:OrganType #todo marty omu
           type: Allulalo
           shouldHave: false
       - !type:SatiateThirst
