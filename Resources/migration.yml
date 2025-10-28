@@ -1188,5 +1188,8 @@ ToyGriffin: ToyFigurineGriffin
 ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
 
+# 2025-10-28
+DringKiraSpecial: DrinkOrangeLimeSodaGlass
+
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu
