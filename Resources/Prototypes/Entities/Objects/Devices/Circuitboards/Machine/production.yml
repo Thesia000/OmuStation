@@ -801,10 +801,10 @@
       stackRequirements:
         Manipulator: 2
         Cable: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
     - type: Tag # Goobstation - augment construction
@@ -827,10 +827,10 @@
         Manipulator: 4
         Steel: 5
         Cable: 10
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 25
-        Glass: 125
+        Steel: 30
+        Plastic: 30
     - type: StaticPrice
       price: 30
 
@@ -848,10 +848,10 @@
       stackRequirements:
         Manipulator: 2
         Cable: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
     - type: Tag # Goobstation - augment construction
@@ -873,10 +873,10 @@
       stackRequirements:
         Manipulator: 2
         CableMV: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Steel: 12
-        Plastic: 12
+        Steel: 25
+        Plastic: 25
     - type: StaticPrice
       price: 15
 
@@ -971,11 +971,11 @@
       stackRequirements:
         Manipulator: 1
         CableHV: 5
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Glass: 125
+        Glass: 200
       chemicalComposition:
-        Silicon: 5
+        Silicon: 20
     - type: StaticPrice
       price: 40
 
@@ -1017,11 +1017,11 @@
       stackRequirements:
         Manipulator: 2
         CableHV: 10
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Glass: 125
+        Glass: 200
       chemicalComposition:
-        Silicon: 5
+        Silicon: 20
     - type: StaticPrice
       price: 40
 
@@ -1037,11 +1037,11 @@
       stackRequirements:
         Manipulator: 1
         Cable: 10
-    - type: PhysicalComposition #Goobstation - Recycle update
+    - type: PhysicalComposition
       materialComposition:
-        Glass: 125
+        Glass: 200
       chemicalComposition:
-        Silicon: 5
+        Silicon: 20
     - type: StaticPrice
       price: 40
 
