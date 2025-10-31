@@ -11,19 +11,24 @@
 // SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
 // SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
 // SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
+// SPDX-FileCopyrightText: 2025 RichardBlonski <48651647+RichardBlonski@users.noreply.github.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
 using Content.Goobstation.Common.MartialArts;
+using Content.Goobstation.Maths.FixedPoint; //omu
 using Content.Goobstation.Shared.MartialArts.Components;
 using Content.Goobstation.Shared.MartialArts.Events;
+using Content.Shared._Goobstation.Heretic.Components; //omu
 using Content.Shared._Shitmed.Medical.Surgery.Traumas;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Components;
+using Content.Shared.Clothing; //omu
+using Content.Shared.Clothing.Components; //omu
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -32,6 +37,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Standing;
+using Content.Shared.Weapons.Melee; //omu
 using Robust.Shared.Audio;
 using Robust.Shared.Utility;
 
@@ -51,6 +57,10 @@ public partial class SharedMartialArtsSystem
 
         SubscribeLocalEvent<GrantCqcComponent, UseInHandEvent>(OnGrantCQCUse);
         SubscribeLocalEvent<GrantCqcComponent, MapInitEvent>(OnMapInitEvent);
+        // omu start
+        SubscribeLocalEvent<GrantCqcComponent, ClothingGotEquippedEvent>(OnWear);
+        SubscribeLocalEvent<GrantCqcComponent, ClothingGotUnequippedEvent>(OnRemove);
+        // omu end
     }
 
     #region Generic Methods
@@ -90,6 +100,11 @@ public partial class SharedMartialArtsSystem
 
     private void OnGrantCQCUse(EntityUid ent, GrantMartialArtKnowledgeComponent comp, UseInHandEvent args)
     {
+        // omu start, remove useless if statement
+        //Makes CQC check for clothes for CQC belt to function
+        if (HasComp<ClothingComponent>(ent))
+            return;
+
         if (args.Handled)
             return;
 
@@ -103,6 +118,7 @@ public partial class SharedMartialArtsSystem
 
         var coords = Transform(args.User).Coordinates;
         _audio.PlayPvs(comp.SoundOnUse, coords);
+
         if (comp.MultiUse)
             return;
 
@@ -111,6 +127,9 @@ public partial class SharedMartialArtsSystem
             return;
 
         Spawn(comp.SpawnedProto, coords);
+        // omu end
+
+
     }
 
     private void OnCQCAttackPerformed(Entity<MartialArtsKnowledgeComponent> ent, ref ComboAttackPerformedEvent args)
@@ -170,6 +189,41 @@ public partial class SharedMartialArtsSystem
         }
     }
 
+    private void OnWear(EntityUid uid, GrantCqcComponent component, ref ClothingGotEquippedEvent args)
+    {
+        if (!_netManager.IsServer)
+            return;
+
+        var user = args.Wearer;
+        TryGrantMartialArt(user, component);
+
+    }
+
+    private void OnRemove(Entity<GrantCqcComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        var user = args.Wearer;
+
+        // Omu Station
+        // Don't proceed if the user has non-removable Martial Arts knowledge
+        if (HasManualCqcKnowledge(user))
+            return;
+
+        if (!TryComp<MartialArtsKnowledgeComponent>(user, out var martialArtsKnowledge)
+            || !TryComp<MeleeWeaponComponent>(user, out var meleeWeaponComponent)) // Omu
+            return;
+
+        if (martialArtsKnowledge.MartialArtsForm != MartialArtsForms.CloseQuartersCombat)
+            return;
+
+        var originalDamage = new DamageSpecifier();
+        originalDamage.DamageDict[martialArtsKnowledge.OriginalFistDamageType]
+            = FixedPoint2.New(martialArtsKnowledge.OriginalFistDamage);
+        meleeWeaponComponent.Damage = originalDamage;
+
+        RemComp<MartialArtsKnowledgeComponent>(user);
+        RemComp<CanPerformComboComponent>(user);
+        RemComp<RiposteeComponent>(user); // Omu
+    }
     #endregion
 
     #region Combo Methods
@@ -204,7 +258,7 @@ public partial class SharedMartialArtsSystem
         if (downed)
         {
             if (TryComp<StaminaComponent>(target, out var stamina) && stamina.Critical)
-                _status.TryAddStatusEffect<ForcedSleepingComponent>(target, "ForcedSleep", TimeSpan.FromSeconds(10), true);
+                _newStatus.TryAddStatusEffectDuration(target, "StatusEffectForcedSleeping", out _, TimeSpan.FromSeconds(10));
             DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _, TargetBodyPart.Head);
             _stamina.TakeStaminaDamage(target, proto.StaminaDamage * 2 + 5, source: ent, applyResistances: true);
         }
@@ -248,11 +302,11 @@ public partial class SharedMartialArtsSystem
             return;
         if(!_hands.TryDrop(target, activeItem.Value))
             return;
-        if (!_hands.TryGetEmptyHand(ent, out var emptyHand))
+        if (!_hands.TryGetEmptyHand(ent.Owner, out var emptyHand))
             return;
         if(!_hands.TryPickup(ent, activeItem.Value, emptyHand))
             return;
-        _hands.SetActiveHand(ent, emptyHand);
+        _hands.SetActiveHand(ent.Owner, emptyHand);
     }
 
     private void OnCQCConsecutive(Entity<CanPerformComboComponent> ent, ref CqcConsecutivePerformedEvent args)
@@ -269,4 +323,18 @@ public partial class SharedMartialArtsSystem
     }
 
     #endregion
+
+    /// Omu Station
+    /// <summary>
+    /// Checks if the user has Martial Arts knowledge that is non-removable (Such as CQC Old Manual).
+    /// </summary>
+    /// <param name="user">The user to check</param>
+    /// <returns>True if the user has non removeable martial arts knowledge, false otherwise</returns>
+    private bool HasManualCqcKnowledge(EntityUid user)
+
+    {
+        return TryComp<MartialArtsKnowledgeComponent>(user, out var martialArtsKnowledge) &&
+               !martialArtsKnowledge.Removable;
+    }
+
 }
