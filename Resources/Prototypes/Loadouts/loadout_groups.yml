@@ -215,6 +215,8 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
+  - TowelColorWhite
+  - TowelColorGray
   # GoobStation Start
   - CardBoxBlack
   - CardBoxNanotrasen
@@ -257,21 +259,19 @@
   - MysteryStaffPlushieBox
   # Omu end
   - TowelColorBlack
-  - TowelColorDarkBlue
+  - TowelColorRed
+  - TowelColorOrange
+  - TowelColorLightBrown
+  - TowelColorYellow
   - TowelColorDarkGreen
-  - TowelColorGold
-  - TowelColorGray
   - TowelColorGreen
   - TowelColorLightBlue
-  - TowelColorLightBrown
+  - TowelColorDarkBlue
+  - TowelColorPurple
   - TowelColorMaroon
   - TowelColorMime
-  - TowelColorOrange
-  - TowelColorPurple
-  - TowelColorRed
   - TowelColorSilver
-  - TowelColorWhite
-  - TowelColorYellow
+  - TowelColorGold
   # Begin DeltaV Additions
   - GoldRing
   - SilverRing
