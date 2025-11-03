@@ -36,10 +36,16 @@ public sealed partial class BluespaceStationDriveComponent : Component
     public float DriveVelocity = 0f;
 
     /// <summary>
-    /// Current Velocity
+    /// the node map
     /// </summary>
     [DataField("navMapNodes")]
     public NavMapNode[] NavMapNodes;
+
+    /// <summary>
+    /// Current Velocity
+    /// </summary>
+    [DataField("currentMapNode")]
+    public NavMapNode CurrentMapNode;
 
     /// <summary>
     /// The target of the next jump
@@ -67,5 +73,6 @@ public struct NavMapNode
     public int Depth;
     public float Distance;
     public float BluespaceResistance;
-    public int[] StormIntensities;
+    public Dictionary<StormType, int> StormIntensities;
 }
+

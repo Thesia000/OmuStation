@@ -32,4 +32,13 @@ public sealed partial class StormComponent : Component
     public TimeSpan DefaultPulseTime = TimeSpan.FromSeconds(30);
 
 }
+/*
+new storms must be registered as a type here
+*/
+enum StormType
+{
+    Electrical,
+    Fire,
+    Shadow
+}
 

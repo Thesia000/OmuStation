@@ -11,7 +11,12 @@ public sealed class StormPulseEvent : EntityEventArgs
 
 }
 
+public sealed class StormDataEvent(Dictionary<StormType, int> stormIntensities) : EntityEventArgs
+{
+    public Dictionary<StormType, int> StormIntensities = stormIntensities;
+}
+
 public sealed class ElectricalStormPhaseEvent : EntityEventArgs
 {
-     
+
 }

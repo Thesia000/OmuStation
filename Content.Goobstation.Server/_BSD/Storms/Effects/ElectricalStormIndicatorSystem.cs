@@ -28,7 +28,6 @@ public abstract class ElectricalStormIndicatorSystem : EntitySystem
             return;
         }
         _adminLog.Add(LogType.Explosion, LogImpact.High, $"Try delete");
-        
         return;
     }
 }
