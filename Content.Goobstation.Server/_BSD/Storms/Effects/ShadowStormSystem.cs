@@ -24,11 +24,12 @@ public sealed class ShadowStormSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ShadowStormComponent, StormPulseEvent>(OnPulse);
+        SubscribeLocalEvent<ShadowStormComponent, StormDataEvent>(OnDataUpdate);
     }
 
     public void OnPulse(EntityUid uid, ShadowStormComponent component, ref StormPulseEvent args)
     {
-        _adminLog.Add(LogType.Explosion, LogImpact.High,$"Shadow Storm pulsing");
+        _adminLog.Add(LogType.Explosion, LogImpact.High, $"Shadow Storm pulsing");
         if (component.StormIntensity < 1)
         {
             return;
@@ -47,10 +48,10 @@ public sealed class ShadowStormSystem : EntitySystem
         //repeat the effect as often as we have strom intensity
         for (var a = 0; a < (component.StormIntensity * 2); a++)
         {
-            var boundBottom = (int)gridComp.LocalAABB.Bottom;
-            var boundTop = (int)gridComp.LocalAABB.Top;
-            var boundLeft = (int)gridComp.LocalAABB.Left;
-            var boundRight = (int)gridComp.LocalAABB.Right;
+            var boundBottom = (int) gridComp.LocalAABB.Bottom;
+            var boundTop = (int) gridComp.LocalAABB.Top;
+            var boundLeft = (int) gridComp.LocalAABB.Left;
+            var boundRight = (int) gridComp.LocalAABB.Right;
             var randomX = _random.Next(boundLeft, boundRight);
             var randomY = _random.Next(boundBottom, boundTop);
             bool valid = true;
@@ -83,15 +84,30 @@ public sealed class ShadowStormSystem : EntitySystem
             {
                 for (int b = -5; b < 6; b++)
                 {
-                    var tileIterator = new Vector2i((randomX+i), (randomY+b));
+                    var tileIterator = new Vector2i((randomX + i), (randomY + b));
                     var posIterator = _mapSys.GridTileToLocal(uid, gridComp, tileIterator);
                     var targetMapPosIterator = _trans.ToMapCoordinates(posIterator);
-                    Spawn(component.SpawnPrototype,targetMapPosIterator);
+                    Spawn(component.SpawnPrototype, targetMapPosIterator);
                 }
             }
-            
+
         }
         return;
 
+    }
+    public void OnDataUpdate(EntityUid uid, ElectricalStormComponent component, ref StormPulseEvent args)
+    {
+        List<StormType> keyList = new List<StormType>(args.StormIntensities.Keys);
+        foreach (StormType type in keyList)
+        {
+            switch (type)
+            {
+                case Shadow:
+                    component.StormIntensity = args.StormIntensities[type];
+                default:
+                    break;
+            }
+        }
+        return;
     }
 }

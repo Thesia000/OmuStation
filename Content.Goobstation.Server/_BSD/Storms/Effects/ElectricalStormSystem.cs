@@ -106,12 +106,11 @@ public sealed class ElectricalStormSystem : EntitySystem
             switch (type)
             {
                 case Electrical:
-
+                    component.StormIntensity = args.StormIntensities[type];
                 default:
                     break;
             }
         }
         return;
     }
-
 }

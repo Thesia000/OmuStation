@@ -28,6 +28,7 @@ public sealed class FireStormSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<FireStormComponent, StormPulseEvent>(OnPulse);
+        SubscribeLocalEvent<FireStormComponent, StormDataEvent>(OnDataUpdate);
     }
 
     public void OnPulse(EntityUid uid, FireStormComponent component, ref StormPulseEvent args)
@@ -94,6 +95,20 @@ public sealed class FireStormSystem : EntitySystem
         return;
 
     }
-
+    public void OnDataUpdate(EntityUid uid, ElectricalStormComponent component, ref StormPulseEvent args)
+    {
+        List<StormType> keyList = new List<StormType>(args.StormIntensities.Keys);
+        foreach (StormType type in keyList)
+        {
+            switch (type)
+            {
+                case Fire:
+                    component.StormIntensity = args.StormIntensities[type];
+                default:
+                    break;
+            }
+        }
+        return;
+    }
 
 }
