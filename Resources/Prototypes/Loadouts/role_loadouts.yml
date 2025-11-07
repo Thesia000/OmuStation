@@ -327,8 +327,7 @@
   - Survival
   - Trinkets
   - JanitorJobTrinkets
-  - JanitorPlunger
-  - Animals
+  - Animals # Goobstation?
   - GroupSpeciesBreathTool
   # Goobstation - EE Plasmeme Change.
   - JanitorEnvirohelm
@@ -639,8 +638,7 @@
   - TrinketsSecurity # Omu Edit
   - Trinkets
   - HeadofSecurityJobTrinkets
-  - SecurityStar
-  - Animals
+  - Animals # Goobstation
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - HeadofSecurityEnvirohelm
@@ -663,8 +661,7 @@
   - SurvivalSecurity
   - Trinkets
   - WardenJobTrinkets
-  - SecurityStar
-  - Animals
+  - Animals # Goobstation
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - WardenEnvirohelm
@@ -687,8 +684,7 @@
   - SurvivalSecurity
   - Trinkets
   - SecurityJobTrinkets
-  - SecurityStar
-  - Animals
+  - Animals # Goobstation
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - SecurityOfficerEnvirohelm
@@ -710,8 +706,7 @@
   - SurvivalSecurity
   - Trinkets
   - DetectiveJobTrinkets
-  - SecurityStar
-  - Animals
+  - Animals # Goobstation
   - GroupSpeciesBreathToolSecurity
   # Goobstation - EE Plasmeme Change.
   - DetectiveEnvirohelm
