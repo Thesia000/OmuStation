@@ -1,3 +1,5 @@
+using System.Numerics;
+using System.Runtime.InteropServices;
 using Content.Goobstation.Shared._BSD.Drive.Components;
 
 
@@ -30,13 +32,13 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
         component.Energy += deltaChange;
         //call event for acceleration change proportional to energy decay after all
     }
-    public void BeamEnergy(BluespaceStationDriveCoreComponent component, float beamEnergy)//needs to be moved into a event that is called and raised?
+    public void BeamEnergy(BluespaceStationDriveCoreComponent component)
     {
         if (component == null)
         {
             return;
         }
-        component.Energy += beamEnergy;
+        component.Energy += component.DeltaEnergyBeams;
         return;
     }
     #endregion
@@ -48,8 +50,10 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
             return;
         }
         var deltaChange = 0f;
-        var distance = Math.Sqrt(component.PositionY * component.PositionY + component.PositionX * component.PositionX);
-        deltaChange += -(distance * distance - Math.Log(distance)) + 2f - Math.Log(component.Energy);
+        var distance = component.Distance;
+        deltaChange += distance - component.InnerShellDistance//distance to the inner ring
+                        + component.outerShellDistance - distance//distance to the outer ring
+                        - Math.Log10(component.Energy);//mallus for high energy
         if (component.SoftStability > 0)
         {
             if (deltaChange > component.SoftStability)
@@ -64,21 +68,78 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
         }
         if (component.SoftStability < 0)
         {
-            if (deltaChange > component.SoftStability)
+            if (deltaChange > component.HardStability)
             {
                 deltaChange -= component.HardStability;
-                component.HardStability = 0;
+                component.HardStability = 0;//TRIGGER core failure
             }
             else
             {
                 component.HardStability -= deltaChange;
             }
         }
+        if (component.HardStability < 0 && component.CoreSaftyOverwriteActive)
+        {
+            if (deltaChange > component.CoreStability)
+            {
+                deltaChange -= component.CoreStability;
+                component.CoreStability = 0;//--> NUKE the station or do the special thing
+                var ev = new CoreFailureEvent();
+                RaiseLocalEvent(uid, ev, true);
+            }
+            else
+            {
+                component.CoreStability -= deltaChange;
+            }
+        }
     }
-    //add some detection for consequences
+    //add some detection for consequences, that are not nuking
     public void EvaluateStability(BluespaceStationDriveCoreComponent component)
     {
 
+    }
+    #endregion
+    #region Movment
+    public void CoreVirtualMove(BluespaceStationDriveCoreComponent component)
+    {
+        if (component == null)
+        {
+            return;
+        }
+        //Energy beams
+        Complex angleTrans = (0, component.Andgle);
+        float currentX = Complex.Exp(angleTrans).Real * component.Distance;
+        float currentY = Complex.Exp(angleTrans).Imaginary * component.Distance;
+        float deltaX = 0f;
+        float deltaY = 0f;
+        if (component.ActiveEnergyBeams[0])//N
+        {
+            deltaY += Math.Exp(currentY) * component.ActiveEnergyBeamsPower[0];
+        }
+        if (component.ActiveEnergyBeams[1])//N
+        {
+            deltaY -= Math.Exp(-currentY) * component.ActiveEnergyBeamsPower[1];
+        }
+        if (component.ActiveEnergyBeams[2])//N
+        {
+            deltaY += Math.Exp(currentX) * component.ActiveEnergyBeamsPower[2];
+        }
+        if (component.ActiveEnergyBeams[3])//N
+        {
+            deltaY -= Math.Exp(currentX) * component.ActiveEnergyBeamsPower[3];
+        }
+        currentX += deltaX;
+        currentY += deltaY;
+        component.Angle = Math.Atan2(currentX, currentY);
+        component.Distance = Math.Sqrt(Math.Pow(currentX, 2) + Math.Pow(currentY, 2));
+        //Distance
+        float deltaChange = 0f;
+        deltaChange += component.Distance - component.InnerShellDistance;//for now linear scaling, consider exponental later
+        deltaChange += component.OuterShellDistance - component.Distance;
+        component.Distance += deltaChange;
+        //Rotation
+        float deltaAngle = 0f;
+        
     }
     #endregion
     public override void Update(float frameTime)
@@ -90,6 +151,7 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
             EnergyDecay(core);
             StabilityUpdate(core);
             EvaluateStability(core);
+            CoreVirtualMove(core);
         }
     }
 }

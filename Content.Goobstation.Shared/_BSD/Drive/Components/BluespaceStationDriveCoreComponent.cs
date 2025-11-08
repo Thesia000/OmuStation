@@ -12,6 +12,24 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     public float Energy = 0f;
 
     /// <summary>
+    /// The incomming energy into the system
+    /// </summary>
+    [DataField("deltaEnergyBeams")]
+    public float DeltaEnergyBeams = 0f;
+
+    /// <summary>
+    /// List of active beams, index accending: 0,1,2,3 -> N,S,E,W
+    /// </summary>
+    [DataField("activeEnergyBeams")]
+    public bool[] ActiveEnergyBeams = [false, false, false, false];
+
+    /// <summary>
+    /// List of active beam power, index accending: 0,1,2,3 -> N,S,E,W
+    /// </summary>
+    [DataField("activeEnergyBeamsPower")]
+    public float[] DeltaEnergyBeams = [0f, 0f, 0f, 0f];
+
+    /// <summary>
     /// Current soft stability, can be regenerated
     /// </summary>
     [DataField("softStability")]
@@ -28,6 +46,7 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     /// </summary>
     [DataField("coreStability")]
     public float CoreStability = 100f;
+
     /// <summary>
     /// Allowes nuclear operatives to overload the core and kill everbody
     /// </summary>
@@ -35,15 +54,35 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     public bool CoreSaftyOverwriteActive = true;
 
     /// <summary>
-    /// the position X in the virtual grid
+    /// the andgle the core point is at, in 2i*PI*n where n is this value
     /// </summary>
-    [DataField("positionX")]
-    public float PositionX = 0f;
+    [DataField("angle")]
+    public float Angle = 0f;
+
     /// <summary>
-    /// the position Y in the virtual grid
+    /// the distance from (0,0) in the virtual grid
     /// </summary>
-    [DataField("positionY")]
-    public float PositionY = 0f;
+    [DataField("distance")]
+    public float Distance = 0f;
+
+    /// <summary>
+    /// the distance from (0,0) in the virtual grid
+    /// </summary>
+    [DataField("innerShellDistance")]
+    public float InnerShellDistance = 0f;
+
+    /// <summary>
+    /// the distance from (0,0) in the virtual grid
+    /// </summary>
+    [DataField("outerShellDistance")]
+    public float OuterShellDistance = 0f;
+
+    /// <summary>
+    /// the andgle the core point is at
+    /// </summary>
+    [DataField("moveDistance")]
+    public float BaseMoveDistance = 10f;
+
     /// <summary>
     /// The efficency of the energy used for traveling(between 1 and 0)
     /// </summary>
