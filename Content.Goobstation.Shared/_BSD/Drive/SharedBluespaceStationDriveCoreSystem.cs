@@ -107,7 +107,7 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
             return;
         }
         //Energy beams
-        Complex angleTrans = (0, component.Andgle);
+        Complex angleTrans = (0, component.Angle);
         float currentX = Complex.Exp(angleTrans).Real * component.Distance;
         float currentY = Complex.Exp(angleTrans).Imaginary * component.Distance;
         float deltaX = 0f;
@@ -138,8 +138,14 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
         deltaChange += component.OuterShellDistance - component.Distance;
         component.Distance += deltaChange;
         //Rotation
-        float deltaAngle = 0f;
-        
+        float deltaAngle = component.Distance / component.RotationSpeed;
+        component.Angle += deltaAngle;
+        while (component.Angle >= Math.PI * 2)
+        {
+            component.Angle -= Math.PI * 2;
+            var ev = new BasePointRewardEvent();
+            RaiseLocalEvent(uid, ev, true);
+        }
     }
     #endregion
     public override void Update(float frameTime)

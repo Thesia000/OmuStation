@@ -60,6 +60,12 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     public float Angle = 0f;
 
     /// <summary>
+    /// movment
+    /// </summary>
+    [DataField("rotation")]
+    public float RotationSpeed = 2f;
+
+    /// <summary>
     /// the distance from (0,0) in the virtual grid
     /// </summary>
     [DataField("distance")]
