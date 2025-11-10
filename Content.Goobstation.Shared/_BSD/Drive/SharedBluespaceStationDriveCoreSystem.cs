@@ -116,15 +116,15 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
         {
             deltaY += Math.Exp(currentY) * component.ActiveEnergyBeamsPower[0];
         }
-        if (component.ActiveEnergyBeams[1])//N
+        if (component.ActiveEnergyBeams[1])//S
         {
             deltaY -= Math.Exp(-currentY) * component.ActiveEnergyBeamsPower[1];
         }
-        if (component.ActiveEnergyBeams[2])//N
+        if (component.ActiveEnergyBeams[2])//E
         {
             deltaY += Math.Exp(currentX) * component.ActiveEnergyBeamsPower[2];
         }
-        if (component.ActiveEnergyBeams[3])//N
+        if (component.ActiveEnergyBeams[3])//W
         {
             deltaY -= Math.Exp(currentX) * component.ActiveEnergyBeamsPower[3];
         }
