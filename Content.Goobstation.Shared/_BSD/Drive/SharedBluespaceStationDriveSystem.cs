@@ -1,8 +1,9 @@
 using Content.Goobstation.Shared._BSD.Drive.Components;
-
+using Content.Goobstation.Shared._BSD.Storms.Components;
+using Content.Goobstation.Shared._BSD.Storms.Events;
 
 namespace Content.Goobstation.Shared._BSD.Drive;
-
+/*
 public abstract class SharedBluespaceStationDriveSystem : EntitySystem
 {
     public override void Initialize()
@@ -14,7 +15,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
     The navmap is not a history but only the term for the options offered to the stations crew when performing a jump.
 
     This part of the navmap is there to generate , save, manipulate and delete the options the station has. 
-    */
+    *//*
     private void UpdateDistance(BluespaceStationDriveComponent component)
     {
         for (int iterator = 0; iterator < component.NavMapNodes.Length; iterator++)
@@ -37,7 +38,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
         component.CurrentMapNode = component.NavMapNodes[component.DestinationMapNavNodeId];
         /*
         Create the new navmap
-        */
+        *//*
         int nodeNR = 0;
         NavMapNode[] creration = new NavMapNode[totalNodes];
         for (int i; i <= component.NavMapDownwardsChoises; i++)
@@ -46,7 +47,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
             node.Depth = Math.Max(0, component.Depth - 1);
             node.Distance = 0;
             node.BluespaceResistance = 0;
-            node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
+            //node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
             node.NodeID = nodeNR;
             creration[nodeNR] = node;
             nodeNR++;
@@ -57,7 +58,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
             node.Depth = component.Depth;
             node.Distance = 0;
             node.BluespaceResistance = 0;
-            node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
+            //node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
             node.NodeID = nodeNR;
             creration[nodeNR] = node;
             nodeNR++;
@@ -68,12 +69,12 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
             node.Depth = component.Depth;
             node.Distance = 0;
             node.BluespaceResistance = 0;
-            node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
+            //node.StormIntensities;//array -> kind of shit needs a better way, possibly a key -> value system?
             node.NodeID = nodeNR;
             creration[nodeNR] = node;
             nodeNR++;
         }
-        creration.CopyTo(component.NavMapNodes);
+        //creration.copy(component.NavMapNodes);
         /*
         Set the storms
         */
@@ -83,7 +84,7 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
         "shadow"
         "electric"
         "fire"
-        */
+        *//*
         var ev = new StormDataEvent(component.currentMapNode.StormIntensities);
         RaiseLocalEvent(uid, ev, true);
         return;
@@ -104,4 +105,4 @@ public abstract class SharedBluespaceStationDriveSystem : EntitySystem
         }
     }
 
-}
+}*/

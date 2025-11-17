@@ -35,7 +35,7 @@ public sealed partial class StormComponent : Component
 /*
 new storms must be registered as a type here
 */
-enum StormType
+public enum StormType
 {
     Electrical,
     Fire,

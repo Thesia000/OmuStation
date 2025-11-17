@@ -27,7 +27,7 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     /// List of active beam power, index accending: 0,1,2,3 -> N,S,E,W
     /// </summary>
     [DataField("activeEnergyBeamsPower")]
-    public float[] DeltaEnergyBeams = [0f, 0f, 0f, 0f];
+    public float[] ActiveDeltaEnergyBeams = [0f, 0f, 0f, 0f];
 
     /// <summary>
     /// Current soft stability, can be regenerated
@@ -99,6 +99,6 @@ public sealed partial class BluespaceStationDriveCoreComponent : Component
     /// ID of the related drive
     /// </summary>
     [DataField("driveID")]
-    public EntityUid DriveId = 0;
+    public int DriveId = 0;
 }
 

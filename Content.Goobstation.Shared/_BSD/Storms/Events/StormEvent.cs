@@ -1,4 +1,4 @@
-
+using Content.Goobstation.Shared._BSD.Storms.Components;
 namespace Content.Goobstation.Shared._BSD.Storms.Events;
 
 /// <summary>

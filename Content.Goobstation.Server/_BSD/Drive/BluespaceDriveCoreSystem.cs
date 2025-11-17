@@ -8,8 +8,9 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<BluespaceStationDriveCoreComponent, ItemSlotInsertAttemptEvent>(SaveDriveId);
+        //SubscribeLocalEvent<BluespaceStationDriveCoreComponent, ItemSlotInsertAttemptEvent>(SaveDriveId);
     }
+    /*
     public void SaveDriveId(EntityUid uid, BluespaceStationDriveCoreComponent component, ref ItemSlotInsertAttemptEvent args)
     {
         component.DriveId = args.SlotEntity;
@@ -18,4 +19,5 @@ public abstract class SharedBluespaceStationDriveCoreSystem : EntitySystem
     {
         base.Update(frameTime);
     }
+    */
 }
