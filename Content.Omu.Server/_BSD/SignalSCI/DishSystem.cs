@@ -6,7 +6,10 @@
 //
 // SPDX-License-Identifier: MIT
 
-
+using Robust.Shared.Random;
+using Robust.Shared.Collections;
+using Robust.Shared.Timing;
+using Robust.Shared.Map.Components;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -17,17 +20,23 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// </summary>
 public sealed partial class SignalDishSystem
 {
+    [Dependency] protected readonly SharedTransformSystem _trans = default!;
     private void InitializeVessel()
     {
         SubscribeLocalEvent<SignalSciDish,AnomalyStabilityChangedEvent>(HarvestingEvent);
     }
 
-    private void HarvestingEvent(ref AnomalyStabilityChangedEvent args)
+    private void HarvestingEvent(EntityUid uid,ref AnomalyStabilityChangedEvent args)
     {
-        var query = EntityQueryEnumerator<SignalSciSignal>();
-        while (query.MoveNext(out var signalEnt, out var comp))
+        var SignalQuerry = AllEntityQuery<StormShieldComponent, TransformComponent>();
+        while (SignalQuerry.MoveNext(out _, out var signalComp, out var signalTransComp))
         {
-            signalEnt;
+            if (signalTransComp.MapID != targetMapPos.MapId)
+            {
+                continue;
+            }
+            var signalCords = _trans.GetWorldPosition(signalTransComp);
+            
         }
         return;
     }
