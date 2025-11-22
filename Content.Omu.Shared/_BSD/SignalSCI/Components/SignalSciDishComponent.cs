@@ -20,7 +20,7 @@ public sealed partial class SignalSciDish : Component
     /// Efficency of the dish: signal data to stored data in the server
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float EfficencyBase = 0f;
+    public float EfficencyBase = 1f;
 
     /// <summary>
     /// Harvesting of the signal data assuming 100% alignment
