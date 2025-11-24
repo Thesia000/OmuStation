@@ -87,7 +87,7 @@ public sealed class TraitSystem : EntitySystem
         {
 
             if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, uid) ||
-                _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, uid))
+                _whitelistSystem.IsWhitelistPass(traitPrototype.Blacklist, uid))
                 continue;
 
             // Add all components required by the prototype
