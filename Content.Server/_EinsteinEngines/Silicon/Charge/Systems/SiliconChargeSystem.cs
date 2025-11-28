@@ -12,7 +12,6 @@ using Content.Server.Power.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Server.Temperature.Components;
 using Content.Shared.Atmos.Components;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Popups;
 using Content.Shared._EinsteinEngines.Silicon.Systems;
@@ -30,6 +29,9 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Power.Components;
+using Content.Shared.Temperature.Components;
+using Content.Shared.Movement.Components;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Server._EinsteinEngines.Silicon.Charge;
 
@@ -37,7 +39,6 @@ public sealed class SiliconChargeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _moveMod = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -75,14 +76,6 @@ public sealed class SiliconChargeSystem : EntitySystem
             batteryEnt = battery.Value.Owner;
             return true;
         }
-
-        // Goobstation - Energycrit: Deshitcodified this
-        /*
-        // try get a battery directly on the inserted entity
-        if (TryComp(silicon, out batteryComp)
-            || _powerCell.TryGetBatteryFromSlot(silicon, out batteryComp))
-            return true;
-        */
 
         //DebugTools.Assert("SiliconComponent does not contain Battery");
         return false;
