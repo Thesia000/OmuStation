@@ -1828,6 +1828,7 @@
     threshold: 70
     cap: 140
   - type: Crawler
+  - type: StatusIcon
   - type: DiseaseCarrier # Goobstation
 
 - type: entity
