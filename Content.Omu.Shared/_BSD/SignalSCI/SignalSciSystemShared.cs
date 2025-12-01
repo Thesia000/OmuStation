@@ -15,7 +15,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
     public override void Update(EntityUid uid, float frameTime)
     {
         base.Update(frameTime);
-        var query = EntityQueryEnumerator<SignalSciDish>();
+        var query = EntityQueryEnumerator<SignalSciDishComponent>();
         while (query.MoveNext(out var dishEnt, out var comp))
         {
             if (comp.Harvesting)

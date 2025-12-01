@@ -2,7 +2,7 @@ namespace Content.Omu.Shared._BSD.SignalSCI.Components;
 
 [RegisterComponent]
 
-public sealed partial class SignalSciSignal : Component
+public sealed partial class SignalSciSignalComponent : Component
 {
     /// <summery>
     /// Always a positive integer and above 0 or we devide by 0

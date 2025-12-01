@@ -2,7 +2,7 @@ namespace Content.Omu.Shared._BSD.SignalSCI.Components;
 
 [RegisterComponent]
 
-public sealed partial class SignalSciDish : Component
+public sealed partial class SignalSciDishComponent : Component
 {
     /// <summary>
     /// The angle the Disk is facing

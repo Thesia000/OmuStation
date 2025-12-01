@@ -11,32 +11,33 @@ using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 using Robust.Shared.Map.Components;
 
-namespace Content.Omu.Server._BSD.SignalSCI;
+namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
 /// <summary>
 /// This handles anomalous vessel as well as
 /// the calculations for how many points they
 /// should produce.
 /// </summary>
-public sealed partial class SignalDishSystem
+public sealed partial class MultiBlockSystem
 {
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SignalSciDishComponent,AnomalyStabilityChangedEvent>(HarvestingEvent);
+        SubscribeLocalEvent<MultiBlockPartComponent, AfterConstructionChangeEntityEvent>(CheckIntegrity);
+        SubscribeLocalEvent<MultiBlockPartComponent, AnchorStateChangedEvent>(CheckIntegrity);
     }
 
-    private void HarvestingEvent(EntityUid uid,ref AnomalyStabilityChangedEvent args)
+    private void CheckIntegrity(EntityUid uid,ref AnomalyStabilityChangedEvent args)
     {
-        var SignalQuerry = AllEntityQuery<StormShieldComponent, TransformComponent>();
-        while (SignalQuerry.MoveNext(out _, out var signalComp, out var signalTransComp))
+        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
+        while (MachineQuerry.MoveNext(out _, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
         {
-            if (signalTransComp.MapID != targetMapPos.MapId)
+            if (transComp.MapID != targetMapPos.MapId)
             {
                 continue;
             }
-            var signalCords = _trans.GetWorldPosition(signalTransComp);
+            EntityUid[] toSearch;
             
         }
         return;
