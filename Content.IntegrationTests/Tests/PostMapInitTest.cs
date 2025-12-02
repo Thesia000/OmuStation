@@ -249,7 +249,7 @@ namespace Content.IntegrationTests.Tests
             "Dev",            // Dev map
             "dm01-entryway",  // Deathmatch
             "Europa",         // Not in pool.
-            //"Exo",          // Fuck off. I'm not even risking this list doing anything with it present.
+            "Exo",          // okay fine fuck it.
             "Fland",
             "FlandHighPop",
             "Glacier", // OMU
@@ -270,6 +270,7 @@ namespace Content.IntegrationTests.Tests
             "Reach",
             "Saltern",
             //"Serpentcrest", // omu serpentcrest kil
+            "Snowball",
             "TestTeg",        // Dev map
             "Train"           // Not in pool
             // Goob end
@@ -293,7 +294,7 @@ namespace Content.IntegrationTests.Tests
               "Dev",            // Dev map
             //"dm01-entryway",  // Deathmatch
             //"Europa",         // Not in pool.
-            //"Exo",            // Not in pool.
+              "Exo",
               "Fland",
               "FlandHighPop",
              "Glacier", // OMU
@@ -316,6 +317,7 @@ namespace Content.IntegrationTests.Tests
               "Reach",
               "Saltern",
             //"Serpentcrest", Omu No
+              "Snowball",
         };
         // Goobstation edit end
 

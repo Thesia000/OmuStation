@@ -38,7 +38,9 @@ public sealed class StationPowerTests
         "Leonid",
         "Delta",
         //"Chloris", // Omu, not in rotation
-        "Cog"
+        "Cog",
+        "Snowball",
+        "Exo",
     ];
 
     [Explicit]
