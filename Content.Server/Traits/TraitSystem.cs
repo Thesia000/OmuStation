@@ -22,6 +22,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -36,6 +37,7 @@ public sealed class TraitSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // Goobstation - EE
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!; // HardLight
 
@@ -106,6 +108,12 @@ public sealed class TraitSystem : EntitySystem
                 }
             }
             // Omu end
+
+            // Add all JobSpecials required by the prototype
+            foreach (var special in traitPrototype.Specials)
+            {
+                special.AfterEquip(uid);
+            }
 
             //  EE Lang, Goobedited to be less fucking shit holy fuck.
             _languageSystem.UpdateEntityLanguages(uid, traitPrototype);  // Remove/Add Languages required by the prototype

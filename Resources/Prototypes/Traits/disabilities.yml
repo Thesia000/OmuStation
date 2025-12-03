@@ -127,8 +127,10 @@
   description: trait-painnumbness-desc
   # category: Disabilities
   category: MentalTraits # Omustation - Remake EE Traits system - EE traits categories
-  components:
-  - type: PainNumbness
+  specials:
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - PainNumbnessTraitStatusEffect
   globalCost: -2 # Omustation - Remake EE Traits system - global trait points cost
 
 - type: trait
