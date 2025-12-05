@@ -37,7 +37,15 @@ public sealed partial class MultiBlockSystem
             {
                 continue;
             }
-            EntityUid[] toSearch;
+            int toSearch = 1;
+            EntityUid[] toSearchArray =  new EntityUid[4*toSearch];
+            EntityUid[] foundSearchArray =  new EntityUid[4*toSearch];
+            do
+            {
+                toSearchArray =  new EntityUid[4*toSearch];
+
+            }while(toSearch>0);
+            
             
         }
         return;

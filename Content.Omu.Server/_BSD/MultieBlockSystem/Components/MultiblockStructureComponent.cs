@@ -22,4 +22,10 @@ public sealed partial class MultiBlockStructureComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public string[] AllowedTypes;
 
+    /// <summary>
+    /// Components Present
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Dictionary<string,int> TypesPresent = new Dictionary<string, int>();
+
 }
