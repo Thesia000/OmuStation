@@ -20,11 +20,12 @@
     weight: 0.5
     reagents:
     - Omnizine
-    - Nocturine
-    - Lexorin
+    - Impedrezene
+    - Fresium
+    - HeartbreakerToxin
     - Honk
     - BuzzochloricBees
-    - Stimulants
+    - Stimulants # Goob
     # Goobstation
     - JuiceThatMakesYouHew
     - Carpolin
@@ -59,6 +60,9 @@
     - ChangelingSting
     - CogChamp
     - JuiceThatMakesYouWeh
+    - TearGas
+    - Lipolicide
+    - Benzene
     # Goobstation
     - Genecide
     - Fentanyl
@@ -99,6 +103,8 @@
     - Cola
     - Diphenhydramine
     - Iron
+    - Bleach
+    - Mannitol
     # Goobstation
     - Ibuprofen
     - Tilenol
@@ -127,7 +133,7 @@
     - Ash
     - SodiumCarbonate
     - SpaceDrugs
-    - MuteToxin
+    - SpaceGlue
     - JuiceBerryPoison
     - Pilk
     - Posca
@@ -140,6 +146,9 @@
     - Potassium
     - Fluorine
     - Aluminium
+    - Wine
+    - Coffee
+    - Beer
     # Goobstation
     - Tirimol
     - Probital
