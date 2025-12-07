@@ -1191,5 +1191,9 @@ ToySkeleton: ToyFigurineSkeleton
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass
 
+# 2025-12-06
+SpawnPointZookeeper: null
+SpawnPointBoxer: null
+
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu

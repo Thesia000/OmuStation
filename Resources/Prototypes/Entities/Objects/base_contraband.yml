@@ -221,15 +221,6 @@
     allowedJobs: [ Bartender, BlueshieldOfficer ] # Omu - BSO added as it has access to security contraband, should include multi-department sec contraband.
 
 - type: entity
-  id: BaseSecurityBartenderZookeeperContraband
-  parent: BaseRestrictedContraband
-  abstract: true
-  components:
-  - type: Contraband
-    allowedDepartments: [ Security ]
-    allowedJobs: [ Bartender, Zookeeper, BlueshieldOfficer ] # Omu - BSO added as it has access to security contraband, should include multi-department sec contraband.
-
-- type: entity
   id: BaseSecurityLawyerContraband
   parent: BaseRestrictedContraband
   abstract: true
