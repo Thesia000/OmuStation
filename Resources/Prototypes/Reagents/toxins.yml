@@ -627,6 +627,7 @@
           type:
           - Animal
           - Vox
+          - Plant
           - Yowie # Goobstation - Yowie
           - XenobioSlime # Goobstation - XenobioSlime
           - Xelthia # Fuck you as well
@@ -637,6 +638,7 @@
           type:
           - Animal
           - Vox
+          - Plant
           - Yowie # Goobstation - Yowie
           - XenobioSlime # Goobstation - XenobioSlime
           - Xelthia # Fuck you as well
@@ -644,6 +646,13 @@
         damage:
           types:
             Poison: 1
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Plant ]
+        damage:
+          types:
+            Poison: .25
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
