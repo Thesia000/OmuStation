@@ -149,6 +149,9 @@
     - !type:GroupSelector
       weight: 75
       children:
+      - !type:NestedSelector
+        weight: 5 # Roughly 7% chance
+        tableId: AllToysTable
       # Smoker's specialty
       - !type:AllSelector
         children:
@@ -259,13 +262,7 @@
         - id: ClothingNeckCloakKaijuCloak #Imported from Impstation14, Illegal Cloaks
         - id: ClothingNeckCloakFugitiveCloak #Imported from Impstation14, Illegal Cloaks
       - id: ToyFigurineSkeleton
-      - id: Basketball
-      - id: Football
-      - id: TennisBall
-      - id: BalloonNT
-      - id: BalloonCorgi
       - id: MysteryFigureBox
-      - id: RubberChicken
       - id: FoodSnackLollypopWrappedMysteryNeutral # Goobstation - Lollypops!
 #      - id: RevolutionaryManifesto # Einstein Engines - Revolutionary Manifesto # Omu, remove bookrevs
       # Cult
@@ -312,9 +309,10 @@
     - !type:GroupSelector
       weight: 2
       children:
-      - id: Skub
+      - id: Skub # Goobstation Start
       - id: PonderingOrb
       - id: CluwneHorn
+      - id: ClothingShoesSkates # Goobstation End
       - id: DrinkMugDog
       - id: CigarGold
       - id: ClothingUniformJumpsuitFamilyGuy
@@ -323,7 +321,7 @@
       - id: ClothingShoesWizardSkates #GoobStation - Wizard Skates
       - id: FoodSnackLollypopWrappedMysteryEvil # Goobstation - Lollypops!
       - id: MysteryLighterBox
-      - id: GoldenPersonalAI
+      - id: GoldenPersonalAI # Goobstation
 
 - type: entity
   name: Maint Loot Spawner
@@ -522,6 +520,8 @@
       - id: SawImprov
       - id: HydroponicsToolMiniHoe
       - id: ClothingHandsKnuckleDusters
+      - !type:NestedSelector
+        tableId: AllToyWeaponsTable
 
 - type: entity
   name: Maint Loot Spawner
