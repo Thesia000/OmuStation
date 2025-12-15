@@ -61,6 +61,7 @@ reagent-name-dexalin = dexalin
 reagent-desc-dexalin = Used for treating minor oxygen deprivation and bloodloss, mildly toxic to Avali and Resomi. A required reagent for dexalin plus.
 
 reagent-name-dexalin-plus = dexalin plus
+reagent-name-dexalin-plus-saline = dexalin plus & saline
 reagent-desc-dexalin-plus = Used in treatment of extreme cases of oxygen deprivation and bloodloss, toxic to Avali and Resomi. Flushes heartbreaker toxin out of the blood stream.
 # Starlight End
 
@@ -151,6 +152,7 @@ reagent-name-lacerinol = lacerinol
 reagent-desc-lacerinol = A fairly unreactive chemical that boosts collagen sythesis to incredible levels, healing slash trauma.
 
 reagent-name-puncturase = puncturase
+reagent-name-puncturase-tranexamic = puncturase & tranexamic
 reagent-desc-puncturase = A fizzy chemical that helps rebuild trauma caused by piercing damage, leaving a slight amount of tissue damage behind.
 
 reagent-name-bruizine = bruizine
@@ -160,6 +162,7 @@ reagent-name-holywater = holy water
 reagent-desc-holywater = The cleanest and purest of waters straight from the hands of god, is known to magically heal wounds.
 
 reagent-name-pyrazine = pyrazine
+reagent-name-pyrazine-dermaline = pyrazine & dermaline
 reagent-desc-pyrazine = Efficiently heals burns from the hottest of fires. Causes massive internal bleeding when overdosed.
 
 reagent-name-insuzine = insuzine
