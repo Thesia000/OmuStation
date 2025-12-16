@@ -40,9 +40,9 @@
     time: 10h # Omustation
   - !type:OverallPlaytimeRequirement # Omustation
     time: 10h
+  weight: 10
   canBeAntag: false
   goobcoins: 40 #Goob content
-  weight: 10 # Goob Edit
   icon: JobIconStationAi
   supervisors: job-supervisors-rd
   jobEntity: StationAiBrain
