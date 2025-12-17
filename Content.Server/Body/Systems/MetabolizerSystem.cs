@@ -60,6 +60,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using System.Linq;
 using Content.Server.Body.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Bed.Sleep; // Shitmed Change
@@ -200,15 +201,28 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
             return;
         }
 
+        // Copy the solution do not edit the original solution list
+        var list = solution.Contents.ToList();
+
+        // Collecting blood reagent for filtering
+        var bloodList = new List<string>();
+        var ev = new MetabolismExclusionEvent(bloodList);
+        RaiseLocalEvent(solutionEntityUid.Value, ref ev);
+
         // randomize the reagent list so we don't have any weird quirks
         // like alphabetical order or insertion order mattering for processing
-        var list = solution.Contents.ToArray();
         _random.Shuffle(list);
+
+        bool isDead = _mobStateSystem.IsDead(solutionEntityUid.Value);
 
         int reagents = 0;
         foreach (var (reagent, quantity) in list)
         {
             if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
+                continue;
+
+            // Skip blood reagents
+            if (bloodList.Contains(reagent.Prototype))
                 continue;
 
             var mostToRemove = FixedPoint2.Zero;
@@ -232,9 +246,9 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
                 continue;
 
             // Goob edit start
-            var ev = new ExcludeMetabolismGroupsEvent(ent.Owner);
-            RaiseLocalEvent(solutionEntityUid.Value, ref ev);
-            var exclude = ev.Groups ?? new();
+            var ev2 = new ExcludeMetabolismGroupsEvent(ent.Owner);
+            RaiseLocalEvent(solutionEntityUid.Value, ref ev2);
+            var exclude = ev2.Groups ?? new();
 
             // TODO: Kill MetabolismGroups!
             foreach (var group in ent.Comp1.MetabolismGroups.ExceptBy(exclude, x => x.Id)) // Goob edit end
@@ -257,6 +271,10 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
                 // if it's possible for them to be dead, and they are,
                 // then we shouldn't process any effects, but should probably
                 // still remove reagents
+                // todo marty clean this up.
+                if (isDead && !proto.WorksOnTheDead)
+                    continue;
+                // Goob start
                 if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
                 {
                     // Shitmed Change Start
@@ -271,6 +289,7 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
 
                     // Shitmed Change End
                 }
+                // Goob end
 
                 var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
 
