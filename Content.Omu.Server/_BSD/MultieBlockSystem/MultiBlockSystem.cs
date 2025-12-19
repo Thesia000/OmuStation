@@ -10,6 +10,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 using Robust.Shared.Map.Components;
+using System.Collections.Generic;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
@@ -31,23 +32,41 @@ public sealed partial class MultiBlockSystem
     private void CheckIntegrity(EntityUid uid,ref AnomalyStabilityChangedEvent args)
     {
         var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
-        while (MachineQuerry.MoveNext(out _, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
+        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
         {
             if (transComp.MapID != targetMapPos.MapId)
             {
                 continue;
             }
-            int toSearch = 1;
-            EntityUid[] toSearchArray =  new EntityUid[4*toSearch];
-            EntityUid[] foundSearchArray =  new EntityUid[4*toSearch];
+            Node start = new Node();
+            start.ID = uidLoop;
+            start.Efficency = 1.0;
+            List<Node> toSearchList =  new List<EntityUid>();
+            toSearchList.Add(start);
+            List<EntityUid> foundSearchList =  new List<EntityUid>();
             do
             {
-                toSearchArray =  new EntityUid[4*toSearch];
+                //first get the most efficent item
+                EntityUid = targetUid;
 
-            }while(toSearch>0);
+                //then check the sides
+                Comp<MultiBlockPartComponent>(uid);
+                for(int i = 0; i < 4; i++)
+                {
+                    CheckSide(targetUid,i);
+                }
+
+
+
+
+            }while(toSearchList.Size);
             
             
         }
         return;
+    }
+    private Node CheckSide(EntityUid uid,int sindeNum)
+    {
+        var targetCord = Comp<TransformComponent>(uid);
     }
 }

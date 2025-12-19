@@ -17,9 +17,27 @@ public sealed partial class MultiBlockPartComponent : Component
     public bool[4] Connectability = [true,true,true,true];
 
     /// <summary>
+    /// Allowed types this thing is allowed to connect to, the universal key is "ALL"
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string[4] Connectability = ["ALL","ALL","ALL","ALL"];
+
+    /// <summary>
     /// If a multiblock starts from this component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Origin = false;
+
+    /// <summary>
+    /// Ho much of a effect is transmitted from this block to the next
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float TransmissionEfficency = 0.0;
+
+    /// <summary>
+    /// Ho much of a effect is transmitted from this block to the next
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float MachinePower = 1.0;
 
 }

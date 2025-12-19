@@ -26,6 +26,17 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components Present
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<string,int> TypesPresent = new Dictionary<string, int>();
+    public Dictionary<string,float> TypesPresent = new Dictionary<string, float>();
+    /// <summary>
+    /// Components Present
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Dictionary<string,List<Node>> EntityDic = new Dictionary<string,List<Node>>();
 
+}
+
+struct Node
+{
+    float Efficency;
+    EntityUid ID;
 }
