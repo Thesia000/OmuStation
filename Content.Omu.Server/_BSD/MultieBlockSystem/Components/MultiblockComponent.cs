@@ -14,7 +14,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// in witch directions the block allowes additions to itself
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool[4] Connectability = [true,true,true,true];
+    public bool[4] Connectability = [true,true,true,true];//N,E,S,W
 
     /// <summary>
     /// Allowed types this thing is allowed to connect to, the universal key is "ALL"
@@ -27,6 +27,12 @@ public sealed partial class MultiBlockPartComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Origin = false;
+
+    /// <summary>
+    /// If a multiblock already claimed this component
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool Claimed = false;
 
     /// <summary>
     /// Ho much of a effect is transmitted from this block to the next

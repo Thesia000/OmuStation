@@ -42,31 +42,59 @@ public sealed partial class MultiBlockSystem
             start.ID = uidLoop;
             start.Efficency = 1.0;
             List<Node> toSearchList =  new List<EntityUid>();
-            toSearchList.Add(start);
             List<EntityUid> foundSearchList =  new List<EntityUid>();
+            toSearchList.Add(start);
+            foundSearchList.Add(start);
             do
             {
-                //first get the most efficent item
-                EntityUid = targetUid;
+                //first get the most efficent item, then remove it from the to search list
 
+
+                
+                EntityUid = targetUid;
                 //then check the sides
-                Comp<MultiBlockPartComponent>(uid);
+                MultiBlockPartComponent targetComp = Comp<MultiBlockPartComponent>(uid);
+                targetComp.Claimed = true;
                 for(int i = 0; i < 4; i++)
                 {
-                    CheckSide(targetUid,i);
+                    if (!targetComp.Connectability[i])
+                    {
+                        continue;
+                    }
+                    Node temp = CheckSide(targetUid,i);
+                    if (temp != null)
+                    {
+                        toSearchList.add(temp);
+                        foundSearchList.add(temp);
+                    }
                 }
-
-
-
-
             }while(toSearchList.Size);
             
             
         }
         return;
     }
-    private Node CheckSide(EntityUid uid,int sindeNum)
+    private Node CheckSide(EntityUid uid,int sideNum)
     {
-        var targetCord = Comp<TransformComponent>(uid);
+        var targetCord = _trans.GetGridPosition(Comp<TransformComponent>(uid));
+        switch (sideNum){
+            case 0://N
+                targetCord.x += 1;
+                break;
+            case 1://E
+                targetCord.y += 1;
+                break;
+            case 2://s
+                targetCord.x -= 1;
+                break;
+            default://4; W
+                targetCord.y -= 1;
+                break;
+        }
+        //get the entity on that cordinate
+
+        //checked entity if it is valid
+
+        //return entity or null
     }
 }
