@@ -20,7 +20,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Allowed types this thing is allowed to connect to, the universal key is "ALL"
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public string[4] Connectability = ["ALL","ALL","ALL","ALL"];
+    public string[4] AllowedConnectionTypes = ["ALL","ALL","ALL","ALL"];
 
     /// <summary>
     /// If a multiblock starts from this component
@@ -38,7 +38,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Ho much of a effect is transmitted from this block to the next
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float TransmissionEfficency = 0.0;
+    public float TransmissionEfficency = 0.9;
 
     /// <summary>
     /// Ho much of a effect is transmitted from this block to the next

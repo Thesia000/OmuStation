@@ -38,5 +38,6 @@ public sealed partial class MultiBlockStructureComponent : Component
 struct Node
 {
     float Efficency;
-    EntityUid ID;
+    EntityUid Id;
+    string Type;
 }
