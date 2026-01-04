@@ -29,7 +29,7 @@
 using System.Linq;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Goobstation.Common.CCVar; // Goobstation Change
-using Content.Shared.CCVar; // WD
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.Audio;
@@ -199,7 +199,7 @@ public partial class ChatBox : UIWidget
     {
         Contents.Clear();
 
-        foreach (var message in _controller.History) // WD
+        foreach (var message in _controller.History)
         {
             OnMessageAdded(message.Item2);
         }
@@ -221,6 +221,7 @@ public partial class ChatBox : UIWidget
         formatted.PushColor(color);
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
+        Contents.AddMessage(formatted, tagsAllowed: null);
         if(repeat != 0) // WD EDIT START
         {
             int displayRepeat = repeat + 1;
