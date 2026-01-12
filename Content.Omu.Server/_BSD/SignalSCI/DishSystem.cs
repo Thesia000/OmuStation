@@ -1,15 +1,11 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
+
 
 using Robust.Shared.Random;
 using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 using Robust.Shared.Map.Components;
+using Content.Omu.Shared._BSD.SignalSCI.Events;
+using Content.Omu.Shared._BSD.SignalSCI.Components;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -18,24 +14,20 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// the calculations for how many points they
 /// should produce.
 /// </summary>
-public sealed partial class SignalDishSystem
+public sealed partial class SignalDishSystem : EntitySystem
 {
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SignalSciDishComponent,AnomalyStabilityChangedEvent>(HarvestingEvent);
+        SubscribeLocalEvent<SignalSciDishComponent,SignalHarvestingEvent>(HarvestingEvent);
     }
 
-    private void HarvestingEvent(EntityUid uid,ref AnomalyStabilityChangedEvent args)
+    private void HarvestingEvent(EntityUid uid, SignalSciDishComponent comp, ref SignalHarvestingEvent args)
     {
-        var SignalQuerry = AllEntityQuery<StormShieldComponent, TransformComponent>();
+        var SignalQuerry = AllEntityQuery<SignalSciDishComponent, TransformComponent>();
         while (SignalQuerry.MoveNext(out _, out var signalComp, out var signalTransComp))
         {
-            if (signalTransComp.MapID != targetMapPos.MapId)
-            {
-                continue;
-            }
             var signalCords = _trans.GetWorldPosition(signalTransComp);
             
         }

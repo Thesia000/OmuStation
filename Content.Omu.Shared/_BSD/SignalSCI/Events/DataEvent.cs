@@ -1,3 +1,5 @@
+using Content.Shared.Actions;
+
 namespace Content.Omu.Shared._BSD.SignalSCI.Events;
 
 /// <summary>
@@ -8,4 +10,7 @@ namespace Content.Omu.Shared._BSD.SignalSCI.Events;
 /// <param name="IdealAmount"></param>
 /// <param name="LinkedServer">Location for the data to be stored in</param>
 [ByRefEvent]
-public readonly record struct SignalHarvestingEvent(EntityUid Dish, float Alignment, float IdealAmount,float Efficency, EntityUid LinkedServer);
+public sealed partial class SignalHarvestingEvent : InstantActionEvent
+{
+
+};

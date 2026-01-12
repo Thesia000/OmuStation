@@ -1,4 +1,4 @@
-namespace Content.Omu.Shared._BSD.MultiBlockSystem.Components;
+namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
 //This is always present on origin blocks
@@ -20,7 +20,7 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components that can be added to the structure, connectors or upgrades
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public string[] AllowedTypes;
+    public string[] AllowedTypes = {"NONE"};
 
     /// <summary>
     /// Components Present
@@ -35,9 +35,9 @@ public sealed partial class MultiBlockStructureComponent : Component
 
 }
 
-struct Node
+public struct Node
 {
-    float Efficency;
-    EntityUid Id;
-    string Type;
+    public float Efficency;
+    public EntityUid Id;
+    public string Type;
 }

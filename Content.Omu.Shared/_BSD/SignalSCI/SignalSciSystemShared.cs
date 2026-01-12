@@ -1,18 +1,16 @@
 using Content.Omu.Shared._BSD.SignalSCI.Events;
+using Content.Omu.Shared._BSD.SignalSCI.Components;
 namespace Content.Omu.Shared._BSD.SignalSCI;
 
-/// <summary>
-/// This handles logic and interactions relating to <see cref="AnomalyComponent"/>
-/// </summary>
-public sealed partial class AnomalySystem : SharedAnomalySystem
+public sealed partial class SignalSCISystem : EntitySystem
 {
-    public void HarvestSignal(EntityUid uid,SignalSCIDishComponent comp)
+    public void HarvestSignal(EntityUid uid,SignalSciDishComponent comp)
     {
-        var ev = SignalHarvestingEvent(uid,comp.Angle,comp.HarvestingBaseRate,comp.EfficencyBase,null);
+        SignalHarvestingEvent ev = new SignalHarvestingEvent();
         RaiseLocalEvent(uid, ref ev, true);
         return;
     }
-    public override void Update(EntityUid uid, float frameTime)
+    public override void Update(float frameTime)
     {
         base.Update(frameTime);
         var query = EntityQueryEnumerator<SignalSciDishComponent>();

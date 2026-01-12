@@ -1,17 +1,16 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
+using System.Collections.Generic;
+
+using Robust.Server.GameObjects;
 
 using Robust.Shared.Random;
 using Robust.Shared.Collections;
 using Robust.Shared.Timing;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using System.Collections.Generic;
+
+using Content.Server.Construction;
 using Content.Shared.Maps;
+using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
@@ -20,30 +19,38 @@ namespace Content.Omu.Server._BSD.MultiBlockSystem;
 /// the calculations for how many points they
 /// should produce.
 /// </summary>
-public sealed partial class MultiBlockSystem
+public sealed partial class MultiBlockSystem : EntitySystem
 {
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
+    [Dependency] private readonly SharedMapSystem _maps = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<MultiBlockPartComponent, AfterConstructionChangeEntityEvent>(CheckIntegrity);
         SubscribeLocalEvent<MultiBlockPartComponent, AnchorStateChangedEvent>(CheckIntegrity);
     }
+    private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
+    {
+        CheckIntegrityAll();
+        return;
+    }
+    private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AnchorStateChangedEvent args)
+    {
+        CheckIntegrityAll();
+        return;
+    }
 
-    private void CheckIntegrity()
+    private void CheckIntegrityAll()
     {
         var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
         while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
         {
-            if (transComp.MapID != targetMapPos.MapId)
-            {
-                continue;
-            }
             Node start = new Node();
-            start.ID = uidLoop;
-            start.Efficency = 1.0;
-            List<Node> toSearchList =  new List<EntityUid>();
-            List<EntityUid> foundSearchList =  new List<EntityUid>();
+            start.Id = uidLoop;
+            start.Efficency = 1.0f;
+            List<Node> toSearchList =  new List<Node>();
+            List<Node> foundSearchList =  new List<Node>();
             toSearchList.Add(start);
             foundSearchList.Add(start);
             Node currentNode;
@@ -51,8 +58,8 @@ public sealed partial class MultiBlockSystem
             {
                 //first get the most efficent item, then remove it from the to search list
                 toSearchList.Sort((s1,s2)=>s1.Efficency.CompareTo(s2.Efficency));
-                currentNode = toSearchList.First();
-                toSearchList.ReomveAt(0);
+                currentNode = toSearchList[0];
+                toSearchList.Remove(currentNode);
                 //then check the sides
                 MultiBlockPartComponent targetComp = Comp<MultiBlockPartComponent>(currentNode.Id);
                 targetComp.Claimed = true;
@@ -62,17 +69,23 @@ public sealed partial class MultiBlockSystem
                     {
                         continue;
                     }
-                    Node temp = Node();
-                    temp.Id = CheckSide(currentNode.Id,i,targetComp.AllowedConnectionTypes[i]);
-                    temp.Efficency = currentNode.Efficency * Comp<MultiBlockPartComponent>(temp.Id).TransmissionEfficency;
-                    temp.Type = Comp<MultiBlockPartComponent>(temp.Id).Type;
-                    if (temp != null)
+                    Node temp = new Node();
+                    temp.Id = CheckSide(currentNode.Id,i,targetComp.AllowedConnectionTypes[i],multiBlockStructureComp.AllowedTypes);
+                    if(!TryComp<MultiBlockPartComponent>(temp.Id, out var foundNodeComp))
                     {
-                        toSearchList.add(temp);
-                        foundSearchList.add(temp);
+                        continue;//this should never fail but ye know somethimes it may just happen
+                    }
+                    temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
+                    temp.Type = foundNodeComp.Type;
+                    if (temp.Id == currentNode.Id)//this means there is no entity found but cant use null
+                    {
+                        if(!foundSearchList.Contains(temp)){
+                        toSearchList.Add(temp);
+                        foundSearchList.Add(temp);
+                        }
                     }
                 }
-            }while(toSearchList.Size);
+            }while(toSearchList.Count>0);
             //update the actual values to the master structure and link them all
             foreach(Node addNode in foundSearchList)
             {
@@ -84,47 +97,53 @@ public sealed partial class MultiBlockSystem
     }
     private EntityUid CheckSide(EntityUid uid,int sideNum, string allowedTypes, string[] structureTypesAllowed)
     {
-        var targetCord = _trans.GetGridPosition(Comp<TransformComponent>(uid));
+        var targetCordVec = _maps.GetGridPosition(uid);
         switch (sideNum){
             case 0://N
-                targetCord.x += 1;
+                targetCordVec.X += 1.0f;
                 break;
             case 1://E
-                targetCord.y += 1;
+                targetCordVec.Y += 1.0f;
                 break;
             case 2://s
-                targetCord.x -= 1;
+                targetCordVec.X -= 1.0f;
                 break;
             default://4; W
-                targetCord.y -= 1;
+                targetCordVec.Y -= 1.0f;
                 break;
         }
         //get the entity on that cordinate
-        HashSet<EntityUid> FoundEntities = GetEntitiesInTile(targetCord);
+        EntityCoordinates targetCord = new EntityCoordinates(
+                    Transform(uid).GridUid.Value,
+                    targetCordVec.X,
+                    targetCordVec.Y
+                  );
+        HashSet<EntityUid> FoundEntities = _turf.GetEntitiesInTile(targetCord);
         if (FoundEntities == null)
         {
-            return;
+            return uid;//basicly null but cant null
         }
         //checked entity if it is valid
         //return entity or null
         foreach(EntityUid targetUid in FoundEntities)
         {
-            MultiBlockPartComponent searchedComp = Comp<MultiBlockPartComponent>(targetUid);
-            if(searchedComp != null)
+            if(!TryComp<MultiBlockPartComponent>(targetUid, out var searchedComp))
             {
-                if (!structureTypesAllowed.Contains(searchedComp.Type))//exit in case the multiblock does not allow this Type
+                continue;//this can fail and makes the following check obsolte but alas
+            }
+            foreach(string check in structureTypesAllowed){
+                if (!check.Contains(searchedComp.Type))//exit in case the multiblock does not allow this Type
                 {
-                    return null;
+                    return uid;
                 }
-                if(searchedComp.Type == allowedTypes || allowedTypes == "ALL")
-                {
-                    return targetUid;
-                //this limits it to one multiblock component PER tile, a better solution could be made but is utterly unneccesary
-                //as there should never be a multiblock structure that requires multiple structures on one tile.
-                }
-                
+            }
+            if(searchedComp.Type == allowedTypes || allowedTypes == "ALL")
+            {
+                return targetUid;
+            //this limits it to one multiblock component PER tile, a better solution could be made but is utterly unneccesary
+            //as there should never be a multiblock structure that requires multiple structures on one tile.
             }
         }
-        return null;
+        return uid;
     }
 }

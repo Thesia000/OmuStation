@@ -28,5 +28,11 @@ public sealed partial class SignalSciDishComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float HarvestingBaseRate = 100f;
 
+    /// <summary>
+    /// Harvesting of the signal data assuming 100% alignment
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntityUid LinkedServer;
+
 
 }

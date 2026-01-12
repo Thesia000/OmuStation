@@ -1,4 +1,4 @@
-namespace Content.Omu.Shared._BSD.MultiBlockSystem.Components;
+namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
 
@@ -14,13 +14,13 @@ public sealed partial class MultiBlockPartComponent : Component
     /// in witch directions the block allowes additions to itself
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool[4] Connectability = [true,true,true,true];//N,E,S,W
+    public bool[] Connectability = [true,true,true,true];//N,E,S,W
 
     /// <summary>
     /// Allowed types this thing is allowed to connect to, the universal key is "ALL"
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public string[4] AllowedConnectionTypes = ["ALL","ALL","ALL","ALL"];
+    public string[] AllowedConnectionTypes = ["ALL","ALL","ALL","ALL"];
 
     /// <summary>
     /// If a multiblock starts from this component
@@ -38,12 +38,12 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Ho much of a effect is transmitted from this block to the next
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float TransmissionEfficency = 0.9;
+    public float TransmissionEfficency = 0.9f;
 
     /// <summary>
     /// Ho much of a effect is transmitted from this block to the next
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float MachinePower = 1.0;
+    public float MachinePower = 1.0f;
 
 }
