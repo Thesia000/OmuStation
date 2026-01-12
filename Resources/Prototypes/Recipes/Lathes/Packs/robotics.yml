@@ -52,8 +52,8 @@
   recipes:
   - BorgModuleAdvancedCleaning
   - BorgModuleAdvancedTool
-  # - BorgModuleAdvancedClowning # goobedit
-  - BorgModuleAdvancedChemical
+  #- BorgModuleAdvancedClowning # Goobstation
+  - BorgModuleAdvancedTopical
   - BorgModuleAdvancedMining
 
 - type: latheRecipePack
