@@ -1074,29 +1074,29 @@
     hands:
     - item: HandheldHealthAnalyzer
     - item: Syringe
-    #- item: BorgDropper # Omustation
-    - item: BaseChemistryEmptyVial
+    # - item: BorgDropper Omu
+    - item: ChemistryEmptyVial
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyRepresentative: ChemistryEmptyVial
         whitelist:
           components:
           - FitsInDispenser
           tags:
           - ChemDispensable # Omu edit
-    - item: BaseChemistryEmptyVial
+    - item: ChemistryEmptyVial
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyRepresentative: ChemistryEmptyVial
         whitelist:
           components:
           - FitsInDispenser
           tags:
           - ChemDispensable # Omu edit
-    - item: BaseBeaker
+    - item: BaseBeaker # Omu
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseBeaker
+        emptyRepresentative: BaseBeaker # Omu
         whitelist:
           components:
           - FitsInDispenser
@@ -1173,11 +1173,11 @@
     - item: SprayBottle
     - item: GasAnalyzer
     - item: BorgDropper
+    - item: ChemistryEmptyVial
     - item: HolofanProjector # Goobstation
-    - item: BaseChemistryEmptyVial
       hand:
         emptyLabel: borg-slot-small-containers-empty
-        emptyRepresentative: BaseChemistryEmptyVial
+        emptyRepresentative: ChemistryEmptyVial
         whitelist:
           components:
           - FitsInDispenser
