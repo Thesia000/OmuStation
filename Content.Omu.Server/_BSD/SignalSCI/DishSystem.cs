@@ -10,9 +10,7 @@ using Content.Omu.Shared._BSD.SignalSCI.Components;
 namespace Content.Omu.Server._BSD.SignalSCI;
 
 /// <summary>
-/// This handles anomalous vessel as well as
-/// the calculations for how many points they
-/// should produce.
+/// This system handles the signal dish multiblock behaviour
 /// </summary>
 public sealed partial class SignalDishSystem : EntitySystem
 {
