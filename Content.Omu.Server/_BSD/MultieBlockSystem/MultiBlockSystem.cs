@@ -30,6 +30,11 @@ public sealed partial class MultiBlockSystem : EntitySystem
         SubscribeLocalEvent<MultiBlockPartComponent, AfterConstructionChangeEntityEvent>(CheckIntegrity);
         SubscribeLocalEvent<MultiBlockPartComponent, AnchorStateChangedEvent>(CheckIntegrity);
     }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        
+    }
     private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
     {
         CheckIntegrityAll();
