@@ -1,0 +1,59 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by Thesia (github) for Space Station 14.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name":"advanced-cabele-module"
+        },
+        {
+            "name":"advanced-construction-module"
+        },
+        {
+            "name":"camera-access-module"
+        },
+        {
+            "name":"chemistry-module"
+        },
+        {
+            "name":"configurator-module"
+        },
+        {
+            "name":"ERT-engi-module"
+        },
+        {
+            "name":"ERT-med-module"
+        },
+        {
+            "name":"ERT-sec-module"
+        },
+        {
+            "name":"paperwork-module"
+        },
+        {
+            "name":"paramed-module"
+        },
+        {
+            "name":"particle-decelerator-module"
+        },
+        {
+            "name":"refueling-module"
+        },
+        {
+            "name":"self-replication-module"
+        },
+        {
+            "name":"shielding-module"
+        },
+        {
+            "name":"spin-inverter-module"
+        },
+        {
+            "name":"void-mobility-module"
+        }
+    ]
+}

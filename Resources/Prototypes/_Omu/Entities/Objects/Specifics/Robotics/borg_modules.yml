@@ -1,0 +1,371 @@
+﻿# NT Modules
+
+- type: entity
+  id: BorgModuleERTMed
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseCentcommContraband ]
+  name: ERT medical cyborg module
+  suffix: DO NOT MAP
+  description: A module that comes with a ERT levels of medical help.
+  components:
+    - type: Sprite
+      layers:
+      - state: nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+      - state: icon-nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+    - type: ItemBorgModule
+      moduleId: BorgModuleERTMed
+      items:
+        - CentCommHypo
+        - EnergyScalpel
+        - EnergyCautery
+        - AdvancedRetractor
+        - BoneGel
+        - WeaponPulsePistol
+    - type: BorgModuleIcon
+      icon: { sprite: Interface/Actions/actions_borg.rsi, state: ERT-med-module }
+
+- type: entity
+  id: BorgModuleERTEngi
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseCentcommContraband ]
+  name: ERT engineering cyborg module
+  suffix: DO NOT MAP
+  description: A module that comes with a ERT levels of engineering help.
+  components:
+    - type: Sprite
+      layers:
+      - state: nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+      - state: icon-nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+    - type: ItemBorgModule
+      moduleId: BorgModuleERTEngi
+      items:
+        - RCDExperimental
+        - WeaponPulsePistol
+    - type: BorgModuleIcon
+      icon: { sprite: Interface/Actions/actions_borg.rsi, state: ERT-engi-module }
+
+- type: entity
+  id: BorgModuleERTSec
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseCentcommContraband ]
+  name: ERT security cyborg module
+  suffix: DO NOT MAP
+  description: A module that comes with a ERT levels of security help.
+  components:
+    - type: Sprite
+      layers:
+      - state: nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+      - state: icon-nanotressen
+        sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+    - type: ItemBorgModule
+      moduleId: BorgModuleERTSec
+      items:
+        - WeaponPulseCarbineAdvancedBorg 
+        - HandheldCrewMonitor
+        - WeaponPulsePistol 
+        - WeaponDisablerAdvanced 
+    - type: BorgModuleIcon
+      icon: { sprite: Interface/Actions/actions_borg.rsi, state: ERT-sec-module }
+#science
+
+- type: entity
+  id: BorgInverter
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: Spin inverter cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: science
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-spin-inverter
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: DroppableBorgModule
+    moduleId: BorgInverter
+    items:
+    - id: DeviceQuantumSpinInverter
+      whitelist:
+        tags:
+        - QuantumSpinInverter
+
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: spin-inverter-module }
+
+#medical
+
+- type: entity
+  id: BorgModuleParamed
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  name: paramed cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-paramed
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleParamed
+    items:
+    - MedicatedSutureLingering0
+    - RegenerativeMeshLingering0
+  - type: DroppableBorgModule
+    moduleId: BorgModuleParamed
+    items:
+    - id: EmergencyRollerBedSpawnFolded
+      whitelist:
+        id:
+        - EmergencyRollerBedSpawnFolded
+    - id: EmergencyMedipen
+      whitelist:
+        tags:
+        - EmergencyMedipen
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: paramed-module }
+
+- type: entity
+  id: BorgModuleChemisty
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  name: chem cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-chemist
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleChemisty
+    items:
+    - BorgDropper
+    - HandLabeler
+  - type: DroppableBorgModule
+    moduleId: BorgModuleChemisty
+    items:
+    - id: Beaker
+      whitelist:
+        components:
+        - FitsInDispenser
+    - id: Beaker
+      whitelist:
+        components:
+        - FitsInDispenser
+    - id: Jug
+      whitelist:
+        tags:
+        - ChemDispensable
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: chemistry-module }
+
+#engi
+
+- type: entity
+  id: BorgModuleAdvancedConstruction
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
+  name: advanced construction cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: engineering
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-advanced-construction
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleAdvancedConstruction
+    items:
+    - SheetRGlassLingering0
+    - SheetPGlassLingering0
+    - SheetRPGlassLingering0
+    - SheetUGlassLingering0
+    - SheetRUGlassLingering0
+    - SheetPlasteelLingering0
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: advanced-construction-module }
+
+- type: entity
+  id: BorgModuleAdvancedCabeling
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
+  name: advanced cabeling cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: engineering
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-advanced-cabeling
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleAdvancedCabeling
+    items:
+    - BaseHandheldStationMapPowerCe
+    - CableApcStackLingering10
+    - CableMVStackLingering10
+    - CableHVStackLingering10
+    - JawsOfLife
+    - trayScanner
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: advanced-cabele-module }
+
+- type: entity
+  id: BorgModuleRefueling
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
+  name: refueling cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: engineering
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-refueling
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleRefueling
+    items:
+    - SheetPlasmaLingering0
+    - SheetUraniumLingering0
+  - type: DroppableBorgModule
+    moduleId: BorgModuleRefueling
+    items:
+    - id: AmeJar
+      whitelist:
+        components:
+        - AmeFuelContainer
+    - id: PlasmaTank
+      whitelist:
+        components:
+        - GasTank
+    # End Frontier: droppable borg items
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: refueling-module }
+
+#general
+
+- type: entity
+  id: BorgParticleDecelerator
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: particle decelerator cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-particledecelerator
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgParticleDecelerator
+    items:
+    - BorgWeaponParticleDecelerator
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: particle-decelerator-module }
+
+- type: entity
+  id: BorgModulePaperwork
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: paperwork cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-paperwork
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: Papwerwork
+    items:
+    - Pen
+    - RubberStampApproved
+    - RubberStampDenied
+    - HandLabeler
+  - type: DroppableBorgModule
+    moduleId: Papwerwork
+    items:
+    - id: Paper
+      whitelist:
+        components:
+          - FaxableObject
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: paperwork-module }
+
+- type: entity
+  id: BorgModuleShielding
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: Shielding cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-shielding
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleShielding
+    items:
+    - RiotBulletShield
+    - RiotLaserShield
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: shielding-module }
+
+- type: entity
+  id: BorgModuleConfigurator
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: configuration cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-configuration
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleConfigurator
+    items:
+    - AccessConfigurator
+    - NetworkConfigurator
+  - type: DroppableBorgModule
+    moduleId: BorgModuleConfigurator
+    items:
+    - id: VisitorIDCard
+      whitelist:
+        components:
+          - IdCard
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: configurator-module }
+
+- type: entity
+  id: BorgModuleVoidMobility
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: void mobility cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-void-mobility
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: DroppableBorgModule
+    moduleId: BorgModuleVoidMobility
+    items:
+    - id: JetpackMini
+      whitelist:
+        components:
+          - Jetpack
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: void-mobility-module }
+
+- type: entity
+  id: BorgModuleCamrraAccess
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: camera access cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+      sprite: Objects/Specific/Robotics/borgmodule.rsi
+    - state: icon-camera-access
+      sprite: _Omu/Objects/Specific/Robotics/borgmodule_additional.rsi
+  - type: ItemBorgModule
+    moduleId: BorgModuleCamrraAccess
+    items:
+    - CameraBug #needs a retectured version for borgs
+    - BaseHandheldTelevision
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: camera-access-module }

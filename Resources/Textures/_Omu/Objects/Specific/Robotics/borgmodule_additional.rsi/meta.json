@@ -1,0 +1,53 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Created by Thesia (github) for Space Station 14.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon-camera-access"
+        },
+        {
+            "name": "icon-paperwork"
+        },
+        {
+            "name": "icon-particledecelerator"
+        },
+        {
+            "name": "icon-self-replication"
+        },
+        {
+            "name": "icon-void-mobility"
+        },
+        {
+            "name": "icon-configuration"
+        },
+        {
+            "name": "icon-shielding"
+        },
+        {
+            "name": "icon-advanced-cabeling"
+        },
+        {
+            "name": "icon-advanced-construction"
+        },
+        {
+            "name": "nanotressen"
+        },
+        {
+            "name": "icon-spin-inverter"
+        },
+        {
+            "name": "icon-paramed"
+        },
+        {
+            "name": "icon-nanotressen"
+        },
+        {
+            "name": "icon-refueling"
+        }
+    ]
+}
