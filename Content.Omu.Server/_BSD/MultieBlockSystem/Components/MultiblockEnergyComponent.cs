@@ -26,6 +26,12 @@ public sealed partial class MultiBlockPartComponent : Component
     /// If a multistruct is powered
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool Powered = false;
+    public string[] EnergyProvidingTypes = {"EnergyProvider"};
+
+    /// <summary>
+    /// If a multistruct is powered
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string[] EnergyCapacityTypes = {"EnergyCapacityProvider"};
 
 }
