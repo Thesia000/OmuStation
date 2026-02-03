@@ -33,8 +33,25 @@ public sealed partial class MultiBlockSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
+        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
+        {
+            PowerUpdate(uidLoop,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        }
+    }
+
+    private void PowerUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
+    {
         
     }
+
+    private void EnergyStroageUpdateAll()
+    {
+        return;
+    }
+
+
+
     private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
     {
         CheckIntegrityAll();
@@ -120,6 +137,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 
             }
         }
+        EnergyStroageUpdateAll();
         return;
     }
     private void ResetClaimedStatus()

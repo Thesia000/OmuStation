@@ -2,10 +2,10 @@ namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
 
-public sealed partial class MultiBlockPartComponent : Component
+public sealed partial class MultiBlockEnergyManagmentComponent : Component
 {
     /// <summary>
-    /// Energy stored in the machine in kJ
+    /// Energy stored in the machine in J
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float StoredEnergy = 0;
@@ -23,15 +23,25 @@ public sealed partial class MultiBlockPartComponent : Component
     public bool Powered = false;
 
     /// <summary>
-    /// If a multistruct is powered
+    /// expects the battery component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public string[] EnergyProvidingTypes = {"EnergyProvider"};
 
     /// <summary>
-    /// If a multistruct is powered
+    /// expects the multiblock energy storage comp
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public string[] EnergyCapacityTypes = {"EnergyCapacityProvider"};
+
+}
+
+public sealed partial class MultiBlockEnergyStorageComponent : Component
+{
+    /// <summary>
+    /// Energy stored in the machine in J
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float StorEnergy = 20e+6;//adds 20 MJ of energy storage
 
 }
