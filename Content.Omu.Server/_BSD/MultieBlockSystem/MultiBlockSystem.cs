@@ -10,6 +10,7 @@ using Robust.Shared.Map.Components;
 
 using Content.Server.Construction;
 using Content.Shared.Maps;
+using Content.Server.Power.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
@@ -21,7 +22,7 @@ namespace Content.Omu.Server._BSD.MultiBlockSystem;
 /// </summary>
 public sealed partial class MultiBlockSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedTransformSystem _trans = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     public override void Initialize()
@@ -33,20 +34,77 @@ public sealed partial class MultiBlockSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        PowerUpdateAll();
+    }
+    private void PowerUpdateAll()
+    {
         var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
         while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
         {
             PowerUpdate(uidLoop,multiBlockStructureComp,multiBlockEnergyManagmentComp);
         }
     }
-
+    private void PowerUpdate(EntityUid uid)
+    {
+        if(!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp))return;
+        if(!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp))return;
+        PowerUpdate(uid,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        return;
+    }
     private void PowerUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
     {
-        
+        foreach(string ProviderType in powerComp.EnergyProvidingTypes)
+        {
+            foreach(Node iterator in comp.EntityDic[ProviderType])
+            {
+                if(!TryComp<BatteryComponent>(iterator.Id, out var battery))continue;
+                if(!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair))continue;
+                float deltaChange = 0;
+                if(transfair.TransEnergy>0)deltaChange = Math.Min(battery.CurrentCharge,transfair.TransEnergy * iterator.Efficency);
+                else deltaChange = Math.Max(battery.CurrentCharge-battery.MaxCharge,transfair.TransEnergy * iterator.Efficency);
+                ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange,battery.MaxCharge);
+                RaiseLocalEvent(iterator.Id, ref ev, true);
+                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy+deltaChange,powerComp.StoredEnergyCapacity);
+
+            }
+        }
+        powerComp.StoredEnergy += powerComp.EnergyDelta;//structs own powergeneration/consumption
+        if (powerComp.StoredEnergy < 0)
+        {
+            powerComp.StoredEnergy = 0;
+            powerComp.Powered = false;
+            return;
+        }
+        powerComp.Powered = true;
+        return;
     }
 
     private void EnergyStroageUpdateAll()
     {
+        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
+        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
+        {
+            EnergyStroageUpdate(uidLoop,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        }
+    }
+    private void EnergyStroageUpdate(EntityUid uid)
+    {
+        if(!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp))return;
+        if(!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp))return;
+        EnergyStroageUpdate(uid,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        return;
+    }
+    private void EnergyStroageUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
+    {
+        powerComp.StoredEnergyCapacity = 0;
+        foreach(string EnergyStorageType in powerComp.EnergyCapacityTypes)
+        {
+            foreach(Node iterator in comp.EntityDic[EnergyStorageType])
+            {
+                if(!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp))continue;
+                powerComp.StoredEnergyCapacity += storageComp.StoreEnergy * iterator.Efficency;
+            }
+        }
         return;
     }
 
@@ -142,8 +200,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
     }
     private void ResetClaimedStatus()
     {
-        var ResetWaveEntites = AllEntityQuery<MultiBlockPartComponent>();
-        while (FoundEntities.MoveNext(out var uidLoop,out var MultiblockPartComp))
+        var resetWaveEntites = AllEntityQuery<MultiBlockPartComponent>();
+        while (resetWaveEntites.MoveNext(out var uidLoop,out var MultiblockPartComp))
         {
             MultiblockPartComp.Claimed = false;
         }

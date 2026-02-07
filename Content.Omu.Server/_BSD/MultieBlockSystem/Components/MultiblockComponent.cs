@@ -38,7 +38,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Ho much of a effect is transmitted from this block to the next
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float TransmissionEfficency = 0.9f;
+    public float TransmissionEfficency = 0.98f;//warning this is EXPONENTIAL decrease handle with CARE and infuluences how effective machines are
 
     /// <summary>
     /// Ho much of a effect is transmitted from this block to the next

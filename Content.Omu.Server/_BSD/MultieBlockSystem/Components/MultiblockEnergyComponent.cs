@@ -11,6 +11,12 @@ public sealed partial class MultiBlockEnergyManagmentComponent : Component
     public float StoredEnergy = 0;
 
     /// <summary>
+    /// Max Energy stored in the machine in J
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float StoredEnergyCapacity = 0;
+
+    /// <summary>
     /// Energy drain in W
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
@@ -26,7 +32,7 @@ public sealed partial class MultiBlockEnergyManagmentComponent : Component
     /// expects the battery component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public string[] EnergyProvidingTypes = {"EnergyProvider"};
+    public string[] EnergyProvidingTypes = {"EnergyTransfair"};
 
     /// <summary>
     /// expects the multiblock energy storage comp
@@ -42,6 +48,16 @@ public sealed partial class MultiBlockEnergyStorageComponent : Component
     /// Energy stored in the machine in J
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float StorEnergy = 20e+6;//adds 20 MJ of energy storage
+    public float StoreEnergy = 20e+6f;//adds 20 MJ of energy storage
+
+}
+
+public sealed partial class MultiBlockEnergyTransfairComponent : Component
+{
+    /// <summary>
+    /// Energy stored in the machine in J
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float TransEnergy = 0.5e+6f;//adds 0.5 MW positive value adds chage to system
 
 }
