@@ -280,7 +280,7 @@ public abstract class SharedFlightSystem : EntitySystem
 
     private void OnStandingStateFlightAttempt(EntityUid uid, StandingStateComponent component, ref FlightAttemptEvent args)
     {
-        if (!_standing.IsDown(uid, component))
+        if (!_standing.IsDown(uid))
             return;
 
         //Omu Edit Start - Paraplegic Harpies
