@@ -44,6 +44,10 @@
     {
       "name": "equipped-OUTERCLOTHING-feroxi",
       "directions": 4
-    }
+    },
+      {
+          "name": "equipped-OUTERCLOTHING-dog",
+          "directions": 4
+      }
   ]
 }
