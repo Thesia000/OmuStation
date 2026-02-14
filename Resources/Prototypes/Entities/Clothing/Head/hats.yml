@@ -859,7 +859,7 @@
     sprite: Clothing/Head/Hats/redwizard.rsi
   - type: Tag
     tags:
-    - PetWearable
+    - PetWearable # Goobstation
     - CorgiWearable
     - ClothMade
     - WhitelistChameleon
@@ -1072,7 +1072,7 @@
     sprite: Clothing/Head/Hats/violetwizard.rsi
   - type: Tag
     tags:
-    - PetWearable
+    - PetWearable # Goobstation
     - CorgiWearable
     - ClothMade
     - WhitelistChameleon
@@ -1178,6 +1178,7 @@
     - HamsterWearable
     - MouseWearable # Goobstation
     - WhitelistChameleon
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
