@@ -21,7 +21,7 @@ public sealed partial class SignalSciServerComponent : Component
     /// The conversion rate for data to significant data
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public float Efficency = 0f;
+    public float Efficency = 0.1f;
 
     /// <summary>
     /// Significant data stored within this server, used to print point diks, with special machines FTL disks, explorations and node maps

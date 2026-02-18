@@ -1,9 +1,7 @@
 
-
-using Robust.Shared.Random;
 using Robust.Shared.Collections;
-using Robust.Shared.Timing;
 using Robust.Shared.Map.Components;
+using Content.Omu.Server._BSD.SignalSCI.Components;
 using Content.Omu.Shared._BSD.SignalSCI.Events;
 using Content.Omu.Shared._BSD.SignalSCI.Components;
 
@@ -21,13 +19,25 @@ public sealed partial class SignalDishSystem : EntitySystem
         SubscribeLocalEvent<SignalSciDishComponent,SignalHarvestingEvent>(HarvestingEvent);
     }
 
-    private void HarvestingEvent(EntityUid uid, SignalSciDishComponent comp, ref SignalHarvestingEvent args)
+    private void HarvestingEvent(EntityUid uid, SignalSciDishComponent dishComp, ref SignalHarvestingEvent args)
     {
-        var SignalQuerry = AllEntityQuery<SignalSciDishComponent, TransformComponent>();
-        while (SignalQuerry.MoveNext(out _, out var signalComp, out var signalTransComp))
+        var mapQuerry = AllEntityQuery<SignalMapComponent>();
+        while(mapQuerry.MoveNext(out var mapEnt, out var comp))
         {
-            var signalCords = _trans.GetWorldPosition(signalTransComp);
-            
+            if(Transform(mapEnt).MapID != Transform(uid).MapID)continue;
+            for(int move = 0; move <comp.SignalList.Count;move++)
+            {
+                float efficency = 1.0f;
+                if(dishComp.Angle - comp.SignalList[move].Angle !=0f){
+                efficency = Math.Min(Math.Abs(1.0f /(dishComp.Angle - comp.SignalList[move].Angle)),1.0f);
+                }
+                if(efficency > 0f)
+                {
+                    comp.SignalList[move].DataRemaining -= efficency * dishComp.HarvestingBaseRate;
+                    if(!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
+                    serverComp.StoredData += efficency * dishComp.HarvestingBaseRate * dishComp.EfficencyBase;
+                }
+            }
         }
         return;
     }
