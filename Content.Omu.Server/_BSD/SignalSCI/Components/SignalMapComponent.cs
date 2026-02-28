@@ -14,13 +14,13 @@ public sealed partial class SignalMapComponent : Component
     /// how many signals should be active at the same tiem
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public int DesiredAmountOfSignals;
+    public int DesiredAmountOfSignals = 5;
 
     /// <summary>
     /// Randomised each time a new signal needs to be added
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public int SignalAmountVariance;
+    public int SignalAmountVariance = 2;
 
     //The time distribution is linear form the bottom to the top time
     /// <summary>
@@ -33,6 +33,16 @@ public sealed partial class SignalMapComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public float SignalDurationMax = 60 * 10;
+    /// <summary>
+    /// SignalPoints Min
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float SingalPointsMin = 50000;//makes it require upgraded systems to fully harvest a signal
+    /// <summary>
+    /// SignalPoints Max
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float SingalPointsMax = 100000;
 }
 
 public class Signal
