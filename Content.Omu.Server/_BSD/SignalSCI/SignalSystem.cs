@@ -46,5 +46,6 @@ public sealed partial class SignalMapSystem : EntitySystem
         //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
         Signal newSignal = new Signal(_random.NextFloat(0.0f,360f),_random.NextFloat(signalMapComp.SingalPointsMin,signalMapComp.SingalPointsMax),disaperanceTime);
         signalMapComp.SignalList.Add(newSignal);
+        return;
     }
 }
