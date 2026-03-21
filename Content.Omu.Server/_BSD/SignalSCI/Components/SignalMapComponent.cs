@@ -8,7 +8,7 @@ public sealed partial class SignalMapComponent : Component
     /// Saves the Data needed for the Signals position
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public List<Signal> SignalList;
+    public List<Signal> SignalList = new List<Signal>();
 
     /// <summary>
     /// how many signals should be active at the same tiem

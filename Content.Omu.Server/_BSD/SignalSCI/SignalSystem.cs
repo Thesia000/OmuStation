@@ -15,7 +15,6 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// </summary>
 public sealed partial class SignalMapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _MapSys = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     public override void Initialize()
@@ -26,19 +25,27 @@ public sealed partial class SignalMapSystem : EntitySystem
     {
         base.Update(frameTime);
         var mapQuerry = AllEntityQuery<SignalMapComponent>();
-        while(mapQuerry.MoveNext(out var mapEnt, out var comp))
+        while(mapQuerry.MoveNext(out var mapEnt, out var comp))//this is done on update as we also manage the individual signals expration time here
         {
+            //update the signals aka delete if there time has come
+            if(comp.SignalList.Count > 0){
+                foreach(var signal in comp.SignalList){
+                    if(signal == null) continue;
+                    if(signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
+                }
+            }
+            //add more singals if need be, this will lead to high and low times for signal amounts.
             if(comp.SignalList.Count - comp.DesiredAmountOfSignals <= comp.SignalAmountVariance)continue;
             while(comp.SignalList.Count < comp.DesiredAmountOfSignals)CreateSignal(comp);
-            int additional = _random.Next(0,comp.SignalAmountVariance);
-            for(int i=0;i<additional;i++)CreateSignal(comp);
+            int additional = _random.Next(0, comp.SignalAmountVariance);
+            for(int i = 0; i < additional; i++)CreateSignal(comp);
         }
     }
-    public void SetupMapSignals(EntityUid uid)//this si called in case the map lacks the component
+    public SignalMapComponent SetupMapSignals(EntityUid uid)//this is called in case the map lacks the component
     {
-        EntityUid MapUid = _MapSys.GetMapOrInvalid(Transform(uid).MapID);
-        EnsureComp<SignalMapComponent>(MapUid);//ensure the map of the station has signals
-        return;
+        EnsureComp<SignalMapComponent>(uid);//ensure the map of the station has signals
+        TryComp<SignalMapComponent>(uid, out var comp);
+        return comp;
     }
     public void CreateSignal(SignalMapComponent signalMapComp)
     {
