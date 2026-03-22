@@ -35,7 +35,7 @@ public sealed partial class SignalMapSystem : EntitySystem
                 }
             }
             //add more singals if need be, this will lead to high and low times for signal amounts.
-            if(comp.SignalList.Count - comp.DesiredAmountOfSignals <= comp.SignalAmountVariance)continue;
+            if(comp.SignalList.Count - comp.DesiredAmountOfSignals >= comp.SignalAmountVariance)continue;
             while(comp.SignalList.Count < comp.DesiredAmountOfSignals)CreateSignal(comp);
             int additional = _random.Next(0, comp.SignalAmountVariance);
             for(int i = 0; i < additional; i++)CreateSignal(comp);
@@ -51,7 +51,7 @@ public sealed partial class SignalMapSystem : EntitySystem
     {
         TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin,signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
         //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
-        Signal newSignal = new Signal(_random.NextFloat(0.0f,360f),_random.NextFloat(signalMapComp.SingalPointsMin,signalMapComp.SingalPointsMax),disaperanceTime);
+        Signal newSignal = new Signal(_random.NextFloat(0.0f,360f), _random.NextFloat(signalMapComp.SingalPointsMin,signalMapComp.SingalPointsMax),disaperanceTime);
         signalMapComp.SignalList.Add(newSignal);
         return;
     }
