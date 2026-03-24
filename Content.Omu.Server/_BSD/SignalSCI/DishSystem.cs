@@ -4,8 +4,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.GameObjects;
 
 using Content.Omu.Server._BSD.SignalSCI.Components;
-using Content.Omu.Shared._BSD.SignalSCI.Events;
-using Content.Omu.Shared._BSD.SignalSCI.Components;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -20,13 +18,28 @@ public sealed partial class SignalDishSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SignalSciDishComponent,SignalHarvestingEvent>(DishSignalHarvest);
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        var query = EntityQueryEnumerator<SignalSciDishComponent>();
+        while (query.MoveNext(out var dishEnt, out var comp))
+        {
+            if (comp.Harvesting)//basicly if this machine is turned on -> needs to be move to multi struct possibly
+            {
+                DishSignalHarvest(dishEnt, comp);
+            }
+        }
     }
 
-    private void DishSignalHarvest(EntityUid uid, SignalSciDishComponent dishComp, ref SignalHarvestingEvent args)
+    private void DishSignalHarvest(EntityUid uid, SignalSciDishComponent dishComp)
     {
         EntityUid MapUid = _MapSys.GetMapOrInvalid(Transform(uid).MapID);
-        if(!TryComp<SignalMapComponent>(MapUid, out var comp)){comp = _signalMap.SetupMapSignals(MapUid);}
+        if(!TryComp<SignalMapComponent>(MapUid, out var comp))
+        {
+            comp = _signalMap.SetupMapSignals(MapUid);
+        }
+        if(comp == null){Log.Error("MapEnt: "+MapUid+" did not contain the SignalMapComponent but was expected to.");return;}
         for(int move = 0; move < comp.SignalList.Count; move++)//this math needs to be done every tick as we can harvest multiple signals if they align
         {
             float efficency = 1.0f;

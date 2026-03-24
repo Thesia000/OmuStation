@@ -1,7 +1,6 @@
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
-
 public sealed partial class MultiBlockEnergyManagmentComponent : Component
 {
     /// <summary>
@@ -41,7 +40,7 @@ public sealed partial class MultiBlockEnergyManagmentComponent : Component
     public string[] EnergyCapacityTypes = {"EnergyCapacityProvider"};
 
 }
-
+[RegisterComponent]
 public sealed partial class MultiBlockEnergyStorageComponent : Component
 {
     /// <summary>
@@ -51,7 +50,7 @@ public sealed partial class MultiBlockEnergyStorageComponent : Component
     public float StoreEnergy = 20e+6f;//adds 20 MJ of energy storage
 
 }
-
+[RegisterComponent]
 public sealed partial class MultiBlockEnergyTransfairComponent : Component
 {
     /// <summary>

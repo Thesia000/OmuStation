@@ -1,6 +1,6 @@
 using Content.Server.Station.Components;
 
-using Content.Omu.Shared._BSD.SignalSCI.Events;
+
 using Content.Omu.Server._BSD.SignalSCI.Events;
 using Content.Omu.Server._BSD.SignalSCI.Components;
 

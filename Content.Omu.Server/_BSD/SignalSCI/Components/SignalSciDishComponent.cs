@@ -1,4 +1,4 @@
-namespace Content.Omu.Shared._BSD.SignalSCI.Components;
+namespace Content.Omu.Server._BSD.SignalSCI.Components;
 
 [RegisterComponent]
 

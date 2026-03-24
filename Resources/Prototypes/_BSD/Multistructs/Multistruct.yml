@@ -1,0 +1,65 @@
+﻿
+- type: entity
+  id: MultistructBaseCore
+  parent: [ ConstructibleMachine]
+  name: MultistructBaseCore
+  abstract: true
+  components:
+  - type: MultiBlockPart
+  - type: MultiBlockStructure
+  - type: MultiBlockEnergyManagment
+    EnergyProvidingTypes: {"EnergyTransfair"}
+    EnergyCapacityTypes: {"EnergyCapacityProvider"}
+
+
+- type: entity
+  id: MultistructPartBase
+  parent: [ ConstructibleMachine]
+  name: MultistructPartBase
+  abstract: true
+  components:
+  - type: MultiBlockPart
+
+- type: entity
+  id: MultistructPartEnergyTransfairBase
+  parent: [ ConstructibleMachine]
+  name: MultistructPartEnergyTransfairBase
+  abstract: true
+  components:
+  - type: MultiBlockPart
+  - type: MultiBlockEnergyTransfair
+  - type: ExaminableBattery
+  - type: PowerMonitoringDevice
+    group: MultiStructs
+    sourceNode: input
+    loadNode: output
+    collectionName: apc
+    sprite: Structures/Power/apc.rsi
+    state: static
+  - type: BatteryCharger #this needs testing but should be fine, they will possibly double as SMES due to this
+    voltage: High
+  - type: PowerProvider
+    voltage: High
+  - type: PowerNetworkBattery
+    maxChargeRate: 150000 # 150KW
+  - type: Battery
+    maxCharge: 10000000 #10MJ these are high yield power transfair and larger structs may need higher tier ones
+    startingCharge: 10000000
+  - type: Electrified #DONT mess with high power machiens
+    onHandInteract: false
+    onInteractUsing: true
+    onBump: true
+    requirePower: true
+    highVoltageNode: input
+    mediumVoltageNode: output
+  - type: LightningTarget
+    priority: 1
+
+- type: entity
+  id: MultistructPartEnergyStorageBase
+  parent: [ ConstructibleMachine]
+  name: MultistructPartEnergyStorageBase
+  abstract: true
+  components:
+  - type: MultiBlockPart
+  - type: MultiBlockEnergyStorage

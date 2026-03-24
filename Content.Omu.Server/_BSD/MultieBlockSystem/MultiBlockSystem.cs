@@ -53,8 +53,10 @@ public sealed partial class MultiBlockSystem : EntitySystem
     }
     private void PowerUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
     {
+        if(powerComp.EnergyProvidingTypes == null)return;
         foreach(string ProviderType in powerComp.EnergyProvidingTypes)
         {
+            if(!comp.EntityDic.ContainsKey(ProviderType))continue;
             foreach(Node iterator in comp.EntityDic[ProviderType])
             {
                 if(!TryComp<BatteryComponent>(iterator.Id, out var battery))continue;
@@ -97,8 +99,10 @@ public sealed partial class MultiBlockSystem : EntitySystem
     private void EnergyStroageUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
     {
         powerComp.StoredEnergyCapacity = 0;
+        if(powerComp.EnergyCapacityTypes == null)return;
         foreach(string EnergyStorageType in powerComp.EnergyCapacityTypes)
         {
+            if(!comp.EntityDic.ContainsKey(EnergyStorageType))continue;
             foreach(Node iterator in comp.EntityDic[EnergyStorageType])
             {
                 if(!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp))continue;
