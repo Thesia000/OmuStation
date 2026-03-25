@@ -4,6 +4,10 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.GameObjects;
 
 using Content.Omu.Server._BSD.SignalSCI.Components;
+using Content.Omu.Server._BSD.MultiBlockSystem.Events;
+using Content.Omu.Server._BSD.MultiBlockSystem.Components;
+
+using Content.Omu.Server._BSD.MultiBlockSystem;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -18,6 +22,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValues);
     }
     public override void Update(float frameTime)
     {
@@ -30,6 +35,25 @@ public sealed partial class SignalDishSystem : EntitySystem
                 DishSignalHarvest(dishEnt, comp);
             }
         }
+    }
+    private void UpdateValues(EntityUid uid, SignalSciDishComponent comp, ref MultiStructChangeEvent args)
+    {
+        if(!TryComp<MultiBlockStructureComponent>(uid, out var structureComp))return;
+        //harvesting rate
+        comp.HarvestingRate = 0f;
+        foreach(string ProviderType in comp.DishTypes)
+        {
+            if(!structureComp.TypesPresent.ContainsKey(ProviderType))continue;
+            comp.HarvestingRate += structureComp.TypesPresent[ProviderType] * comp.HarvestingBaseRate;
+        }
+        //Conversion efficency
+        comp.EfficencyConversion = comp.EfficencyBase;
+        foreach(string ProviderType in comp.ProductivityTypes)
+        {
+            if(!structureComp.TypesPresent.ContainsKey(ProviderType))continue;
+            comp.EfficencyConversion += structureComp.TypesPresent[ProviderType];//productivity modules always have efficency rating coresponding to there buff!!!
+        }
+        return;
     }
 
     private void DishSignalHarvest(EntityUid uid, SignalSciDishComponent dishComp)
@@ -49,10 +73,10 @@ public sealed partial class SignalDishSystem : EntitySystem
             }
             if(efficency > 0f)
             {
-                float harvestedAmount = Math.Min(efficency * dishComp.HarvestingBaseRate, comp.SignalList[move].DataRemaining);
+                float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
                 comp.SignalList[move].DataRemaining -= harvestedAmount;
                 if(!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
-                serverComp.StoredData += harvestedAmount * dishComp.EfficencyBase;
+                serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
             }
         }
         return;

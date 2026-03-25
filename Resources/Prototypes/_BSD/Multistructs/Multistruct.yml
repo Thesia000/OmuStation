@@ -8,9 +8,8 @@
   - type: MultiBlockPart
   - type: MultiBlockStructure
   - type: MultiBlockEnergyManagment
-    EnergyProvidingTypes: {"EnergyTransfair"}
-    EnergyCapacityTypes: {"EnergyCapacityProvider"}
-
+    EnergyProvidingTypes: [EnergyTransfair]
+    EnergyCapacityTypes: [EnergyCapacityProvider] 
 
 - type: entity
   id: MultistructPartBase

@@ -1,9 +1,30 @@
 ﻿- type: entity
   id: DishMultistructCore
-  parent: [ MultistructBaseCore,BaseComputerAiAccess]
+  parent: [ MultistructBaseCore , BaseComputerAiAccess ]
   name: DishMultistructCoreName
   description: DishMultistructCoreNameDesc
   components:
   - type: MultiBlockStructure
-    AllowedTypes: {"DishConnector","SignalDish","EnergyTransfair","EnergyCapacityProvider"}
+    AllowedTypes: [DishConnector,SignalDish,EnergyTransfair,EnergyCapacityProvider,Productivity]
   - type: SignalSciDish
+
+- type: entity
+  id: DishMultistructSignalDish
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  name: DishMultistructSignalDishName
+  description: DishMultistructSignalDishDesc
+  components:
+  - type: MultiBlockPart
+    Type: 'SignalDish'
+    AllowedConnectionTypes: [DishConnector , DishConnector ,DishConnector, DishConnector]
+
+
+- type: entity
+  id: DishMultistructConnector
+  parent: [ BaseComputerAiAccess]
+  name: DishMultistructConnectorName
+  description: DishMultistructConnectorDesc
+  components:
+  - type: MultiBlockPart
+    Type: 'DishConnector'
+    AllowedConnectionTypes: [ALL ,ALL ,ALL ,ALL]

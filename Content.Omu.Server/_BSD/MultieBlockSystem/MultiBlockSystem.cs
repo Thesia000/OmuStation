@@ -12,6 +12,7 @@ using Content.Server.Construction;
 using Content.Shared.Maps;
 using Content.Server.Power.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
+using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
@@ -198,6 +199,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 }
                 
             }
+            var ev = new MultiStructChangeEvent();//let subsy know things happened
+            RaiseLocalEvent(uidLoop, ref ev);
         }
         EnergyStroageUpdateAll();
         return;

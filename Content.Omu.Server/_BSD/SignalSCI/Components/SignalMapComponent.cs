@@ -7,41 +7,41 @@ public sealed partial class SignalMapComponent : Component
     /// <summary>
     /// Saves the Data needed for the Signals position
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public List<Signal> SignalList = new List<Signal>();
 
     /// <summary>
     /// how many signals should be active at the same tiem
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public int DesiredAmountOfSignals = 5;
 
     /// <summary>
     /// Randomised each time a new signal needs to be added
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public int SignalAmountVariance = 2;
 
     //The time distribution is linear form the bottom to the top time
     /// <summary>
     /// SignalDisapreance Min in seconds
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float SignalDurationMin = 60 * 5;
     /// <summary>
     /// SignalDisapreance Max in seconds
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float SignalDurationMax = 60 * 10;
     /// <summary>
     /// SignalPoints Min
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float SingalPointsMin = 50000;//makes it require upgraded systems to fully harvest a signal
     /// <summary>
     /// SignalPoints Max
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float SingalPointsMax = 100000;
 }
 
