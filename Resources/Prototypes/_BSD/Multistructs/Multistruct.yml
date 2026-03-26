@@ -1,24 +1,36 @@
 ﻿
 - type: entity
-  id: MultistructBaseCore
-  parent: [ ConstructibleMachine]
-  name: MultistructBaseCore
-  abstract: true
-  components:
-  - type: MultiBlockPart
-  - type: MultiBlockStructure
-  - type: MultiBlockEnergyManagment
-    EnergyProvidingTypes: [EnergyTransfair]
-    EnergyCapacityTypes: [EnergyCapacityProvider] 
-
-- type: entity
   id: MultistructPartBase
   parent: [ ConstructibleMachine]
   name: MultistructPartBase
   abstract: true
   components:
   - type: MultiBlockPart
-    Type: 'NONE'
+    structureType: 
+    - None
+    allowedConnectionTypesNorth:
+    - ERROR-NONE
+    allowedConnectionTypesEast:
+    - ERROR-NONE
+    allowedConnectionTypesSouth:
+    - ERROR-NONE
+    allowedConnectionTypesWest:
+    - ERROR-NONE
+
+- type: entity
+  id: MultistructBaseCore
+  parent: [MultistructPartBase]
+  name: MultistructBaseCore
+  abstract: true
+  components:
+  - type: MultiBlockStructure
+    AllowedTypes:
+    - ERROR
+  - type: MultiBlockEnergyManagment
+    EnergyProvidingTypes: 
+    - EnergyTransfair
+    EnergyCapacityTypes: 
+    - EnergyCapacityProvider
 
 - type: entity
   id: MultistructPartEnergyTransfairBase
@@ -27,6 +39,8 @@
   abstract: true
   components:
   - type: MultiBlockPart
+    structureType: 
+    - EnergyTransfair
   - type: MultiBlockEnergyTransfair
   - type: ExaminableBattery
   - type: PowerMonitoringDevice
@@ -62,4 +76,6 @@
   abstract: true
   components:
   - type: MultiBlockPart
+    structureType: 
+    - EnergyCapacityProvider
   - type: MultiBlockEnergyStorage

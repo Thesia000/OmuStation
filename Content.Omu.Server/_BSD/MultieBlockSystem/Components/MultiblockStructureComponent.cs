@@ -22,7 +22,7 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components that can be added to the structure, connectors or upgrades
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedTypes;
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedTypes = new();
 
     /// <summary>
     /// Components Present

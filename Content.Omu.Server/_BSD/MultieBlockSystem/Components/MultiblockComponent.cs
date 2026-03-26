@@ -10,7 +10,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Type of the machine, varries from multiblock to multiblock
     /// </summary>
     [DataField]
-    public MultiStructTypePrototype Type;
+    public HashSet<ProtoId<MultiStructTypePrototype>> StructureType = new();
 
     /// <summary>
     /// in witch directions the block allowes additions to itself

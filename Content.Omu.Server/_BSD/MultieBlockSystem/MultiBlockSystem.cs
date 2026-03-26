@@ -133,14 +133,20 @@ public sealed partial class MultiBlockSystem : EntitySystem
         var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
         while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
         {
-            Node start = new Node();
-            start.Id = uidLoop;
-            start.Efficency = 1.0f;
-            start.Type = MultiblockPartComp.Type.ID;
+            bool onlySaveOne = true;
             List<Node> toSearchList =  new List<Node>();
             List<Node> foundSearchList =  new List<Node>();
-            toSearchList.Add(start);
-            foundSearchList.Add(start);
+            foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){
+                Node start = new Node();
+                start.Id = uidLoop;
+                start.Efficency = 1.0f;
+                start.Type = iterator;
+                foundSearchList.Add(start);
+                if(onlySaveOne){//sure the first node MAY have a million types but we ONLY NEED ONE in the search list
+                    toSearchList.Add(start);
+                    onlySaveOne = false;
+                }
+            } 
             Node currentNode;
             do
             {
@@ -178,15 +184,17 @@ public sealed partial class MultiBlockSystem : EntitySystem
                     {
                         continue;//this should never fail but ye know somethimes it may just happen
                     }
-                    temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
-                    temp.Type = foundNodeComp.Type.ID;
-                    if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
-                    {
-                        if(!foundNodeComp.Claimed){
-                            toSearchList.Add(temp.clone());
-                            foundSearchList.Add(temp.clone());
-                            foundNodeComp.Claimed = true;
+                    if(!foundNodeComp.Claimed){
+                        temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
+                        foreach(ProtoId<MultiStructTypePrototype> iterator in foundNodeComp.StructureType){
+                            temp.Type = iterator;
+                            if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
+                            {
+                                toSearchList.Add(temp.clone());
+                                foundSearchList.Add(temp.clone());   
+                            }
                         }
+                        foundNodeComp.Claimed = true;
                     }
                 }
             }while(toSearchList.Count>0);
@@ -255,8 +263,14 @@ public sealed partial class MultiBlockSystem : EntitySystem
             {
                 continue;
             }
-            if(!allowedTypes.Contains(MultiblockPartComp.Type))continue;
-            if(!structureTypesAllowed.Contains(MultiblockPartComp.Type))continue;
+            if(MultiblockPartComp.StructureType==null)continue;
+            bool allowedPart = false;
+            foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){
+                if(!allowedTypes.Contains(iterator))continue;
+                if(!structureTypesAllowed.Contains(iterator))continue;
+                allowedPart =true;
+            }
+            if(!allowedPart)continue;
             if(Transform(uid).GridUid.Value != Transform(uidLoop).GridUid.Value)//same grid check
             {
                 continue;
