@@ -15,8 +15,15 @@
   description: DishMultistructSignalDishDesc
   components:
   - type: MultiBlockPart
-    Type: 'SignalDish'
-    AllowedConnectionTypes: [DishConnector , DishConnector ,DishConnector, DishConnector]
+    Type: SignalDish
+    AllowedConnectionTypesNorth:
+    - DishConnector
+    AllowedConnectionTypesEast:
+    - DishConnector
+    AllowedConnectionTypesSouth:
+    - DishConnector
+    AllowedConnectionTypesWest:
+    - DishConnector
 
 
 - type: entity
@@ -26,5 +33,12 @@
   description: DishMultistructConnectorDesc
   components:
   - type: MultiBlockPart
-    Type: 'DishConnector'
-    AllowedConnectionTypes: [ALL ,ALL ,ALL ,ALL]
+    Type: DishConnector
+    AllowedConnectionTypesNorth:
+    - ALL
+    AllowedConnectionTypesEast:
+    - ALL
+    AllowedConnectionTypesSouth:
+    - ALL
+    AllowedConnectionTypesWest:
+    - ALL

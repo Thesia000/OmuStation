@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes;
+
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
@@ -8,7 +10,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Type of the machine, varries from multiblock to multiblock
     /// </summary>
     [DataField]
-    public string Type = "NONE";
+    public MultiStructTypePrototype Type;
 
     /// <summary>
     /// in witch directions the block allowes additions to itself
@@ -20,7 +22,22 @@ public sealed partial class MultiBlockPartComponent : Component
     /// Allowed types this thing is allowed to connect to, the universal key is "ALL", current issue highly limited as only one per category, may be amended later
     /// </summary>
     [DataField]
-    public string[] AllowedConnectionTypes = ["ALL","ALL","ALL","ALL"];
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedConnectionTypesNorth = new();
+    /// <summary>
+    /// Allowed types this thing is allowed to connect to, the universal key is "ALL", current issue highly limited as only one per category, may be amended later
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedConnectionTypesEast = new();
+    /// <summary>
+    /// Allowed types this thing is allowed to connect to, the universal key is "ALL", current issue highly limited as only one per category, may be amended later
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedConnectionTypesSouth = new();
+    /// <summary>
+    /// Allowed types this thing is allowed to connect to, the universal key is "ALL", current issue highly limited as only one per category, may be amended later
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedConnectionTypesWest = new();
 
     /// <summary>
     /// If a multiblock starts from this component

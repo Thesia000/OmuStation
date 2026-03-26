@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes;
+
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
@@ -31,13 +33,13 @@ public sealed partial class MultiBlockEnergyManagmentComponent : Component
     /// expects the battery component
     /// </summary>
     [DataField]
-    public string[] EnergyProvidingTypes = {"EnergyTransfair"};
+    public HashSet<ProtoId<MultiStructTypePrototype>> EnergyProvidingTypes = new();
 
     /// <summary>
     /// expects the multiblock energy storage comp
     /// </summary>
     [DataField]
-    public string[] EnergyCapacityTypes = {"EnergyCapacityProvider"};
+    public HashSet<ProtoId<MultiStructTypePrototype>> EnergyCapacityTypes = new();
 
 }
 [RegisterComponent]

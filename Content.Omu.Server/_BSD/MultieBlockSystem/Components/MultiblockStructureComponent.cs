@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes;
+
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
@@ -20,7 +22,7 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components that can be added to the structure, connectors or upgrades
     /// </summary>
     [DataField]
-    public string[] AllowedTypes = {"NONE"};
+    public HashSet<ProtoId<MultiStructTypePrototype>> AllowedTypes;
 
     /// <summary>
     /// Components Present

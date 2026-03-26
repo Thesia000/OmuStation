@@ -7,6 +7,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 using Content.Server.Construction;
 using Content.Shared.Maps;
@@ -135,7 +136,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
             Node start = new Node();
             start.Id = uidLoop;
             start.Efficency = 1.0f;
-            start.Type = MultiblockPartComp.Type;
+            start.Type = MultiblockPartComp.Type.ID;
             List<Node> toSearchList =  new List<Node>();
             List<Node> foundSearchList =  new List<Node>();
             toSearchList.Add(start);
@@ -157,13 +158,28 @@ public sealed partial class MultiBlockSystem : EntitySystem
                         continue;
                     }
                     Node temp = new Node();
-                    temp.Id = CheckSide(currentNode.Id,i,targetComp.AllowedConnectionTypes[i],multiBlockStructureComp.AllowedTypes,multiBlockStructureComp.PositionErrorMargine);
+                    HashSet<ProtoId<MultiStructTypePrototype>> handDown = new();
+                    switch (i){
+                        case 0://N
+                            handDown = targetComp.AllowedConnectionTypesNorth;
+                            break;
+                        case 1://E
+                            handDown = targetComp.AllowedConnectionTypesEast;
+                            break;
+                        case 2://s
+                            handDown = targetComp.AllowedConnectionTypesSouth;
+                            break;
+                        default://4; W
+                            handDown = targetComp.AllowedConnectionTypesWest;
+                            break;
+                    }
+                    temp.Id = CheckSide(currentNode.Id,i,handDown,multiBlockStructureComp.AllowedTypes,multiBlockStructureComp.PositionErrorMargine);
                     if(!TryComp<MultiBlockPartComponent>(temp.Id, out var foundNodeComp))
                     {
                         continue;//this should never fail but ye know somethimes it may just happen
                     }
                     temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
-                    temp.Type = foundNodeComp.Type;
+                    temp.Type = foundNodeComp.Type.ID;
                     if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
                     {
                         if(!foundNodeComp.Claimed){
@@ -214,7 +230,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
         }
         return;
     }
-    private EntityUid CheckSide(EntityUid uid,int sideNum, string allowedTypes, string[] structureTypesAllowed,float margineOfError)
+    private EntityUid CheckSide(EntityUid uid,int sideNum, HashSet<ProtoId<MultiStructTypePrototype>> allowedTypes, HashSet<ProtoId<MultiStructTypePrototype>> structureTypesAllowed,float margineOfError)
     {
         var targetCordVec = _maps.GetGridPosition(uid);//unideal use of a var, find proper datatype to optimise further
         switch (sideNum){
@@ -239,6 +255,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
             {
                 continue;
             }
+            if(!allowedTypes.Contains(MultiblockPartComp.Type))continue;
+            if(!structureTypesAllowed.Contains(MultiblockPartComp.Type))continue;
             if(Transform(uid).GridUid.Value != Transform(uidLoop).GridUid.Value)//same grid check
             {
                 continue;

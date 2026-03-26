@@ -18,6 +18,7 @@
   abstract: true
   components:
   - type: MultiBlockPart
+    Type: 'NONE'
 
 - type: entity
   id: MultistructPartEnergyTransfairBase
