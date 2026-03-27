@@ -4,6 +4,17 @@
   name: DishMultistructCoreName
   description: DishMultistructCoreNameDesc
   components:
+  - type: MultiBlockPart
+    structureType: 
+    - SignalDishControll
+    allowedConnectionTypesNorth:
+    - ALL
+    allowedConnectionTypesEast:
+    - ALL
+    allowedConnectionTypesSouth:
+    - ALL
+    allowedConnectionTypesWest:
+    - ALL
   - type: MultiBlockStructure
     allowedTypes:
     - DishConnector
@@ -20,6 +31,9 @@
   description: DishMultistructSignalDishDesc
   components:
   - type: MultiBlockPart
+    transmissionEfficency: 0.5
+    structureType: 
+    - SignalDish
     allowedConnectionTypesNorth:
     - DishConnector
     allowedConnectionTypesEast:

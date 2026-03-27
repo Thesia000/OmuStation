@@ -24,6 +24,8 @@ namespace Content.Omu.Server._BSD.MultiBlockSystem;
 /// </summary>
 public sealed partial class MultiBlockSystem : EntitySystem
 {
+    //magic number sets the override key to allow all connections
+    private ProtoId<MultiStructTypePrototype> protoAll = "ALL";
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -167,16 +169,16 @@ public sealed partial class MultiBlockSystem : EntitySystem
                     HashSet<ProtoId<MultiStructTypePrototype>> handDown = new();
                     switch (i){
                         case 0://N
-                            handDown = targetComp.AllowedConnectionTypesNorth;
+                            handDown.UnionWith(targetComp.AllowedConnectionTypesNorth);
                             break;
                         case 1://E
-                            handDown = targetComp.AllowedConnectionTypesEast;
+                            handDown.UnionWith(targetComp.AllowedConnectionTypesEast);
                             break;
                         case 2://s
-                            handDown = targetComp.AllowedConnectionTypesSouth;
+                            handDown.UnionWith(targetComp.AllowedConnectionTypesSouth);
                             break;
                         default://4; W
-                            handDown = targetComp.AllowedConnectionTypesWest;
+                            handDown.UnionWith(targetComp.AllowedConnectionTypesWest);
                             break;
                     }
                     temp.Id = CheckSide(currentNode.Id,i,handDown,multiBlockStructureComp.AllowedTypes,multiBlockStructureComp.PositionErrorMargine);
@@ -266,8 +268,9 @@ public sealed partial class MultiBlockSystem : EntitySystem
             if(MultiblockPartComp.StructureType==null)continue;
             bool allowedPart = false;
             foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){
-                if(!allowedTypes.Contains(iterator))continue;
                 if(!structureTypesAllowed.Contains(iterator))continue;
+                if(allowedTypes.Contains(protoAll))allowedPart = true;//override condition allow any type
+                if(!allowedTypes.Contains(iterator))continue;
                 allowedPart =true;
             }
             if(!allowedPart)continue;
