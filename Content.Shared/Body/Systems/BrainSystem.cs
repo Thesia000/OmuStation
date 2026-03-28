@@ -20,8 +20,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Body.Components;
-using Content.Server.Ghost.Components;
+using Content.Goobstation.Common.Body;
+using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Ghost;
@@ -29,18 +29,9 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Pointing;
-using Content.Goobstation.Common.Body;
-// Shitmed Change
-using Content.Shared._Shitmed.Body.Organ;
-using Content.Shared.Body.Systems;
-using Content.Goobstation.Common.Changeling;
-using Content.Shared.Body.Components;
-using Content.Goobstation.Shared.Changeling.Components;
-// EE Reverse MMI
 using Content.Shared.Silicons.Borgs.Components;
 
-
-namespace Content.Server.Body.Systems
+namespace Content.Shared.Body.Systems
 {
     public sealed class BrainSystem : EntitySystem
     {
@@ -108,11 +99,11 @@ namespace Content.Server.Body.Systems
             if (TerminatingOrDeleted(newEntity) || TerminatingOrDeleted(oldEntity))
                 return;
 
-        EnsureComp<MindContainerComponent>(newEntity);
-        EnsureComp<MindContainerComponent>(oldEntity);
+            EnsureComp<MindContainerComponent>(newEntity);
+            EnsureComp<MindContainerComponent>(oldEntity);
 
-        var ghostOnMove = EnsureComp<GhostOnMoveComponent>(newEntity);
-        ghostOnMove.MustBeDead = HasComp<MobStateComponent>(newEntity); // Don't ghost living players out of their bodies.
+            var ghostOnMove = EnsureComp<GhostOnMoveComponent>(newEntity);
+            ghostOnMove.MustBeDead = HasComp<MobStateComponent>(newEntity); // Don't ghost living players out of their bodies.
 
         // EE Reverse MMI start
         if (HasComp<BorgBrainComponent>(newEntity))
