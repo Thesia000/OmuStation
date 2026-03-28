@@ -1098,6 +1098,8 @@
   parent: BaseGameRule
   id: DerelictEngineerCyborgSpawn
   components:
+  - type: GameRule # Goob
+    chaosScore: 150
   - type: StationEvent
     weight: 2.5
     earliestStart: 15
@@ -1148,6 +1150,8 @@
   parent: BaseGameRule
   id: DerelictJanitorCyborgSpawn
   components:
+  - type: GameRule # Goob
+    chaosScore: 150
   - type: StationEvent
     weight: 2.5
     earliestStart: 15
@@ -1169,6 +1173,8 @@
   parent: BaseGameRule
   id: DerelictMedicalCyborgSpawn
   components:
+  - type: GameRule # Goob
+    chaosScore: 150
   - type: StationEvent
     weight: 2.5
     earliestStart: 15
@@ -1190,6 +1196,8 @@
   parent: BaseGameRule
   id: DerelictMiningCyborgSpawn
   components:
+  - type: GameRule # Goob
+    chaosScore: 150
   - type: StationEvent
     weight: 2.5
     earliestStart: 15
@@ -1211,6 +1219,8 @@
   parent: BaseGameRule
   id: DerelictSyndicateAssaultCyborgSpawn
   components:
+  - type: GameRule # Goob
+    chaosScore: 150
   - type: StationEvent
     weight: 2.5
     earliestStart: 25

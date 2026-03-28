@@ -91,6 +91,5 @@ public sealed class MindShieldSystem : EntitySystem
     {
         RemComp<MindShieldComponent>(args.Implanted);
     }
-    //todo marty goobcheck here
 }
 
