@@ -38,10 +38,10 @@
     #omu end
     Hair: MobSlimeMarkingFollowSkin
     FacialHair: MobSlimeMarkingFollowSkin
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
-    Chest: MobSlimeChest
-    Groin: MobSlimeGroin
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Chest: MobSlimeTorso
+    Groin: MobSlimeGroin # goob
     Eyes: MobHumanoidEyes
     LArm: MobSlimeLArm
     RArm: MobSlimeRArm
@@ -75,10 +75,10 @@
     Chest:
       points: 8
       required: false
-    Underwear:
+    UndergarmentBottom: # Goob
       points: 1
       required: false
-    Undershirt:
+    UndergarmentTop: # Goob
       points: 1
       required: false
     RightLeg:
