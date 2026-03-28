@@ -200,8 +200,8 @@
     - id: Zipties
 
 - type: entity
-  id: ClothingBeltAssaultFilled
-  parent: ClothingBeltAssault
+  id: ClothingBeltMilitaryWebbingFilled
+  parent: ClothingBeltMilitaryWebbing
   suffix: Filled, BSO
   components:
   - type: EntityTableContainerFill
