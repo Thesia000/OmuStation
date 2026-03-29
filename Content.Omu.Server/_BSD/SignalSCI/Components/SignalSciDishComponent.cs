@@ -44,7 +44,7 @@ public sealed partial class SignalSciDishComponent : Component
     /// Linked Server to store the data
     /// </summary>
     [DataField]
-    public EntityUid? LinkedServer;//nullable I hate ye
+    public EntityUid LinkedServer;//nullable I hate ye
 
     /// <summary>
     /// Components that can be added to the structure, connectors or upgrades

@@ -3,6 +3,10 @@ using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Robust.Shared.GameObjects;
 
+using Content.Server.Research.Systems;
+using Content.Shared.Research.Components;
+using Content.Shared.Research;
+
 using Content.Omu.Server._BSD.SignalSCI.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
@@ -19,6 +23,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _MapSys = default!;
     [Dependency] protected readonly SharedTransformSystem _trans = default!;
     [Dependency] protected readonly SignalMapSystem _signalMap = default!;
+    [Dependency] private readonly ResearchSystem _research = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -75,8 +80,10 @@ public sealed partial class SignalDishSystem : EntitySystem
             {
                 float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
                 comp.SignalList[move].DataRemaining -= harvestedAmount;
-                if(!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
-                serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
+                if(dishComp.LinkedServer==null)continue;
+                if(!TryComp<ResearchServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
+                //serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;future math
+                _research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time
             }
         }
         return;
