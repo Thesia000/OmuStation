@@ -121,19 +121,19 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninChest
+  id: MobVulpkaninTorso
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts_plantigrade.rsi # Omu - vulp furrification
     state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninChestMale
+  id: MobVulpkaninTorsoMale
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts_plantigrade.rsi # Omu - vulp furrification
     state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninChestFemale
+  id: MobVulpkaninTorsoFemale
   baseSprite:
     sprite: _DV/Mobs/Species/Vulpkanin/parts_plantigrade.rsi # Omu - vulp furrification
     state: chest_f

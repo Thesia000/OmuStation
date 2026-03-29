@@ -41,12 +41,10 @@
     HeadTop: MobShadowkinAnyMarking
     HeadSide: MobShadowkinAnyMarkingFollowSkin
     Tail: MobShadowkinAnyMarking # Omu - Changed from MobShadowkinAnyMarkingFollowSkin. Allows for custom tail colors
+    Chest: MobShadowkinTorso
     #omu start
     Hair: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
     #omu end
-    Chest: MobShadowkinChest
     Groin: MobShadowkinGroin
     Eyes: MobShadowkinEyes
     LArm: MobShadowkinLArm
@@ -108,10 +106,10 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobShadowkinChest
+  id: MobShadowkinTorso
   baseSprite:
     sprite: _EinsteinEngines/Mobs/Species/Shadowkin/parts.rsi
-    state: chest_m
+    state: torso_m
 
 - type: humanoidBaseSprite
   id: MobShadowkinGroin
@@ -120,16 +118,16 @@
     state: groin_m
 
 - type: humanoidBaseSprite
-  id: MobShadowkinChestMale
+  id: MobShadowkinTorsoMale
   baseSprite:
     sprite: _EinsteinEngines/Mobs/Species/Shadowkin/parts.rsi
-    state: chest_m
+    state: torso_m
 
 - type: humanoidBaseSprite
-  id: MobShadowkinChestFemale
+  id: MobShadowkinTorsoFemale
   baseSprite:
     sprite: _EinsteinEngines/Mobs/Species/Shadowkin/parts.rsi
-    state: chest_f
+    state: torso_f
 
 - type: humanoidBaseSprite
   id: MobShadowkinGroinMale
