@@ -1,6 +1,9 @@
 
 using Content.Shared.Research;
 using Content.Shared.Research.Components;
+
+using Content.Omu.Shared._BSD.SignalSCI.SharedDishConsole;
+
 using Robust.Client.UserInterface;
 
 namespace Content.Omu.Client._BSD.SignalSCI.UI
@@ -26,7 +29,7 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI
             };
             _menu.OnPrintButtonPressed += () =>
             {
-                SendMessage(new DiskConsolePrintDiskMessage());
+                SendMessage(new DishConsolePrintDiskMessage());
             };
         }
 
@@ -34,7 +37,7 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI
         {
             base.UpdateState(state);
 
-            if (state is not DiskConsoleBoundUserInterfaceState msg)
+            if (state is not DishConsoleBoundUserInterfaceState msg)
                 return;
 
             _menu?.Update(msg);
