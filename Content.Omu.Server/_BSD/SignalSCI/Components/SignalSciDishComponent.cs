@@ -5,16 +5,22 @@ namespace Content.Omu.Server._BSD.SignalSCI.Components;
 public sealed partial class SignalSciDishComponent : Component
 {
     /// <summary>
-    /// The angle the Disk is facing
+    /// The angle the Disk is supposed to face
     /// </summary>
     [DataField]
-    public float Angle = 0f;
-
+    public float DesiredAngle = 0f;
     /// <summary>
     /// The angle the Disk is facing
+    /// IMPORTANT the diviation is exponental dont mess with AngleErrorMargine margine less you KNOW what you are doing
     /// </summary>
     [DataField]
-    public bool Harvesting = false;
+    public float AngleErrorMargine = 0.15f;
+
+    /// <summary>
+    /// if we allow the dish to harvest rn
+    /// </summary>
+    [DataField]
+    public bool Harvesting = true;
 
     /// <summary>
     /// Efficency of the dish: signal data to stored data in the server as a baseline

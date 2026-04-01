@@ -39,7 +39,21 @@ public sealed partial class SignalDishSystem : EntitySystem
             {
                 DishSignalHarvest(dishEnt, comp);
             }
+            RotationUpdate(dishEnt, comp);
         }
+    }
+    private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
+    {
+        TryComp<TransformComponent>(uid, out var transcomp);
+        float angle=(float)transcomp.WorldRotation;
+        if(100.0f*MathF.Abs(MathF.Tan((angle - comp.DesiredAngle) / 180.0f))<comp.AngleErrorMargine)return;//IMPORTANT the diviation is exponental dont mess with angle ERROR margine less you KNOW what you are doing
+        float maxRotation = -1 * MathF.Tan((angle - comp.DesiredAngle) / 180.0f);//contant to be added probably going to be modular
+        TryComp<TransformComponent>(transcomp.GridUid,out var gridTransformComp);
+        Angle newAngel = (Angle)((float)gridTransformComp.WorldRotation + maxRotation);
+        if(newAngel > 360.0f)newAngel-=360.0f;
+        if(newAngel < 0.0f)newAngel+=360.0f;
+        _trans.SetWorldRotation(gridTransformComp,newAngel);
+        return;
     }
     private void UpdateValues(EntityUid uid, SignalSciDishComponent comp, ref MultiStructChangeEvent args)
     {
@@ -68,13 +82,15 @@ public sealed partial class SignalDishSystem : EntitySystem
         {
             comp = _signalMap.SetupMapSignals(MapUid);
         }
+        TryComp<TransformComponent>(uid, out var transcomp);
+        float angle=(float)transcomp.WorldRotation;
         if(comp == null){Log.Error("MapEnt: "+MapUid+" did not contain the SignalMapComponent but was expected to.");return;}
         for(int move = 0; move < comp.SignalList.Count; move++)//this math needs to be done every tick as we can harvest multiple signals if they align
         {
             float efficency = 1.0f;
-            if(dishComp.Angle - comp.SignalList[move].Angle != 0f){
+            if(angle - comp.SignalList[move].Angle != 0f){
                 //the magic numbers used here are used to achive a repaeating tan function that has a periodicity of 360.0f currently fine tuned for a 6 degree missaligment before penelties
-                efficency = MathF.Min(MathF.Abs(MathF.Tan((dishComp.Angle - comp.SignalList[move].Angle + 180.0f) / (4.0f * 180.0f / (2 * (float)MathF.PI))) / 10.0f), 1.0f);
+                efficency = MathF.Min(MathF.Abs(MathF.Tan((angle - comp.SignalList[move].Angle + 180.0f) / (4.0f * 180.0f / (2 * (float)MathF.PI))) / 10.0f), 1.0f);
             }
             if(efficency > 0f)
             {
