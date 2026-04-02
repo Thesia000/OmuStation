@@ -26,15 +26,12 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Goobstation.Shared.Clothing.Components;
-using Content.Server.Construction.Conditions;
 using Content.Shared._White.Xenomorphs.FaceHugger;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Atmos.Components;
-using Content.Server.Nutrition.EntitySystems;
 using Content.Shared.Nutrition.Components;
 using Content.Goobstation.Shared.Xenomorph; // Omu
-
 
 namespace Content.Server._White.Xenomorphs.FaceHugger;
 
@@ -123,7 +120,8 @@ public sealed class FaceHuggerSystem : EntitySystem
         FaceHuggerComponent component,
         BeingUnequippedAttemptEvent args)
     {
-        if (component.Slot != args.Slot || args.Unequipee != args.UnEquipTarget || !component.InfectionPrototype.HasValue || _mobState.IsDead(uid) || HasComp<FacehuggerImmuneComponent>(args.Unequipee)) ; // Omu, add check for FacehuggerImmune
+        if (component.Slot != args.Slot || args.Unequipee != args.UnEquipTarget ||
+            !component.InfectionPrototype.HasValue || _mobState.IsDead(uid) || HasComp<FacehuggerImmuneComponent>(args.Unequipee)) // Omu, add check for FacehuggerImmune
             return;
 
         _popup.PopupEntity(
