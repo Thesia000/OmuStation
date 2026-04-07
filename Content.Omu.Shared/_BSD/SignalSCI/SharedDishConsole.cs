@@ -11,15 +11,11 @@ public enum DishConsoleUiKey : byte
 [Serializable, NetSerializable]
 public sealed class DishConsoleBoundUserInterfaceState : BoundUserInterfaceState
 {
-    public bool CanPrint;
-    public int PointCost;
-    public int ServerPoints;
+    public float RequestedAngle;
 
-    public DishConsoleBoundUserInterfaceState(int serverPoints, int pointCost, bool canPrint)
+    public DishConsoleBoundUserInterfaceState(float requestedAngle)
     {
-        CanPrint = canPrint;
-        PointCost = pointCost;
-        ServerPoints = serverPoints;
+        RequestedAngle = requestedAngle;
     }
 }
 
@@ -27,4 +23,15 @@ public sealed class DishConsoleBoundUserInterfaceState : BoundUserInterfaceState
 public sealed class DishConsolePrintDiskMessage : BoundUserInterfaceMessage
 {
     
+}
+
+[Serializable, NetSerializable]
+public sealed class DishConsoleSetRequestedAngleMessage : BoundUserInterfaceMessage
+{
+    public float RequestedAngle;
+
+    public DishConsoleSetRequestedAngleMessage(float requestedAngle)
+    {
+        RequestedAngle = requestedAngle;
+    }
 }

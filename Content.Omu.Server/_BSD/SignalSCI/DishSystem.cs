@@ -10,8 +10,9 @@ using Content.Shared.Research;
 using Content.Omu.Server._BSD.SignalSCI.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
-
 using Content.Omu.Server._BSD.MultiBlockSystem;
+
+using Content.Omu.Shared._BSD.SignalSCI.SharedDishConsole;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -28,6 +29,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValues);
+        SubscribeLocalEvent<SignalSciDishComponent, DishConsoleSetRequestedAngleMessage>(OnRequestedAngleSet);
     }
     public override void Update(float frameTime)
     {
@@ -42,16 +44,25 @@ public sealed partial class SignalDishSystem : EntitySystem
             RotationUpdate(dishEnt, comp);
         }
     }
+    private void OnRequestedAngleSet(EntityUid uid, SignalSciDishComponent comp,DishConsoleSetRequestedAngleMessage args)
+    {
+        comp.DesiredAngle = args.RequestedAngle;
+        return;
+    }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
     {
         TryComp<TransformComponent>(uid, out var transcomp);
-        float angle=(float)transcomp.WorldRotation;
-        if(100.0f*MathF.Abs(MathF.Tan((angle - comp.DesiredAngle) / 180.0f))<comp.AngleErrorMargine)return;//IMPORTANT the diviation is exponental dont mess with angle ERROR margine less you KNOW what you are doing
-        float maxRotation = -1 * MathF.Tan((angle - comp.DesiredAngle) / 180.0f);//contant to be added probably going to be modular
         TryComp<TransformComponent>(transcomp.GridUid,out var gridTransformComp);
+        float angle=(float)transcomp.WorldRotation * (180/(float)MathF.PI);
+        float maxRotation;
+        if(!(angle >= comp.AngleErrorMargine + comp.DesiredAngle || angle <= comp.AngleErrorMargine - comp.DesiredAngle))
+        {
+            return;
+        }
+        maxRotation = comp.DesiredAngle - angle;
+        if(maxRotation > 360.0f+angle-comp.DesiredAngle)maxRotation = 360.0f+angle-comp.DesiredAngle;
+        maxRotation = MathF.Min(maxRotation,comp.MaxRotationSpeed);
         Angle newAngel = (Angle)((float)gridTransformComp.WorldRotation + maxRotation);
-        if(newAngel > 360.0f)newAngel-=360.0f;
-        if(newAngel < 0.0f)newAngel+=360.0f;
         _trans.SetWorldRotation(gridTransformComp,newAngel);
         return;
     }

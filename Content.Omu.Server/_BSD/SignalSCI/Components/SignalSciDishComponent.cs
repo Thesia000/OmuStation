@@ -10,11 +10,16 @@ public sealed partial class SignalSciDishComponent : Component
     [DataField]
     public float DesiredAngle = 0f;
     /// <summary>
-    /// The angle the Disk is facing
-    /// IMPORTANT the diviation is exponental dont mess with AngleErrorMargine margine less you KNOW what you are doing
+    /// The angle the Disk is facing tollerance
     /// </summary>
     [DataField]
-    public float AngleErrorMargine = 0.15f;
+    public float AngleErrorMargine = 0.01f;
+
+    /// <summary>
+    /// manipulates the speed of rotation in degrees
+    /// </summary>
+    [DataField]
+    public float MaxRotationSpeed = 0.5f;
 
     /// <summary>
     /// if we allow the dish to harvest rn

@@ -14,19 +14,34 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DishControllMenu : FancyWindow
 {
+    public event Action<float>? onAngleChange;
     public event Action? OnServerButtonPressed;
     public event Action? OnPrintButtonPressed;
 
     public DishControllMenu()
     {
         RobustXamlLoader.Load(this);
-
+        AngleRequest.IsValid += IsValid;
+        AngleRequest.ValueChanged += (args) =>
+        {
+            onAngleChange?.Invoke(args.Value);
+        };
         ServerButton.OnPressed += _ => OnServerButtonPressed?.Invoke();
         PrintButton.OnPressed += _ => OnPrintButtonPressed?.Invoke();
     }
 
     public void Update(DishConsoleBoundUserInterfaceState state)
     {
-        PrintButton.Disabled = !state.CanPrint;
+        if (!AngleRequest.LineEditControl.HasKeyboardFocus())
+            AngleRequest.Value = (int)state.RequestedAngle;
+    }
+    private bool IsValid(int arg)
+    {
+        if (arg < 0.0f)
+            return false;
+
+        if (arg > 360.0f)
+            return false;
+        return true;
     }
 }

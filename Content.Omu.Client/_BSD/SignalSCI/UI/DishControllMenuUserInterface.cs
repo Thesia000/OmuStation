@@ -31,6 +31,11 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI
             {
                 SendMessage(new DishConsolePrintDiskMessage());
             };
+            _menu.onAngleChange += SetRequestedAngle;
+        }
+        public void SetRequestedAngle(float target)
+        {
+            SendMessage(new DishConsoleSetRequestedAngleMessage(target));
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)
