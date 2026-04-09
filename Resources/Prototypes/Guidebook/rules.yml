@@ -318,7 +318,7 @@
   name: guide-entry-rules-s2
   ruleEntry: true
   priority: 2
-  text: "/ServerInfo/Guidebook/ServerRules/SiliconRules/RuleS2LawPriority.xml"
+  text: "/_Omu/ServerInfo/Guidebook/ServerRules/SiliconRules/RuleS2LawPriority.xml" #OMU edit we changed that
 
 - type: guideEntry
   id: RuleS3
