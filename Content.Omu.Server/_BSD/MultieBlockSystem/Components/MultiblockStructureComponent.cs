@@ -30,7 +30,7 @@ public sealed partial class MultiBlockStructureComponent : Component
     [DataField]
     public Dictionary<string,float> TypesPresent = new Dictionary<string, float>();
     /// <summary>
-    /// Components Present
+    /// Components Present entity dic
     /// </summary>
     [DataField]
     public Dictionary<string,List<Node>> EntityDic = new Dictionary<string,List<Node>>();

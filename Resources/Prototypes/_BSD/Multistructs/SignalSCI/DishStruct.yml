@@ -60,6 +60,7 @@
   description: DishMultistructConnectorDesc
   components:
   - type: MultiBlockPart
+    transmissionEfficency: 1
     structureType: 
     - DishConnector
     allowedConnectionTypesNorth:

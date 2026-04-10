@@ -265,6 +265,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
             {
                 continue;
             }
+            if(!transComp.Anchored)continue;
             if(MultiblockPartComp.StructureType==null)continue;
             bool allowedPart = false;
             foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){

@@ -34,9 +34,10 @@ public sealed partial class SignalDishSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var query = EntityQueryEnumerator<SignalSciDishComponent>();
-        while (query.MoveNext(out var dishEnt, out var comp))
+        var query = EntityQueryEnumerator<SignalSciDishComponent, MultiBlockEnergyManagmentComponent>();
+        while (query.MoveNext(out var dishEnt, out var comp, out var energycomp))
         {
+            if(!energycomp.Powered)continue;//do nothing if no power is in the system
             if (comp.Harvesting)//basicly if this machine is turned on -> needs to be move to multi struct possibly
             {
                 DishSignalHarvest(dishEnt, comp);
@@ -51,7 +52,10 @@ public sealed partial class SignalDishSystem : EntitySystem
     }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
     {
-        TryComp<TransformComponent>(uid, out var transcomp);
+        TryComp<MultiBlockStructureComponent>(uid, out var multistructcomp);//consider making this a proper methode to call
+        EntityUid antennaUid = multistructcomp.EntityDic["SignalAntenna"][0].Id;//gets the first entry
+        if(antennaUid==null)return;
+        TryComp<TransformComponent>(antennaUid, out var transcomp);
         TryComp<TransformComponent>(transcomp.GridUid,out var gridTransformComp);
         float angle=(float)transcomp.WorldRotation * (180/(float)MathF.PI);
         float maxRotation;
@@ -108,9 +112,9 @@ public sealed partial class SignalDishSystem : EntitySystem
                 float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
                 comp.SignalList[move].DataRemaining -= harvestedAmount;
                 if(dishComp.LinkedServer==null)continue;
-                if(!TryComp<ResearchServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
-                //serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;future math
-                _research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time
+                if(!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
+                serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
+                //_research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time
             }
         }
         return;

@@ -28,6 +28,4 @@ public sealed partial class SignalSciServerComponent : Component
     /// </summary>
     [DataField]
     public float SignificantData = 0f;
-
-
 }
