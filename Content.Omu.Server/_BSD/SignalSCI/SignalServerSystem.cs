@@ -1,3 +1,4 @@
+using System.Linq;
 
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
@@ -19,14 +20,20 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// </summary>
 public sealed partial class SignalServerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _MapSys = default!;
-    [Dependency] protected readonly SharedTransformSystem _trans = default!;
-    [Dependency] protected readonly SignalMapSystem _signalMap = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<SignalSciServerComponent, ComponentStartup>(OnServerStartup);
         SubscribeLocalEvent<SignalSciServerComponent, MultiStructChangeEvent>(UpdateValues);
+    }
+    private void OnServerStartup(EntityUid uid, SignalSciServerComponent component, ComponentStartup args)
+    {
+        var unusedId = EntityQuery<SignalSciServerComponent>(true)
+            .Max(s => s.Id) + 1;
+        component.Id = unusedId;
+        Dirty(uid, component);
     }
     public override void Update(float frameTime)
     {
@@ -62,4 +69,23 @@ public sealed partial class SignalServerSystem : EntitySystem
     Signal Salv will use this to buy expeds later
     Other systems may use this in the future too, improving exchagne rate of signif data to RP
     */
+
+    public string[] GetServerNames(EntityUid client)
+    {
+        return GetServers(client).Select(x => x.Comp.ServerName).ToArray();
+    }
+    public int[] GetServerIds(EntityUid client)
+        {
+            return GetServers(client).Select(x => x.Comp.Id).ToArray();
+        }
+    public HashSet<Entity<SignalSciServerComponent>> GetServers(EntityUid client)
+    {
+        var clientXform = Transform(client);
+        if (clientXform.MapUid is not { } map)
+            return [];
+
+        var set = new HashSet<Entity<SignalSciServerComponent>>();
+        _lookup.GetMapEntities(map, set);
+        return set;
+    }
 }

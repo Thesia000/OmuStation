@@ -1,0 +1,73 @@
+namespace Content.Omu.Server._BSD.ServerClientLink.Components;
+
+[RegisterComponent]
+
+public sealed partial class ServerClientLinkComponent : Component
+{
+    /// <summary>
+    /// Components Present entity dic of connected to stated server
+    /// </summary>
+    [DataField]
+    public Dictionary<string,Hashset<EntityUid>> EntityDicServer = new Dictionary<string,Hashset<EntityUid>>();
+
+    /// <summary>
+    /// Components Present to what servers this client is liked
+    /// </summary>
+    [DataField]
+    public Dictionary<string,EntityUid> EntityDicClient = new Dictionary<string,EntityUid>();
+
+    /// <summary>
+    /// Types for when this acts as a cleint, cant be in ServerTypes
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<ServerClientPrototype>> ClientTypes = new();
+
+    /// <summary>
+    /// Types for when this acts like a server, cant be in ClientTypes
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<ServerClientPrototype>> ServerTypes = new();
+
+    /// <summary>
+    /// Allow only server to client links, variable only read for the server, needs to be configured, null defaults into true
+    /// </summary>
+    [DataField]
+    public Dictionary<string,bool> ServerNeedsToIniciate = [];
+
+    /// <summary>
+    /// Default is only on a radius basis, value of distance allowes connections in area
+    /// </summary>
+    [DataField]
+    public Dictionary<string,float> ConnectionRadius = [];
+
+    /// <summary>
+    /// Default is only on a radius basis, works on the entire Grid if true
+    /// </summary>
+    [DataField]
+    public Dictionary<string,bool> GridWideAccessable = [];
+
+    /// <summary>
+    /// The stronger version of GridWideAccessable, works on the entire map if true
+    /// </summary>
+    [DataField]
+    public Dictionary<string,bool> MapWideAccessable = [];
+
+    /// <summary>
+    /// The stronger version of MapWideAccessable, works cross maps if true
+    /// </summary>
+    [DataField]
+    public Dictionary<string,bool> GlobalyAccessable = [];
+
+    /// <summary>
+    /// name of the server/client, can be change by user
+    /// </summary>
+    [DataField]
+    public string name = "ERROR";
+
+    /// <summary>
+    /// number ID identifier to allow differenciation;
+    /// </summary>
+    [DataField]
+    public int sufix = 0;
+
+}

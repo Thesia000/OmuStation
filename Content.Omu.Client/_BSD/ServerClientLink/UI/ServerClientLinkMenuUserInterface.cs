@@ -4,14 +4,14 @@ using Robust.Client.UserInterface;
 using Content.Omu.Shared._BSD.SignalSCI.SharedServerConsole;
 
 
-namespace Content.Omu.Client._BSD.SignalSCI.UI
+namespace Content.Omu.Client._BSD.ServerClientLink.UI
 {
-    public sealed class SignalServerSelectionBoundUserInterface : BoundUserInterface
+    public sealed class ServerClientLinkBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private SignalServerSelectionMenu? _menu;
+        private ServerClientLinkMenu? _menu;
 
-        public SignalServerSelectionBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+        public ServerClientLinkBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             SendMessage(new RequestServerListUpdateMessage());
             SendMessage(new RequestClientListUpdateMessage());
@@ -20,19 +20,19 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI
         protected override void Open()
         {
             base.Open();
-            _menu = this.CreateWindow<SignalServerSelectionMenu>();
+            _menu = this.CreateWindow<ServerClientLinkMenu>();
             _menu.OnServerSelected += SelectServer;
             _menu.OnServerDeselected += DeselectServer;
         }
 
         public void SelectServer(int serverId)
         {
-            SendMessage(new ServerClientLinkMessage(serverId));
+            SendMessage(new ResearchClientServerSelectedMessage(serverId));
         }
 
-        public void DeselectServer(int serverId)
+        public void DeselectServer()
         {
-            SendMessage(new ServerClientDeconnectMessage(serverId));
+            SendMessage(new ResearchClientServerDeselectedMessage());
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)

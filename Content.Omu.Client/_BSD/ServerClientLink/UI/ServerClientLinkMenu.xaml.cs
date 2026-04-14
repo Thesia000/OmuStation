@@ -21,36 +21,38 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Omu.Client._BSD.SignalSCI.UI;
+namespace Content.Omu.Client._BSD.ServerClientLink.UI;
 
     [GenerateTypedNameReferences]
-    public sealed partial class SignalServerSelectionMenu : DefaultWindow
+    public sealed partial class ServerClientLinkMenu : DefaultWindow
     {
-        private int _serverCount;
-        private string[] _serverNames = Array.Empty<string>();
-        private int[] _serverIds = Array.Empty<int>();
-        private int _selectedServerId = -1;
+        private int _unlinkedServerCount;
+        private int _linkedServerCount;
+        private string[] _unlinkedServerNames = Array.Empty<string>();
+        private string[] _linkedServerNames = Array.Empty<string>();
+        private int[] _unlinkedServerIds = Array.Empty<int>();
+        private int[] _linkedServerIds = Array.Empty<int>();
 
         public event Action<int>? OnServerSelected;
-        public event Action? OnServerDeselected;
+        public event Action<int>? OnServerDeselected;
 
         public SignalServerSelectionMenu()
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
-            Servers.OnItemSelected += OnItemSelected;
-            Servers.OnItemDeselected += OnItemDeselected;
+            Unselected.OnItemSelected += OnItemSelectedLinking;
+            Selected.OnItemSelected += OnItemSelectedUnlinking;
         }
 
-        public void OnItemSelected(ItemList.ItemListSelectedEventArgs itemListSelectedEventArgs)
+        public void OnItemSelectedLinking(ItemList.ItemListSelectedEventArgs itemListSelectedEventArgs)
         {
-            OnServerSelected?.Invoke(_serverIds[itemListSelectedEventArgs.ItemIndex]);
+            OnServerSelected?.Invoke(_unlinkedServerCount[itemListSelectedEventArgs.ItemIndex]);
         }
 
-        public void OnItemDeselected(ItemList.ItemListDeselectedEventArgs itemListDeselectedEventArgs)
+        public void OnItemSelectedUnlinking(ItemList.ItemListDeselectedEventArgs itemListDeselectedEventArgs)
         {
-            OnServerDeselected?.Invoke();
+            OnServerDeselected?.Invoke(_linkedServerCount[itemListSelectedEventArgs.ItemIndex]);
         }
 
         public void PopulateUnselected(int serverCount, string[] serverNames, int[] serverIds, int selectedServerId)

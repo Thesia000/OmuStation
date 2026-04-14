@@ -1,0 +1,19 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                VerticalExpand="True" HorizontalExpand="True"
+                Title="{Loc admin-remarks-title}"
+                SetSize="600 400">
+    <PanelContainer StyleClasses="BackgroundDark">
+        <SpinBox Name="Name" HorizontalExpand="True"/>
+        <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">
+            <ItemList Name="Unselected"
+                SelectMode="Single">
+                <!-- Servers are added here by code -->
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">
+            <ItemList Name="Selected"
+                SelectMode="Single">
+                <!-- Servers are added here by code -->
+        </BoxContainer>
+    </PanelContainer>
+</ui:FancyWindow>

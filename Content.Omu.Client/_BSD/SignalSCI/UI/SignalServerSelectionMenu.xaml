@@ -4,7 +4,10 @@
             Title="{Loc 'research-client-server-selection-menu-title'}"
             MinSize="300 300"
             SetSize="300 300">
-    <ItemList Name="Servers"
+    <ItemList Name="Unselected"
+              SelectMode="Single">
+        <!-- Servers are added here by code -->
+    <ItemList Name="Selected"
               SelectMode="Single">
         <!-- Servers are added here by code -->
     </ItemList>

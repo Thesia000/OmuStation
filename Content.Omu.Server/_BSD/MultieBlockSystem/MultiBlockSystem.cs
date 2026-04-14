@@ -12,6 +12,7 @@ using Robust.Shared.Prototypes;
 using Content.Server.Construction;
 using Content.Shared.Maps;
 using Content.Server.Power.Components;
+
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 
@@ -40,6 +41,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
         base.Update(frameTime);
         PowerUpdateAll();
     }
+    #region EnergyLogic
     private void PowerUpdateAll()
     {
         var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
@@ -71,7 +73,6 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange,battery.MaxCharge);
                 RaiseLocalEvent(iterator.Id, ref ev, true);
                 powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy+deltaChange,powerComp.StoredEnergyCapacity);
-
             }
         }
         powerComp.StoredEnergy += powerComp.EnergyDelta;//structs own powergeneration/consumption
@@ -115,9 +116,9 @@ public sealed partial class MultiBlockSystem : EntitySystem
         }
         return;
     }
+    #endregion
 
-
-
+    #region Integrity
     private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
     {
         CheckIntegrityAll();
@@ -292,4 +293,5 @@ public sealed partial class MultiBlockSystem : EntitySystem
         }
         return uid;
     }
+    #endregion
 }

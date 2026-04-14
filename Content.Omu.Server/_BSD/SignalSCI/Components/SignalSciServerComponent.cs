@@ -4,6 +4,16 @@ namespace Content.Omu.Server._BSD.SignalSCI.Components;
 
 public sealed partial class SignalSciServerComponent : Component
 {
+    /// <summary>
+    /// The name of the server
+    /// </summary>
+    [DataField]
+    public string ServerName = "SIGNALSCI";
+    /// <summary>
+    /// The ID of the server
+    /// </summary>
+    [DataField]
+    public int Id = 0;
 
     /// <summary>
     /// Data stored within this server
