@@ -199,6 +199,7 @@
     - CircuitFloorsStatic
     - MedicalBoardsStatic
     - MedicalBoardsStaticGoob
+    - ChemistryStatic
     - ToolsStatic
     - PartsStatic
     - LatheMiscStatic
