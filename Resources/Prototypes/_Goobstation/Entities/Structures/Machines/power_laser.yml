@@ -104,19 +104,23 @@
   - type: StaticPrice # Omu
     price: 1500
 
-- type: hitscan
+- type: entity
+  parent: BasicHitscan
   id: PTL
   maxLength: 50 # Omu
-  damage:
-    types:
-      Heat: 30
-      Structural: 30 # Omu
-  muzzleFlash:
-    sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
-    state: ptl_beam
-  travelFlash:
-    sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
-    state: ptl_beam
-  impactFlash:
-    sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
-    state: ptl_beam
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 30
+        Structural: 30 # Omu
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
+      state: ptl_beam
+    travelFlash:
+      sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
+      state: ptl_beam
+    impactFlash:
+      sprite: _Goobstation/Structures/Machines/PTL/pt_beam.rsi
+      state: ptl_beam
