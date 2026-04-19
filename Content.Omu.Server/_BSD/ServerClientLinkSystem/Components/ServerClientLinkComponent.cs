@@ -1,3 +1,9 @@
+using Robust.Server.GameObjects;
+
+using Robust.Shared.Prototypes;
+
+using Content.Omu.Server._BSD.ServerClientLink.Prototypes;
+
 namespace Content.Omu.Server._BSD.ServerClientLink.Components;
 
 [RegisterComponent]
@@ -8,7 +14,7 @@ public sealed partial class ServerClientLinkComponent : Component
     /// Components Present entity dic of connected to stated server
     /// </summary>
     [DataField]
-    public Dictionary<string,Hashset<EntityUid>> EntityDicServer = new Dictionary<string,Hashset<EntityUid>>();
+    public Dictionary<string,HashSet<EntityUid>> EntityDicServer = new Dictionary<string,HashSet<EntityUid>>();
 
     /// <summary>
     /// Components Present to what servers this client is liked
@@ -62,12 +68,12 @@ public sealed partial class ServerClientLinkComponent : Component
     /// name of the server/client, can be change by user
     /// </summary>
     [DataField]
-    public string name = "ERROR";
+    public string DeviceName = "ERROR";
 
     /// <summary>
     /// number ID identifier to allow differenciation;
     /// </summary>
     [DataField]
-    public int sufix = 0;
+    public int DeviceSuffix = 0;
 
 }

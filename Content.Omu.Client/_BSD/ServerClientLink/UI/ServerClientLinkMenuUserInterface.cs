@@ -1,7 +1,9 @@
 
 using Content.Shared.Research.Components;
+
 using Robust.Client.UserInterface;
-using Content.Omu.Shared._BSD.SignalSCI.SharedServerConsole;
+
+using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
 
 namespace Content.Omu.Client._BSD.ServerClientLink.UI
@@ -13,8 +15,8 @@ namespace Content.Omu.Client._BSD.ServerClientLink.UI
 
         public ServerClientLinkBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
-            SendMessage(new RequestServerListUpdateMessage());
-            SendMessage(new RequestClientListUpdateMessage());
+            SendMessage(new RequestServerListUpdateMessage("ERROR"));
+            SendMessage(new RequestClientListUpdateMessage("ERROR"));
         }
 
         protected override void Open()

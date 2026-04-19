@@ -25,7 +25,7 @@ namespace Content.Omu.Client._BSD.SignalSCI.UI
 
             _menu.OnServerButtonPressed += () =>
             {
-                SendMessage(new ConsoleServerSelectionMessage());
+                SendMessage(new ServerClientMenueOpenMessage());
             };
             _menu.OnPrintButtonPressed += () =>
             {

@@ -69,23 +69,4 @@ public sealed partial class SignalServerSystem : EntitySystem
     Signal Salv will use this to buy expeds later
     Other systems may use this in the future too, improving exchagne rate of signif data to RP
     */
-
-    public string[] GetServerNames(EntityUid client)
-    {
-        return GetServers(client).Select(x => x.Comp.ServerName).ToArray();
-    }
-    public int[] GetServerIds(EntityUid client)
-        {
-            return GetServers(client).Select(x => x.Comp.Id).ToArray();
-        }
-    public HashSet<Entity<SignalSciServerComponent>> GetServers(EntityUid client)
-    {
-        var clientXform = Transform(client);
-        if (clientXform.MapUid is not { } map)
-            return [];
-
-        var set = new HashSet<Entity<SignalSciServerComponent>>();
-        _lookup.GetMapEntities(map, set);
-        return set;
-    }
 }

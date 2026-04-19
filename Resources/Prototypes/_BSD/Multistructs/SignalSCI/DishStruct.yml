@@ -23,15 +23,15 @@
     - EnergyCapacityProvider
     - Productivity
   - type: SignalSciDish
-  - type: ResearchClient
+  - type: ServerClientLinkComponent
   - type: ActivatableUI
     key: enum.DishConsoleUiKey.Key
   - type: UserInterface
     interfaces:
       enum.DishConsoleUiKey.Key:
         type: DishControllMenuUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
+      enum.ServerClientUiKey.Key:
+        type: ServerClientLinkBoundUserInterface
 
 - type: entity
   id: DishMultistructSignalDish
