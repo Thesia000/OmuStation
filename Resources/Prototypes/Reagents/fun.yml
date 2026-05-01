@@ -172,8 +172,8 @@
           type:
           - Yowie
           inverted: true
-        - !type:HasTag
-          invert: true
+        - !type:TagCondition
+          inverted: true
           tag: Bee
       - !type:HealthChange
         damage:
@@ -181,9 +181,9 @@
             Piercing: 2
         conditions:
         - !type:MetabolizerTypeCondition
-          type: Yowie
-        - !type:HasTag
-          invert: true
+          type: [Yowie]
+        - !type:TagCondition
+          inverted: true
           tag: Bee
 # Goobstation yowie changes end
 
@@ -216,7 +216,7 @@
     Poison:
       effects:
       - !type:Electrocute
-        probability: 0.35
+        probability: 0.15 #goob edit
 
 - type: reagent
   id: Razorium
