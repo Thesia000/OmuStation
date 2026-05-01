@@ -33,7 +33,7 @@
         - reagents: [Water, SpaceCleaner]
           methods: [Touch]
           effects:
-            - !type:WashCreamPieReaction
+            - !type:WashCreamPie
     - type: DamageOnHighSpeedImpact
       damage:
         types:
@@ -128,8 +128,6 @@
         - map: ["enum.HumanoidVisualLayers.LArm"]
         - map: ["enum.HumanoidVisualLayers.RLeg"]
         - map: ["enum.HumanoidVisualLayers.LLeg"]
-        - map: [ "enum.HumanoidVisualLayers.Underwear" ] # Omu 109
-        - map: [ "enum.HumanoidVisualLayers.Undershirt" ] # Omu 109
         - shader: StencilClear
           sprite: Mobs/Species/Human/parts.rsi
           state: l_leg
@@ -182,7 +180,10 @@
     - type: HasJobIcons # Goobstation
     - type: Bloodstream # omu
       damageBleedModifiers: BloodlossHuman
-      bloodReagent: CoolantIPC # Omu
+      bloodReagents:
+        reagents:
+          - ReagentId: CoolantIPC
+            Quantity: 1
       bleedReductionAmount: 0
       bloodMaxVolume: 500
       chemicalMaxVolume: 0

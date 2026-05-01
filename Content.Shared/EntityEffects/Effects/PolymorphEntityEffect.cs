@@ -13,7 +13,10 @@ public sealed partial class Polymorph : EntityEffectBase<Polymorph>
     public ProtoId<PolymorphPrototype> Prototype;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-make-polymorph",
-            ("chance", Probability),
-            ("entityname", prototype.Index<EntityPrototype>(prototype.Index(Prototype).Configuration.Entity).Name));
+        // Goob edit
+        => prototype.Index(Prototype).Configuration.Entity is {} entProto
+           && prototype.TryIndex(entProto, out var entityProto)
+            ? Loc.GetString("entity-effect-guidebook-make-polymorph",
+                ("chance", Probability), ("entityname", entityProto.Name))
+            : Loc.GetString("entity-effect-guidebook-random-polymorph", ("chance", Probability));
 }
