@@ -865,7 +865,6 @@
       - !type:HealthChange
         scaleByQuantity: true
         ignoreResistances: false
-        ignoreBlockers: false
         damage:
           types:
             Blunt: -2

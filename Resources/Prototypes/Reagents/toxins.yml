@@ -69,9 +69,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
+          inverted: true
         damage:
           types:
             Poison: 4
@@ -95,24 +95,22 @@
     Poison:
       effects:
       - !type:HealthChange
-        conditions: # Imp - Thaven are immune to carpotoxin because their organs are full of it (what would it damage?)
-        - !type:OrganType
-          type: Thaven
-          shouldHave: false
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        conditions:
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type:
+          - Yowie
+          - Thaven # Fuck you too
+          inverted: true
         damage:
           types:
             Poison: 4
       - !type:PopupMessage
         conditions:
-        - !type:OrganType
-          type: Thaven
-          shouldHave: false
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type:
+          - Yowie
+          - Thaven # Fuck you too
+          inverted: true
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-burning-insides" ]
@@ -140,14 +138,14 @@
       - !type:MovementSpeedModifier
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:ModifyStatusEffect
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         - !type:ReagentCondition
           reagent: ChloralHydrate
@@ -161,7 +159,7 @@
           reagent: ChloralHydrate
           min: 20
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -180,9 +178,9 @@
       effects:
         - !type:HealthChange
           conditions:
-          - !type:OrganType # Goobstation - Yowie
-            type: Yowie
-            shouldHave: false
+          - !type:MetabolizerTypeCondition # Goobstation - Yowie
+            type: [ Yowie ]
+            inverted: true
           damage:
             types:
               Poison: 2
@@ -192,7 +190,7 @@
             reagent: GastroToxin
             min: 2
           - !type:MetabolizerTypeCondition # Goobstation - Yowie
-            type: [Yowie]
+            type: [ Yowie ]
             inverted: true
           probability: 0.2
 
@@ -210,9 +208,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 1
@@ -418,9 +416,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Asphyxiation: 5
@@ -486,7 +484,7 @@
           reagent: Histamine
           min: 45
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -549,7 +547,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -580,9 +578,9 @@
      effects:
       - !type:SatiateHunger
         conditions:
-        - !type:OrganType # Goob, Vox are stinky
-          type: Vox
-          shouldHave: true
+        - !type:MetabolizerTypeCondition # Goobstation - Vox
+          type: [ Vox ]
+          inverted: true
 
 - type: reagent
   id: Romerol
@@ -660,14 +658,14 @@
         amount: 0.5
       - !type:AdjustReagent # Omu, letting xelthia eat more things
         conditions:
-        - !type:OrganType
-          type: Xelthia
+        - !type:MetabolizerTypeCondition
+          type: [ Xelthia ]
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent # Goobstation - XenobioSlime
         conditions:
-        - !type:OrganType
-          type: XenobioSlime
+        - !type:MetabolizerTypeCondition # Goobstation - XenobioSlime
+          type: [ XenobioSlime ]
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
@@ -745,7 +743,8 @@
       - !type:SpeciesChange
         newSpecies: BananaMen
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Honk
           min: 30
       - !type:Emote
         emote: Honk
@@ -780,7 +779,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -801,7 +800,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -830,7 +829,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -849,7 +848,7 @@
     Poison:
       effects:
       - !type:Electrocute
-        probability: 0.8
+        probability: 0.5 #goob edit
 
 - type: reagent
   id: Lipolicide
@@ -869,7 +868,7 @@
         - !type:HungerCondition
           max: 50
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:

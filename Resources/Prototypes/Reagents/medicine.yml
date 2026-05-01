@@ -1961,7 +1961,7 @@
             reagent: PotassiumIodide
             min: 20
           - !type:MetabolizerTypeCondition # Goobstation - Yowie
-            type: Yowie
+            type: [Yowie]
             inverted: true
         damage:
           types:
