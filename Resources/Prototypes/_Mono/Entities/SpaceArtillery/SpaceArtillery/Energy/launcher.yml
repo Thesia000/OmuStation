@@ -34,7 +34,7 @@
   - type: ApcPowerReceiverBattery # Omu
     batteryRechargeRate: 200
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipRubiconProjectile
     fireCost: 400
   - type: Destructible
@@ -101,7 +101,7 @@
   - type: ApcPowerReceiverBattery # Omu
     batteryRechargeRate: 100
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipMediumPlasmaProjectile
     fireCost: 1000
   - type: Destructible
@@ -171,7 +171,7 @@
   - type: ApcPowerReceiverBattery # Omu
     batteryRechargeRate: 2000
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipDymereProjectile
     fireCost: 20000
   - type: RadarBlip

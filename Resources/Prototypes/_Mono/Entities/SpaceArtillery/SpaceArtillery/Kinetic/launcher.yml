@@ -40,7 +40,7 @@
   - type: CombatMode
     isInCombatMode: true
   - type: Airtight
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: 20mmBulletArmorPiercing
     fireCost: 15
   - type: RadiationBlocker
@@ -89,7 +89,7 @@
     powerUsePassive: 750
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipDravonProjectile
     fireCost: 250
   - type: RadarBlip
@@ -141,7 +141,7 @@
     powerUsePassive: 600
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: 90mmBulletArmorPiercing
     fireCost: 50
   - type: RadarBlip
@@ -188,7 +188,7 @@
     powerUsePassive: 3500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipTarnyxProjectile
     fireCost: 17500 # low shot weapon moved back to the original spot
   - type: RadarBlip
@@ -252,7 +252,7 @@
     powerUsePassive: 1500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipCyrexaProjectile
     fireCost: 6000
   - type: RadarBlip
@@ -316,7 +316,7 @@
     powerUsePassive: 1500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipHadesProjectile
     fireCost: 6000
   - type: RadarBlip
@@ -363,7 +363,7 @@
     powerUsePassive: 1000
     powerUseActive: 7500
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipRailgunProjectile
     fireCost: 1500
   - type: Fixtures
@@ -450,7 +450,7 @@
     powerUsePassive: 1500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipBoforsProjectile
     fireCost: 6000
   - type: RadarBlip
@@ -509,7 +509,7 @@
     powerUsePassive: 1500
     powerUseActive: 0
   - type: Actions
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: ShipKargilProjectile
     fireCost: 6000
   - type: RadarBlip
