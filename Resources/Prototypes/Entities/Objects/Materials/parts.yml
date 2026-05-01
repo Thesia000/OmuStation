@@ -151,7 +151,6 @@
   components:
   - type: Tag
     tags:
-    - RodMetal1
     - ConstructionMaterial
     - DroneUsable # Goobstation
   - type: Sprite
@@ -167,7 +166,6 @@
   components:
   - type: Tag
     tags:
-    - RodMetal1
     - ConstructionMaterial
     - DroneUsable # Goobstation
   - type: Sprite

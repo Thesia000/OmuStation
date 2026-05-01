@@ -2487,6 +2487,32 @@
                 ]
             ]
         },
+         {
+            "name": "comm_wizard",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "wizard_key",
+            "directions": 4
+        },
         {
             "name": "xenorobot",
             "directions": 4
