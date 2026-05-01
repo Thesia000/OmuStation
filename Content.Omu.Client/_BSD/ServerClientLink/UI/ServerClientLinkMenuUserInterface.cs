@@ -5,6 +5,7 @@ using Robust.Client.UserInterface;
 
 using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
+using Content.Omu.Client._BSD.ServerClientLink.UI;
 
 namespace Content.Omu.Client._BSD.ServerClientLink.UI
 {
@@ -29,12 +30,12 @@ namespace Content.Omu.Client._BSD.ServerClientLink.UI
 
         public void SelectServer(int serverId)
         {
-            SendMessage(new ResearchClientServerSelectedMessage(serverId));
+            SendMessage(new ServerClientLinkServerConnectMessage(serverId));
         }
 
-        public void DeselectServer()
+        public void DeselectServer(int serverId)
         {
-            SendMessage(new ResearchClientServerDeselectedMessage());
+            SendMessage(new ServerClientLinkServerDiscconectMessage(serverId));
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)

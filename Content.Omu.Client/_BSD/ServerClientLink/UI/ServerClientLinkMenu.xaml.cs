@@ -34,12 +34,12 @@ public sealed partial class ServerClientLinkMenu : FancyWindow
 
     public void OnItemSelectedLinking(ItemList.ItemListSelectedEventArgs itemListSelectedEventArgs)
     {
-        OnServerSelected?.Invoke(_unlinkedServerCount[itemListSelectedEventArgs.ItemIndex]);
+        OnServerSelected?.Invoke(itemListSelectedEventArgs.ItemIndex);
     }
 
     public void OnItemSelectedUnlinking(ItemList.ItemListSelectedEventArgs itemListSelectedEventArgs)
     {
-        OnServerDeselected?.Invoke(_linkedServerCount[itemListSelectedEventArgs.ItemIndex]);
+        OnServerDeselected?.Invoke(itemListSelectedEventArgs.ItemIndex);
     }
 
     public void PopulateUnselected(int serverCount, string[] serverNames, int[] serverIds, int selectedServerId)

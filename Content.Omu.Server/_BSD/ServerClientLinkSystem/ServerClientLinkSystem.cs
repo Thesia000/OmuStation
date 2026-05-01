@@ -49,11 +49,15 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     private void OnSyncServerMessage(EntityUid uid, ServerClientLinkComponent comp,RequestServerListUpdateMessage args)
     {
-        var names = GetServerNames(uid, args.Channel);
+        var namesUnselected = GetServerNamesUnselected(uid, args.Channel);
+        var namesSelected = GetServerNamesUnselected(comp.EntityDicServer[args.Channel]);
         var state = new ServerClientSelectionBoundUserInterfaceState(
-            names.Length,
-            names,
-            GetServerIds(uid, args.Channel)
+            namesUnselected.Length,
+            namesUnselected,
+            GetServerIdsUnselected(uid, args.Channel),
+            namesSelected.Length,
+            namesSelected,
+            GetServerIdsUnselected(comp.EntityDicServer[args.Channel])
             );
 
         _uiSystem.SetUiState(uid, ServerClientUiKey.Key, state);
@@ -115,13 +119,37 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
         return set;
     }
     
-    public string[] GetServerNames(EntityUid client, string channel)
+    public string[] GetServerNamesUnselected(EntityUid client, string channel)
     {
         return GetServers(client, channel).Select(x => x.Comp.DeviceName).ToArray();
     }
-    public int[] GetServerIds(EntityUid client, string channel)
+    public int[] GetServerIdsUnselected(EntityUid client, string channel)
     {
         return GetServers(client, channel).Select(x => x.Comp.DeviceSuffix).ToArray();
+    }
+    public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
+    {
+        var set = new HashSet<Entity<ServerClientLinkComponent>>();
+        while(entHash.MoveNext(out var entUid))
+        {
+            if (Trycomp<ServerClientLinkComponent>(entUid,out var compToSave))
+            {
+                set.Add(compToSave);
+            }
+        }
+        return set.Select(x => x.Comp.DeviceName).toArray();
+    }
+    public string[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
+    {
+        var set = new HashSet<Entity<ServerClientLinkComponent>>();
+        while(entHash.MoveNext(out var entUid))
+        {
+            if (Trycomp<ServerClientLinkComponent>(entUid,out var compToSave))
+            {
+                set.Add(compToSave);
+            }
+        }
+        return set.Select(x => x.Comp.DeviceSuffix).toArray();
     }
     #endregion
     //mostly the same as server logic but for the clients
