@@ -826,7 +826,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Botanist
-    - Zookeeper
 
 - type: listing
   id: UplinkDartGun
