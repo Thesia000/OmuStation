@@ -18,10 +18,6 @@ using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Charges.Components;
-using Content.Shared.Charges.Systems;
-using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
@@ -44,9 +40,6 @@ using Content.Goobstation.Common.Flash;
 using Content.Shared.Mobs.Components; // Goobstation
 using Content.Shared.Movement.Systems;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
-using System.Linq;
 using Content.Shared.Clothing.Components;
 
 namespace Content.Shared.Flash;
@@ -183,6 +176,7 @@ public abstract class SharedFlashSystem : EntitySystem
         bool displayPopup = true,
         bool melee = false,
         TimeSpan? stunDuration = null,
+        bool ignoreProtection = false, //DeltaV: allow flashing to ignore flash protection
         bool revFlash = false) // funkystation // Moved to shared to keep up with upstream - Omu
     {
         // Goob edit start
@@ -194,7 +188,7 @@ public abstract class SharedFlashSystem : EntitySystem
             || !_tag.HasTag(used.Value, IgnoreResistancesTag)
             && !vulnerableEv.Vulnerable)
         {
-            var attempt = new FlashAttemptEvent(target, user, used);
+            var attempt = new FlashAttemptEvent(target, user, used, ignoreProtection);
             RaiseLocalEvent(target, ref attempt, true);
 
             if (attempt.Cancelled)
@@ -209,7 +203,8 @@ public abstract class SharedFlashSystem : EntitySystem
         // Goobstation end
 
         // don't paralyze, slowdown or convert to rev if the target is immune to flashes
-        if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(target, FlashedKey, flashDuration, true))
+        if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(target, FlashedKey, flashDuration, true)
+            && !ignoreProtection) //DeltaV: allow flashing to ignore flash protection
             return;
 
         if (stunDuration != null)
@@ -345,7 +340,8 @@ public abstract class SharedFlashSystem : EntitySystem
         if (TryComp<MaskComponent>(ent, out var mask) && mask.IsToggled)
             return;
 
-        if (ent.Comp.Enabled)
+        if (ent.Comp.Enabled
+            && !args.IgnoreProtection) //DeltaV: allow flashing to ignore flash protection
             args.Cancelled = true;
     }
 

@@ -15,13 +15,13 @@
       effects:
       - !type:Emote
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
           invert: true
         emote: Cough
@@ -29,13 +29,13 @@
         probability: 0.2
       - !type:DropItemsEntityEffect
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
           invert: true
         probability: 0.2
@@ -63,8 +63,8 @@
         conditions:
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:HealthChange
         damage:
@@ -77,24 +77,24 @@
         conditions:
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         amount: -1.5
         conditions:
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
-      - !type:ChemCleanBloodstream
+      - !type:CleanBloodstream
         cleanseRate: 6
         conditions:
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:GenericStatusEffect
         key: SeeingRainbows
@@ -103,6 +103,6 @@
         conditions:
         - !type:HasComponentCondition
           components:
-            - Wizard
-            - Apprentice
+          - type: Wizard
+          - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
