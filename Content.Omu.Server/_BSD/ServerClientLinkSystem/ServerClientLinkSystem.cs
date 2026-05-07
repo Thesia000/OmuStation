@@ -69,6 +69,9 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
         var state = new ServerClientSelectionBoundUserInterfaceState(
             names.Length,
             names,
+            GetClientIds(uid, args.Channel),
+            names.Length,
+            names,
             GetClientIds(uid, args.Channel)
             );
 
@@ -129,27 +132,27 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
     {
-        var set = new HashSet<Entity<ServerClientLinkComponent>>();
+        var set = new HashSet<ServerClientLinkComponent>();
         while(entHash.MoveNext(out var entUid))
         {
-            if (Trycomp<ServerClientLinkComponent>(entUid,out var compToSave))
+            if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
             {
                 set.Add(compToSave);
             }
         }
-        return set.Select(x => x.Comp.DeviceName).toArray();
+        return set.Select(x => x.DeviceName).toArray();
     }
-    public string[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
+    public int[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
     {
-        var set = new HashSet<Entity<ServerClientLinkComponent>>();
+        var set = new HashSet<ServerClientLinkComponent>();
         while(entHash.MoveNext(out var entUid))
         {
-            if (Trycomp<ServerClientLinkComponent>(entUid,out var compToSave))
+            if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
             {
                 set.Add(compToSave);
             }
         }
-        return set.Select(x => x.Comp.DeviceSuffix).toArray();
+        return set.Select(x => x.DeviceSuffix).toArray();
     }
     #endregion
     //mostly the same as server logic but for the clients
