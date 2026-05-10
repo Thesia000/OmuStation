@@ -22745,3 +22745,9 @@ Entries:
       message: Added polling booths! (not yet mapped.)
   id: 2615
   time: '2026-04-29T00:27:44.0000000+00:00'
+- author: seyriix
+  changes:
+    - type: Tweak
+      message: Re-sprited the BSO mantle
+  id: 2617
+  time: '2026-05-10T08:10:50.0000000+00:00'
