@@ -417,6 +417,7 @@
         - Ingot
         - Metal # Goobstation Start
         - Wooden
+        - SheetPlasma
         - Plastic # Goobstation End
         - Ingot #OMU
   - type: Lathe
@@ -731,6 +732,7 @@
       tags:
         - Sheet
         - RawMaterial
+        - SheetPlasma # Goob
   - type: Lathe
     idleState: icon
     runningState: building

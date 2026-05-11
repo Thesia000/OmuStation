@@ -88,6 +88,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPlasma
 
 - type: entity
   id: CargoTechFab
@@ -156,6 +157,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPlasma
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -257,6 +259,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPlasma
 
 - type: entity
   id: ServiceTechFab
@@ -320,6 +323,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPlasma
 
 - type: entity
   id: ERTTechFab
@@ -357,3 +361,4 @@
           - Sheet
           - RawMaterial
           - Ingot
+          - SheetPlasma

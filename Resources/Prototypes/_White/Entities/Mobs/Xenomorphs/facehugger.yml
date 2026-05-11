@@ -88,7 +88,7 @@
     tags:
     - XenomorphItem
   - type: Physics
-    bodyType: Dynamic
+    bodyType: KinematicController
   - type: CollisionWake
     enabled: false
   - type: RequireProjectileTarget

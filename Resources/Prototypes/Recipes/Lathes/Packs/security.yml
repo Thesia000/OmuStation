@@ -65,7 +65,7 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
-#  - ShrapnelPayload # Omu
+  # - ShrapnelPayload
 
 - type: latheRecipePack
   id: SecurityWeaponsStatic
@@ -104,7 +104,8 @@
   recipes:
   - CableDetStack1
   - EmptyDetonator
-  - ExplosivePayload
+  #- ExplosivePayload # Goobstation
+  - ShrapnelPayload # Goobstation
   - GrenadeBlast
   - GrenadeEMP
   - GrenadeFlash
