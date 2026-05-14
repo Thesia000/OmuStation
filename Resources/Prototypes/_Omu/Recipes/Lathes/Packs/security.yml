@@ -3,6 +3,8 @@
   recipes:
   - MagazineShotgunLeverRifleEmpty
   - MagazineShotgunLeverRifle
+  - MagazineBoxPistolRubber
+  - MagazinePistolSubMachineGunRubber
   - MagazineBoxCaselessRiflePractice
   - MagazineCaselessRiflePractice
   - MagazineCaselessRifleShortPractice
@@ -11,6 +13,8 @@
   - MagazineCaselessRifleShortFMJ
   - MagazineMagnumLeverRifle
   - MagazineMagnumLeverRifleEmpty
+  - MagazineClipM1Garand
+  - MagazineClipM1GarandEmpty
 
 - type: latheRecipePack
   id: SecurityAmmoOmu
