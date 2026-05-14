@@ -2,8 +2,6 @@ using Robust.Server.GameObjects;
 
 using Robust.Shared.Prototypes;
 
-using Content.Omu.Server._BSD.ServerClientLink.Prototypes;
-
 namespace Content.Omu.Server._BSD.ServerClientLink.Components;
 
 [RegisterComponent]
@@ -26,13 +24,13 @@ public sealed partial class ServerClientLinkComponent : Component
     /// Types for when this acts as a cleint, cant be in ServerTypes
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<ServerClientPrototype>> ClientTypes = new();
+    public HashSet<ProtoId<ServerClientPrototype>> ClientTypes = new HashSet<ProtoId<ServerClientPrototype>>();
 
     /// <summary>
     /// Types for when this acts like a server, cant be in ClientTypes
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<ServerClientPrototype>> ServerTypes = new();
+    public HashSet<ProtoId<ServerClientPrototype>> ServerTypes = new HashSet<ProtoId<ServerClientPrototype>>();
 
     /// <summary>
     /// Allow only server to client links, variable only read for the server, needs to be configured, null defaults into true

@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Omu.Server._BSD.ServerClientLink.Prototypes;
+namespace Content.Omu.Server._BSD.ServerClientLink.Components;
 
 /// <summary>
 /// Prototype representing a struct Types in YAML.

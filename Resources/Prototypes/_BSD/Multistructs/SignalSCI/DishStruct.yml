@@ -23,7 +23,7 @@
     - EnergyCapacityProvider
     - Productivity
   - type: SignalSciDish
-  - type: ServerClientLinkComponent
+  - type: ServerClientLink
   - type: ActivatableUI
     key: enum.DishConsoleUiKey.Key
   - type: UserInterface
