@@ -133,26 +133,26 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
     {
         var set = new HashSet<ServerClientLinkComponent>();
-        while(entHash.MoveNext(out var entUid))
+        foreach(var entUid in entHash)
         {
             if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
             {
                 set.Add(compToSave);
             }
         }
-        return set.Select(x => x.DeviceName).toArray();
+        return set.Select(x => x.DeviceName).ToArray();
     }
     public int[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
     {
         var set = new HashSet<ServerClientLinkComponent>();
-        while(entHash.MoveNext(out var entUid))
+        foreach(var entUid in entHash)
         {
             if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
             {
                 set.Add(compToSave);
             }
         }
-        return set.Select(x => x.DeviceSuffix).toArray();
+        return set.Select(x => x.DeviceSuffix).ToArray();
     }
     #endregion
     //mostly the same as server logic but for the clients

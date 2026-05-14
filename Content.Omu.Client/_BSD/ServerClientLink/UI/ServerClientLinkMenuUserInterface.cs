@@ -42,7 +42,8 @@ namespace Content.Omu.Client._BSD.ServerClientLink.UI
         {
             base.UpdateState(state);
             if (state is not ServerClientSelectionBoundUserInterfaceState rState) return;
-            _menu?.PopulateUnselected(rState.ServerCount, rState.ServerNames, rState.ServerIds, rState.SelectedServerId);
+            _menu?.PopulateUnselected(rState.AvailableServerCount, rState.AvailableServerNames, rState.AvailableServerIds,
+                                        rState.ConnectedServerCount, rState.ConnectedServerNames, rState.ConnectedServerIds);
         }
     }
 }

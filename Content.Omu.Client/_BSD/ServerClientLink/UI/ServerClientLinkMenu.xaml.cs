@@ -42,7 +42,8 @@ public sealed partial class ServerClientLinkMenu : FancyWindow
         OnServerDeselected?.Invoke(itemListSelectedEventArgs.ItemIndex);
     }
 
-    public void PopulateUnselected(int serverCount, string[] serverNames, int[] serverIds, int selectedServerId)
+    public void PopulateUnselected(int availableServerCount, string[] availableServerNames, int[] availableServerIds,
+                                    int connectedServerCount, string[] connectedServerNames, int[] connectedServerIds)
     {
         
     }
