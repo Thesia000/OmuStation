@@ -16,7 +16,7 @@ public sealed partial class MultiBlockPartComponent : Component
     /// in witch directions the block allowes additions to itself
     /// </summary>
     [DataField]
-    public bool[] Connectability = [true,true,true,true];//N,E,S,W
+    public bool[] Connectability = [true, true, true, true];//N,E,S,W
 
     /// <summary>
     /// Allowed types this thing is allowed to connect to, the universal key is "ALL", current issue highly limited as only one per category, may be amended later

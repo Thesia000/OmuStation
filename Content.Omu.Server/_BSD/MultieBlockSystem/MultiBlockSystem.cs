@@ -198,8 +198,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
                             temp.Type = iterator;
                             if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
                             {
-                                toSearchList.Add(temp.clone());
-                                foundSearchList.Add(temp.clone());
+                                toSearchList.Add(temp.Clone());
+                                foundSearchList.Add(temp.Clone());
                             }
                         }
                         foundNodeComp.Claimed = true;
@@ -213,12 +213,12 @@ public sealed partial class MultiBlockSystem : EntitySystem
             {
                 if (multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
                 {
-                    multiBlockStructureComp.EntityDic[addNode.Type].Add(addNode.clone());
+                    multiBlockStructureComp.EntityDic[addNode.Type].Add(addNode.Clone());
                 }
                 else
                 {
                     List<Node> newList = new List<Node>();
-                    newList.Add(addNode.clone());
+                    newList.Add(addNode.Clone());
                     multiBlockStructureComp.EntityDic.Add(addNode.Type, newList);
                 }
                 if (multiBlockStructureComp.TypesPresent.ContainsKey(addNode.Type))

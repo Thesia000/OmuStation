@@ -28,23 +28,23 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components Present
     /// </summary>
     [DataField]
-    public Dictionary<string,float> TypesPresent = new Dictionary<string, float>();
+    public Dictionary<string, float> TypesPresent = new Dictionary<string, float>();
     /// <summary>
     /// Components Present entity dic
     /// </summary>
     [DataField]
-    public Dictionary<string,List<Node>> EntityDic = new Dictionary<string,List<Node>>();
+    public Dictionary<string, List<Node>> EntityDic = new Dictionary<string, List<Node>>();
 
 }
 
-public class Node
+public sealed class Node
 {
     public float Efficency;
     public EntityUid Id;
     public string Type = "ERROR";
 
-    public Node clone()
+    public Node Clone()
     {
-        return (Node)MemberwiseClone();
+        return (Node) MemberwiseClone();
     }
 }
