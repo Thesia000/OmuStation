@@ -41,26 +41,25 @@ public sealed partial class SignalServerSystem : EntitySystem
         var query = EntityQueryEnumerator<SignalSciServerComponent, MultiBlockEnergyManagmentComponent>();
         while (query.MoveNext(out var ent, out var comp, out var energycomp))
         {
-            if(!energycomp.Powered)continue;
-            ComputeData(ent,comp);
+            if (!energycomp.Powered) continue;
+            ComputeData(ent, comp);
         }
     }
     private void UpdateValues(EntityUid uid, SignalSciServerComponent comp, ref MultiStructChangeEvent args)
     {
-        if(!TryComp<MultiBlockStructureComponent>(uid, out var structureComp))return;
-        
+        if (!TryComp<MultiBlockStructureComponent>(uid, out var structureComp)) return;
         return;
     }
     private void ComputeData(EntityUid uid, SignalSciServerComponent comp)
     {
-        if(comp.StoredData<=0.0f)return;
-        float computAmount = Math.Min(comp.StoredData,comp.ProcessingPower);
+        if (comp.StoredData <= 0.0f) return;
+        float computAmount = Math.Min(comp.StoredData, comp.ProcessingPower);
         comp.StoredData -= computAmount;
         //comp.SignificantData += computAmount * comp.Efficency;
         //temp start
         if (!_research.TryGetClientServer(uid, out var server, out var serverComponent))
             return;
-        _research.ModifyServerPoints(server.Value, (int)Math.Round(computAmount * comp.Efficency));
+        _research.ModifyServerPoints(server.Value, (int) Math.Round(computAmount * comp.Efficency));
         //temp end
         return;
     }

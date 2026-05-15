@@ -61,12 +61,12 @@ public sealed partial class SignalSciDishComponent : Component
     /// Components that can be added to the structure, connectors or upgrades
     /// </summary>
     [DataField]
-    public string[] DishTypes = {"SignalDish"};
+    public string[] DishTypes = { "SignalDish" };
 
     /// <summary>
     /// Components that can be added to the structure, connectors or upgrades
     /// </summary>
     [DataField]
-    public string[] ProductivityTypes = {"Productivity"};
+    public string[] ProductivityTypes = { "Productivity" };
 
 }

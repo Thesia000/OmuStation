@@ -45,17 +45,17 @@ public sealed partial class SignalMapComponent : Component
     public float SingalPointsMax = 100000;
 }
 
-public class Signal
+public sealed class Signal
+{
+    public float Angle;//in degrees
+    public float DataRemaining;
+    public float EventChanse = 0.05f;//the percentage chanse that a event is triggered upon signal depletion
+    public TimeSpan SignalDisaperance;
+    public Signal(float angle, float dataRemaining, TimeSpan signalDisaperance)
     {
-        public float Angle;//in degrees
-        public float DataRemaining;
-        public float EventChanse = 0.05f;//the percentage chanse that a event is triggered upon signal depletion
-        public TimeSpan SignalDisaperance;
-        public Signal(float angle,float dataRemaining,TimeSpan signalDisaperance)
-        {
-            Angle = angle;
-            DataRemaining = dataRemaining;
-            SignalDisaperance = signalDisaperance;
-        }
+        Angle = angle;
+        DataRemaining = dataRemaining;
+        SignalDisaperance = signalDisaperance;
     }
+}
 

@@ -25,20 +25,22 @@ public sealed partial class SignalMapSystem : EntitySystem
     {
         base.Update(frameTime);
         var mapQuerry = AllEntityQuery<SignalMapComponent>();
-        while(mapQuerry.MoveNext(out var mapEnt, out var comp))//this is done on update as we also manage the individual signals expration time here
+        while (mapQuerry.MoveNext(out var mapEnt, out var comp))//this is done on update as we also manage the individual signals expration time here
         {
             //update the signals aka delete if there time has come
-            if(comp.SignalList.Count > 0){
-                foreach(var signal in comp.SignalList){
-                    if(signal == null) continue;
-                    if(signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
+            if (comp.SignalList.Count > 0)
+            {
+                foreach (var signal in comp.SignalList)
+                {
+                    if (signal == null) continue;
+                    if (signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
                 }
             }
             //add more singals if need be, this will lead to high and low times for signal amounts.
-            if(comp.SignalList.Count - comp.DesiredAmountOfSignals >= comp.SignalAmountVariance)continue;
-            while(comp.SignalList.Count < comp.DesiredAmountOfSignals)CreateSignal(comp);
+            if (comp.SignalList.Count - comp.DesiredAmountOfSignals >= comp.SignalAmountVariance) continue;
+            while (comp.SignalList.Count < comp.DesiredAmountOfSignals) CreateSignal(comp);
             int additional = _random.Next(0, comp.SignalAmountVariance);
-            for(int i = 0; i < additional; i++)CreateSignal(comp);
+            for (int i = 0; i < additional; i++) CreateSignal(comp);
         }
     }
     public SignalMapComponent SetupMapSignals(EntityUid uid)//this is called in case the map lacks the component
@@ -49,9 +51,9 @@ public sealed partial class SignalMapSystem : EntitySystem
     }
     public void CreateSignal(SignalMapComponent signalMapComp)
     {
-        TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin,signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
+        TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin, signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
         //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
-        Signal newSignal = new Signal(_random.NextFloat(0.0f,360f), _random.NextFloat(signalMapComp.SingalPointsMin,signalMapComp.SingalPointsMax),disaperanceTime);
+        Signal newSignal = new Signal(_random.NextFloat(0.0f, 360f), _random.NextFloat(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax), disaperanceTime);
         signalMapComp.SignalList.Add(newSignal);
         return;
     }
