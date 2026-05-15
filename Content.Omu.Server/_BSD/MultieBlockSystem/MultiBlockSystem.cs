@@ -26,7 +26,7 @@ namespace Content.Omu.Server._BSD.MultiBlockSystem;
 public sealed partial class MultiBlockSystem : EntitySystem
 {
     //magic number sets the override key to allow all connections
-    private ProtoId<MultiStructTypePrototype> protoAll = "ALL";
+    private readonly ProtoId<MultiStructTypePrototype> _protoAll = "ALL";
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -44,35 +44,35 @@ public sealed partial class MultiBlockSystem : EntitySystem
     #region EnergyLogic
     private void PowerUpdateAll()
     {
-        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
-        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
+        var machineQuerry = AllEntityQuery<MultiBlockStructureComponent, MultiBlockEnergyManagmentComponent>();
+        while (machineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
         {
-            PowerUpdate(uidLoop,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+            PowerUpdate(uidLoop, multiBlockStructureComp, multiBlockEnergyManagmentComp);
         }
     }
     private void PowerUpdate(EntityUid uid)
     {
-        if(!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp))return;
-        if(!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp))return;
-        PowerUpdate(uid,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        if (!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp)) return;
+        if (!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp)) return;
+        PowerUpdate(uid, multiBlockStructureComp, multiBlockEnergyManagmentComp);
         return;
     }
-    private void PowerUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
+    private void PowerUpdate(EntityUid uid, MultiBlockStructureComponent comp, MultiBlockEnergyManagmentComponent powerComp)
     {
-        if(powerComp.EnergyProvidingTypes == null)return;
-        foreach(string ProviderType in powerComp.EnergyProvidingTypes)
+        if (powerComp.EnergyProvidingTypes == null) return;
+        foreach (string providerType in powerComp.EnergyProvidingTypes)
         {
-            if(!comp.EntityDic.ContainsKey(ProviderType))continue;
-            foreach(Node iterator in comp.EntityDic[ProviderType])
+            if (!comp.EntityDic.ContainsKey(providerType)) continue;
+            foreach (Node iterator in comp.EntityDic[providerType])
             {
-                if(!TryComp<BatteryComponent>(iterator.Id, out var battery))continue;
-                if(!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair))continue;
+                if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
+                if (!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair)) continue;
                 float deltaChange = 0;
-                if(transfair.TransEnergy>0)deltaChange = Math.Min(battery.CurrentCharge,transfair.TransEnergy * iterator.Efficency);
-                else deltaChange = Math.Max(battery.CurrentCharge-battery.MaxCharge,transfair.TransEnergy * iterator.Efficency);
-                ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange,battery.MaxCharge);
+                if (transfair.TransEnergy > 0) deltaChange = Math.Min(battery.CurrentCharge, transfair.TransEnergy * iterator.Efficency);
+                else deltaChange = Math.Max(battery.CurrentCharge - battery.MaxCharge, transfair.TransEnergy * iterator.Efficency);
+                ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange, battery.MaxCharge);
                 RaiseLocalEvent(iterator.Id, ref ev, true);
-                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy+deltaChange,powerComp.StoredEnergyCapacity);
+                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy + deltaChange, powerComp.StoredEnergyCapacity);
             }
         }
         powerComp.StoredEnergy += powerComp.EnergyDelta;//structs own powergeneration/consumption
@@ -88,29 +88,29 @@ public sealed partial class MultiBlockSystem : EntitySystem
 
     private void EnergyStroageUpdateAll()
     {
-        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent,MultiBlockEnergyManagmentComponent>();
-        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
+        var machineQuerry = AllEntityQuery<MultiBlockStructureComponent, MultiBlockEnergyManagmentComponent>();
+        while (machineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var multiBlockEnergyManagmentComp))
         {
-            EnergyStroageUpdate(uidLoop,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+            EnergyStroageUpdate(uidLoop, multiBlockStructureComp, multiBlockEnergyManagmentComp);
         }
     }
     private void EnergyStroageUpdate(EntityUid uid)
     {
-        if(!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp))return;
-        if(!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp))return;
-        EnergyStroageUpdate(uid,multiBlockStructureComp,multiBlockEnergyManagmentComp);
+        if (!TryComp<MultiBlockStructureComponent>(uid, out var multiBlockStructureComp)) return;
+        if (!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var multiBlockEnergyManagmentComp)) return;
+        EnergyStroageUpdate(uid, multiBlockStructureComp, multiBlockEnergyManagmentComp);
         return;
     }
-    private void EnergyStroageUpdate(EntityUid uid, MultiBlockStructureComponent comp,MultiBlockEnergyManagmentComponent powerComp)
+    private void EnergyStroageUpdate(EntityUid uid, MultiBlockStructureComponent comp, MultiBlockEnergyManagmentComponent powerComp)
     {
         powerComp.StoredEnergyCapacity = 0;
-        if(powerComp.EnergyCapacityTypes == null)return;
-        foreach(string EnergyStorageType in powerComp.EnergyCapacityTypes)
+        if (powerComp.EnergyCapacityTypes == null) return;
+        foreach (string energyStorageType in powerComp.EnergyCapacityTypes)
         {
-            if(!comp.EntityDic.ContainsKey(EnergyStorageType))continue;
-            foreach(Node iterator in comp.EntityDic[EnergyStorageType])
+            if (!comp.EntityDic.ContainsKey(energyStorageType)) continue;
+            foreach (Node iterator in comp.EntityDic[energyStorageType])
             {
-                if(!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp))continue;
+                if (!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp)) continue;
                 powerComp.StoredEnergyCapacity += storageComp.StoreEnergy * iterator.Efficency;
             }
         }
@@ -119,12 +119,12 @@ public sealed partial class MultiBlockSystem : EntitySystem
     #endregion
 
     #region Integrity
-    private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
+    private void CheckIntegrity(EntityUid uid, MultiBlockPartComponent comp, ref AfterConstructionChangeEntityEvent args)
     {
         CheckIntegrityAll();
         return;
     }
-    private void CheckIntegrity(EntityUid uid,MultiBlockPartComponent comp, ref AnchorStateChangedEvent args)
+    private void CheckIntegrity(EntityUid uid, MultiBlockPartComponent comp, ref AnchorStateChangedEvent args)
     {
         CheckIntegrityAll();
         return;
@@ -133,34 +133,36 @@ public sealed partial class MultiBlockSystem : EntitySystem
     private void CheckIntegrityAll()
     {
         ResetClaimedStatus();
-        var MachineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
-        while (MachineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var transComp,out var MultiblockPartComp))
+        var machineQuerry = AllEntityQuery<MultiBlockStructureComponent, TransformComponent, MultiBlockPartComponent>();
+        while (machineQuerry.MoveNext(out var uidLoop, out var multiBlockStructureComp, out var transComp, out var multiblockPartComp))
         {
             bool onlySaveOne = true;
-            List<Node> toSearchList =  new List<Node>();
-            List<Node> foundSearchList =  new List<Node>();
-            foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){
+            List<Node> toSearchList = new List<Node>();
+            List<Node> foundSearchList = new List<Node>();
+            foreach (ProtoId<MultiStructTypePrototype> iterator in multiblockPartComp.StructureType)
+            {
                 Node start = new Node();
                 start.Id = uidLoop;
                 start.Efficency = 1.0f;
                 start.Type = iterator;
                 foundSearchList.Add(start);
-                if(onlySaveOne){//sure the first node MAY have a million types but we ONLY NEED ONE in the search list
+                if (onlySaveOne)
+                {//sure the first node MAY have a million types but we ONLY NEED ONE in the search list
                     toSearchList.Add(start);
                     onlySaveOne = false;
                 }
-            } 
+            }
             Node currentNode;
             do
             {
                 //first get the most efficent item, then remove it from the to search list
-                toSearchList.Sort((s1,s2)=>s1.Efficency.CompareTo(s2.Efficency));
+                toSearchList.Sort((s1, s2) => s1.Efficency.CompareTo(s2.Efficency));
                 currentNode = toSearchList[0];
                 toSearchList.Remove(currentNode);
                 //then check the sides
                 MultiBlockPartComponent targetComp = Comp<MultiBlockPartComponent>(currentNode.Id);
                 targetComp.Claimed = true;
-                for(int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     if (!targetComp.Connectability[i])
                     {
@@ -168,7 +170,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
                     }
                     Node temp = new Node();
                     HashSet<ProtoId<MultiStructTypePrototype>> handDown = new();
-                    switch (i){
+                    switch (i)
+                    {
                         case 0://N
                             handDown.UnionWith(targetComp.AllowedConnectionTypesNorth);
                             break;
@@ -182,31 +185,33 @@ public sealed partial class MultiBlockSystem : EntitySystem
                             handDown.UnionWith(targetComp.AllowedConnectionTypesWest);
                             break;
                     }
-                    temp.Id = CheckSide(currentNode.Id,i,handDown,multiBlockStructureComp.AllowedTypes,multiBlockStructureComp.PositionErrorMargine);
-                    if(!TryComp<MultiBlockPartComponent>(temp.Id, out var foundNodeComp))
+                    temp.Id = CheckSide(currentNode.Id, i, handDown, multiBlockStructureComp.AllowedTypes, multiBlockStructureComp.PositionErrorMargine);
+                    if (!TryComp<MultiBlockPartComponent>(temp.Id, out var foundNodeComp))
                     {
                         continue;//this should never fail but ye know somethimes it may just happen
                     }
-                    if(!foundNodeComp.Claimed){
+                    if (!foundNodeComp.Claimed)
+                    {
                         temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
-                        foreach(ProtoId<MultiStructTypePrototype> iterator in foundNodeComp.StructureType){
+                        foreach (ProtoId<MultiStructTypePrototype> iterator in foundNodeComp.StructureType)
+                        {
                             temp.Type = iterator;
                             if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
                             {
                                 toSearchList.Add(temp.clone());
-                                foundSearchList.Add(temp.clone());   
+                                foundSearchList.Add(temp.clone());
                             }
                         }
                         foundNodeComp.Claimed = true;
                     }
                 }
-            }while(toSearchList.Count>0);
+            } while (toSearchList.Count > 0);
             //update the actual values to the master structure and link them all
-            multiBlockStructureComp.EntityDic = new Dictionary<string,List<Node>>();
+            multiBlockStructureComp.EntityDic = new Dictionary<string, List<Node>>();
             multiBlockStructureComp.TypesPresent = new Dictionary<string, float>();
-            foreach(Node addNode in foundSearchList)
+            foreach (Node addNode in foundSearchList)
             {
-                if(multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
+                if (multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
                 {
                     multiBlockStructureComp.EntityDic[addNode.Type].Add(addNode.clone());
                 }
@@ -214,9 +219,9 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 {
                     List<Node> newList = new List<Node>();
                     newList.Add(addNode.clone());
-                    multiBlockStructureComp.EntityDic.Add(addNode.Type,newList);
+                    multiBlockStructureComp.EntityDic.Add(addNode.Type, newList);
                 }
-                if(multiBlockStructureComp.TypesPresent.ContainsKey(addNode.Type))
+                if (multiBlockStructureComp.TypesPresent.ContainsKey(addNode.Type))
                 {
                     multiBlockStructureComp.TypesPresent[addNode.Type] += addNode.Efficency * Comp<MultiBlockPartComponent>(addNode.Id).MachinePower;
                 }
@@ -224,7 +229,6 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 {
                     multiBlockStructureComp.TypesPresent.Add(addNode.Type, addNode.Efficency * Comp<MultiBlockPartComponent>(addNode.Id).MachinePower);
                 }
-                
             }
             var ev = new MultiStructChangeEvent();//let subsy know things happened
             RaiseLocalEvent(uidLoop, ref ev);
@@ -235,16 +239,17 @@ public sealed partial class MultiBlockSystem : EntitySystem
     private void ResetClaimedStatus()
     {
         var resetWaveEntites = AllEntityQuery<MultiBlockPartComponent>();
-        while (resetWaveEntites.MoveNext(out var uidLoop,out var MultiblockPartComp))
+        while (resetWaveEntites.MoveNext(out var uidLoop, out var multiblockPartComp))
         {
-            MultiblockPartComp.Claimed = false;
+            multiblockPartComp.Claimed = false;
         }
         return;
     }
-    private EntityUid CheckSide(EntityUid uid,int sideNum, HashSet<ProtoId<MultiStructTypePrototype>> allowedTypes, HashSet<ProtoId<MultiStructTypePrototype>> structureTypesAllowed,float margineOfError)
+    private EntityUid CheckSide(EntityUid uid, int sideNum, HashSet<ProtoId<MultiStructTypePrototype>> allowedTypes, HashSet<ProtoId<MultiStructTypePrototype>> structureTypesAllowed, float margineOfError)
     {
         var targetCordVec = _maps.GetGridPosition(uid);//unideal use of a var, find proper datatype to optimise further
-        switch (sideNum){
+        switch (sideNum)
+        {
             case 0://N
                 targetCordVec.X += 1.0f;
                 break;
@@ -259,33 +264,34 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 break;
         }
         //get the entity on that cordinate
-        var FoundEntities = AllEntityQuery<TransformComponent, MultiBlockPartComponent>();
-        while (FoundEntities.MoveNext(out var uidLoop, out var transComp,out var MultiblockPartComp))
+        var foundEntities = AllEntityQuery<TransformComponent, MultiBlockPartComponent>();
+        while (foundEntities.MoveNext(out var uidLoop, out var transComp, out var multiblockPartComp))
         {
-            if (MultiblockPartComp.Claimed)//ignore already in use parts
+            if (multiblockPartComp.Claimed)//ignore already in use parts
             {
                 continue;
             }
-            if(!transComp.Anchored)continue;
-            if(MultiblockPartComp.StructureType==null)continue;
+            if (!transComp.Anchored) continue;
+            if (multiblockPartComp.StructureType == null) continue;
             bool allowedPart = false;
-            foreach(ProtoId<MultiStructTypePrototype> iterator in MultiblockPartComp.StructureType){
-                if(!structureTypesAllowed.Contains(iterator))continue;
-                if(allowedTypes.Contains(protoAll))allowedPart = true;//override condition allow any type
-                if(!allowedTypes.Contains(iterator))continue;
-                allowedPart =true;
+            foreach (ProtoId<MultiStructTypePrototype> iterator in multiblockPartComp.StructureType)
+            {
+                if (!structureTypesAllowed.Contains(iterator)) continue;
+                if (allowedTypes.Contains(_protoAll)) allowedPart = true;//override condition allow any type
+                if (!allowedTypes.Contains(iterator)) continue;
+                allowedPart = true;
             }
-            if(!allowedPart)continue;
-            if(Transform(uid).GridUid.Value != Transform(uidLoop).GridUid.Value)//same grid check
+            if (!allowedPart) continue;
+            if (Transform(uid).GridUid != Transform(uidLoop).GridUid || Transform(uidLoop).GridUid == null)//same grid check
             {
                 continue;
             }
             var checkCordVec = _maps.GetGridPosition(uidLoop);
-            if(Math.Abs(checkCordVec.X - targetCordVec.X) > margineOfError)
+            if (Math.Abs(checkCordVec.X - targetCordVec.X) > margineOfError)
             {
                 continue;
             }
-            if(Math.Abs(checkCordVec.Y - targetCordVec.Y) > margineOfError)
+            if (Math.Abs(checkCordVec.Y - targetCordVec.Y) > margineOfError)
             {
                 continue;
             }

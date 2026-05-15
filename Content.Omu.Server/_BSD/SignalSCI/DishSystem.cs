@@ -22,8 +22,8 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 public sealed partial class SignalDishSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _MapSys = default!;
-    [Dependency] protected readonly SharedTransformSystem _trans = default!;
-    [Dependency] protected readonly SignalMapSystem _signalMap = default!;
+    [Dependency] private readonly SharedTransformSystem _trans = default!;
+    [Dependency] private readonly SignalMapSystem _signalMap = default!;
     [Dependency] private readonly ResearchSystem _research = default!;
     public override void Initialize()
     {
@@ -52,13 +52,13 @@ public sealed partial class SignalDishSystem : EntitySystem
     }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
     {
-        TryComp<MultiBlockStructureComponent>(uid, out var multistructcomp);//consider making this a proper methode to call
+        if(!TryComp<MultiBlockStructureComponent>(uid, out var multistructcomp))return;//consider making this a proper methode to call
         EntityUid antennaUid = multistructcomp.EntityDic["SignalAntenna"][0].Id;//gets the first entry
-        if(antennaUid==null)return;
-        TryComp<TransformComponent>(antennaUid, out var transcomp);
+        Comp<TransformComponent>(antennaUid, out var transcomp);
+        if(transcomp.GridUid==null)return;
         TryComp<TransformComponent>(transcomp.GridUid,out var gridTransformComp);
-        float angle=(float)transcomp.WorldRotation * (180/(float)MathF.PI);
-        float maxRotation;
+        float angle=(float)_trans.GetWorldRotation(transcomp.GridUid!) * (180/(float)MathF.PI);
+        float maxRotation = 0f;
         if(!(angle >= comp.AngleErrorMargine + comp.DesiredAngle || angle <= comp.AngleErrorMargine - comp.DesiredAngle))
         {
             return;
@@ -66,7 +66,7 @@ public sealed partial class SignalDishSystem : EntitySystem
         maxRotation = comp.DesiredAngle - angle;
         if(maxRotation > 360.0f+angle-comp.DesiredAngle)maxRotation = 360.0f+angle-comp.DesiredAngle;
         maxRotation = MathF.Min(maxRotation,comp.MaxRotationSpeed);
-        Angle newAngel = (Angle)((float)gridTransformComp.WorldRotation + maxRotation);
+        Angle newAngel = (Angle)((float)_trans.GetWorldRotation(transcomp.GridUid!) + maxRotation);
         _trans.SetWorldRotation(gridTransformComp,newAngel);
         return;
     }
@@ -97,8 +97,7 @@ public sealed partial class SignalDishSystem : EntitySystem
         {
             comp = _signalMap.SetupMapSignals(MapUid);
         }
-        TryComp<TransformComponent>(uid, out var transcomp);
-        float angle=(float)transcomp.WorldRotation;
+        float angle=(float)_trans.GetWorldRotation(uid);
         if(comp == null){Log.Error("MapEnt: "+MapUid+" did not contain the SignalMapComponent but was expected to.");return;}
         for(int move = 0; move < comp.SignalList.Count; move++)//this math needs to be done every tick as we can harvest multiple signals if they align
         {
@@ -111,7 +110,7 @@ public sealed partial class SignalDishSystem : EntitySystem
             {
                 float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
                 comp.SignalList[move].DataRemaining -= harvestedAmount;
-                if(dishComp.LinkedServer==null)continue;
+                if(dishComp.LinkedServer == null)continue;
                 if(!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp))continue;
                 serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
                 //_research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time

@@ -47,7 +47,7 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
         //temp: cant fail for testing reasons
         _uiSystem.TryToggleUi(uid, ServerClientUiKey.Key, args.Actor);
     }
-    private void OnSyncServerMessage(EntityUid uid, ServerClientLinkComponent comp,RequestServerListUpdateMessage args)
+    private void OnSyncServerMessage(EntityUid uid, ServerClientLinkComponent comp, RequestServerListUpdateMessage args)
     {
         var namesUnselected = GetServerNamesUnselected(uid, args.Channel);
         var namesSelected = GetServerNamesUnselected(comp.EntityDicServer[args.Channel]);
@@ -63,7 +63,7 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
         _uiSystem.SetUiState(uid, ServerClientUiKey.Key, state);
         return;
     }
-    private void OnSyncClientMessage(EntityUid uid, ServerClientLinkComponent comp,RequestClientListUpdateMessage args)
+    private void OnSyncClientMessage(EntityUid uid, ServerClientLinkComponent comp, RequestClientListUpdateMessage args)
     {
         var names = GetClientNames(uid, args.Channel);
         var state = new ServerClientSelectionBoundUserInterfaceState(
@@ -81,61 +81,60 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     #endregion
     //logic related to servers, like getting all server, names, ids, lists checking areas
     #region Logic Servers
-    public HashSet<Entity<ServerClientLinkComponent>> GetServers(EntityUid uid, string channel)
+    public HashSet<ServerClientLinkComponent> GetServers(EntityUid uid, string channel)
     {
         var entityQuerry = AllEntityQuery<ServerClientLinkComponent, TransformComponent>();
-        TryComp<TransformComponent>(uid, out var transComp);
-        var set = new HashSet<Entity<ServerClientLinkComponent>>();
-        while(entityQuerry.MoveNext(out var serverEnt, out var serverComp, out var transCompServer))
+        TransformComponent transComp = Transform(uid);
+        var set = new HashSet<ServerClientLinkComponent>();
+        while (entityQuerry.MoveNext(out var serverEnt, out var serverComp, out var transCompServer))
         {
-            if(!serverComp.ServerTypes.Contains(channel))continue;
+            if (!serverComp.ServerTypes.Contains(channel)) continue;
             if (serverComp.ServerNeedsToIniciate[channel])
             {
                 continue;//server does not answer pings and prevents connection attempts this way
             }
             if (serverComp.GlobalyAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(serverComp);
                 continue;
             }
-            if(transComp.MapID != transCompServer.MapID)continue;
+            if (transComp!.MapID != transCompServer!.MapID) continue;
             if (serverComp.MapWideAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(serverComp);
                 continue;
             }
-            if(transComp.GridUid != transCompServer.GridUid || transCompServer.GridUid == null)continue;
-            if(serverComp.GridWideAccessable[channel])
+            if (transComp.GridUid != transCompServer.GridUid || transCompServer.GridUid == null) continue;
+            if (serverComp.GridWideAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(serverComp);
                 continue;
             }
-            float distance = (float)Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompServer.Coordinates.X,2)+Math.Pow(transComp.Coordinates.Y - transCompServer.Coordinates.Y,2));
-            if(serverComp.ConnectionRadius[channel] == null)continue;
-            if( distance > serverComp.ConnectionRadius[channel])
+            float distance = (float) Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompServer.Coordinates.X, 2) + Math.Pow(transComp.Coordinates.Y - transCompServer.Coordinates.Y, 2));
+            if (distance > serverComp.ConnectionRadius[channel])
             {
-                set.Add(serverEnt);
+                set.Add(serverComp);
                 continue;
             }
         }
 
         return set;
     }
-    
+
     public string[] GetServerNamesUnselected(EntityUid client, string channel)
     {
-        return GetServers(client, channel).Select(x => x.Comp.DeviceName).ToArray();
+        return GetServers(client, channel).Select(x => x.DeviceName).ToArray();
     }
     public int[] GetServerIdsUnselected(EntityUid client, string channel)
     {
-        return GetServers(client, channel).Select(x => x.Comp.DeviceSuffix).ToArray();
+        return GetServers(client, channel).Select(x => x.DeviceSuffix).ToArray();
     }
     public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
     {
         var set = new HashSet<ServerClientLinkComponent>();
-        foreach(var entUid in entHash)
+        foreach (var entUid in entHash)
         {
-            if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
+            if (TryComp<ServerClientLinkComponent>(entUid, out var compToSave))
             {
                 set.Add(compToSave);
             }
@@ -145,9 +144,9 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     public int[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
     {
         var set = new HashSet<ServerClientLinkComponent>();
-        foreach(var entUid in entHash)
+        foreach (var entUid in entHash)
         {
-            if (TryComp<ServerClientLinkComponent>(entUid,out var compToSave))
+            if (TryComp<ServerClientLinkComponent>(entUid, out var compToSave))
             {
                 set.Add(compToSave);
             }
@@ -158,36 +157,35 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     //mostly the same as server logic but for the clients
     #region Logic Client
 
-    public HashSet<Entity<ServerClientLinkComponent>> GetClients(EntityUid uid, ServerClientLinkComponent serverComp, string channel)
+    public HashSet<ServerClientLinkComponent> GetClients(EntityUid uid, ServerClientLinkComponent serverComp, string channel)
     {
         var entityQuerry = AllEntityQuery<ServerClientLinkComponent, TransformComponent>();
-        TryComp<TransformComponent>(uid, out var transComp);
-        var set = new HashSet<Entity<ServerClientLinkComponent>>();
-        while(entityQuerry.MoveNext(out var serverEnt, out var clientComp, out var transCompClient))
+        TransformComponent transComp = Transform(uid);
+        var set = new HashSet<ServerClientLinkComponent>();
+        while (entityQuerry.MoveNext(out var serverEnt, out var clientComp, out var transCompClient))
         {
-            if(!clientComp.ClientTypes.Contains(channel))continue;
+            if (!clientComp.ClientTypes.Contains(channel)) continue;
             if (serverComp.GlobalyAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(clientComp);
                 continue;
             }
-            if(transComp.MapID != transCompClient.MapID)continue;
+            if (transComp.MapID != transCompClient.MapID) continue;
             if (serverComp.MapWideAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(clientComp);
                 continue;
             }
-            if(transComp.GridUid != transCompClient.GridUid || transCompClient.GridUid == null)continue;
-            if(serverComp.GridWideAccessable[channel])
+            if (transComp.GridUid != transCompClient.GridUid || transCompClient.GridUid == null) continue;
+            if (serverComp.GridWideAccessable[channel])
             {
-                set.Add(serverEnt);
+                set.Add(clientComp);
                 continue;
             }
-            float distance = (float)Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompClient.Coordinates.X,2)+Math.Pow(transComp.Coordinates.Y - transCompClient.Coordinates.Y,2));
-            if(serverComp.ConnectionRadius[channel] == null)continue;
-            if( distance > serverComp.ConnectionRadius[channel])
+            float distance = (float) Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompClient.Coordinates.X, 2) + Math.Pow(transComp.Coordinates.Y - transCompClient.Coordinates.Y, 2));
+            if (distance > serverComp.ConnectionRadius[channel])
             {
-                set.Add(serverEnt);
+                set.Add(clientComp);
                 continue;
             }
         }
@@ -195,14 +193,14 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     public string[] GetClientNames(EntityUid client, string channel)
     {
-        if(!TryComp<ServerClientLinkComponent>(client, out var serverComp))return new string[0];
-        return GetClients(client, serverComp, channel).Select(x => x.Comp.DeviceName).ToArray();
+        if (!TryComp<ServerClientLinkComponent>(client, out var serverComp)) return new string[0];
+        return GetClients(client, serverComp, channel).Select(x => x.DeviceName).ToArray();
     }
     public int[] GetClientIds(EntityUid client, string channel)
     {
-        if(!TryComp<ServerClientLinkComponent>(client, out var serverComp))return new int[0];
-        return GetClients(client, serverComp, channel).Select(x => x.Comp.DeviceSuffix).ToArray();
+        if (!TryComp<ServerClientLinkComponent>(client, out var serverComp)) return new int[0];
+        return GetClients(client, serverComp, channel).Select(x => x.DeviceSuffix).ToArray();
     }
-    
+
     #endregion
 }

@@ -45,7 +45,7 @@ public sealed partial class SignalMapSystem : EntitySystem
     {
         EnsureComp<SignalMapComponent>(uid);//ensure the map of the station has signals
         TryComp<SignalMapComponent>(uid, out var comp);
-        return comp;
+        return comp!;
     }
     public void CreateSignal(SignalMapComponent signalMapComp)
     {
