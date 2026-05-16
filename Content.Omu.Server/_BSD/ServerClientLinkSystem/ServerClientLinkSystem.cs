@@ -24,7 +24,7 @@ using Robust.Server.GameObjects;
 
 using Content.Shared.Popups;
 
-using Content.Omu.Server._BSD.ServerClientLink.Components;
+using Content.Omu.Server._BSD.ServerClientLinkSystem.Components;
 
 using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
@@ -36,18 +36,18 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ServerClientLinkComponent, RequestServerListUpdateMessage>(OnSyncServerMessage);
-        SubscribeLocalEvent<ServerClientLinkComponent, RequestClientListUpdateMessage>(OnSyncClientMessage);
+        SubscribeLocalEvent<ServerClientLinkInfrastructureComponent, RequestServerListUpdateMessage>(OnSyncServerMessage);
+        SubscribeLocalEvent<ServerClientLinkInfrastructureComponent, RequestClientListUpdateMessage>(OnSyncClientMessage);
 
-        SubscribeLocalEvent<ServerClientLinkComponent, ServerClientMenueOpenMessage>(OnServerClientMenueOpenRequest);
+        SubscribeLocalEvent<ServerClientLinkInfrastructureComponent, ServerClientMenueOpenMessage>(OnServerClientMenueOpenRequest);
     }
     #region UI
-    private void OnServerClientMenueOpenRequest(EntityUid uid, ServerClientLinkComponent component, ServerClientMenueOpenMessage args)
+    private void OnServerClientMenueOpenRequest(EntityUid uid, ServerClientLinkInfrastructureComponent component, ServerClientMenueOpenMessage args)
     {
         //temp: cant fail for testing reasons
         _uiSystem.TryToggleUi(uid, ServerClientUiKey.Key, args.Actor);
     }
-    private void OnSyncServerMessage(EntityUid uid, ServerClientLinkComponent comp, RequestServerListUpdateMessage args)
+    private void OnSyncServerMessage(EntityUid uid, ServerClientLinkInfrastructureComponent comp, RequestServerListUpdateMessage args)
     {
         var namesUnselected = GetServerNamesUnselected(uid, args.Channel);
         var namesSelected = GetServerNamesUnselected(comp.EntityDicServer[args.Channel]);
@@ -63,7 +63,7 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
         _uiSystem.SetUiState(uid, ServerClientUiKey.Key, state);
         return;
     }
-    private void OnSyncClientMessage(EntityUid uid, ServerClientLinkComponent comp, RequestClientListUpdateMessage args)
+    private void OnSyncClientMessage(EntityUid uid, ServerClientLinkInfrastructureComponent comp, RequestClientListUpdateMessage args)
     {
         var names = GetClientNames(uid, args.Channel);
         var state = new ServerClientSelectionBoundUserInterfaceState(
@@ -81,11 +81,11 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     #endregion
     //logic related to servers, like getting all server, names, ids, lists checking areas
     #region Logic Servers
-    public HashSet<ServerClientLinkComponent> GetServers(EntityUid uid, string channel)
+    public HashSet<ServerClientLinkInfrastructureComponent> GetServers(EntityUid uid, string channel)
     {
-        var entityQuerry = AllEntityQuery<ServerClientLinkComponent, TransformComponent>();
+        var entityQuerry = AllEntityQuery<ServerClientLinkInfrastructureComponent, TransformComponent>();
         TransformComponent transComp = Transform(uid);
-        var set = new HashSet<ServerClientLinkComponent>();
+        var set = new HashSet<ServerClientLinkInfrastructureComponent>();
         while (entityQuerry.MoveNext(out var serverEnt, out var serverComp, out var transCompServer))
         {
             if (!serverComp.ServerTypes.Contains(channel)) continue;
@@ -131,10 +131,10 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
     {
-        var set = new HashSet<ServerClientLinkComponent>();
+        var set = new HashSet<ServerClientLinkInfrastructureComponent>();
         foreach (var entUid in entHash)
         {
-            if (TryComp<ServerClientLinkComponent>(entUid, out var compToSave))
+            if (TryComp<ServerClientLinkInfrastructureComponent>(entUid, out var compToSave))
             {
                 set.Add(compToSave);
             }
@@ -143,10 +143,10 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     public int[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
     {
-        var set = new HashSet<ServerClientLinkComponent>();
+        var set = new HashSet<ServerClientLinkInfrastructureComponent>();
         foreach (var entUid in entHash)
         {
-            if (TryComp<ServerClientLinkComponent>(entUid, out var compToSave))
+            if (TryComp<ServerClientLinkInfrastructureComponent>(entUid, out var compToSave))
             {
                 set.Add(compToSave);
             }
@@ -157,11 +157,11 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     //mostly the same as server logic but for the clients
     #region Logic Client
 
-    public HashSet<ServerClientLinkComponent> GetClients(EntityUid uid, ServerClientLinkComponent serverComp, string channel)
+    public HashSet<ServerClientLinkInfrastructureComponent> GetClients(EntityUid uid, ServerClientLinkInfrastructureComponent serverComp, string channel)
     {
-        var entityQuerry = AllEntityQuery<ServerClientLinkComponent, TransformComponent>();
+        var entityQuerry = AllEntityQuery<ServerClientLinkInfrastructureComponent, TransformComponent>();
         TransformComponent transComp = Transform(uid);
-        var set = new HashSet<ServerClientLinkComponent>();
+        var set = new HashSet<ServerClientLinkInfrastructureComponent>();
         while (entityQuerry.MoveNext(out var serverEnt, out var clientComp, out var transCompClient))
         {
             if (!clientComp.ClientTypes.Contains(channel)) continue;
@@ -193,12 +193,12 @@ public sealed partial class ServerClientLinkSystem : EntitySystem
     }
     public string[] GetClientNames(EntityUid client, string channel)
     {
-        if (!TryComp<ServerClientLinkComponent>(client, out var serverComp)) return new string[0];
+        if (!TryComp<ServerClientLinkInfrastructureComponent>(client, out var serverComp)) return new string[0];
         return GetClients(client, serverComp, channel).Select(x => x.DeviceName).ToArray();
     }
     public int[] GetClientIds(EntityUid client, string channel)
     {
-        if (!TryComp<ServerClientLinkComponent>(client, out var serverComp)) return new int[0];
+        if (!TryComp<ServerClientLinkInfrastructureComponent>(client, out var serverComp)) return new int[0];
         return GetClients(client, serverComp, channel).Select(x => x.DeviceSuffix).ToArray();
     }
 

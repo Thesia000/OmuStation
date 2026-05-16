@@ -1,18 +1,18 @@
-using Robust.Server.GameObjects;
-
 using Robust.Shared.Prototypes;
 
-namespace Content.Omu.Server._BSD.ServerClientLink.Components;
+using Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
+
+namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Components;
 
 [RegisterComponent]
 
-public sealed partial class ServerClientLinkComponent : Component
+public sealed partial class ServerClientLinkInfrastructureComponent : Component
 {
     /// <summary>
     /// Components Present entity dic of connected to stated server
     /// </summary>
     [DataField]
-    public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new Dictionary<string, HashSet<EntityUid>>();
+    public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new();
 
     /// <summary>
     /// Components Present to what servers this client is liked
@@ -36,31 +36,31 @@ public sealed partial class ServerClientLinkComponent : Component
     /// Allow only server to client links, variable only read for the server, needs to be configured, null defaults into true
     /// </summary>
     [DataField]
-    public Dictionary<string, bool> ServerNeedsToIniciate = [];
+    public Dictionary<string, bool> ServerNeedsToIniciate = new();
 
     /// <summary>
     /// Default is only on a radius basis, value of distance allowes connections in area
     /// </summary>
     [DataField]
-    public Dictionary<string, float> ConnectionRadius = [];
+    public Dictionary<string, float> ConnectionRadius = new();
 
     /// <summary>
     /// Default is only on a radius basis, works on the entire Grid if true
     /// </summary>
     [DataField]
-    public Dictionary<string, bool> GridWideAccessable = [];
+    public Dictionary<string, bool> GridWideAccessable = new();
 
     /// <summary>
     /// The stronger version of GridWideAccessable, works on the entire map if true
     /// </summary>
     [DataField]
-    public Dictionary<string, bool> MapWideAccessable = [];
+    public Dictionary<string, bool> MapWideAccessable = new();
 
     /// <summary>
     /// The stronger version of MapWideAccessable, works cross maps if true
     /// </summary>
     [DataField]
-    public Dictionary<string, bool> GlobalyAccessable = [];
+    public Dictionary<string, bool> GlobalyAccessable = new();
 
     /// <summary>
     /// name of the server/client, can be change by user

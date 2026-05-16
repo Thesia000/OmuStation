@@ -4,6 +4,7 @@
   name: DishMultistructCoreName
   description: DishMultistructCoreNameDesc
   components:
+  - type: ServerClientLinkInfrastructure
   - type: MultiBlockPart
     structureType: 
     - SignalDishControll
@@ -23,7 +24,6 @@
     - EnergyCapacityProvider
     - Productivity
   - type: SignalSciDish
-  - type: ServerClientLink
   - type: ActivatableUI
     key: enum.DishConsoleUiKey.Key
   - type: UserInterface
