@@ -22831,3 +22831,9 @@ Entries:
       message: Add overalls to the passenger loadout options
   id: 2631
   time: '2026-05-23T20:34:14.0000000+00:00'
+- author: Kenkaitos
+  changes:
+    - type: Fix
+      message: Gave Gemini Hologram role requirement
+  id: 2633
+  time: '2026-05-23T20:38:01.0000000+00:00'
