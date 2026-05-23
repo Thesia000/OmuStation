@@ -306,6 +306,7 @@
     - CameraBoards
     - ServiceTools
     - ServiceBoardsGoob # goob
+    - EntertainmentPack # goob
     # Einstein Engines Packs
     - Translators
   - type: EmagLatheRecipes
