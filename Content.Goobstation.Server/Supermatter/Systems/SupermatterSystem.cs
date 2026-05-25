@@ -67,6 +67,7 @@ using System.Numerics;                    //omu
 using Content.Shared.Radio;            //omu
 using Content.Server.Radio.EntitySystems;    //omu
 using Content.Server.Chat.Managers; // omu
+using Content.Server.Construction.Completions; // omu
 using Content.Shared.Mind; // omu
 using Content.Shared.Humanoid; // omu
 using Robust.Shared.Player; // omu
@@ -678,6 +679,9 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
     private void OnCollideEvent(EntityUid uid, SupermatterComponent sm, ref StartCollideEvent args)
     {
         var target = args.OtherEntity;
+
+        if (args.OurEntity != uid || !args.OtherFixture.Hard)
+            return;
 
         // Stop immune entities from activating the sm.
         if (args.OtherBody.BodyType == BodyType.Static
