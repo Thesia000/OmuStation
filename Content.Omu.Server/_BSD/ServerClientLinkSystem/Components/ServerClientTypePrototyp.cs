@@ -7,7 +7,7 @@ namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
 /// Meant to only have an ID property, as that is the only thing that
 /// gets saved in hashsets.
 /// </summary>
-[Prototype("ServerCleintProto")]
+[Prototype("ServerClientPrototype")]
 public sealed partial class ServerClientPrototype : IPrototype
 {
     [IdDataField, ViewVariables]

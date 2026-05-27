@@ -18,17 +18,13 @@ primary work way:
 */
 using System.Linq;
 
-using Robust.Shared.Collections;
-
 using Robust.Server.GameObjects;
-
-using Content.Shared.Popups;
 
 using Content.Omu.Server._BSD.ServerClientLinkSystem.Components;
 
 using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
-namespace Content.Omu.Server._BSD.ServerClientLink;
+namespace Content.Omu.Server._BSD.ServerClientLinkSystem;
 
 public sealed partial class ServerClientLinkSystem : EntitySystem
 {
