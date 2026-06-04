@@ -6,13 +6,13 @@ namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Components;
 
 [RegisterComponent]
 
-public sealed partial class ServerClientLinkInfrastructureComponent : Component
+public sealed partial class ServerClientLinkInfrastructureExtendedNameComponent : Component
 {
     /// <summary>
     /// Components Present entity dic of connected to stated server
     /// </summary>
     [DataField]
-    public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new();
+    public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new Dictionary<string, HashSet<EntityUid>>();
 
     /// <summary>
     /// Components Present to what servers this client is liked
@@ -24,13 +24,13 @@ public sealed partial class ServerClientLinkInfrastructureComponent : Component
     /// Types for when this acts as a cleint, cant be in ServerTypes
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<ServerClientPrototype>> ClientTypes = new HashSet<ProtoId<ServerClientPrototype>>();
+    public HashSet<ProtoId<ServerClientPrototypePrototype>> ClientTypes = new HashSet<ProtoId<ServerClientPrototypePrototype>>();
 
     /// <summary>
     /// Types for when this acts like a server, cant be in ClientTypes
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<ServerClientPrototype>> ServerTypes = new HashSet<ProtoId<ServerClientPrototype>>();
+    public HashSet<ProtoId<ServerClientPrototypePrototype>> ServerTypes = new HashSet<ProtoId<ServerClientPrototypePrototype>>();
 
     /// <summary>
     /// Allow only server to client links, variable only read for the server, needs to be configured, null defaults into true

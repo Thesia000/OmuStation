@@ -8,7 +8,7 @@ namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
 /// gets saved in hashsets.
 /// </summary>
 [Prototype("ServerClientPrototype")]
-public sealed partial class ServerClientPrototype : IPrototype
+public sealed partial class ServerClientPrototypePrototype : IPrototype
 {
     [IdDataField, ViewVariables]
     public string ID { get; private set; } = string.Empty;
