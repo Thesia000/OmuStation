@@ -12,7 +12,7 @@ using Robust.Shared.Serialization;
 namespace Content.Omu.Client._BSD.ServerClientLink.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ServerClientLinkMenu : FancyWindow
+public sealed partial class IngameServerClientLinkMenu : FancyWindow
 {
     private int _unlinkedServerCount;
     private int _linkedServerCount;
@@ -23,7 +23,7 @@ public sealed partial class ServerClientLinkMenu : FancyWindow
     public event Action<int>? OnServerSelected;
     public event Action<int>? OnServerDeselected;
 
-    public ServerClientLinkMenu()
+    public IngameServerClientLinkMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);

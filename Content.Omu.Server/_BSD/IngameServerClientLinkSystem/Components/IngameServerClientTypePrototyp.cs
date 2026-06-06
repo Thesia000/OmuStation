@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
+namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem.Prototype;
 
 /// <summary>
 /// Prototype representing a struct Types in YAML.
@@ -8,7 +8,7 @@ namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
 /// gets saved in hashsets.
 /// </summary>
 [Prototype("ServerClientPrototype")]
-public sealed partial class ServerClientPrototypePrototype : IPrototype
+public sealed partial class IngameServerClientPrototypePrototype : IPrototype
 {
     [IdDataField, ViewVariables]
     public string ID { get; private set; } = string.Empty;

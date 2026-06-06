@@ -53,6 +53,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
     {
         if (!TryComp<MultiBlockStructureComponent>(uid, out var multistructcomp)) return;//consider making this a proper methode to call
+        if (!multistructcomp.EntityDic.ContainsKey("SignalAntenna")) return;
         EntityUid antennaUid = multistructcomp.EntityDic["SignalAntenna"][0].Id;//gets the first entry
         TransformComponent transcomp = Transform(antennaUid);
         if (transcomp.GridUid == null) return;

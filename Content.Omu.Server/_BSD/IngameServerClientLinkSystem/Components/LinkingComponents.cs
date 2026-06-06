@@ -1,12 +1,11 @@
 using Robust.Shared.Prototypes;
 
-using Content.Omu.Server._BSD.ServerClientLinkSystem.Prototype;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Prototype;
 
-namespace Content.Omu.Server._BSD.ServerClientLinkSystem.Components;
+namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 [RegisterComponent]
-
-public sealed partial class ServerClientLinkInfrastructureExtendedNameComponent : Component
+public sealed partial class IngameServerClientLinkInfrastructureComponent : Component
 {
     /// <summary>
     /// Components Present entity dic of connected to stated server
@@ -23,14 +22,14 @@ public sealed partial class ServerClientLinkInfrastructureExtendedNameComponent 
     /// <summary>
     /// Types for when this acts as a cleint, cant be in ServerTypes
     /// </summary>
-    [DataField]
-    public HashSet<ProtoId<ServerClientPrototypePrototype>> ClientTypes = new HashSet<ProtoId<ServerClientPrototypePrototype>>();
+    //[DataField]
+    public HashSet<ProtoId<IngameServerClientPrototypePrototype>> ClientTypes = new HashSet<ProtoId<IngameServerClientPrototypePrototype>>();
 
     /// <summary>
     /// Types for when this acts like a server, cant be in ClientTypes
     /// </summary>
-    [DataField]
-    public HashSet<ProtoId<ServerClientPrototypePrototype>> ServerTypes = new HashSet<ProtoId<ServerClientPrototypePrototype>>();
+    //[DataField]
+    public HashSet<ProtoId<IngameServerClientPrototypePrototype>> ServerTypes = new HashSet<ProtoId<IngameServerClientPrototypePrototype>>();
 
     /// <summary>
     /// Allow only server to client links, variable only read for the server, needs to be configured, null defaults into true

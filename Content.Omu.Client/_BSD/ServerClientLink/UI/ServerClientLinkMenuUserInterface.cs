@@ -9,12 +9,12 @@ using Content.Omu.Client._BSD.ServerClientLink.UI;
 
 namespace Content.Omu.Client._BSD.ServerClientLink.UI
 {
-    public sealed class ServerClientLinkBoundUserInterface : BoundUserInterface
+    public sealed class IngameServerClientLinkBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private ServerClientLinkMenu? _menu;
+        private IngameServerClientLinkMenu? _menu;
 
-        public ServerClientLinkBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+        public IngameServerClientLinkBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             SendMessage(new RequestServerListUpdateMessage("ERROR"));
             SendMessage(new RequestClientListUpdateMessage("ERROR"));
@@ -23,7 +23,7 @@ namespace Content.Omu.Client._BSD.ServerClientLink.UI
         protected override void Open()
         {
             base.Open();
-            _menu = this.CreateWindow<ServerClientLinkMenu>();
+            _menu = this.CreateWindow<IngameServerClientLinkMenu>();
             _menu.OnServerSelected += SelectServer;
             _menu.OnServerDeselected += DeselectServer;
         }
