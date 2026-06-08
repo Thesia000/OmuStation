@@ -592,6 +592,7 @@
     - Viral
     - Bacterial
     - Parasite
+  - type: ObraDinnBody # Goobstation
   # </Goobstation>
 
 - type: entity
