@@ -20,12 +20,6 @@ public sealed class DishConsoleBoundUserInterfaceState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class DishConsolePrintDiskMessage : BoundUserInterfaceMessage
-{
-    
-}
-
-[Serializable, NetSerializable]
 public sealed class DishConsoleSetRequestedAngleMessage : BoundUserInterfaceMessage
 {
     public float RequestedAngle;

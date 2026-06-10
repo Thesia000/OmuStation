@@ -6,14 +6,8 @@
     <PanelContainer StyleClasses="BackgroundDark">
         <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">
             <SpinBox Name="Name" HorizontalExpand="True"/>
-            <ItemList Name="Unselected"
-                SelectMode="Single">
-                <!-- Servers are added here by code -->
-            </ItemList>
-            <ItemList Name="Selected"
-                SelectMode="Single">
-                <!-- Servers are added here by code -->
-            </ItemList>
+            <Label Text="{Loc 'dish-control-angle'}"/>
+            <LineEdit Name="PanelRotation" HorizontalExpand="True"/><Label Text="{Loc 'dish-control-window-degrees'}"/>
         </BoxContainer>
     </PanelContainer>
 </ui:FancyWindow>
