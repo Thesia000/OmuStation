@@ -1,4 +1,5 @@
 using Content.Server._Obelisk.Species.Components;
+using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Temperature.Components;
