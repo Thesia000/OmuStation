@@ -62,7 +62,6 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.Omu.Common.CCVar;
-using Content.Goobstation.Common.CCVar;
 using Robust.Shared;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Configuration;
