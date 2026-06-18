@@ -615,6 +615,7 @@
           - Yowie # Goobstation - Yowie
           - XenobioSlime # Goobstation - XenobioSlime
           - Xeltia # Omu Fuck you as well
+          - Hydrakin
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -631,6 +632,7 @@
           - Yowie # Goobstation - Yowie
           - XenobioSlime # Goobstation - XenobioSlime
           - Xelthia # Fuck you as well
+          - Hydrakin
           inverted: true
       - !type:HealthChange
         conditions:
@@ -642,6 +644,7 @@
           - Yowie # Goobstation - Yowie
           - XenobioSlime # Goobstation - XenobioSlime
           - Xelthia # Fuck you as well
+          - Hydrakin
           inverted: true
         damage:
           types:
@@ -668,7 +671,7 @@
       - !type:AdjustReagent # Goobstation - XenobioSlime
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - XenobioSlime
-          type: [ XenobioSlime ]
+          type: [ XenobioSlime, Hydrakin ]
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent

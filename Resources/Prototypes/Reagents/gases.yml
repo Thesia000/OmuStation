@@ -99,8 +99,13 @@
       - !type:Oxygenate
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Human, Animal, Rat, Plant,
-                  Feroxi]  # DeltaV - Feroxi Still need to breathe
+          type:
+          - Human
+          - Animal
+          - Rat
+          - Plant
+          - Feroxi # DeltaV - Feroxi Still need to breathe
+          - Hydrakin # guh
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         conditions:
@@ -240,7 +245,7 @@
         factor: 4
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Plasmaman ]
+          type: [ Plasmaman, Hydrakin ] # ass
       - !type:ModifyLungGas
         conditions:
         - !type:MetabolizerTypeCondition
@@ -414,6 +419,7 @@
           type:
           - Plant
           - Cybernetic # Shitmed - Cybernetic Organs
+          - Hydrakin #argh
           inverted: true
         factor: -4
       # We need a metabolism effect on reagent removal
@@ -513,6 +519,7 @@
           type:
           - Slime
           - Cybernetic # Shitmed - Cybernetic Organs
+          - Hydrakin # agh
           inverted: true
         - !type:BloodReagentThresholdCondition #  Assmos - /tg/ gases
           reagent: NitrosylPlasmide
@@ -610,7 +617,7 @@
 # Goobstation start
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [ Yowie ]
+          type: [ Yowie, Hydrakin ]
         damage:
           groups:
             Brute: -1
