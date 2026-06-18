@@ -135,7 +135,7 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Slime
-  - type: PassiveDamage # Around 8 damage a minute healed # Omu start, add back slime regen
+  - type: PassiveDamage # Around 8 damage a minute healed
     allowedStates:
     - Alive
     damageCap: 65
@@ -144,7 +144,7 @@
         Heat: -0.14
       groups:
         Brute: -0.14
-    healAllParts: true # Omu end
+    healAllParts: true # Omu
   #  - type: DamageVisuals
   #    damageOverlayGroups:
   #      Brute:
