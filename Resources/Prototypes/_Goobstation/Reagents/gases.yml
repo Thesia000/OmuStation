@@ -415,6 +415,9 @@
         speedModifier: 1.6
       - !type:AddReagentToBlood
         conditions:
+        - !type:MetabolizerTypeCondition # Fuck you
+          type: [Hydrakin]
+          inverted: true        
         - !type:ReagentCondition
           reagent: Nitrium
           min: 6
@@ -430,6 +433,9 @@
         time: 8
       - !type:HealthChange
         conditions:
+        - !type:MetabolizerTypeCondition # Fuck you
+          type: [Hydrakin]
+          inverted: true
         - !type:ReagentCondition
           reagent: Nitrium
           min: 10
