@@ -206,10 +206,6 @@
             Poison: 1.5
     Gas:
       effects:
-      - !type:Oxygenate # Mono - Hydrakin
-        conditions:
-        - !type:MetabolizerTypeCondition # Fuck you
-          type: [Hydrakin]
       - !type:HealthChange
 # Goobstation start
         conditions:
