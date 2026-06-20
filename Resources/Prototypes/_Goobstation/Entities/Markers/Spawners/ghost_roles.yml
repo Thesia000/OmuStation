@@ -20,6 +20,10 @@
     - MindRoleGhostRoleSoloAntagonistBorgGoob
     raffle:
       settings: default
+    requirements:
+    - !type:RoleTimeRequirement
+      role: JobBorg
+      time: 3600 #1 hour
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -42,6 +46,10 @@
     - MindRoleGhostRoleSoloAntagonistPassengerGoob
     raffle:
       settings: default
+    requirements:
+    - !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 36000 #10 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -64,6 +72,10 @@
     - MindRoleGhostRoleSoloAntagonistClownGoob
     raffle:
       settings: default
+    requirements:
+    - !type:RoleTimeRequirement
+      role: JobClown
+      time: 3600 #1 hour
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -85,6 +97,10 @@
     - MindRoleGhostRoleFreeAgentEngineeringGoob
     raffle:
       settings: default
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 54000 #15 hrs
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -106,6 +122,10 @@
     - MindRoleGhostRoleFreeAgentSecurityGoob
     raffle:
       settings: default
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -129,6 +149,10 @@
     - MindRoleGhostRoleSoloAntagonistMimeGoob
     raffle:
       settings: default
+    requirements:
+    - !type:RoleTimeRequirement
+      role: JobMime
+      time: 3600 #1 hour
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -151,6 +175,10 @@
     - MindRoleGhostRoleFreeAgentSecurityGoob
     raffle:
       settings: default
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -173,6 +201,10 @@
     - MindRoleGhostRoleFreeAgentSecurityGoob
     raffle:
       settings: default
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -195,6 +227,10 @@
     - MindRoleGhostRoleFreeAgentSecurityGoob # todo marty
     raffle:
       settings: default
+    requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
