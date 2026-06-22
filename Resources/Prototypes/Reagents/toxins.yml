@@ -662,16 +662,18 @@
           type: [ Animal ]
         reagent: Protein
         amount: 0.5
-      - !type:AdjustReagent # Omu, letting xelthia eat more things
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Xelthia ]
-        reagent: Protein
-        amount: 0.5
       - !type:AdjustReagent # Goobstation - XenobioSlime
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - XenobioSlime
-          type: [ XenobioSlime, Hydrakin ]
+          type: [ XenobioSlime ]
+        reagent: Protein
+        amount: 0.5
+      - !type:AdjustReagent # Mono - Hydrakin
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type:
+          - Hydrakin # Go fuck yourself
+          - Xelthia # Omu
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
