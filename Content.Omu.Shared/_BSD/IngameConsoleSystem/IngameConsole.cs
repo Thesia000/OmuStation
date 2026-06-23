@@ -1,0 +1,1 @@
+namespace Content.Omu.Shared.IngameConsoleSystem;
