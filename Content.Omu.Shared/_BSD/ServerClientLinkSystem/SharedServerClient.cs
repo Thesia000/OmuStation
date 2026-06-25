@@ -24,7 +24,6 @@ public sealed class ServerClientSelectionBoundUserInterfaceState : BoundUserInte
         AvailableServerCount = availableServerCount;
         AvailableServerNames = availableServerNames;
         AvailableServerIds = availableServerIds;
-        
         ConnectedServerCount = connectedServerCount;
         ConnectedServerNames = connectedServerNames;
         ConnectedServerIds = connectedServerIds;
@@ -53,7 +52,7 @@ public sealed class RequestClientListUpdateMessage : BoundUserInterfaceMessage
 [Serializable, NetSerializable]
 public sealed class ServerClientMenueOpenMessage : BoundUserInterfaceMessage
 {
-    
+
 }
 
 /// <summary>
@@ -78,5 +77,5 @@ public sealed class ServerClientLinkServerDiscconectMessage : BoundUserInterface
     public ServerClientLinkServerDiscconectMessage(int serverId)
     {
         ServerId = serverId;
-   }
+    }
 }
