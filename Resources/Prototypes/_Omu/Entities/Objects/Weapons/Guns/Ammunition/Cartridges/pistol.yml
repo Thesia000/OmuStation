@@ -12,3 +12,29 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#43c4f7"
+
+- type: entity
+  id: CartridgeMagnumCompound213
+  name: shell (.45 REDACTED)
+  parent: [ BaseCartridgeCaselessRifle , BaseCentcommContraband ]
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#00FF00"
+  - type: CartridgeAmmo
+    proto: BulletMagnumCompund213
+  - type: ChemicalAmmo
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        reagents:
+        - ReagentId: IACompound213 #OMU
+          Quantity: 10
+        - ReagentId: Impedrezene
+          Quantity: 5
+  - type: SolutionTransfer
+    maxTransferAmount: 15

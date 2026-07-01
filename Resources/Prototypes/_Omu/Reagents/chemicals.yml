@@ -38,3 +38,19 @@
         conditions:
         - !type:OrganType
           type: Vox
+
+- type: reagent
+  id: IACompound213
+  name: reagent-name-IACompound213
+  group: Medicine
+  desc: reagent-desc-IACompound213
+  physicalDesc: reagent-physical-desc-IACompound213
+  color: "#58DCA8"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.25
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 20
