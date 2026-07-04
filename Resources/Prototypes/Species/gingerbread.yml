@@ -27,7 +27,7 @@
     HeadSide: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
-    Chest: MobGingerbreadTorso
+    Chest: MobGingerbreadChest
     Groin: MobGingerbreadGroin
     Eyes: MobGingerbreadEyes
     LArm: MobGingerbreadLArm

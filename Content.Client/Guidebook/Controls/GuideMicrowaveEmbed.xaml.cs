@@ -37,6 +37,8 @@ public sealed partial class GuideMicrowaveEmbed : PanelContainer, IDocumentTag, 
 
     public IPrototype? RepresentedPrototype { get; private set; }
 
+    public IPrototype? RepresentedPrototype { get; private set; }
+
     public GuideMicrowaveEmbed()
     {
         RobustXamlLoader.Load(this);

@@ -112,8 +112,6 @@ using Content.Goobstation.Maths.FixedPoint;
 using Content.Goobstation.Shared.Mind.Components;
 using Content.Server.Maps;
 using Content.Shared.Maps;
-
-// Omu Station - End of Round Silicon Summary
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Roles;

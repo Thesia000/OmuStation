@@ -1103,8 +1103,9 @@
         Bloodloss:
           -0.8
   - type: Temperature
-    heatDamageThreshold: 1000 # Omu, make smile a bit more tanky.
-    coldDamageThreshold: -200 # Omu, make smile spaceproof.
+  - type: TemperatureDamage
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
   - type: Damageable # Omu start
     damageContainer: Biological
     damageModifierSet: Smile

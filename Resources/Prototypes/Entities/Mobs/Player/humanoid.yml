@@ -589,6 +589,36 @@
   - type: RandomHumanoidSpawner
     settings: ERTSecurityArmedGrenade
 
+- type: entity
+  id: RandomHumanoidSpawnerERTSecurityArmedRifle
+  parent: RandomHumanoidSpawnerERTSecurityEVA
+  name: ERT security rifleman
+  suffix: ERTRole, Armed, EVA
+  components:
+  - type: RandomHumanoidSpawner
+    settings: ERTSecurityArmedRifle
+
+- type: randomHumanoidSettings
+  id: ERTSecurityArmedRifle
+  parent: ERTSecurityEVA
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryLast
+    nameFormat: name-format-ert-rifle
+  - type: Loadout
+    prototypes: [ ERTSecurityGearArmedRifle ]
+    roleLoadout: [ RoleSurvivalMilitaryDouble ]
+
+- type: entity
+  parent: RandomHumanoidSpawnerERTSecurityEVA
+  id: RandomHumanoidSpawnerERTSecurityArmedGrenade
+  name: ERT security grenadier
+  suffix: ERTRole, Armed, EVA
+  components:
+  - type: RandomHumanoidSpawner
+    settings: ERTSecurityArmedGrenade
+
 - type: randomHumanoidSettings
   parent: ERTSecurityEVA
   id: ERTSecurityArmedGrenade
@@ -698,6 +728,26 @@
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
     - type: AutoImplant
       implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant ] # Omu - Removed StypticStimulatorImplant
+
+- type: entity
+  parent: RandomHumanoidSpawnerERTMedicalEVA
+  id: RandomHumanoidSpawnerERTMedicalArmed
+  suffix: ERTRole, Armed, EVA
+  components:
+  - type: RandomHumanoidSpawner
+    settings: ERTMedicalArmed
+
+- type: randomHumanoidSettings
+  parent: ERTMedicalEVA
+  id: ERTMedicalArmed
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryLast
+    nameFormat: name-format-ert-corpsman
+  - type: Loadout
+    prototypes: [ ERTMedicalGearArmed ]
+    roleLoadout: [ RoleSurvivalMilitaryDouble ]
 
 - type: entity
   parent: RandomHumanoidSpawnerERTMedicalEVA

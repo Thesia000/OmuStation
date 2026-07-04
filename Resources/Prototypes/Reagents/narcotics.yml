@@ -64,11 +64,12 @@
   meltingPoint: 170.0
   metabolisms:
     Poison:
+      # Main effects
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [Yowie]
         damage:
           groups:
             Brute: -1
@@ -79,23 +80,23 @@
             Radiation: -0.5
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
-            Poison: 0.75
+            Poison: 2 # Goobstation
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: Desoxyephedrine
-          min: 30
+          min: 16
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
           type: [Yowie]
           inverted: true
         damage:
           types:
-            Poison: 2 # this is added to the base damage of the meth.
+            Poison: 2.75 # this is added to the base damage of the meth. // Goobstation +0.75  damage
             Asphyxiation: 2
     Narcotic:
       effects:
@@ -110,7 +111,7 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
-          inverted: true
+          inverted: false
         walkSpeedModifier: 1.2
         sprintSpeedModifier: 1.2
       - !type:GenericStatusEffect
@@ -118,12 +119,21 @@
         component: StutteringAccent
       - !type:Jitter
       - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
+        effectProto: StatusEffectDesoxyStamina # You are on meth. You keep going.
         time: 3
-        type: Remove
-      - !type:ModifyKnockdown
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
         time: 3
-        type: Remove
+      # Side effects
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPainNumbness
+        time: 2
+      # Interactions
       - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -141,11 +151,12 @@
         locale: reagent-effect-guidebook-remove-delayed-knockdown
     Medicine:
       effects:
+      # Side effects
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition
           reagent: Desoxyephedrine
-          min: 20
+          min: 5
 
 - type: reagent
   id: Ephedrine
@@ -161,10 +172,11 @@
   metabolisms:
     Narcotic:
       effects:
+      # Main effects
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -174,20 +186,37 @@
             Shock: -0.5
             Cold: -0.5
             Radiation: -0.5
-      - !type:MovespeedModifier
-        conditions: #imp
-        - !type:OrganType #imp
-          type: Allulalo
-          shouldHave: false
-        walkSpeedModifier: 1.25
-        sprintSpeedModifier: 1.25
-      - !type:MovespeedModifier #imp
+      - !type:MovementSpeedModifier
+        conditions: # Omu
+        - !type:MetabolizerTypeCondition
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          inverted: true
+        walkSpeedModifier: 1.15
+        sprintSpeedModifier: 1.15
+      # Omustation Start
+      - !type:MovementSpeedModifier
         conditions:
-        - !type:OrganType #imp
-          type: Allulalo
-          shouldHave: true
-        walkSpeedModifier: 1.12
-        sprintSpeedModifier: 1.12
+        - !type:MetabolizerTypeCondition
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          inverted: false
+        walkSpeedModifier: 1.05 # I don't actually know what the fuck is up with them so im making up these fucking numbers - upstreamer
+        sprintSpeedModifier: 1.05
+      # Omustation End
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
+        time: 1
+        type: Remove
+      - !type:ModifyKnockdown
+        time: 1
+        type: Remove
+        # Side effects
+      - !type:Jitter
+      - !type:PopupMessage
+        visualType: Medium
+        messages: [ "ephedrine-effect-tight-pain", "ephedrine-effect-heart-pounds" ]
+        type: Local
+        probability: 0.05
+        # OD
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -198,16 +227,9 @@
           inverted: true
         damage:
           types:
-            Poison: 2 # this is added to the base damage of the meth.
+            Poison: 2
             Asphyxiation: 2
-      - !type:Jitter
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
-        time: 1
-        type: Remove
-      - !type:ModifyKnockdown
-        time: 1
-        type: Remove
+      # Interactions
       - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -233,11 +255,12 @@
         time: 10 # it accumulated 1.2*quantity and then exists for 30 seconds.
     Medicine:
       effects:
+      # Side effects
       - !type:ResetNarcolepsy
         conditions:
         - !type:ReagentCondition
           reagent: Ephedrine
-          min: 30
+          min: 15
 
 - type: reagent
   id: Stimulants
@@ -252,12 +275,12 @@
   meltingPoint: 170.0
   metabolisms:
     Narcotic:
-      metabolismRate: 0.25 # Goobstation edit
       effects:
+      # Main effects
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -267,27 +290,30 @@
             Shock: -0.5
             Cold: -0.5
             Radiation: -0.5
-      - !type:MovespeedModifier
-        conditions: #imp
-        - !type:OrganType #imp
-          type: Allulalo
-          shouldHave: false
-        walkSpeedModifier: 1.3
-        sprintSpeedModifier: 1.3
-      - !type:MovespeedModifier #imp
+
+      - !type:MovementSpeedModifier
         conditions:
-        - !type:OrganType #imp
-          type: Allulalo
-          shouldHave: true
-        walkSpeedModifier: 1.2
-        sprintSpeedModifier: 1.2
+        - !type:MetabolizerTypeCondition
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          inverted: true
+        walkSpeedModifier: 1.25
+        sprintSpeedModifier: 1.25
+      # Omustation Start
+      - !type:MovementSpeedModifier
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          inverted: false
+        walkSpeedModifier: 1.15
+        sprintSpeedModifier: 1.15
+      # Omustation End
       - !type:HealthChange
         conditions:
           - !type:ReagentCondition
             reagent: Stimulants
             min: 20 # Goob edit
           - !type:MetabolizerTypeCondition # Goobstation - Yowie
-            type: [Yowie]
+            type: [ Yowie ]
             inverted: true
         damage:
           types:
@@ -300,20 +326,35 @@
         reagent: ChloralHydrate
         amount: -10
       - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
+        effectProto: StatusEffectStimulantsStamina # You are on meth. You keep going.
         time: 3
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
+        time: 3.5
         type: Remove
       - !type:ModifyKnockdown
-        time: 3
+        time: 3.5
         type: Remove
-      - !type:GenericStatusEffect
-        key: StaminaModifier
-        component: StaminaModifier
-        time: 3
       - !type:ModifyStatusEffect
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Remove
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 3
+      # Side effects
+      - !type:Jitter
+      # OD
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 50
+        damage:
+          types:
+            Poison: 1
+      # Interactions
       - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -322,6 +363,13 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: ChloralHydrate
+          min: 1
+        reagent: ChloralHydrate
+        amount: -10
       - !type:GenericStatusEffect # goob edit
         key: Adrenaline
         component: IgnoreSlowOnDamage
@@ -336,21 +384,30 @@
           amount: 1.2
           time: 30 # it accumulated 1.2*quantity and then exists for 30 seconds.
     Medicine:
-      metabolismRate: 0.25 # Goobstation edit
       effects:
-        - !type:ResetNarcolepsy
-        - !type:SatiateHunger
-          factor: 1
-        - !type:SatiateThirst
-          factor: 1
-        - !type:HealthChange
-          conditions:
-          - !type:TotalDamageCondition
-            min: 70 # only heals when you're more dead than alive
-          damage: # heals at the same rate as tricordrazine, doesn't heal poison because if you OD'd I'm not giving you a safety net
-            groups:
-              Burn: -1
-              Brute: -1
+      # Main effects
+      - !type:ModifyBleed
+        amount: -1.5
+      - !type:EvenHealthChange
+        conditions:
+        - !type:TotalDamageCondition
+          min: 70 # only heals when you're more dead than alive
+        damage: # Doesn't heal poison because if you OD'd I'm not giving you a safety net
+          Burn: -0.5
+          Brute: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:TotalDamageCondition
+          min: 95 # Just to bring you back from the brink of death
+        damage:
+          types:
+            Asphyxiation: -2
+      # Side effects
+      - !type:ResetNarcolepsy
+      - !type:SatiateHunger
+        factor: 1
+      - !type:SatiateThirst
+        factor: 1
 
 - type: reagent
   id: THC
@@ -371,8 +428,8 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
         damage:
           groups:
             Brute: -1
@@ -402,8 +459,8 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
         damage:
           groups:
             Brute: -0.2
@@ -429,7 +486,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -439,13 +496,13 @@
             Shock: -0.5
             Cold: -0.5
             Radiation: -0.5
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -472,8 +529,8 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
         damage:
           groups:
             Brute: -1
@@ -501,7 +558,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -539,7 +596,7 @@
           reagent: Nocturine
           min: 8
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         effectProto: StatusEffectForcedSleeping
         time: 6
@@ -560,9 +617,9 @@
       effects:
       - !type:GenericStatusEffect
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         key: Muted
         component: Muted
         type: Add
@@ -651,7 +708,8 @@
         - norepinephricacid-effect-darkness
         - norepinephricacid-effect-blindness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: TearGas
           min: 5
       - !type:Emote
         emote: Scream
@@ -693,7 +751,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           groups:
@@ -787,5 +845,6 @@
       effects:
       - !type:ResetNarcolepsy
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: NitrosylPlasmide
           min: 1

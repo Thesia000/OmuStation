@@ -217,7 +217,7 @@
             sprite: _Floofstation/Mobs/Species/Resomi/displacement.rsi
             state: belt
   - type: Bloodstream # Goobstation - lore stuff
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: ResomiBlood # Starlight # todo marty unfuck this bullshit
         Quantity: 200

@@ -398,16 +398,13 @@ entity-effect-guidebook-ignite =
         *[other] ignite
     } the metabolizer
 
-<<<<<<<< HEAD:Resources/Locale/en-US/_Mono/guidebook/chemistry/effects.ftl
-# Omu, add "if it is not hostile" to make-sentient
-reagent-effect-guidebook-make-sentient =
-========
 entity-effect-guidebook-make-sentient =
->>>>>>>> fd8f437f88e (Entity effects ECS refactor (#40580)):Resources/Locale/en-US/guidebook/entity-effects/effects.ftl
     { $chance ->
         [1] Makes
         *[other] make
     } the metabolizer sentient if it is not hostile
+
+# Omu edit ^ add: "if it is not hostile"
 
 entity-effect-guidebook-make-polymorph =
     { $chance ->

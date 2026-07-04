@@ -251,6 +251,12 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!CanTakeVolume(entity, inVolume, entity.Comp))
             return false;
 
+        var inVolume = materials.Values.Sum();
+        var stored = GetStoredMaterials((entity, entity.Comp), localOnly);
+
+        if (!CanTakeVolume(entity, inVolume, entity.Comp))
+            return false;
+
         foreach (var (material, amount) in materials)
         {
             if (!IsMaterialWhitelisted(entity, material))

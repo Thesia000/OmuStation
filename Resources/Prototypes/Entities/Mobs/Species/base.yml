@@ -387,7 +387,6 @@
     - Muted
     - TemporaryBlindness
     - Pacified
-    - StaminaModifier
     - Flashed
     - RadiationProtection
     - Vulgarity # Goobstation - add Profanol
@@ -498,6 +497,7 @@
     - DoorBumpOpener
     - AnomalyHost
   - type: Targeting # Shitmed Change
+  - type: CosmicCenserTarget # DeltaV - Cosmic Cult
   - type: CanEscapeInventory # GoobStation - Escape being picked up by players
   - type: Consciousness
     cap: 190
@@ -544,10 +544,11 @@
   - type: Blindable
   # Other
   - type: Temperature
-    heatDamageThreshold: 325
-    coldDamageThreshold: 260
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureDamage
+    heatDamageThreshold: 325
+    coldDamageThreshold: 260
     coldDamage:
       types:
         Cold: 0.1 #per second, scales with temperature & other constants

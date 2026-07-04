@@ -13,6 +13,8 @@ using Content.Server.Body.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Temperature.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
@@ -62,6 +64,14 @@ public sealed class ThermalRegulatorSystem : EntitySystem
     {
         if (!Resolve(ent, ref ent.Comp2, logMissing: false))
             return;
+
+        // mono begin
+        if (ent.Comp1.ProcessWhileDead == false && TryComp<MobStateComponent>(ent, out var mobComp1) && mobComp1.CurrentState == MobState.Dead)
+            return;
+
+        if (ent.Comp1.ProcessWhileCrit == false && TryComp<MobStateComponent>(ent, out var mobComp2) && mobComp2.CurrentState == MobState.Critical)
+            return;
+        // mono end
 
         // TODO: Why do we have two datafields for this if they are only ever used once here?
         // mono begin

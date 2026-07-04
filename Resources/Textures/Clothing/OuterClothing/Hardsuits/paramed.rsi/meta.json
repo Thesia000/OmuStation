@@ -48,6 +48,10 @@
       {
           "name": "equipped-OUTERCLOTHING-dog",
           "directions": 4
-      }
+      },
+    {
+      "name": "equipped-OUTERCLOTHING-hydrakin",
+      "directions": 4
+    }
   ]
 }

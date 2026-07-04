@@ -20,7 +20,7 @@
         messages: [ "xeno-extract-reaction" ]
       - !type:PlaySoundEffect
         sound: /Audio/Effects/Chemistry/bubbles.ogg
-      - !type:CreateEntityReactionEffect
+      - !type:SpawnEntity
         entity: SheetPlastic10
         number: 3
         shouldScale: false
@@ -33,7 +33,7 @@
         messages: [ "xeno-extract-reaction" ]
       - !type:PlaySoundEffect
         sound: /Audio/Effects/Chemistry/bubbles.ogg
-      - !type:CreateEntityReactionEffect
+      - !type:SpawnEntity
         entity: SheetPlasma1
         number: 3
         shouldScale: false
@@ -48,7 +48,7 @@
         sound: /Audio/Effects/Chemistry/bubbles.ogg
       - !type:CreateGas
         gas: Plasma
-        multiplier: 55
+        moles: 55
   - type: Tag
     tags:
     - XenobiologyDarkPurpleExtract

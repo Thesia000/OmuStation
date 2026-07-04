@@ -52,7 +52,7 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobMothTorso
+    Chest: MobMothChest
     Groin: MobMothGroin # Goob
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -88,10 +88,10 @@
     Wings:
       points: 3 # BYRD - MORE MOTHMIZATION, MORE WINGS SO YOU CAN STACK THEM LIKE ANTENNAE FOR FANCIER MOFFS
       required: true
-      defaultMarkings: [ MothWingsDefault ]      
+      defaultMarkings: [ MothWingsDefault ]
     #Omu End - Moving moth wings to Wings body part
     Tail:
-      points: 1 
+      points: 1
       required: false
 #      defaultMarkings: [ MothWingsDefault ]  // Omu - Moving moth wings to Wings body part
     Snout:

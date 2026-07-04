@@ -171,3 +171,17 @@
     proto: SeniorCargo
   equipment:
     id: SeniorCourierPDA
+
+# ID
+- type: loadout
+  id: CargoTechnicianPDA
+  equipment:
+    id: CargoPDA
+
+- type: loadout
+  id: SeniorCourierPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorCargo
+  equipment:
+    id: SeniorCourierPDA

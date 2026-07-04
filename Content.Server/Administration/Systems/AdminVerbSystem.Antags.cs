@@ -82,8 +82,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server._Goobstation.Wizard.Components;
-using Content.Server._DV.CosmicCult.Components; // DeltaV
-using Content.Server._DV.GameTicking.Rules.Components; // DeltaV
+using Content.Server._DV.CosmicCult.Components;
+using Content.Server._DV.GameTicking.Rules.Components;
 using Content.Server.Administration.Commands;
 using Content.Server.Antag;
 using Content.Server.GameTicking;
@@ -99,6 +99,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Roles.Components;
 using Content.Shared.Roles.Components;
 using Content.Server._Harmony.GameTicking.Rules.Components;
 using Content.Server._Starlight.GameTicking.Rules.Components; //Starlight
@@ -124,6 +125,7 @@ public sealed partial class AdminVerbSystem
     private static readonly ProtoId<StartingGearPrototype> PirateGearId = "PirateGear";
     private static readonly EntProtoId DefaultConspiratorRule = "Conspirators"; // Harmony
 	private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation"; //Starlight
+
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)

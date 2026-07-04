@@ -59,7 +59,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -68,7 +68,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -99,9 +99,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Heat: 2
@@ -109,8 +109,8 @@
             Caustic: 0.5 # based off napalm being an irritant
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
         damage:
           types:
             Heat: 2
@@ -144,7 +144,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:
@@ -180,9 +180,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goobstation - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Heat: 2
@@ -191,7 +191,7 @@
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
-          type: [Yowie]
+          type: [ Yowie ]
           inverted: true
         damage:
           types:

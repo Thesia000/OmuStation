@@ -1,4 +1,6 @@
-﻿using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
 
@@ -27,6 +29,7 @@ public sealed partial class CauseZombieInfectionEntityEffectsSystem : EntityEffe
 /// <inheritdoc cref="EntityEffectSystem{T, TEffect}"/>
 public sealed partial class CureZombieInfectionEntityEffectsSystem : EntityEffectSystem<MobStateComponent, CureZombieInfection>
 {
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     // MobState because you have to die to become a zombie...
     protected override void Effect(Entity<MobStateComponent> entity, ref EntityEffectEvent<CureZombieInfection> args)
     {

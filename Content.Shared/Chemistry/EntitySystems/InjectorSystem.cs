@@ -21,7 +21,7 @@ using Content.Shared.Weapons.Melee.Events;
 using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Content.Shared.Chemistry.EntitySystems.Hypospray; // Goob
+using Content.Shared.Chemistry.EntitySystems.Hypospray;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 

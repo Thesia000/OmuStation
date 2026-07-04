@@ -24,6 +24,15 @@
   - Unsexed
   - Male
   - Female
+  # begin Goobstation: port EE height/width sliders
+  # resomi sprites look very wrong when too big or too wide
+  minHeight: 0.80
+  defaultHeight: 0.90
+  maxHeight: 1
+  minWidth: 0.85
+  defaultWidth: 1
+  maxWidth: 1
+  # end Goobstation: port EE height/width sliders
 
 - type: speciesBaseSprites
   id: MobResomiSprites
@@ -34,7 +43,7 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
-    Chest: MobResomiTorso
+    Chest: MobResomiChest
     Groin: MobResomiGroin
     Eyes: MobResomiEyes
     LArm: MobResomiLArm
@@ -127,22 +136,22 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobResomiTorso
+  id: MobResomiChest
   baseSprite:
     sprite: _Floofstation/Mobs/Species/Resomi/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobResomiTorsoMale
+  id: MobResomiChestMale
   baseSprite:
     sprite: _Floofstation/Mobs/Species/Resomi/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobResomiTorsoFemale
+  id: MobResomiChestFemale
   baseSprite:
     sprite: _Floofstation/Mobs/Species/Resomi/parts.rsi
-    state: torso_f
+    state: chest_f
 
 - type: humanoidBaseSprite
   id: MobResomiGroin

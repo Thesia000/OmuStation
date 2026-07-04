@@ -42,7 +42,7 @@
     HeadSide: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobDionaTorso
+    Chest: MobDionaChest
     Groin: MobDionaGroin
     Eyes: MobDionaEyes
     LArm: MobDionaLArm

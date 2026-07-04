@@ -70,6 +70,7 @@ using Content.Server.Polymorph.Systems;
 using Content.Shared._Shitcode.Roles;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Roles.Components;
+using Content.Shared.Temperature.Components;
 
 namespace Content.Server.Heretic.EntitySystems;
 

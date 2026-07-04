@@ -27,7 +27,7 @@ public sealed class StationPowerTests
         "Amber",
         "Bagel",
         "Box",
-        "Cluster",
+        "Elkridge",
         "Fland",
         //"Loop", // Omu, not in rotation
         "Marathon",

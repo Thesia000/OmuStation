@@ -45,6 +45,11 @@ public sealed partial class ThievingSystem : EntitySystem
             _alertsSystem.ShowAlert(entity.Owner, entity.Comp.StealthyAlertProtoId);
     }
 
+    private void OnCompRemoved(Entity<ThievingComponent> entity, ref ComponentRemove args)
+    {
+        _alertsSystem.ClearAlert(entity.Owner, entity.Comp.StealthyAlertProtoId);
+    }
+
     private void OnToggleStealthy(Entity<ThievingComponent> ent, ref ToggleThievingEvent args)
     {
         if (args.Handled)

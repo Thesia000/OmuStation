@@ -29,7 +29,7 @@
   naming: LastFirst
   # begin Goobstation: port EE height/width sliders
   sizeRatio: 1.1 # i don't know WHY, but disproportionate rodentia always look weird.
-  minHeight: 0.75
+  minHeight: 0.8
   defaultHeight: 0.80
   maxHeight: 1.15
   minWidth: 0.80
@@ -46,7 +46,7 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
-    Chest: MobRodentiaTorso
+    Chest: MobRodentiaChest
     Groin: MobRodentiaGroin
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -137,19 +137,19 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobRodentiaTorso
-  baseSprite:
-    sprite: _DV/Mobs/Species/Rodentia/parts.rsi
-    state: troso_m
-
-- type: humanoidBaseSprite
-  id: MobRodentiaTorsoMale
+  id: MobRodentiaChest
   baseSprite:
     sprite: _DV/Mobs/Species/Rodentia/parts.rsi
     state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobRodentiaTorsoFemale
+  id: MobRodentiaChestMale
+  baseSprite:
+    sprite: _DV/Mobs/Species/Rodentia/parts.rsi
+    state: chest_m
+
+- type: humanoidBaseSprite
+  id: MobRodentiaChestFemale
   baseSprite:
     sprite: _DV/Mobs/Species/Rodentia/parts.rsi
     state: chest_f

@@ -168,13 +168,13 @@
     speedModifierThresholds:
       200: 1
   - type: Bloodstream
-    bloodMaxVolume: 300
-    bloodReagents:
+    bloodReferenceSolution:
       reagents:
       - ReagentId: Sulfur
-        Quantity: 1
+        Quantity: 300
     bleedReductionAmount: 5
   - type: Temperature
+  - type: TemperatureDamage
     coldDamage:
       types:
         Cold: 0

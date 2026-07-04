@@ -53,7 +53,7 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobHumanTorso
+    Chest: MobHumanChest
     Groin: MobHumanGroin
     Eyes: MobHumanoidEyes
     HeadTop: MobHumanoidAnyMarking

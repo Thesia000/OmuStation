@@ -35,15 +35,15 @@
     Head: MobSlimeHead
     HeadSide: MobHumanoidAnyMarking
     #omu start - Goat
-    HeadTop: MobHumanoidAnyMarking 
-    Tail: MobHumanoidAnyMarking 
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
     #omu end
     Hair: MobSlimeMarkingFollowSkin
     FacialHair: MobSlimeMarkingFollowSkin
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobSlimeTorso
-    Groin: MobSlimeGroin # goob
+    Chest: MobSlimeChest
+    Groin: MobSlimeGroin
     Eyes: MobHumanoidEyes
     LArm: MobSlimeLArm
     RArm: MobSlimeRArm
@@ -64,11 +64,11 @@
       points: 3
       required: false
       #Omu Start - Goat
-    HeadTop: 
-      points: 8 
+    HeadTop:
+      points: 8
       required: false
-    Tail: 
-      points: 2 
+    Tail:
+      points: 2
       required: false
       #Omu End - Goat
     FacialHair:
@@ -132,22 +132,22 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobSlimeTorso
+  id: MobSlimeChest
   baseSprite:
     sprite: Mobs/Species/Slime/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobSlimeTorsoMale
+  id: MobSlimeChestMale
   baseSprite:
     sprite: Mobs/Species/Slime/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
   id: MobSlimeChestFemale
   baseSprite:
     sprite: Mobs/Species/Slime/parts.rsi
-    state: torso_f
+    state: chest_f
 
 - type: humanoidBaseSprite
   id: MobSlimeGroin

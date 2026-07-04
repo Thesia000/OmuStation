@@ -57,6 +57,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Managers;
+using Content.Goobstation.Common.Traits;
+using Content.Server.Administration.Managers;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat;
@@ -72,6 +74,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Server.Speech.Components;
 using Content.Shared.Body.Components;
+using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Hands.Components;
@@ -100,16 +103,12 @@ using Robust.Shared.Prototypes;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Temperature.Components;
-
-// Goobstation
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Rejuvenate;
-using Content.Goobstation.Common.Traits;
 using Content.Shared.Damage;
 using Content.Shared.Mech.Components;
 using Content.Server.Mech.Systems;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Goobstation.Maths.FixedPoint;
 
 
@@ -362,7 +361,7 @@ public sealed partial class ZombieSystem
         _mind.MakeSentient(target);
 
         //Make the zombie not die in the cold. Good for space zombies
-        if (TryComp<TemperatureComponent>(target, out var tempComp))
+        if (TryComp<TemperatureDamageComponent>(target, out var tempComp))
             tempComp.ColdDamage.ClampMax(0);
 
         //Heals the zombie from all the damage it took while human
@@ -439,5 +438,9 @@ public sealed partial class ZombieSystem
 
         if (TryComp<MechPilotComponent>(target, out var mechPilotComponent)) // Goobstation - kick out zombies from mechs on conversion
             _mech.TryEject(mechPilotComponent.Mech, null, target);
+
+        //Need to prevent them from getting an item, they have no hands.
+        // Also prevents them from becoming a Survivor. They're undead.
+        _tag.AddTag(target, "InvalidForGlobalSpawnSpell");
     }
 }

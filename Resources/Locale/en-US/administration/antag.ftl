@@ -47,8 +47,3 @@ admin-verb-text-make-changeling = Make Changeling
 admin-verb-text-make-conspirator = Make Conspirator
 
 admin-overlay-antag-classic = ANTAG
-
-
-
-
-

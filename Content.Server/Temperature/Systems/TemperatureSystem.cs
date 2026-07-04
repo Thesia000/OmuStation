@@ -102,7 +102,7 @@ using Content.Goobstation.Common.Temperature.Components;
 using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Temperature.Components;
-using Content.Shared._DV.CosmicCult.Components; // DeltaV
+using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Inventory;
 using Content.Shared.Rejuvenate;

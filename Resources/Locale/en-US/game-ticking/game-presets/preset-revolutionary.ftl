@@ -35,7 +35,7 @@ head-rev-break-mindshield = The Mindshield neutralized hypnotic powers, but its 
 ## Rev
 
 roles-antag-rev-name = Revolutionary
-roles-antag-rev-objective = Your objective is to ensure the safety and follow the orders of the Head Revolutionaries as well as getting rid or converting of all Command staff on station.
+roles-antag-rev-objective = Your objective is to ensure the safety and follow the orders of the head revolutionaries, and to help them take over the station by eliminating all members of Command.
 
 rev-break-control = {$name} has remembered their true allegiance!
 

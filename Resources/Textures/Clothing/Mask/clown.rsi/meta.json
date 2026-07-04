@@ -64,6 +64,10 @@
         {
             "name": "opened-equipped-MASK-vox",
             "directions": 4
+        },
+        {
+            "name": "equipped-MASK-hydrakin",
+            "directions": 4
         }
     ]
 }

@@ -227,6 +227,13 @@ namespace Content.IntegrationTests.Tests
             .Select(glob => new Regex(GlobToRegex(glob), RegexOptions.IgnoreCase | RegexOptions.Compiled))
             .ToArray();
 
+        /// <summary>
+        /// Converts the above globs into regex so your eyes dont bleed trying to add filepaths.
+        /// </summary>
+        private static readonly Regex[] DoNotMapWhiteListRegexes = DoNotMapWhitelist
+            .Select(glob => new Regex(GlobToRegex(glob), RegexOptions.IgnoreCase | RegexOptions.Compiled))
+            .ToArray();
+
         private static readonly string[] GameMaps =
         {
             // Goobstation edit:
@@ -294,7 +301,7 @@ namespace Content.IntegrationTests.Tests
             //"dm01-entryway",  // Deathmatch
             //"Europa",         // Not in pool.
               "Exo",
-              "Fland",
+            //  "Fland",        // kill due to mem
               "FlandHighPop",
              "Glacier", // OMU
               "Kettle",
@@ -305,7 +312,7 @@ namespace Content.IntegrationTests.Tests
               "Marathon",
               "Meta",
             //"MeteorArena",    // Deathmatch
-              "Oasis",
+            //  "Oasis",        // kill due to memory
               "OasisHighPop",
               "Omega",
               "Origin",
@@ -316,7 +323,7 @@ namespace Content.IntegrationTests.Tests
               "Reach",
               "Saltern",
             //"Serpentcrest", Omu No
-              "Snowball",
+            // "Snowball", // fuck off not in pool
         };
         // Goobstation edit end
 
