@@ -7,3 +7,13 @@ public enum IngameConsoleUiKey : byte
 {
     Key
 }
+[Serializable, NetSerializable]
+public sealed class IngameConsoleBoundUserInterfaceState : BoundUserInterfaceState
+{
+    public string[] OutputHistory;
+
+    public IngameConsoleBoundUserInterfaceState(string[] history)
+    {
+        OutputHistory = history;
+    }
+}

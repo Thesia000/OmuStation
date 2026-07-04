@@ -18,3 +18,6 @@ public sealed class IngameConsoleCommandAttemptMessage : BoundUserInterfaceMessa
         InputString = requestedAngle;
     }
 }
+
+[ByRefEvent]
+public readonly record struct IngameConsoleHistoryChangeEvent(string AddToHistory);

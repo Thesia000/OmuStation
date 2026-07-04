@@ -5,6 +5,7 @@
   description: DishMultistructCoreNameDesc
   components:
   - type: IngameServerClientLinkInfrastructure
+  - type: IngameConsole
   - type: MultiBlockPart
     structureType: 
     - SignalDishControll
@@ -25,13 +26,11 @@
     - Productivity
   - type: SignalSciDish
   - type: ActivatableUI
-    key: enum.DishConsoleUiKey.Key
+    key: enum.IngameConsoleUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.DishConsoleUiKey.Key:
-        type: DishControllMenuBoundUserInterface
-      enum.ServerClientUiKey.Key:
-        type: IngameServerClientLinkBoundUserInterface
+      enum.IngameConsoleUiKey.Key:
+        type: IngameConsoleBoundUserInterface
 
 - type: entity
   id: DishMultistructSignalDish

@@ -26,6 +26,9 @@ namespace Content.Omu.Client._BSD.IngameConsoleUI.UI
             base.Open();
             _menu = this.CreateWindow<IngameConsoleMenue>();
             _menu.CommandAttempt += AttemptedCommand;
+            IngameConsoleBoundUserInterfaceState state = new(["Start"]);
+            _menu.PopulateHistory(state.OutputHistory);
+            return;
         }
 
         public void AttemptedCommand(string text)
@@ -37,6 +40,9 @@ namespace Content.Omu.Client._BSD.IngameConsoleUI.UI
         protected override void UpdateState(BoundUserInterfaceState state)
         {
             base.UpdateState(state);
+            if (state is not IngameConsoleBoundUserInterfaceState rState) return;
+            _menu?.PopulateHistory(rState.OutputHistory);
+            return;
         }
     }
 }

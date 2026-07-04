@@ -13,6 +13,8 @@ public enum IngameConsoleCommandType
     ICC_Print,//recomended unified print command aka print the information the user needs, takes one argument to determin what info should be printed
     ICC_Print_ALL,//recomended unified print all command, prints all available information
     ICC_HELP,//recomended unified help command prints all commands available to the console
+    ISCL_ASSIGN,//From the ISCL(Ingame Server Client Link System), links a client to a server
+    ISCL_UNASSIGN,//removes a server client link
 }
 public readonly struct IngameConsoleCommand
 {

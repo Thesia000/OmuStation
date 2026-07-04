@@ -27,5 +27,14 @@ public sealed partial class IngameConsoleMenue : FancyWindow
         CommandAttempt?.Invoke(text.Text);
     }
 
+    public void PopulateHistory(string[] history)
+    {
+        ConsoleOutPut.Clear();
+        for (int iterator = 0; iterator < history.Length; iterator++)
+        {
+            ConsoleOutPut.AddItem(history[iterator]);
+        }
+        return;
+    }
 
 }
