@@ -10,6 +10,7 @@ using Content.Omu.Server.IngameConsoleSystem.Components;
 
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
+using Content.Omu.Server._BSD.IngameServerSystem.Events;
 namespace Content.Omu.Server.IngameConsoleSystem;
 
 public sealed class IngameServerSystem : EntitySystem
@@ -41,8 +42,14 @@ public sealed class IngameServerSystem : EntitySystem
     {
         foreach (IngameServerProgram iterator in comp.ActivePrograms)
         {
-            return;
+            IngameServerProgrammExecutionEvent ev = new(iterator.Type, iterator.AssignedProcessingCost);
+            RaiseLocalEvent(uid, ref ev);
         }
         return;
+    }
+
+    public void ChangeProcessingAlotment(IngameServerProgramTypes type, IngameServerComponent comp)
+    {
+        
     }
 }
