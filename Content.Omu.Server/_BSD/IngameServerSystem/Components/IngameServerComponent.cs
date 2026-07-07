@@ -17,10 +17,13 @@ public sealed partial class IngameServerComponent : Component//there can only be
     public float ProcessingPower = 0f;
 
     [DataField]
+    public float AvailabeProcessingPower = 0f;
+
+    [DataField]
     public HashSet<ProtoId<MultiStructTypePrototype>> ProcessingPowerProvidingTypes = new();
 
     [DataField]
-    public HashSet<IngameServerProgram> ActivePrograms = new();
+    public Dictionary<IngameServerProgramTypes, IngameServerProgram> ActivePrograms = new();
 
     [DataField]
     public HashSet<IngameServerProgramTypes> InstalledPrograms = new();

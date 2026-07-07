@@ -46,11 +46,30 @@ public sealed class IngameConsoleSystem : EntitySystem
         {
             if (!comp.AllowedTypes.Contains(iterator.Type)) continue;
             if (iterator.Key != splitInput[0]) continue;
-            if (iterator.ArgumentsNumber + 1 <= splitInput.Length) continue;//ensure we got enought arguments
+            if (iterator.ArgumentsNumberMin + 1 <= splitInput.Length) continue;//ensure we got enought arguments
             IngameConsoleCommandCalledEvent ev = new(iterator.Type, splitInput);//still ships the type with it, aka start reading AFTER index 0
             RaiseLocalEvent(ent, ref ev);
         }
         return;
+    }
+    #endregion
+    #region Assistance in converstion
+    //returns false by default aka this detects true only
+    public bool InputBoolCheck(string input)
+    {
+        switch (input)
+        {
+            case "y":
+                return true;
+            case "yes":
+                return true;
+            case "true":
+                return true;
+            default:
+                break;
+        }
+
+        return false;
     }
     #endregion
 }

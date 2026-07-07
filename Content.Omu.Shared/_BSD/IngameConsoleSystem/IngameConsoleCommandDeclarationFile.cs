@@ -13,7 +13,7 @@ public enum IngameConsoleCommandType
     ICC_Print,//recomended unified print command aka print the information the user needs, takes one argument to determin what info should be printed
     ICC_Print_ALL,//recomended unified print all command, prints all available information
     ICC_HELP,//recomended unified help command prints all commands available to the console
-    ISCL_ASSIGN,//From the ISCL(Ingame Server Client Link System), links a client to a server
+    ICC_ASSIGN,//General use assign command
     ISCL_UNASSIGN,//removes a server client link
 }
 public readonly struct IngameConsoleCommand
@@ -22,11 +22,11 @@ public readonly struct IngameConsoleCommand
     {
         Key = key;
         Type = type;
-        ArgumentsNumber = argumentsNumber;
+        ArgumentsNumberMin = argumentsNumber;
     }
     public string Key { get; init; }
     public IngameConsoleCommandType Type { get; init; }
-    public int ArgumentsNumber { get; init; }//Number of Arguments
+    public int ArgumentsNumberMin { get; init; }//Number of Arguments
 };
 public readonly struct IngameConsoleCommandList
 {
@@ -38,6 +38,7 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("print", IngameConsoleCommandType.ICC_Print, 1));
         List.Add(new IngameConsoleCommand("print_all", IngameConsoleCommandType.ICC_Print_ALL, 0));
         List.Add(new IngameConsoleCommand("help", IngameConsoleCommandType.ICC_HELP, 0));
+        List.Add(new IngameConsoleCommand("assign", IngameConsoleCommandType.ICC_ASSIGN, 1));
     }
 
 
