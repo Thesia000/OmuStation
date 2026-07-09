@@ -190,7 +190,7 @@
 - type: startingGear
   id: CaptainGear
   equipment:
-    #shoes: ClothingShoesBootsLaceup # Omu, Selectable formal shoes
+   # shoes: ClothingShoesBootsLaceup - Goobstation
     eyes: ClothingEyesGlassesCommand
     #gloves: ClothingHandsGlovesCaptain - Goobstation, moved to loadouts
     #id: CaptainPDA - Omu, moved to loadouts

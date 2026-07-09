@@ -164,6 +164,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryScientist
 
+- type: loadout # goob
+  id: ScientistFormal
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitScientistFormal
 
 # Back
 - type: loadout
