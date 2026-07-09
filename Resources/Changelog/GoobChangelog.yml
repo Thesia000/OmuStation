@@ -23522,3 +23522,87 @@ Entries:
         bugs threads in the discord and report things breaking for fixes.
   id: 2715
   time: '2026-07-04T02:14:46.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Fixed materials not actually being added to storages.
+  id: 2716
+  time: '2026-07-08T16:21:43.0000000+00:00'
+- author: Beanyboi69
+  changes:
+    - type: Fix
+      message: fixed vials not showing contained solutions
+    - type: Fix
+      message: fixed vials not being able to be drawn with syringes
+    - type: Fix
+      message: fixed combat injector not working
+    - type: Fix
+      message: fixed autoinjectors not injector the entire cartridge
+    - type: Fix
+      message: fix medipens not working
+    - type: Fix
+      message: fix random sentience localization error
+  id: 2717
+  time: '2026-07-08T19:35:44.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Fixed most lathes not being able to be linked to the Silo.
+    - type: Tweak
+      message: Doubled Silo range
+  id: 2718
+  time: '2026-07-09T11:18:09.0000000+00:00'
+- author: elioskmil
+  changes:
+    - type: Fix
+      message: >-
+        fixed a bug that prevented players from using the RPD to build straight
+        and bent pipes on top of eachother even if they were rotated.
+  id: 2719
+  time: '2026-07-09T11:18:36.0000000+00:00'
+- author: Kenkaitos
+  changes:
+    - type: Fix
+      message: Fixed surgery
+  id: 2720
+  time: '2026-07-09T11:19:07.0000000+00:00'
+- author: Kenkaitos
+  changes:
+    - type: Fix
+      message: Fix IPC not having their charge updated
+  id: 2721
+  time: '2026-07-09T11:20:02.0000000+00:00'
+- author: Beanyboi69
+  changes:
+    - type: Add
+      message: >-
+        Added a bunch of existing jumpsuits and clothing options to some job
+        loadouts
+    - type: Add
+      message: Added a bunch of unused envirosuits to assistant and job loadouts.
+    - type: Add
+      message: New military jumpsuits!
+    - type: Add
+      message: >-
+        Recruit jumpsuit to assistant loadout. Can only be worn with under 5
+        hours of playtime.
+    - type: Fix
+      message: >-
+        Replaced filled advanced jackboots with empty advanced jackboots in HoS
+        loadout
+    - type: Fix
+      message: Warden no longer spawns with an extra secmask
+    - type: Tweak
+      message: Medical doctors must select eyewear
+    - type: Tweak
+      message: NTR fancy jumpsuit now has a 20 hour playtime requirement
+    - type: Tweak
+      message: >-
+        Recolored various military jumpsuits to be more accurate to the jobs
+        they represent.
+    - type: Remove
+      message: Removed Eyewear section from CMO loadout
+    - type: Remove
+      message: Combat boot values from high heeled boots
+  id: 2722
+  time: '2026-07-09T21:17:49.0000000+00:00'
