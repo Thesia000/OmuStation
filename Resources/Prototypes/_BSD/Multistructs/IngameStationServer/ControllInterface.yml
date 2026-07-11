@@ -1,20 +1,19 @@
 ﻿- type: entity
   id: StationServerMultistructCore
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
-  name: StatonServerCoreName
-  description: StatonServerMultistructCoreNameDesc
+  name: StationServerCoreName
+  description: StationServerMultistructCoreDesc
   components:
   - type: IngameServerClientLinkInfrastructure
   - type: IngameConsole
   - type: IngameServer
-    ProcessingPower: 5.0
-    AvailabeProcessingPower: 5.0
-    ProcessingPowerProvidingTypes:
+    processingPower: 5.0
+    processingPowerProvidingTypes:
     - ServerComponent
     - ServerProductivity
-    InstalledPrograms:
-    - 0
-    - 1
+    installedPrograms:
+    - 0.0
+    - 1.0
   - type: MultiBlockPart
     structureType: 
     - IngameServerCore

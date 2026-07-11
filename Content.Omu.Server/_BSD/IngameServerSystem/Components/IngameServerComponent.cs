@@ -26,5 +26,5 @@ public sealed partial class IngameServerComponent : Component//there can only be
     public Dictionary<IngameServerProgramTypes, IngameServerProgram> ActivePrograms = new();
 
     [DataField]
-    public HashSet<IngameServerProgramTypes> InstalledPrograms = new();
+    public HashSet<float> InstalledPrograms = new();
 }
