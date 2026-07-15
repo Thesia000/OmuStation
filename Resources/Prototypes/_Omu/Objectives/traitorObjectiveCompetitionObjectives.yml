@@ -1,0 +1,298 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseTraitorObjectiveCompetitionObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-syndicate
+    difficulty: 1.0
+  - type: RoleRequirement
+    roles:
+    - TraitorRole
+  - type: NoCompletionObjective
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: protectTargetObjective
+  name: objective_protect_name
+  description: objective_protect_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: CorporateClimberObjective
+  name: objective_CorporateClimber_name
+  description: objective_CorporateClimber_description
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: ShoeRemoveObjective
+  name: objective_ShoeRemove_name
+  description: objective_ShoeRemove_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: GravityoffObjective
+  name: objective_Gravityoff_name
+  description: objective_Gravityoff_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: RemoveSteelObjective
+  name: objective_RemoveSteel_name
+  description: objective_RemoveSteel_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: insecurityObjective
+  name: objective_insecurity_name
+  description: objective_insecurity_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: burnNothingObjective
+  name: objective_burnNothing_name
+  description: objective_burnNothing_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: BombDepartmentObjective
+  name: objective_BombDepartment_name
+  description: objective_BombDepartment_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: RemoveTEGObjective
+  name: objective_RemoveTEG_name
+  description: objective_RemoveTEG_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: AllTheLittleGuysObjective
+  name: objective_AllTheLittleGuys_name
+  description: objective_AllTheLittleGuys_traitor_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: TempPromotionRDObjective
+  name: objective_TempPromotionRD_name
+  description: objective_TempPromotionRD_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: TempPromotionQMObjective
+  name: objective_TempPromotionQM_name
+  description: objective_TempPromotionQM_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: TempPromotionCEObjective
+  name: objective_TempPromotionCE_name
+  description: objective_TempPromotionCE_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: AllTheLittleGuysObjective
+  name: objective_AllTheLittleGuys_name
+  description: objective_AllTheLittleGuys_traitor_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: TempPromotionCMOObjective
+  name: objective_TempPromotionCMO_name
+  description: objective_TempPromotionCMO_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: TempPromotionHOPObjective
+  name: objective_TempPromotionHOP_name
+  description: objective_TempPromotionHOP_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: InciteRiotObjective
+  name: objective_InciteRiot_name
+  description: objective_InciteRiot_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: DrugedDrinksObjective
+  name: objective_DrugedDrinks_name
+  description: objective_DrugedDrinks_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: DrugedFoodObjective
+  name: objective_DrugedFood_name
+  description: objective_DrugedFood_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: maroonSalvageShipObjective
+  name: objective_maroonSalvageShip_name
+  description: objective_maroonSalvageShip_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: maroonCargoShipObjective
+  name: objective_maroonCargoShip_name
+  description: objective_maroonCargoShip_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: SlimeCleanupObjective
+  name: objective_SlimeCleanup_name
+  description: objective_SlimeCleanup_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: SpeciesSwapObjective
+  name: objective_SpeciesSwap_name
+  description: objective_SpeciesSwap_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: BeeornottobeeObjective
+  name: objective_Beeornottobee_name
+  description: objective_Beeornottobee_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: ShowOffObjective
+  name: objective_ShowOff_name
+  description: objective_ShowOff_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
+
+- type: entity
+  parent: BaseTraitorObjectiveCompetitionObjective
+  id: CaptureStationObjective
+  name: objective_CaptureStation_name
+  description: objective_CaptureStation_desc
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunprod.rsi
+      state: stunprod_off
