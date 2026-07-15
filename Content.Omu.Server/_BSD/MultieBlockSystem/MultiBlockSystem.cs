@@ -15,6 +15,7 @@ using Content.Server.Power.Components;
 
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
+using Robust.Shared.Toolshed.Commands.Values;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
@@ -27,9 +28,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
 {
     //magic number sets the override key to allow all connections
     private readonly ProtoId<MultiStructTypePrototype> _protoAll = "ALL";
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+
     public override void Initialize()
     {
         base.Initialize();
