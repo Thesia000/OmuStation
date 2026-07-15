@@ -33,11 +33,33 @@ public sealed partial class CureZombieInfectionEntityEffectsSystem : EntityEffec
         if (HasComp<IncurableZombieComponent>(entity))
             return;
 
-        RemComp<ZombifyOnDeathComponent>(entity);
-        RemComp<PendingZombieComponent>(entity);
+        // <Goob> If check because new cure effects + popup
+        if (HasComp<ZombifyOnDeathComponent>(entity)
+            || HasComp<PendingZombieComponent>(entity))
+        {
+            RemComp<ZombifyOnDeathComponent>(entity);
+            RemComp<PendingZombieComponent>(entity);
+
+            _popup.PopupEntity(
+                Loc.GetString("zombie-cure-success"),
+                entity,
+                PopupType.Medium
+            );
+        }
+        // </Goob>
 
         if (args.Effect.Innoculate)
             EnsureComp<ZombieImmuneComponent>(entity);
+
+        // <Goob> new cure
+        if (HasComp<ZombieComponent>(entity)
+            && entity.Comp.CurrentState != MobState.Alive
+            && args.Effect.CureZombies)
+        {
+            var ev = new EntityUnZombifiedEvent(args.Effect.Innoculate);
+            RaiseLocalEvent(entity, ref ev);
+        }
+        // </Goob>
     }
 }
 
@@ -56,6 +78,12 @@ public sealed partial class CureZombieInfection : EntityEffectBase<CureZombieInf
     /// </summary>
     [DataField]
     public bool Innoculate;
+
+    /// <summary>
+    ///  Goobstation - whether it cures zombies in a critical state or under
+    /// </summary>
+    [DataField]
+    public bool CureZombies = false; // Goob
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
