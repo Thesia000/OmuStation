@@ -23,6 +23,7 @@
       - !type:CreateEntityReactionEffect
         entity: XenobioVolatileRedExtractJelly
         number: 1
+        shouldScale: false
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:

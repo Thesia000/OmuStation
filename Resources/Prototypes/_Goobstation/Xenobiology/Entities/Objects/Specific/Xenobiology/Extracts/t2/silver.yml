@@ -42,6 +42,7 @@
       - !type:CreateEntityReactionEffect
         entity: IngotSilver1
         number: 2
+        shouldScale: false
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
@@ -54,6 +55,7 @@
       - !type:CreateEntityReactionEffect
         entity: XenobioGoopBall
         number: 3
+        shouldScale: false
   - type: Tag
     tags:
     - XenobiologySilverExtract

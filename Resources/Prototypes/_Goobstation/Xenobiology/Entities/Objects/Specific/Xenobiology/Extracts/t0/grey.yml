@@ -39,6 +39,7 @@
         delay: 3
         entity: MobSlimeXenobioBabyGrey
         number: 3
+        shouldScale: false
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
@@ -51,6 +52,7 @@
       - !type:CreateEntityReactionEffect
         entity: MonkeyCube
         number: 3
+        shouldScale: false
   - type: Tag
     tags:
     - XenobiologyGreyExtract

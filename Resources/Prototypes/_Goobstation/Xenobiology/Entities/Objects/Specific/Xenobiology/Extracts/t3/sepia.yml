@@ -40,6 +40,7 @@
         delay: 5
         entity: XenoExtractChronofield
         number: 1
+        shouldScale: false
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
@@ -52,6 +53,7 @@
       - !type:CreateEntityReactionEffect
         entity: FloorTileItemSepia
         number: 30
+        shouldScale: false
   - type: Tag
     tags:
     - XenobiologySepiaExtract
