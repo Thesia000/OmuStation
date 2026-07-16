@@ -451,26 +451,6 @@ namespace Content.Server.Zombies
             //UnZombify(ent.Owner, args.CloneUid, ent.Comp);
         }
 
-        // Goob start holy fuck clean this shit up sometimes todo marty
-        private void OnUnZombifyEvent(Entity<ZombieComponent> ent, ref EntityUnZombifiedEvent args)
-        {
-            if (UnZombify(ent, ent, ent.Comp))
-            {
-                _popup.PopupEntity(
-                    Loc.GetString("zombie-cured-popup"),
-                    ent,
-                    PopupType.Medium
-                );
-                return;
-            }
-            _popup.PopupEntity(
-                Loc.GetString("zombie-cure-failed-popup"),
-                ent,
-                PopupType.Medium
-            );
-        }
-        // Goob end
-
         // Make sure players that enter a zombie (for example via a ghost role or the mind swap spell) count as an antagonist.
         private void OnMindAdded(Entity<ZombieComponent> ent, ref MindAddedMessage args)
         {

@@ -107,8 +107,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Goobstation.Common.NTR.Scan; // Goobstation
-using Content.Shared.Chat;
-using Content.Shared.Prototypes;
 
 namespace Content.Server.Lathe
 {

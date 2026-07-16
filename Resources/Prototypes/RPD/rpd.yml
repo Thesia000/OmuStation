@@ -27,6 +27,7 @@
   delay: 0
   rotation: User
   fx: EffectRCDConstruct0
+  allowMultiDirection: true
 
 - type: rcd
   id: PipeBend
@@ -38,6 +39,7 @@
   delay: 0
   rotation: User
   fx: EffectRCDConstruct0
+  allowMultiDirection: true
 
 - type: rcd
   id: PipeTJunction

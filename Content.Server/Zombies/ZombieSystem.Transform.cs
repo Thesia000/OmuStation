@@ -58,7 +58,6 @@
 
 using Content.Server.Administration.Managers;
 using Content.Goobstation.Common.Traits;
-using Content.Server.Administration.Managers;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat;
@@ -74,7 +73,6 @@ using Content.Server.NPC.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Server.Speech.Components;
 using Content.Shared.Body.Components;
-using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Hands.Components;
@@ -438,9 +436,5 @@ public sealed partial class ZombieSystem
 
         if (TryComp<MechPilotComponent>(target, out var mechPilotComponent)) // Goobstation - kick out zombies from mechs on conversion
             _mech.TryEject(mechPilotComponent.Mech, null, target);
-
-        //Need to prevent them from getting an item, they have no hands.
-        // Also prevents them from becoming a Survivor. They're undead.
-        _tag.AddTag(target, "InvalidForGlobalSpawnSpell");
     }
 }
