@@ -397,6 +397,7 @@
 #    - PlushieWachtel # Omu
 #    - PlushieLeguia # Omu
 #    - PlushiePasha # Omu
+#    - PlushieLeoMalone # Omu
 # Omu Start
     - PlushieRestfulOmuStaff
     - PlushieCygOmuStaff
@@ -435,4 +436,5 @@
 #    - EvilPlushieLeguia # Omu
 #    - EvilPlushiePasha # Omu
 #    - EvilPlushieTwofish # Omu
+#    - EvilPlushieLeoMalone # Omu
   - type: DoAfter
