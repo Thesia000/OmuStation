@@ -23783,3 +23783,15 @@ Entries:
       message: Remove the access text from species examine
   id: 2749
   time: '2026-07-16T03:00:48.0000000+00:00'
+- author: Super7522
+  changes:
+    - type: Tweak
+      message: Delimb Chances are now actually possible with Brute and Piercing weapons
+  id: 2751
+  time: '2026-07-17T01:33:37.0000000+00:00'
+- author: Durk
+  changes:
+    - type: Add
+      message: Added ghost cosmetics for patrons.
+  id: 2752
+  time: '2026-07-17T01:37:41.0000000+00:00'
