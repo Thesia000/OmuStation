@@ -23,6 +23,7 @@
     damage:
       types:
         Blunt: 1
+        Ion: 200
   - type: SolutionContainerManager
     solutions:
       ammo:
