@@ -27,4 +27,7 @@ public sealed partial class IngameServerComponent : Component//there can only be
 
     [DataField]
     public HashSet<float> InstalledPrograms = new();
+
+    [DataField]
+    public TimeSpan NextUpdate = new();
 }

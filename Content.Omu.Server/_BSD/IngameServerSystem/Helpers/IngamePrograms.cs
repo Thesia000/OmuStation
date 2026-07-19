@@ -28,10 +28,10 @@ public struct IngameServerProgram
     public int Priority { get; init; }      //lower is better 3 levels: 1 = critical(AI ONLY!!!), 2 = High, 2 = Normal
 }
 
-public struct IngameConsoleCommandList
+public struct IngameProgramList
 {
     public HashSet<IngameServerProgram> Content { get; init; }
-    public IngameConsoleCommandList()
+    public IngameProgramList()
     {
         Content = new();
         Content.Add(new IngameServerProgram(IngameServerProgramTypes.ResearchProgram, 1f, 2));

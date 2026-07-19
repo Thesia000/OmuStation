@@ -18,8 +18,8 @@ public struct IngameServerPointConversions
         //ConversionRate[IngameServerPoints.SciRawData] = 1.0f;//left here cause I wanted to but redoing all of wizdens RND code is something I rather do later :3
         PointAToPointB[IngameServerPoints.SigSciRawTelemetry] = IngameServerPoints.SigSciSignificantData;
         ConversionRate[IngameServerPoints.SigSciRawTelemetry] = 0.1f;
-        //PointAToPointB[IngameServerPoints.SigSciSignificantData] = IngameServerPoints.SciGeneralPoint;
-        //ConversionRate[IngameServerPoints.SigSciSignificantData] = 5.0f;
+        PointAToPointB[IngameServerPoints.SigSciSignificantData] = IngameServerPoints.SciGeneralPoint;
+        ConversionRate[IngameServerPoints.SigSciSignificantData] = 5.0f;
     }
     public Dictionary<IngameServerPoints, IngameServerPoints> PointAToPointB { get; init; }
 

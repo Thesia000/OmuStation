@@ -12,32 +12,41 @@ using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
 using Linguini.Bundle.Errors;
+using Content.Shared._Shitmed.Medical.Surgery.Wounds;
 namespace Content.Omu.Server.IngameConsoleSystem;
 
 public sealed class IngameServerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IngameConsoleSystem _consoleSys = default!;
-    private TimeSpan _nextUpdate;
     public float UpdateFrequencyInSeconds = 0.25f;//I recomend Programs use this to do math as there tickrate
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<IngameServerComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
+        SubscribeLocalEvent<IngameServerComponent, ComponentStartup>(OnComponentSetup);
     }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        if (_nextUpdate < _timing.CurTime)
+        var machineQuerry = AllEntityQuery<IngameServerComponent>();
+        while (machineQuerry.MoveNext(out var uidLoop, out var comp))
         {
-            var machineQuerry = AllEntityQuery<IngameServerComponent>();
-            while (machineQuerry.MoveNext(out var uidLoop, out var comp))
+            if (comp.NextUpdate < _timing.CurTime)
             {
                 RunPrograms(uidLoop, comp);
+                comp.NextUpdate += TimeSpan.FromSeconds(UpdateFrequencyInSeconds);
             }
-            _nextUpdate += TimeSpan.FromSeconds(UpdateFrequencyInSeconds);
         }
-
+    }
+    public void OnComponentSetup(EntityUid uid, IngameServerComponent comp, ComponentStartup args)
+    {
+        IngameProgramList ingameProgramListInstance = new();
+        foreach (IngameServerProgram iterator in ingameProgramListInstance.Content)
+        {
+            if (!comp.InstalledPrograms.Contains((float) iterator.Type)) continue;
+            comp.ActivePrograms.Add(iterator.Type, iterator);
+        }
     }
     public void RunPrograms(EntityUid uid, IngameServerComponent comp)
     {
