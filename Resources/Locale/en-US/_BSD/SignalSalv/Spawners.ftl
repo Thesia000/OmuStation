@@ -1,2 +1,2 @@
 SpawnSignalSalvOutpostDataName = Outpost Data Spawner
-SpawnSignalSalvOutpostDataDesc = Spawns the datadisk containing the information for the planetary mining rig to produce additnal materials
+SpawnSignalSalvOutpostDataDesc = Spawns the datadisk containing the information for the planetary mining rig to produce additional materials
