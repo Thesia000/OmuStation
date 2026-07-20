@@ -5074,3 +5074,230 @@ Entries:
         happened after they were produced.
   id: 659
   time: '2026-07-14T01:01:52.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Added Blueshield officer stamp to their locker!
+  id: 660
+  time: '2026-07-18T17:05:49.0000000+00:00'
+- author: feistyfedora
+  changes:
+    - type: Tweak
+      message: 'Silk can now be stored in pockets. '
+  id: 661
+  time: '2026-07-18T17:37:11.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Advanced biohazard pen now assists with Chimera Infection/cure
+  id: 662
+  time: '2026-07-18T17:37:59.0000000+00:00'
+- author: pinktanuki
+  changes:
+    - type: Fix
+      message: Fixed the name of the Cosmic Cult grid object
+  id: 663
+  time: '2026-07-18T17:39:33.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Remove
+      message: >-
+        Removed Lavaland as part of a test to see what's causing the lag. This
+        is to test and will be reverted in 1 week on the 25th of July
+  id: 664
+  time: '2026-07-18T20:06:36.0000000+00:00'
+- author: Archee and Quill
+  changes:
+    - type: Add
+      message: Clean HUDs are a new researchable tool for Janitors.
+  id: 665
+  time: '2026-07-18T21:55:15.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed tilenol effect description
+  id: 666
+  time: '2026-07-18T22:44:02.0000000+00:00'
+- author: feistyfedora
+  changes:
+    - type: Tweak
+      message: Updated the IPC screens to have more color customization!
+  id: 667
+  time: '2026-07-19T01:27:34.0000000+00:00'
+- author: raincall
+  changes:
+    - type: Add
+      message: Ported a bunch of hairstyles from RMC
+  id: 668
+  time: '2026-07-19T03:01:52.0000000+00:00'
+- author: Willzile1
+  changes:
+    - type: Remove
+      message: >-
+        The Shaft Miners have been thrown into the sun. They will be retrieved
+        once Lavaland is back.
+  id: 669
+  time: '2026-07-19T11:44:55.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: >-
+        Added Vulpkanin, Feroxi, Reptilian, and Harpy sprites to the CSI-122M
+        "Xiézhù" Hardsuit.
+    - type: Add
+      message: >-
+        Also added Vulpkanin, Feroxi, Reptilian, and Harpy sprites to the
+        Syndiesuit that Nobody uses. (CSI-128X "Guānlián")
+  id: 670
+  time: '2026-07-19T14:34:32.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Updated the Harpy Paramedic Hardsuit to match the rest of the sprites.
+  id: 671
+  time: '2026-07-19T14:35:13.0000000+00:00'
+- author: 4Hangar
+  changes:
+    - type: Add
+      message: >-
+        Added the Security Training Manual as an item, it can be found in HoS'
+        locker.
+  id: 672
+  time: '2026-07-19T15:02:00.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Add
+      message: Mimes and other mute characters can make noise by blinking.
+  id: 673
+  time: '2026-07-19T16:44:27.0000000+00:00'
+- author: feistyfedora
+  changes:
+    - type: Tweak
+      message: BugBorg hats fit the chassis better.
+  id: 674
+  time: '2026-07-19T16:55:55.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Add
+      message: >-
+        The AAC tablet (and jailbroken version) have an expanded and polished
+        Omu-specific vocabulary.
+  id: 675
+  time: '2026-07-19T17:09:04.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Changed chloral hydrate to need 8u to sleep now
+    - type: Tweak
+      message: Changed tranq shells to only contain 4 units of chloral hydrate
+  id: 676
+  time: '2026-07-19T17:10:18.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: 'Fixed unlisted chems from granting max energy to chem dispensers. '
+  id: 677
+  time: '2026-07-19T17:51:39.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Ported Vox Paramedic Hardsuit Helmet from Goobstation
+  id: 678
+  time: '2026-07-19T17:53:38.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Hercuri in the bloodstream now works on dead people, can cool down to
+        73.15K, and cools corpses twice as much as alive people.
+  id: 679
+  time: '2026-07-19T18:21:38.0000000+00:00'
+- author: archee1
+  changes:
+    - type: Tweak
+      message: >-
+        Anomaly Synchronizers now have an internal battery to keep them active
+        during short power hiccups.
+  id: 680
+  time: '2026-07-19T18:22:03.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: Added reflectors
+  id: 681
+  time: '2026-07-19T19:41:08.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: >-
+        Added Supermatter events, the rock will now cause events if fed
+        agitating gas mixes, can be mitigated with low gas mixes or utilised for
+        extra flavour.
+  id: 682
+  time: '2026-07-19T20:34:31.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Added mystery sectoral plushies to trinket loadout.
+  id: 683
+  time: '2026-07-20T03:03:56.0000000+00:00'
+- author: Willfullyheretical
+  changes:
+    - type: Add
+      message: 'Uplink PKA pressure upgrade to Shaft Miner syndie catalog '
+  id: 684
+  time: '2026-07-20T10:43:46.0000000+00:00'
+- author: ishkab
+  changes:
+    - type: Fix
+      message: Bananium ore crabs are no longer uninteractable.
+  id: 685
+  time: '2026-07-20T10:48:33.0000000+00:00'
+- author: archee1
+  changes:
+    - type: Tweak
+      message: >-
+        PTLs are slightly smaller than they were before and weigh a more
+        sensible amount for their size with their fired laser being more
+        destructive.
+    - type: Tweak
+      message: >-
+        PTLs no longer gain price as their battery fills up and instead have a
+        static price.
+  id: 686
+  time: '2026-07-20T10:49:02.0000000+00:00'
+- author: nnif1
+  changes:
+    - type: Add
+      message: Added the Foam Minigun try and win it from the slot machines!!
+    - type: Remove
+      message: the slot machine can no longer be emaged to give out random items
+  id: 687
+  time: '2026-07-20T14:46:28.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Readded the siren to the Paramedic Hardsuit
+    - type: Add
+      message: >-
+        Additionally, added new sirens to the Cybersun Paramedic Hardsuit and
+        Modsuit.
+  id: 688
+  time: '2026-07-20T17:13:37.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Ambrosia Vulgaris and Ambrosia Deus no longer contain Desoxyephedrine;
+        Glasstle now contains Desoxyephedrine.
+  id: 689
+  time: '2026-07-20T20:24:17.0000000+00:00'
+- author: Not-Solid
+  changes:
+    - type: Fix
+      message: >-
+        Fixed the client crashing on startup for players on
+        GLES/compatibility-mode renderers (e.g. Qualcomm/Snapdragon ARM devices)
+        due to a shader compile error in the Photophobia effect.
+  id: 690
+  time: '2026-07-20T22:45:54.0000000+00:00'
