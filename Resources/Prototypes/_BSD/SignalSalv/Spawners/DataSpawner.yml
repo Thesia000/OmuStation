@@ -1,6 +1,5 @@
 - type: entity
   id: SpawnSignalSalvOutpostData
-  description: SpawnSignalSalvOutpostDataDesc
   parent: MarkerBase
   components:
   - type: Sprite
