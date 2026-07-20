@@ -1,5 +1,4 @@
 - type: entity
-  name: SpawnSignalSalvOutpostDataName
   id: SpawnSignalSalvOutpostData
   description: SpawnSignalSalvOutpostDataDesc
   parent: MarkerBase
