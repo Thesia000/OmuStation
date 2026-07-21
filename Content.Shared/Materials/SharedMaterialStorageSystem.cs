@@ -164,12 +164,43 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     /// <param name="volume"></param>
     /// <param name="component"></param>
     /// <returns>If the specified volume will fit</returns>
-    public bool CanTakeVolume(EntityUid uid, int volume, MaterialStorageComponent? component = null)
+    public bool CanTakeVolume(EntityUid uid, int volume, MaterialStorageComponent? component = null, string? material = null)
     {
         if (!Resolve(uid, ref component))
             return false;
+        //Omu start
+        if (component.StorageCapPerMaterialToggle)
+        {
+            if (material == null)
+            {
+                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task CanTakeVolume.");
+                return false;
+            }
+            if (!component.StorageMaxPerMaterial.ContainsKey(material)) component.StorageMaxPerMaterial.Add(material, component.StorageCapPerMaterialDefaultValue);
+            return GetMaterialAmount(uid, material) + volume <= component.StorageMaxPerMaterial[material];
+        }
+        //Omu end
         return component.StorageLimit == null || GetTotalMaterialAmount(uid, component) + volume <= component.StorageLimit;
     }
+    //Omu start
+    public int GetMaxAddableVolume(EntityUid uid, MaterialStorageComponent? component = null, string? material = null)
+    {
+        if (!Resolve(uid, ref component))
+            return 0;
+        if (component.StorageCapPerMaterialToggle)
+        {
+            if (material == null)
+            {
+                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task CanTakeVolume.");
+                return 0;
+            }
+            if (!component.StorageMaxPerMaterial.ContainsKey(material)) component.StorageMaxPerMaterial.Add(material, component.StorageCapPerMaterialDefaultValue);
+            return Math.Min(component.StorageMaxPerMaterial[material] - GetMaterialAmount(uid, material), 0);//clamed for safty reasons
+        }
+        if (component.StorageLimit == null) return int.MaxValue;
+        return Math.Min((int) component.StorageLimit - GetTotalMaterialAmount(uid, component), 0);//clamed for safty reasons
+    }
+    //Omu end
 
     /// <summary>
     /// Checks if the specified material can be changed by the specified volume.
@@ -184,7 +215,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
 
-        if (!CanTakeVolume(uid, volume, component))
+        if (!CanTakeVolume(uid, volume, component, materialId))
             return false;
 
         if (!component.IgnoreMaterialWhiteList) // Goobstation Change - Shitcode.
@@ -204,7 +235,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     /// <param name="entity"></param>
     /// <param name="materials"></param>
     /// <returns>If the amount can be changed</returns>
-    public bool CanChangeMaterialAmount(Entity<MaterialStorageComponent?> entity, Dictionary<string,int> materials)
+    public bool CanChangeMaterialAmount(Entity<MaterialStorageComponent?> entity, Dictionary<string, int> materials)
     {
         if (!Resolve(entity, ref entity.Comp))
             return false;
@@ -232,15 +263,13 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return false;
-        if (!CanChangeMaterialAmount(uid, materialId, volume, component))
-            return false;
-
         // Goob start
         EntityUid storageUid;
         Dictionary<ProtoId<MaterialPrototype>, int> storage;
+        Entity<MaterialStorageComponent>? silo = null;
         if (component.ConnectToSilo)
         {
-            var silo = _silo.GetSilo(uid);
+            silo = _silo.GetSilo(uid);
             if (dirty && silo != null)
                 Dirty(silo.Value);
             storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
@@ -254,6 +283,13 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         var existing = storage.GetOrNew(materialId);
         // Goob end
+        //Omu start GOOB we will not be bypassing the checks
+        if (!CanChangeMaterialAmount(uid, materialId, volume, component) && silo == null)
+            return false;
+        else if (silo != null)
+            if (!CanChangeMaterialAmount(silo.Value, materialId, volume, silo.Value.Comp))
+                return false;
+        //Omue end
 
         existing += volume;
 

@@ -116,8 +116,8 @@ public sealed partial class SignalDishSystem : EntitySystem
             {
                 float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
                 comp.SignalList[move].DataRemaining -= harvestedAmount;
-                if (!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp)) continue;
-                serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
+                //if (!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp)) continue;
+                //serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
                 //_research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time
             }
         }

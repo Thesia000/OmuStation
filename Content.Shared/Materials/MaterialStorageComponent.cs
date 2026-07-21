@@ -35,7 +35,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Materials;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMaterialStorageSystem))]
 public sealed partial class MaterialStorageComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -111,6 +110,20 @@ public sealed partial class MaterialStorageComponent : Component
     [DataField, AutoNetworkedField]
     public bool IgnoreMaterialWhiteList;
     // Goobstation Change End
+
+    //OMU edit start- SIGNAL Salv
+    [DataField, AutoNetworkedField]
+    public Dictionary<ProtoId<MaterialPrototype>, int> StorageMaxPerMaterial { get; set; } = new();
+
+    /// <summary>
+    /// In case of no predefined cap the storage will be able to store x/100 plates/ingots
+    /// </summary>
+    [DataField]
+    public int StorageCapPerMaterialDefaultValue = 10000;
+
+    [DataField]
+    public bool StorageCapPerMaterialToggle = true;//fear me for this is a major rework
+    //OMU edit end- SIGNAL Salv
 }
 
 [Serializable, NetSerializable]

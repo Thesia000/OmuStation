@@ -20,6 +20,7 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// </summary>
 public sealed partial class SignalServerSystem : EntitySystem
 {
+    /*
     [Dependency] private readonly ResearchSystem _research = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     public override void Initialize()
@@ -63,7 +64,7 @@ public sealed partial class SignalServerSystem : EntitySystem
         //temp end
         return;
     }
-    /*
+    
     Note for self exact working unsure, rn only one use turn into RP so compute turns significant data into RP istatnly
     Signal Salv will use this to buy expeds later
     Other systems may use this in the future too, improving exchagne rate of signif data to RP
