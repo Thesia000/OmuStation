@@ -191,3 +191,20 @@
     jobIcon: JobIconCustodii
   - type: PresetIdCard
     job: CustodiiVitellus
+
+- type: entity
+  parent: IDCardStandard
+  id: CentralCommandInternalAffairsHeadIDCard
+  name: Sectoral Head of Internal Affairs card
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+    - state: idcentcom
+  - type: Item
+    heldPrefix:
+  - type: IdCard
+    jobTitle: job-name-centcomm-IAH
+    jobIcon: JobIconCentCommIAH
+  - type: PresetIdCard
+    job: CentralCommandIAH

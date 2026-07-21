@@ -93,3 +93,11 @@
     sprite: /Textures/_Omu/Interface/Misc/job_icons.rsi
     state: custodii
   jobName: job-name-centcomm-guard
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconCentCommIAH
+  icon:
+    sprite: /Textures/_Omu/Interface/Misc/job_icons.rsi
+    state: IAH
+  jobName: job-name-centcomm-IAH
