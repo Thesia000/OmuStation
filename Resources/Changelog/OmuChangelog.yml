@@ -5353,3 +5353,9 @@ Entries:
       message: New french words to the french accent.
   id: 696
   time: '2026-07-23T01:57:17.0000000+00:00'
+- author: Mariki
+  changes:
+    - type: Add
+      message: Added a silent admin token gamerule
+  id: 697
+  time: '2026-07-23T21:57:31.0000000+00:00'
