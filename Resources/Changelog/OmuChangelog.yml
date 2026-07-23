@@ -5359,3 +5359,9 @@ Entries:
       message: Added a silent admin token gamerule
   id: 697
   time: '2026-07-23T21:57:31.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Zombies/Sleepers/Lone Op can no longer occur after a point in the shift
+  id: 698
+  time: '2026-07-23T23:14:56.0000000+00:00'
