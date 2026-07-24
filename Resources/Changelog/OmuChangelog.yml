@@ -5373,3 +5373,9 @@ Entries:
         "Blob."
   id: 699
   time: '2026-07-23T23:26:40.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Added 'DescSquad' Component for events and Admin usage
+  id: 700
+  time: '2026-07-24T07:22:51.0000000+00:00'
