@@ -5385,3 +5385,9 @@ Entries:
       message: Fixed Lifeline not dropping items.
   id: 701
   time: '2026-07-24T11:41:26.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed Drill sergeant headset not rendering
+  id: 702
+  time: '2026-07-24T16:53:26.0000000+00:00'
