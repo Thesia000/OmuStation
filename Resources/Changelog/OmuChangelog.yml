@@ -5399,3 +5399,9 @@ Entries:
         spawned again
   id: 703
   time: '2026-07-24T18:24:09.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed adminchat relay sending messages to non-admins.
+  id: 704
+  time: '2026-07-24T18:30:21.0000000+00:00'
