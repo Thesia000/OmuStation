@@ -23,7 +23,6 @@
     - EnergyTransfair
     - EnergyCapacityProvider
     - Productivity
-  - type: SignalSciServer
   - type: ResearchClient
 
 - type: entity

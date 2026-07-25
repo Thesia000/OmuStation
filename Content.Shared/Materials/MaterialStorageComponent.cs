@@ -119,7 +119,7 @@ public sealed partial class MaterialStorageComponent : Component
     /// In case of no predefined cap the storage will be able to store x/100 plates/ingots
     /// </summary>
     [DataField]
-    public int StorageCapPerMaterialDefaultValue = 10000;
+    public int StorageCapPerMaterialDefaultValue = 1000;
 
     [DataField]
     public bool StorageCapPerMaterialToggle = true;//fear me for this is a major rework

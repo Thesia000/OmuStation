@@ -191,7 +191,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         {
             if (material == null)
             {
-                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task CanTakeVolume.");
+                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task GetMaxAddableVolume.");
                 return 0;
             }
             if (!component.StorageMaxPerMaterial.ContainsKey(material)) component.StorageMaxPerMaterial.Add(material, component.StorageCapPerMaterialDefaultValue);
@@ -377,13 +377,23 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         var multiplier = TryComp<StackComponent>(toInsert, out var stackComponent) ? stackComponent.Count : 1;
         var totalVolume = 0;
+        bool allMaterialStorageCapacityPresent = true;//Omu
         foreach (var (mat, vol) in composition.MaterialComposition)
         {
             if (!CanChangeMaterialAmount(receiver, mat, vol * multiplier, storage))
                 return false;
             totalVolume += vol * multiplier;
+            //Omu start
+            if (storage.StorageCapPerMaterialToggle && allMaterialStorageCapacityPresent)
+            {
+                allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat);
+            }
         }
-
+        if (storage.StorageCapPerMaterialToggle)
+        {
+            return allMaterialStorageCapacityPresent;
+        }
+        //Omu end
         return CanTakeVolume(receiver, totalVolume, storage);
     }
 
@@ -413,14 +423,25 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         var multiplier = TryComp<StackComponent>(toInsert, out var stackComponent) ? stackComponent.Count : 1;
         var totalVolume = 0;
+        bool allMaterialStorageCapacityPresent = true;//Omu
         foreach (var (mat, vol) in composition.MaterialComposition)
         {
             if (!CanChangeMaterialAmount(receiver, mat, vol * multiplier, storage))
                 return false;
             totalVolume += vol * multiplier;
+            //Omu start
+            if (storage.StorageCapPerMaterialToggle && allMaterialStorageCapacityPresent)
+            {
+                allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat);
+            }
         }
-
-        if (!CanTakeVolume(receiver, totalVolume, storage))
+        if (storage.StorageCapPerMaterialToggle)
+        {
+            if (!allMaterialStorageCapacityPresent)
+                return false;
+        }
+        //Omu end
+        else if (!CanTakeVolume(receiver, totalVolume, storage))
             return false;
 
         foreach (var (mat, vol) in composition.MaterialComposition)

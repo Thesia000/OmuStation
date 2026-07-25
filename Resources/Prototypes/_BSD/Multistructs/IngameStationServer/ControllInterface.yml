@@ -6,6 +6,8 @@
   components:
   - type: IngameServerClientLinkInfrastructure
   - type: IngameConsole
+    allowedTypes:
+    - SSA_FTL
   - type: IngameServer
     processingPower: 5.0
     processingPowerProvidingTypes:

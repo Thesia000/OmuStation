@@ -23,4 +23,34 @@ public sealed partial class SignalSalvPlanetResourcesComponent : Component
     /// </summary>
     [DataField]
     public bool SpecialResourcePlanet = false;
+
+    /// <summary>
+    /// min number of POI
+    /// </summary>
+    [DataField]
+    public byte POIAmountMin = 1;
+
+    /// <summary>
+    /// max numbder of POI
+    /// </summary>
+    [DataField]
+    public byte POIAmountMax = 3;
+
+    /// <summary>
+    /// mind distance for a POI
+    /// </summary>
+    [DataField]
+    public float POIDistanceMin = 75;
+
+    /// <summary>
+    /// max distance for POI
+    /// </summary>
+    [DataField]
+    public float POIDistanceMax = 150;
+
+    /// <summary>
+    /// in PI radiay
+    /// </summary>
+    [DataField]
+    public float POIMinAngleDifference = 0.2f;
 }

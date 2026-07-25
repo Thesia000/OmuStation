@@ -15,6 +15,7 @@ public enum IngameConsoleCommandType
     ICC_HELP,//recomended unified help command prints all commands available to the console
     ICC_ASSIGN,//General use assign command
     ISCL_UNASSIGN,//removes a server client link
+    SSA_FTL,//SignalSAlvage engaged FTL to destination(predefined by default)
 }
 public readonly struct IngameConsoleCommand
 {
@@ -39,6 +40,7 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("print_all", IngameConsoleCommandType.ICC_Print_ALL, 0));
         List.Add(new IngameConsoleCommand("help", IngameConsoleCommandType.ICC_HELP, 0));
         List.Add(new IngameConsoleCommand("assign", IngameConsoleCommandType.ICC_ASSIGN, 1));
+        List.Add(new IngameConsoleCommand("ftl", IngameConsoleCommandType.SSA_FTL, 0));
     }
 
 
