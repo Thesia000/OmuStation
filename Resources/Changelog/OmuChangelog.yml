@@ -5499,3 +5499,13 @@ Entries:
       message: ported funkystation reagent fires, puddles of ignitables can burn
   id: 719
   time: '2026-07-25T21:59:25.0000000+00:00'
+- author: archee1
+  changes:
+    - type: Add
+      message: Mops can be worn on your back and internals slot
+    - type: Add
+      message: >-
+        Wet floor signs and the janitor bio suit now support internals slots for
+        mops
+  id: 720
+  time: '2026-07-25T22:20:42.0000000+00:00'
