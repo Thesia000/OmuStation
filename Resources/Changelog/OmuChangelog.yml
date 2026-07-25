@@ -5455,3 +5455,11 @@ Entries:
       message: Added bloodred vim, its an allulalo exclusive and can dash!
   id: 712
   time: '2026-07-25T21:00:48.0000000+00:00'
+- author: Mariki
+  changes:
+    - type: Add
+      message: >-
+        The CMO now gets a singular energy chem dispenser board in their
+        locker. 
+  id: 713
+  time: '2026-07-25T21:23:49.0000000+00:00'
