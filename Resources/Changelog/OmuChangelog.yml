@@ -5449,3 +5449,9 @@ Entries:
       message: 'Fixed: Crypods being almost impossible to cool down specific species.'
   id: 711
   time: '2026-07-25T20:59:49.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: Added bloodred vim, its an allulalo exclusive and can dash!
+  id: 712
+  time: '2026-07-25T21:00:48.0000000+00:00'
