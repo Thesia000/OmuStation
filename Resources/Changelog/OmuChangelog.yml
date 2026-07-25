@@ -5471,3 +5471,9 @@ Entries:
         jobs as loadout options.
   id: 714
   time: '2026-07-25T21:26:13.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: Added changeling Berserk sting, get mad... grr
+  id: 715
+  time: '2026-07-25T21:48:47.0000000+00:00'
