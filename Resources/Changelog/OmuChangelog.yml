@@ -5487,3 +5487,9 @@ Entries:
   changes: []
   id: 717
   time: '2026-07-25T21:57:36.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Cognizine now requires the entity be non-hostile
+  id: 718
+  time: '2026-07-25T21:58:29.0000000+00:00'
