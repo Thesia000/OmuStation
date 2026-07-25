@@ -5441,3 +5441,11 @@ Entries:
       message: Cog's bar now has proper disposal pipes.
   id: 710
   time: '2026-07-25T20:57:50.0000000+00:00'
+- author: Richard Blonski
+  changes:
+    - type: Tweak
+      message: Cryopods now cool/heat all species equally.
+    - type: Fix
+      message: 'Fixed: Crypods being almost impossible to cool down specific species.'
+  id: 711
+  time: '2026-07-25T20:59:49.0000000+00:00'
