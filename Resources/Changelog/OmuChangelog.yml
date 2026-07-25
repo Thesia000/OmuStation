@@ -5405,3 +5405,9 @@ Entries:
       message: Fixed adminchat relay sending messages to non-admins.
   id: 704
   time: '2026-07-24T18:30:21.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed the game trying to roll aghosts as antags
+  id: 705
+  time: '2026-07-25T17:32:35.0000000+00:00'
