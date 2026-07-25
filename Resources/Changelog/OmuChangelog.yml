@@ -5411,3 +5411,9 @@ Entries:
       message: Fixed the game trying to roll aghosts as antags
   id: 705
   time: '2026-07-25T17:32:35.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Added further customization to the 'DescSquad' Component
+  id: 706
+  time: '2026-07-25T18:24:26.0000000+00:00'
