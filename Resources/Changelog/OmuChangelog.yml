@@ -5493,3 +5493,9 @@ Entries:
       message: Cognizine now requires the entity be non-hostile
   id: 718
   time: '2026-07-25T21:58:29.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: ported funkystation reagent fires, puddles of ignitables can burn
+  id: 719
+  time: '2026-07-25T21:59:25.0000000+00:00'
