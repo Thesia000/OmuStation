@@ -5463,3 +5463,11 @@ Entries:
         locker. 
   id: 713
   time: '2026-07-25T21:23:49.0000000+00:00'
+- author: archee1
+  changes:
+    - type: Tweak
+      message: >-
+        Formal shoes such as leather and laceups are now available on a lot more
+        jobs as loadout options.
+  id: 714
+  time: '2026-07-25T21:26:13.0000000+00:00'
