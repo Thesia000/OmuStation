@@ -39,7 +39,7 @@
   - BasicRoundstartVariation
 
 - type: gamePreset
-  id: AdminManuelGameControll
+  id: AdminManualGameControl
   name: manual-control-gamerule-title
   showInVote: false #admin only
   description: manual-control-gamerule-description
