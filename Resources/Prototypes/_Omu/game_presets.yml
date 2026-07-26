@@ -51,6 +51,6 @@
   id: AdminManualGameControlCOMPLETE
   name: manual-control-gamerule-title
   showInVote: false #admin only
-  description: manuel-control-gamerule-description
+  description: manual-control-gamerule-description
   rules:
   - BasicRoundstartVariation
