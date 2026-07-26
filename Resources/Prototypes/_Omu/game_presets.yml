@@ -42,7 +42,7 @@
   id: AdminManuelGameControll
   name: manuel-controll-gamerule-title
   showInVote: false #admin only
-  description: manuel-controll-gamerule-description
+  description: manuel-control-gamerule-description
   rules:
   - SpaceTrafficControlFriendlyEventScheduler
   - BasicRoundstartVariation
