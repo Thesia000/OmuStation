@@ -40,7 +40,7 @@
 
 - type: gamePreset
   id: AdminManuelGameControll
-  name: manuel-control-gamerule-title
+  name: manual-control-gamerule-title
   showInVote: false #admin only
   description: manual-control-gamerule-description
   rules:
