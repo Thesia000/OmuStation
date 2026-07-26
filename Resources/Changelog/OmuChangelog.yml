@@ -5525,3 +5525,9 @@ Entries:
         delivery all round
   id: 722
   time: '2026-07-26T17:51:25.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Add
+      message: New game rule for admins to use :3
+  id: 723
+  time: '2026-07-26T17:52:37.0000000+00:00'
