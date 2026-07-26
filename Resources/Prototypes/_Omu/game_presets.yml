@@ -37,3 +37,20 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
+
+- type: gamePreset
+  id: AdminManuelGameControllCOMPLETE
+  name: manuel-controll-gamerule-title
+  showInVote: false #admin only
+  description: manuel-controll-gamerule-description
+  rules:
+  - SpaceTrafficControlFriendlyEventScheduler
+  - BasicRoundstartVariation
+
+- type: gamePreset
+  id: AdminManuelGameControllCOMPLETE
+  name: manuel-controll-gamerule-title
+  showInVote: false #admin only
+  description: manuel-controll-gamerule-description
+  rules:
+  - BasicRoundstartVariation
