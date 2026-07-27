@@ -5531,3 +5531,11 @@ Entries:
       message: New game rule for admins to use :3
   id: 723
   time: '2026-07-26T17:52:37.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: >-
+        Kettle's disposals is now connected properly to the disposals pipe
+        system.
+  id: 724
+  time: '2026-07-27T13:58:46.0000000+00:00'
