@@ -5553,3 +5553,9 @@ Entries:
       message: Increased spawn rate of sleeper agents
   id: 726
   time: '2026-07-27T15:03:35.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Added IAA as a midround spawn.
+  id: 727
+  time: '2026-07-27T15:04:17.0000000+00:00'
