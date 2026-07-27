@@ -5539,3 +5539,11 @@ Entries:
         system.
   id: 724
   time: '2026-07-27T13:58:46.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: >-
+        Added a single disposals pipe to connect a disposals unit in the medbay
+        in Leonid.
+  id: 725
+  time: '2026-07-27T14:32:01.0000000+00:00'
