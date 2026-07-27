@@ -5573,3 +5573,11 @@ Entries:
       message: New Vent Critters can spawn
   id: 729
   time: '2026-07-27T21:31:36.0000000+00:00'
+- author: archee1
+  changes:
+    - type: Add
+      message: >-
+        Pill canisters now have an open and closed visual state similar to
+        toolboxes
+  id: 730
+  time: '2026-07-27T21:57:11.0000000+00:00'
