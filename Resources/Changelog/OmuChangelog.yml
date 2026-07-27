@@ -5565,3 +5565,11 @@ Entries:
       message: Lowered Abductor spawn slightly.
   id: 728
   time: '2026-07-27T21:23:16.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Floor Goblins can spawn again
+    - type: Add
+      message: New Vent Critters can spawn
+  id: 729
+  time: '2026-07-27T21:31:36.0000000+00:00'
