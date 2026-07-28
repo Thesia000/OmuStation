@@ -5581,3 +5581,11 @@ Entries:
         toolboxes
   id: 730
   time: '2026-07-27T21:57:11.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: >-
+        You now require the "CanPilot" tag to pilot mechs, this means that mobs
+        like monkeys cannot pilot a mech, HAMTR and VIM are unaffected by this.
+  id: 731
+  time: '2026-07-28T00:54:19.0000000+00:00'
