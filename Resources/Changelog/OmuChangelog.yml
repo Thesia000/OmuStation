@@ -5607,3 +5607,9 @@ Entries:
       message: Cog's cargo window shutter is now directional.
   id: 734
   time: '2026-07-29T01:56:05.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Remove
+      message: Paradox clone disabled due to urgent bug. Will be enabled in the future
+  id: 735
+  time: '2026-07-29T03:32:54.0000000+00:00'
