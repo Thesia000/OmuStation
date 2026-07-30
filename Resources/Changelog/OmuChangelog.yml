@@ -5613,3 +5613,9 @@ Entries:
       message: Paradox clone disabled due to urgent bug. Will be enabled in the future
   id: 735
   time: '2026-07-29T03:32:54.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Adds the steal target to the hos's other guns.
+  id: 736
+  time: '2026-07-30T00:27:14.0000000+00:00'
