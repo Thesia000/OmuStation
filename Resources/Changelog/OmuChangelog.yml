@@ -5667,3 +5667,9 @@ Entries:
       message: Changed shuttlebombing rule on request of headmins.
   id: 742
   time: '2026-07-31T17:15:39.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: Added cortical borers
+  id: 743
+  time: '2026-07-31T17:27:02.0000000+00:00'
