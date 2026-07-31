@@ -5661,3 +5661,9 @@ Entries:
         two crimes.
   id: 741
   time: '2026-07-31T17:03:46.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Changed shuttlebombing rule on request of headmins.
+  id: 742
+  time: '2026-07-31T17:15:39.0000000+00:00'
