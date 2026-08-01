@@ -5673,3 +5673,11 @@ Entries:
       message: Added cortical borers
   id: 743
   time: '2026-07-31T17:27:02.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: >-
+        Fixed round end summary window crashing when a player writes a badly
+        formatted message as last message.
+  id: 744
+  time: '2026-08-01T20:47:04.0000000+00:00'
