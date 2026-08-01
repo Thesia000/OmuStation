@@ -119,6 +119,7 @@
     - Sheet
     - Metal
     - Steel
+    - ConstructionMaterial # Goob
   - type: UserInterface # Omu Start - EE Port
     interfaces:
       enum.RadialSelectorUiKey.Key:

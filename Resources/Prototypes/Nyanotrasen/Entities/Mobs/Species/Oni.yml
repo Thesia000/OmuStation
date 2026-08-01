@@ -55,6 +55,8 @@
     modifier: 0.25 # Slowdowns incurred by worn clothing are 25% less effective.
   - type: Body
     prototype: Oni
+  - type: Damageable # Goob-Fixes
+    damageModifierSet: Oni
   - type: LightweightDrunk
     boozeStrengthMultiplier: 0.5 # REAL hard to get drunk
   - type: Fixtures
