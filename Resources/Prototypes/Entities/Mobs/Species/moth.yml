@@ -206,6 +206,7 @@
     noRot: true
     drawdepth: Mobs
     layers:
+      - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # Floof
       - map: [ "enum.HumanoidVisualLayers.Groin" ]
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -235,9 +236,10 @@
       - map: [ "id" ]
       - map: [ "outerClothing" ]
       - map: [ "beltalt" ] # Omu change.
-      - map: [ "enum.HumanoidVisualLayers.Wings" ] #Omu - change Tail to Wings
-      - map: [ "enum.HumanoidVisualLayers.Tail" ]
+      - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
+      - map: [ "enum.HumanoidVisualLayers.TailBehindBackpack" ] # imp
       - map: [ "back" ]
+      - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # Floof
       - map: [ "neck" ]
       - map: [ "enum.HumanoidVisualLayers.Face" ] # Goobstation?
       - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
