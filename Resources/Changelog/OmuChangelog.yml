@@ -5697,3 +5697,9 @@ Entries:
       message: Added changeling leap - it leaps at you.
   id: 746
   time: '2026-08-02T21:16:51.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Fix
+      message: 'Bug fix: Chitinids now speak Chittin instead of Moffic'
+  id: 747
+  time: '2026-08-02T22:50:49.0000000+00:00'
