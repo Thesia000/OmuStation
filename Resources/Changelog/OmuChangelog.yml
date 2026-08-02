@@ -5691,3 +5691,9 @@ Entries:
       message: Increased cortical borer egg laying cost to 250 from 200
   id: 745
   time: '2026-08-02T19:57:14.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: Added changeling leap - it leaps at you.
+  id: 746
+  time: '2026-08-02T21:16:51.0000000+00:00'
