@@ -106,12 +106,14 @@
   storage:
     back:
     - ClothingHeadHatFlowerWreath
+  groupBy: "hats" # GoobStation
 
 - type: loadout
   id: Hairflower
   storage:
     back:
     - ClothingHeadHatHairflower
+  groupBy: "hats"  # GoobStation
 
 # Headphones
 - type: loadout
@@ -119,6 +121,7 @@
   storage:
     back:
     - ClothingMultipleHeadphones
+  groupBy: "hats" # GoobStation
 
 # Toys
 - type: loadout
@@ -126,12 +129,14 @@
   storage:
     back:
     - PlushieLizard
+  groupBy: "plushies" # GoobStation
 
 - type: loadout
   id: PlushieSpaceLizard
   storage:
     back:
     - PlushieSpaceLizard
+  groupBy: "plushies" # GoobStation
 
 - type: loadout
   id: ThreeCandles
