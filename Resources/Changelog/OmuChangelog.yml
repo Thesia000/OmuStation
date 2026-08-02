@@ -5681,3 +5681,13 @@ Entries:
         formatted message as last message.
   id: 744
   time: '2026-08-01T20:47:04.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed firestacking on fires - they actually hurt again
+    - type: Fix
+      message: Fixed mirror maiden's visibility
+    - type: Tweak
+      message: Increased cortical borer egg laying cost to 250 from 200
+  id: 745
+  time: '2026-08-02T19:57:14.0000000+00:00'
