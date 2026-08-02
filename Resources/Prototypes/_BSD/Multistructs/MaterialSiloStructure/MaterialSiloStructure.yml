@@ -1,5 +1,5 @@
 ﻿- type: entity
-  id: StationServerMultistructCore
+  id: MaterialSiloMultistructCore
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
   name: StationServerCoreName
   description: StationServerMultistructCoreDesc
@@ -9,17 +9,22 @@
     allowedTypes:
     - ICC_ASSIGN
     - ICC_Print
-  - type: IngameServer
-    processingPower: 5.0
-    processingPowerProvidingTypes:
-    - ServerComponent
-    - ServerProductivity
-    installedPrograms:
-    - 0.0
-    - 1.0
+  - type: SignalSalvMaterialReciverStructure
+  - type: MaterialStorage
+    ignoreColor: true
+    StorageCapPerMaterialDefaultValue: 10000
+  - type: Silo
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 1000
+  - type: DeviceLinkSource
+    range: 1000
+    ports:
+      - MaterialSilo
   - type: MultiBlockPart
     structureType: 
-    - IngameServerCore
+    - MaterialSiloStructureCore
     allowedConnectionTypesNorth:
     - ALL
     allowedConnectionTypesEast:
@@ -30,11 +35,8 @@
     - ALL
   - type: MultiBlockStructure
     allowedTypes:
-    - ServerConnector
-    - EnergyTransfair
-    - EnergyCapacityProvider
-    - ServerProductivity
-    - ServerComponent
+    - MaterialSiloReciver
+    - MaterialSiloStorageExtender
   - type: ActivatableUI
     key: enum.IngameConsoleUiKey.Key
   - type: UserInterface

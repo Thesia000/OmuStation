@@ -1,25 +1,17 @@
 ﻿- type: entity
-  id: StationServerMultistructCore
+  id: FTLDriveMultistructCore
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
-  name: StationServerCoreName
-  description: StationServerMultistructCoreDesc
+  name: FTLDriveCoreName
+  description: FTLDriveMultistructCoreDesc
   components:
-  - type: IngameServerClientLinkInfrastructure
   - type: IngameConsole
     allowedTypes:
-    - ICC_ASSIGN
+    - SSA_FTL
     - ICC_Print
-  - type: IngameServer
-    processingPower: 5.0
-    processingPowerProvidingTypes:
-    - ServerComponent
-    - ServerProductivity
-    installedPrograms:
-    - 0.0
-    - 1.0
+  - type: SignalSalvFtlDevice
   - type: MultiBlockPart
     structureType: 
-    - IngameServerCore
+    - FTLDriveStructureCore
     allowedConnectionTypesNorth:
     - ALL
     allowedConnectionTypesEast:
@@ -30,11 +22,8 @@
     - ALL
   - type: MultiBlockStructure
     allowedTypes:
-    - ServerConnector
-    - EnergyTransfair
-    - EnergyCapacityProvider
-    - ServerProductivity
-    - ServerComponent
+    - MaterialSiloReciver
+    - MaterialSiloStorageExtender
   - type: ActivatableUI
     key: enum.IngameConsoleUiKey.Key
   - type: UserInterface

@@ -1,5 +1,6 @@
 using Content.Shared.Materials;
 using Robust.Shared.Prototypes;
+using Content.Shared.Random;
 
 namespace Content.Omu.Server._BSD.SignalSalv.Components;
 
@@ -53,4 +54,10 @@ public sealed partial class SignalSalvPlanetResourcesComponent : Component
     /// </summary>
     [DataField]
     public float POIMinAngleDifference = 0.2f;
+
+    /// <summary>
+    /// Determiens the effects this disease mutates
+    /// </summary>
+    [DataField]
+    public ProtoId<WeightedRandomPrototype> AvailablePois = "SignalSalvPoi";
 }
