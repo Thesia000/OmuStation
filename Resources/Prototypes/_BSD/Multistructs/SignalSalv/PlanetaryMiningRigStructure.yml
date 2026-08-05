@@ -1,1 +1,32 @@
-﻿
+﻿- type: entity
+  id: PlanetaryMiningRigMultistructCore
+  parent: [ MultistructBaseCore , BaseComputerAiAccess ]
+  name: PlanetaryMiningRigCoreName
+  description: PlanetaryMiningRigMultistructCoreDesc
+  components:
+  - type: IngameConsole
+    allowedTypes:
+    - SSA_FTL
+    - ICC_Print
+  - type: SignalSalvFtlDevice
+  - type: MultiBlockPart
+    structureType: 
+    - PlanetaryMiningRigStructureCore
+    allowedConnectionTypesNorth:
+    - ALL
+    allowedConnectionTypesEast:
+    - ALL
+    allowedConnectionTypesSouth:
+    - ALL
+    allowedConnectionTypesWest:
+    - ALL
+  - type: MultiBlockStructure
+    allowedTypes:
+    - PlanetaryMiningRigDrill
+    - PlanetaryMiningRigExtender
+  - type: ActivatableUI
+    key: enum.IngameConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IngameConsoleUiKey.Key:
+        type: IngameConsoleBoundUserInterface

@@ -8,6 +8,10 @@ using Content.Omu.Server._BSD.SignalSalv.Helpers;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
+using Content.Server.Shuttles.Systems;
+using Content.Server.Shuttles.Events;
+using Content.Shared.Shuttles.Events;
+
 using Robust.Shared.Timing;
 
 using System.Linq;
@@ -21,16 +25,12 @@ using Content.Shared.Interaction;
 using Robust.Shared.Random;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Toolshed.TypeParsers.Math;
-using Content.Goobstation.Shared.Wraith.SaltLines;
-using System.Diagnostics.Metrics;
 
 using Content.Server.Parallax;
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Toolshed.Commands.Values;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
-using Content.Shared.Ninja.Systems;
+using Content.Server.Shuttles.Components;
+
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
@@ -42,6 +42,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly ShuttleSystem _shuttle = default!;
 
     private static readonly TotalMaterialMiningRateList MaterialMiningRatesBase = new();
     private static readonly ProtoId<BiomeTemplatePrototype> BiomeTemplate = "Continental";
@@ -83,11 +84,17 @@ public sealed partial class SignalSalvSystem : EntitySystem
     }
     public void IngameConsoleCommandSignalSalvFTLDevice(Entity<SignalSalvFtlDeviceComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
-        if (args.Type == IngameConsoleCommandType.SSA_FTL)
+        if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "jump")
         {
             IngameConsoleHistoryChangeEvent ev = new("-> FTL Attempt started");
             RaiseLocalEvent(ent, ref ev);
             GenerateExpeditionMapAndFTL(ent, ent.Comp);
+        }
+        else if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "calculate")
+        {
+            IngameConsoleHistoryChangeEvent ev = new("-> FTL Coordinates calculated");
+            RaiseLocalEvent(ent, ref ev);
+            GenerateJumpPoint(ent.Comp);
         }
         else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 1 && args.Args[1] == "ftl")
         {
@@ -126,7 +133,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
             int counter = 1;
             while (counter < 11)
             {
-                if (comp.MaterialInTransit[iterator] > (comp.MaterialProductionPerSecond[iterator] / (counter / 10.0f)))
+                if (comp.MaterialInTransit[iterator] >= (comp.MaterialProductionPerSecond[iterator] / (counter / 10.0f)))
                 {
                     subAddition += "|";
                 }
@@ -156,16 +163,74 @@ public sealed partial class SignalSalvSystem : EntitySystem
         EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(uidReciver).MapID);
         if (!TryComp<SignalSalvFtlDeviceComponent>(uidReciver, out var compFTL)) return "ERROR- THIS IS NOT A FTL DRIVE";
         TransformComponent transComp = Transform(uidReciver);
+        if (transComp.GridUid! == null) return "ERROR - NO SHUTTLE ATTACHED";
+        var gridUid = transComp.GridUid.Value;
+        if (!TryComp<PhysicsComponent>(gridUid, out var physicsComp)) return "ERROR- THE SHUTTLE<" + gridUid + "> DOES NOT HAVE PHYSICS";
         Vector2d vector = new(transComp.Coordinates.X, transComp.Coordinates.Y);
         string returnString = "";
+        //Drive charge
         returnString += "-> FTL Capacitor Charge: " + compFTL.StoredChargeFTLCapacitiors + " out of required: " + compFTL.FTLCharge;
         returnString += "\n(";
         int counter = 1;
         while (counter < 11)
         {
-            if (compFTL.StoredChargeFTLCapacitiors > (compFTL.FTLCharge / (counter / 10.0f)))
+            if (compFTL.StoredChargeFTLCapacitiors >= (compFTL.FTLCharge * (counter / 10.0f)))
             {
                 returnString += "|";
+                if (counter == 10)
+                {
+                    returnString += ") -> (FTL DRIVE CHARGED";
+                }
+            }
+            else
+            {
+                returnString += "-";
+            }
+            counter++;
+        }
+        //Jump point
+        returnString += ")\n";
+        if (compFTL.JumpPointSet)
+        {
+            returnString += "-> Jump Point at location: (" + compFTL.DesignatedJumpPoint.X + "|" + compFTL.DesignatedJumpPoint.Y + ")\n";
+            returnString += "-> Approximate Jump Point distance: " + GetDistance(vector, compFTL.DesignatedJumpPoint);
+            returnString += "\n(";
+            counter = 1;
+            var distance = GetDistance(vector, compFTL.DesignatedJumpPoint);
+            while (counter < 11)
+            {
+                if (distance >= (compFTL.JumpPointTolerance * (counter / 10.0f)))
+                {
+                    returnString += "|";
+                    if (counter == 10)
+                    {
+                        returnString += ") -> (SHIP IN POSITION";
+                    }
+                }
+                else
+                {
+                    returnString += "-";
+                }
+                counter++;
+            }
+            returnString += ")\n";
+        }
+        else
+        {
+            returnString += "-> Jump point is yet to be calculated";
+        }
+        returnString += "-> FTL Drive Mass Capacity: " + compFTL.MaxFTLGridMass + " Current shuttle mass: " + physicsComp!.Mass;
+        returnString += "\n(";
+        counter = 1;
+        while (counter < 11)
+        {
+            if (physicsComp!.Mass <= (compFTL.MaxFTLGridMass * (10 - counter / 10.0f)))
+            {
+                returnString += "|";
+                if (counter == 10)
+                {
+                    returnString += ") -> (FTL DRIVE STRONG ENOUGHT";
+                }
             }
             else
             {
@@ -174,15 +239,6 @@ public sealed partial class SignalSalvSystem : EntitySystem
             counter++;
         }
         returnString += ")\n";
-        if (compFTL.JumpPointSet)
-        {
-            returnString += "-> Jump Point at location: (" + compFTL.DesignatedJumpPoint.X + "|" + compFTL.DesignatedJumpPoint.Y + ")\n";
-            returnString += "-> Approximate Jump Point distance: " + GetDistance(vector, compFTL.DesignatedJumpPoint);
-        }
-        else
-        {
-            returnString += "-> Jump point is yet to be calculated";
-        }
         return returnString;
     }
     #endregion
@@ -346,7 +402,14 @@ public sealed partial class SignalSalvSystem : EntitySystem
             RaiseLocalEvent(shuttleConsole, ref ev);
             return;
         }
-        EntityUid gridUid = (EntityUid) transComp.GridUid;//we know you arent null
+        EntityUid gridUid = transComp.GridUid.Value;//we know you arent null
+        TryComp<ShuttleComponent>(gridUid, out var shuttleComponent);
+        if (shuttleComponent == null)
+        {
+            IngameConsoleHistoryChangeEvent ev = new("-> FTL CHANCELLED | The grid is not a SHUTTLE somehow");
+            RaiseLocalEvent(shuttleConsole, ref ev);
+            return;
+        }
         //Check if the ship has FTL capabilities!!
         if (!CheckFTLAbility(gridUid, ftlComp))
         {
@@ -355,26 +418,31 @@ public sealed partial class SignalSalvSystem : EntitySystem
             return;
         }
         //Generate the Map
+        EntityUid targetMap;
         if (ftlComp.PreConfigedPlanet)
         {
-            GenerateExpeditionMap();//for now the same fix later lamo
+            targetMap = GenerateExpeditionMap();//for now the same fix later lamo
         }
         else
         {
-            GenerateExpeditionMap();
+            targetMap = GenerateExpeditionMap();
         }
         //Move the ship
-
+        var tagEv = new FTLTagEvent();
+        RaiseLocalEvent(transComp.GridUid.Value, ref tagEv);
+        var targetCoordinates = new EntityCoordinates(targetMap, new Vector2(0, 0));
+        Angle targetAngle = new();
+        _shuttle.FTLToCoordinates(transComp.GridUid.Value, shuttleComponent, targetCoordinates, targetAngle);
         return;
     }
     private bool CheckFTLAbility(EntityUid gridUid, SignalSalvFtlDeviceComponent ftlComp)
     {
-        if (TryComp<PhysicsComponent>(gridUid, out var physicsComp)) return false;
+        if (!TryComp<PhysicsComponent>(gridUid, out var physicsComp)) return false;
         TransformComponent transComp = Transform(gridUid);
         if (physicsComp!.Mass > ftlComp.MaxFTLGridMass) return false;
         if (ftlComp.FTLCharge > ftlComp.StoredChargeFTLCapacitiors) return false;
         Vector2d vectorCord = new(transComp.Coordinates.X, transComp.Coordinates.Y);
-        if (ftlComp.JumpPointTolerance > GetDistance(vectorCord, ftlComp.DesignatedJumpPoint)) return false;
+        if (ftlComp.JumpPointTolerance < GetDistance(vectorCord, ftlComp.DesignatedJumpPoint)) return false;
         return true;
     }
     private float GetDistance(Vector2d a, Vector2d b)
@@ -387,17 +455,19 @@ public sealed partial class SignalSalvSystem : EntitySystem
     {
         Random rand = new((int) _timing.CurTime.TotalSeconds);
         float angle = rand.NextFloat(0, (float) Math.PI * 2f);
-        ftlComp.DesignatedJumpPoint = (
-            Math.Cos(angle) * ftlComp.DistanceFromZeroZeroForJumpPoint,
-            Math.Sin(angle) * ftlComp.DistanceFromZeroZeroForJumpPoint
+        ftlComp.DesignatedJumpPoint = new(
+            (float) Math.Cos(angle) * ftlComp.DistanceFromZeroZeroForJumpPoint,
+            (float) Math.Sin(angle) * ftlComp.DistanceFromZeroZeroForJumpPoint
         );
+        ftlComp.JumpPointSet = true;
         return;
     }
-    public void GenerateExpeditionMap()
+    public EntityUid GenerateExpeditionMap()
     {
         EntityUid expedMapUid = _mapSys.CreateMap(out var mapId);
         SignalSalvPlanetResourcesComponent planetResourcesComp = EnsureComp<SignalSalvPlanetResourcesComponent>(expedMapUid);
         GenerateExpeditionMap(expedMapUid, mapId, planetResourcesComp);
+        return expedMapUid;
     }
     public void GenerateExpeditionMap(EntityUid expedMapUid, MapId mapId, SignalSalvPlanetResourcesComponent planetResourcesComp)
     {
@@ -434,8 +504,9 @@ public sealed partial class SignalSalvSystem : EntitySystem
             int attempts = 0;
             bool invalidAngle = true;
             double angle = 0;
-            while (invalidAngle || attempts < 15)
+            while (invalidAngle && attempts < 15)
             {
+                attempts++;
                 invalidAngle = false;
                 angle = rand.NextFloat(0.0f, (float) Math.PI * 2.0f);
                 foreach (var iterator in takenAngles)
@@ -447,11 +518,10 @@ public sealed partial class SignalSalvSystem : EntitySystem
             takenAngles.Add(angle);
             offset.X = (float) Math.Sin(angle) * distance;
             offset.Y = (float) Math.Cos(angle) * distance;
-            _mapLoader.TryLoadGrid(mapId, pOIlocation, out var gridOut, null, offset);
-
-            //Turn map into a planet and add the outer barrier
-            _biome.EnsurePlanet(expedMapUid, _protoManager.Index(BiomeTemplate), rand.Next());
+            //_mapLoader.TryLoadGrid(mapId, pOIlocation, out var gridOut, null, offset); disabeled for now testing
         }
+        //Turn map into a planet and add the outer barrier
+        _biome.EnsurePlanet(expedMapUid, _protoManager.Index(BiomeTemplate), rand.Next());
 
     }
     #endregion

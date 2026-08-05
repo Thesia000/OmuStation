@@ -1,3 +1,6 @@
+using System.Numerics;
+using Robust.Shared.Map;
+
 namespace Content.Omu.Server._BSD.SignalSalv.Components;
 
 //This exists to allow me to modify specail values later such as true distance of objects in LY and is also used as a console UI detection.
@@ -33,7 +36,7 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
     /// Location where the FTL jump will be taking place
     /// </summary>
     [DataField]
-    public Vector2d DesignatedJumpPoint = new();
+    public Vector2 DesignatedJumpPoint = new();
 
     /// <summary>
     /// Location where the FTL jump will be taking place

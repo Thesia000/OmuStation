@@ -27,7 +27,11 @@ public sealed class IngameConsoleSystem : EntitySystem
     public void IngameConsoleHistoryChange(Entity<IngameConsoleComponent> ent, string historyAddition)
     {
         if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
-        comp.History.Add(historyAddition);
+        foreach (string iterator in historyAddition.Split('\n'))
+        {
+            if (iterator == null) continue;
+            comp.History.Add(iterator);
+        }
         var state = new IngameConsoleBoundUserInterfaceState(
             comp.History.ToArray<string>());
         _uiSystem.SetUiState(ent.Owner, IngameConsoleUiKey.Key, state);
@@ -56,7 +60,7 @@ public sealed class IngameConsoleSystem : EntitySystem
     #endregion
     #region Assistance in converstion
     //returns false by default aka this detects true only
-    HashSet<string> _waysToSayTrue = new HashSet<string> { "y", "yes", "true" };
+    HashSet<string> _waysToSayTrue = new HashSet<string> { "y", "yes", "true", "Y", "Yes", "TRUE", "True", "YES" };
     public bool InputBoolCheck(string input)
     {
         if (_waysToSayTrue.Contains(input)) return true;

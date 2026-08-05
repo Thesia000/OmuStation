@@ -183,6 +183,13 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         return component.StorageLimit == null || GetTotalMaterialAmount(uid, component) + volume <= component.StorageLimit;
     }
     //Omu start
+    /// <summary>
+    /// Get the maxiumum of a material that fits in a specified volume
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="volume"></param>
+    /// <param name="component"></param>
+    /// <returns>The maximum amount that will fit in the specified volume</returns>
     public int GetMaxAddableVolume(EntityUid uid, MaterialStorageComponent? component = null, string? material = null)
     {
         if (!Resolve(uid, ref component))
@@ -199,6 +206,28 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         }
         if (component.StorageLimit == null) return int.MaxValue;
         return Math.Min((int) component.StorageLimit - GetTotalMaterialAmount(uid, component), 0);//clamed for safty reasons
+    }
+
+
+    /// <todo>
+    /// Find out a decent way to make this function nativly used by inserting sheets that does not completele delete the entire sheet on insert
+    /// <\todo>
+    /// <summary>
+    /// Tries to change the amount of a specific material in the storage.
+    /// Forces the maximum of the materials if they dont fit instantly
+    /// Still respects the filters in place.
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="materialId"></param>
+    /// <param name="volume"></param>
+    /// <param name="component"></param>
+    /// <param name="dirty"></param>
+    /// <returns>If it was successful</returns>
+    public bool TryChangeMaterialAmountMax(EntityUid uid, string materialId, int volume, MaterialStorageComponent? component = null, bool dirty = true)
+    {
+        var deltaVolume = Math.Min(volume, GetMaxAddableVolume(uid, component, materialId));
+        if (TryChangeMaterialAmount(uid, materialId, deltaVolume, component, dirty)) return false;
+        return true;
     }
     //Omu end
 
@@ -313,7 +342,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     /// <param name="entity"></param>
     /// <param name="materials"></param>
     /// <returns>If the amount can be changed</returns>
-    public bool TryChangeMaterialAmount(Entity<MaterialStorageComponent?> entity, Dictionary<string,int> materials)
+    public bool TryChangeMaterialAmount(Entity<MaterialStorageComponent?> entity, Dictionary<string, int> materials)
     {
         if (!Resolve(entity, ref entity.Comp))
             return false;

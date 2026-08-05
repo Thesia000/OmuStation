@@ -9,6 +9,7 @@
     - SSA_FTL
     - ICC_Print
   - type: SignalSalvFtlDevice
+  - type: MultiBlockEnergyManagment
   - type: MultiBlockPart
     structureType: 
     - FTLDriveStructureCore
