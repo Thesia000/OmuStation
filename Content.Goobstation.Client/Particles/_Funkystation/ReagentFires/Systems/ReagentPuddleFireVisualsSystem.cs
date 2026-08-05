@@ -1,15 +1,17 @@
-﻿using Content.Client._Starfall.Particles;
+﻿using Content.Goobstation.Shared.Particles;
 using Content.Shared._Funkystation.ReagentFires;
-using Content.Shared._Starfall.Particles;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._Funkystation.ReagentFires.Systems
+// This dogshit is in goob client because it was merged with a different particle system for no fucking reason and goobs particlesys is goobmod.
+
+namespace Content.Goobstation.Client.Particles._Funkystation.ReagentFires.Systems
 {
-    public sealed partial class ReagentPuddleFireVisualsSystem : EntitySystem
+    public sealed class ReagentPuddleFireVisualsSystem : EntitySystem
     {
-        [Dependency] private AppearanceSystem _appearance = null!;
-        [Dependency] private ParticleSystem _particles = null!;
-        [Dependency] private SharedTransformSystem _transform = null!;
+        [Dependency] private readonly AppearanceSystem _appearance = null!;
+        [Dependency] private readonly ParticleSystem _particles = null!;
+        [Dependency] private readonly SharedTransformSystem _transform = null!;
+        [Dependency] private readonly SpriteSystem _sprite = null!;
 
         private readonly Dictionary<EntityUid, (ActiveEmitter? Fire, ActiveEmitter? Smoke)> _emitters = new();
 
@@ -95,7 +97,7 @@ namespace Content.Client._Funkystation.ReagentFires.Systems
             }
 
             var stateString = fireState.ToString();
-            sprite.LayerSetState(0, stateString);
+            _sprite.LayerSetRsiState(uid, 0,stateString);
 
             var intensity = 1f;
             var smokeSize = 0.8f;
@@ -116,13 +118,13 @@ namespace Content.Client._Funkystation.ReagentFires.Systems
             {
                 pair.Smoke.Intensity = intensity;
                 var smokeOverrides = new ParticleRuntimeOverrides { ParticleSize = smokeSize };
-                ParticleSystem.UpdateRuntime(pair.Smoke, smokeOverrides);
+                _particles.UpdateRuntime(pair.Smoke.Handle, smokeOverrides);
             }
 
             // Apply synchronized flame color dynamically to the decoupled sprite and standard particle emitters
             if (_appearance.TryGetData<Color>(uid, ReagentPuddleFireVisuals.FireColor, out var color))
             {
-                sprite.Color = color;
+                _sprite.SetColor(uid, color);
                 if (pair.Fire != null)
                     pair.Fire.ColorOverride = color;
                 // Soften the smoke tint opacity slightly so it acts as a subtle background element
