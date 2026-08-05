@@ -1022,8 +1022,8 @@
 
 - type: marking
   id: WingsPyrausta
-  bodyPart: Tail
-  markingCategory: Tail
+  bodyPart: Wings #Omu - Tail to Wings
+  markingCategory: Wings #Omu - Tail to Wings
   speciesRestriction: [ Moth ]
   layering:
     pyr_neck: TailBehindBackpack

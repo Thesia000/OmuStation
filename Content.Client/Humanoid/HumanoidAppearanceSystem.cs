@@ -1,26 +1,7 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 csqrb <56765288+CaptainSqrBeard@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 paige404 <59348003+paige404@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
 using Content.Client.DisplacementMap;
-using Content.Shared.CCVar;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -344,26 +325,25 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     private void RemoveMarking(Marking marking, Entity<SpriteComponent> spriteEnt)
     {
         if (!_markingManager.TryGetMarking(marking, out var prototype))
+        {
             return;
+        }
 
         foreach (var sprite in prototype.Sprites)
         {
             if (sprite is not SpriteSpecifier.Rsi rsi)
+            {
                 continue;
+            }
 
             var layerId = $"{marking.MarkingId}-{rsi.RsiState}";
             if (!_sprite.LayerMapTryGet(spriteEnt.AsNullable(), layerId, out var index, false))
+            {
                 continue;
+            }
 
             _sprite.LayerMapRemove(spriteEnt.AsNullable(), layerId);
             _sprite.RemoveLayer(spriteEnt.AsNullable(), index);
-
-            // If this marking is one that can be displaced, we need to remove the displacement as well; otherwise
-            // altering a marking at runtime can lead to the renderer falling over.
-            // The Vulps must be shaved.
-            // (https://github.com/space-wizards/space-station-14/issues/40135).
-            if (prototype.CanBeDisplaced)
-                _displacement.EnsureDisplacementIsNotOnSprite(spriteEnt, layerId);
         }
     }
 
@@ -446,7 +426,9 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             // FLOOF CHANGE START
             var markingSprite = markingPrototype.Sprites[j];
             if (markingSprite is not SpriteSpecifier.Rsi rsi)
-                return;
+            {
+                continue;
+            }
 
             var layerSlot = markingPrototype.BodyPart;
             // first, try to see if there are any custom layers for this marking
@@ -502,7 +484,9 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             sprite.LayerSetVisible(layerId, visible);
 
             if (!visible || setting == null) // this is kinda implied
+            {
                 continue;
+            }
 
             // Okay so if the marking prototype is modified but we load old marking data this may no longer be valid
             // and we need to check the index is correct.

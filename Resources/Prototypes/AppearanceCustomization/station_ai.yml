@@ -54,7 +54,8 @@
   - StationAiHologramHorror #Goobstation
   - StationAiHologramQueen #Goobstation
   - StationAiHologramPerformer  #Goobstation
-  - StationAiHologramAlgalone # omu, part of bugborg pr
+# Omustation Start
+  - StationAiHologramAlgalone
   - StationAiHologramFractalsnowflake
   - StationAiHologramHensonsnode
   - StationAiHologramLongrun
@@ -63,6 +64,7 @@
   - StationAiHologramRorschach
   - StationAiHologramSeraphim
   - StationAiHologramTripleaffirmative
+# Omustation End
 
 # Iconography
 - type: stationAiCustomization
