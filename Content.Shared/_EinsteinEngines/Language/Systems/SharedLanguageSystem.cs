@@ -1,4 +1,5 @@
 using System.Text;
+using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 

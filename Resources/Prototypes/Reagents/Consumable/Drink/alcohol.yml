@@ -322,7 +322,7 @@
       - !type:Drunk
         boozePower: 2
         conditions: # Omu start
-        - !type:OrganType #todo marty omu
+        - !type:OrganType #todo omu
           type: Allulalo
           shouldHave: false
       - !type:SatiateThirst

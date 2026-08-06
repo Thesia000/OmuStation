@@ -1,4 +1,6 @@
+/* todo omu
 using Content.Shared.Polymorph.Components;
+
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Polymorph;
@@ -27,3 +29,4 @@ public sealed partial class RevertPolymorph : EventEntityEffect<RevertPolymorph>
     }
 
 }
+*/
