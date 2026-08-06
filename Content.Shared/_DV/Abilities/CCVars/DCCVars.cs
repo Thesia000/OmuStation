@@ -15,6 +15,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+/* Omu This shit doesnt exist here, look in Content.Shared/_DV/CCVars/
+
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._DV.CCVars;
@@ -34,7 +36,7 @@ public sealed partial class DCCVars
 
     /*
      * Cosmic Cult
-     */
+
 
     /// <summary>
     /// The multiplier for the difficulty of the monument.
@@ -84,3 +86,4 @@ public sealed partial class DCCVars
     public static readonly CVarDef<int> CosmicCultFinaleDelaySeconds =
         CVarDef.Create("cosmiccult.extra_entropy_for_finale", 1, CVar.SERVER);
 }
+*/

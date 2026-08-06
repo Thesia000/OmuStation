@@ -62,7 +62,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._Shitmed.Weapons.Ranged.Events; // Shitmed Change
 using Content.Shared.ActionBlocker;
@@ -74,7 +73,6 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
 using Content.Shared.Mech.Components; // Goobstation
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
@@ -234,7 +232,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (!TryGetGun(user.Value, out var gun) ||
             HasComp<ItemComponent>(user)) // Goobstation - carryable entities (e.g. felinids) can't shoot while held
             return;
-        }
 
         if (gun.Owner != GetEntity(msg.Gun))
             return;
@@ -263,7 +260,6 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         if (!TryGetGun(user.Value, out var userGun))
             return;
-        }
 
         if (userGun.Owner != gunUid)
             return;
