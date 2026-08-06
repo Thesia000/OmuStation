@@ -156,7 +156,7 @@
       time: 20h # Omu
     - !type:OverallPlaytimeRequirement # Omu
       time: 40h # Omu Edit - Not technically needed, but it helps since time transfered people still need to play shifts before captaining.
-    #- !type:SpeciesRequirement # Goob - None Felinid
+      #- !type:SpeciesRequirement # Goob - None Felinid
     #  inverted: true
     #  species:
     #  - Felinid

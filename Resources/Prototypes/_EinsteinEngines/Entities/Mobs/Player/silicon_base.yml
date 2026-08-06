@@ -182,8 +182,8 @@
       damageBleedModifiers: BloodlossHuman
       bloodReagents:
         reagents:
-          - ReagentId: CoolantIPC
-            Quantity: 1
+        - ReagentId: CoolantIPC
+          Quantity: 1
       bleedReductionAmount: 0
       bloodMaxVolume: 500
       chemicalMaxVolume: 0

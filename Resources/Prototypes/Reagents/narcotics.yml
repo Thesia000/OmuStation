@@ -102,14 +102,14 @@
       - !type:MovementSpeedModifier
         conditions: # imp # Omu
         - !type:MetabolizerTypeCondition
-          type: [Allulalo] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
           inverted: true
         walkSpeedModifier: 1.35
         sprintSpeedModifier: 1.35
       - !type:MovementSpeedModifier #imp
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [Allulalo] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          type: [ Allulalo ] # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
           inverted: true
         walkSpeedModifier: 1.2
         sprintSpeedModifier: 1.2

@@ -143,8 +143,8 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 20h
-    #- !type:SpeciesRequirement # Goob - None Felinid
-    #  inverted: true
+  #- !type:SpeciesRequirement # Goob - None Felinid
+  #  inverted: true
     #  species:
     #  - Felinid
     - !type:OverallPlaytimeRequirement

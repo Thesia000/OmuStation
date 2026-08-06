@@ -1081,7 +1081,7 @@
         emptyLabel: borg-slot-small-containers-empty
         emptyRepresentative: ChemistryEmptyVial # Omu
         whitelist:
-        # Omustation start
+          # Omustation start
           components:
           - FitsInDispenser
           tags:

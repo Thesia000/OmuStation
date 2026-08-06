@@ -491,7 +491,7 @@
         time: 12
       - !type:HealthChange #Starlight start
         conditions:
-          - !type:MetabolizerTypeCondition
+        - !type:MetabolizerTypeCondition
             type:
             - Resomi
             - Avali

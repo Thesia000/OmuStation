@@ -139,9 +139,9 @@
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   requirements:
-    - !type:RoleTimeRequirement
-      role: JobWarden
-      time: 5h # Goobstation
+  - !type:RoleTimeRequirement
+    role: JobWarden
+    time: 5h # Goobstation
     - !type:RoleTimeRequirement
       role: JobDetective
       time: 5h # Omustation
