@@ -5741,3 +5741,9 @@ Entries:
   changes: []
   id: 753
   time: '2026-08-07T08:33:22.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Add
+      message: Added per color glowing toggles to markings.
+  id: 754
+  time: '2026-08-07T09:07:49.0000000+00:00'
