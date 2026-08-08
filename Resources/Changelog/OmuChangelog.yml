@@ -5860,3 +5860,13 @@ Entries:
         for a new machine and figure it out.
   id: 768
   time: '2026-08-08T21:42:06.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Ninja can now only hack comms consoles which are able to call evac.
+    - type: Tweak
+      message: Ninja will lose stealth when shot.
+    - type: Tweak
+      message: Ninjutsu now loses the sneak attack bonus when attacked.
+  id: 769
+  time: '2026-08-08T21:56:30.0000000+00:00'
