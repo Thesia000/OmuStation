@@ -5878,3 +5878,9 @@ Entries:
         changeling sting.
   id: 770
   time: '2026-08-08T21:59:47.0000000+00:00'
+- author: NotActuallyMarty
+  changes:
+    - type: Add
+      message: Avali now look sleeker in various helmets including hardsuits.
+  id: 771
+  time: '2026-08-08T22:36:17.0000000+00:00'
