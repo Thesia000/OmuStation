@@ -5834,3 +5834,13 @@ Entries:
         Mothmization is at hand!
   id: 765
   time: '2026-08-08T20:57:58.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: >-
+        Botany has lost its monopoly on cool bandanas. Chemists, Janitors,
+        Roboticists, Security, Cargo, and the Quartermaster now have some too!
+    - type: Add
+      message: Also added a plain white bandana, and tossed it at the Chef.
+  id: 766
+  time: '2026-08-08T21:00:32.0000000+00:00'
