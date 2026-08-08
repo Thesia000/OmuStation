@@ -5794,3 +5794,11 @@ Entries:
         instead for brigmed and admin assistant
   id: 760
   time: '2026-08-08T20:29:09.0000000+00:00'
+- author: feistyfedora
+  changes:
+    - type: Tweak
+      message: >-
+        Updated the hair color selection to respond a faster when picking hair
+        colors!
+  id: 761
+  time: '2026-08-08T20:30:19.0000000+00:00'
