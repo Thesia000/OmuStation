@@ -5802,3 +5802,11 @@ Entries:
         colors!
   id: 761
   time: '2026-08-08T20:30:19.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: >-
+        Swapped out the medical smart fridge with a botany smart fridge between
+        hydro and kitchen in most maps.
+  id: 762
+  time: '2026-08-08T20:45:48.0000000+00:00'
