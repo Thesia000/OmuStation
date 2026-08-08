@@ -5826,3 +5826,11 @@ Entries:
       message: Changed the clowns room airlock to a theatre airlock in Glacier.
   id: 764
   time: '2026-08-08T20:49:34.0000000+00:00'
+- author: 3PonPon3
+  changes:
+    - type: Tweak
+      message: >-
+        Moths can now use up to 3 different wings markings for customization!
+        Mothmization is at hand!
+  id: 765
+  time: '2026-08-08T20:57:58.0000000+00:00'
