@@ -418,7 +418,7 @@ public sealed partial class GunSystem : SharedGunSystem
             ThrowingSystem.TryThrow(uid, mapDirection, gun.Comp.ProjectileSpeedModified, user);
             return;
         }
-        projectileComp.Damage *= gun.DamageModifier; // Omu
+        projectileComp.Damage *= gun.Comp.DamageModifier; // Omu
         ShootProjectile(uid, mapDirection, gunVelocity, gun, user, gun.Comp.ProjectileSpeedModified,
         targetCoordinates); // Goobstation
     }

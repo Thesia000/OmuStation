@@ -8,8 +8,6 @@
   parent: PartHuman
   abstract: true
   components:
-  - type: Damageable
-    damageModifierSet: Oni
   - type: BodyPart
     species: Oni
   - type: Damageable # Goob-Fixes
@@ -31,7 +29,7 @@
   components:
   - type: Sprite
     sprite: Mobs/Species/Human/parts.rsi
-    state: "torso_m"
+    state: "chest_m"
 
 - type: entity
   id: GroinOni

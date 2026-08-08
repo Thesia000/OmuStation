@@ -419,13 +419,6 @@
   - LizardPlushieCaptain
 
 - type: loadoutGroup
-  id: CaptainJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieCaptain
-
-- type: loadoutGroup
   id: HoPHead
   name: loadout-group-hop-head
   minLimit: 0
@@ -477,13 +470,6 @@
   - ClothingFormalHoPDress # Omu
   - HoPLongcoat #goob
   - HoPLongcoatDV # DeltaV Longcoats
-
-- type: loadoutGroup
-  id: HoPJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieHeadOfPersonnel
 
 - type: loadoutGroup
   id: HoPJobTrinkets
@@ -577,13 +563,6 @@
   - WinterBoots
   - LaceupBoots # Omu
   - LeatherShoes # Omu
-
-- type: loadoutGroup
-  id: PassengerJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushiePassenger
 
 - type: loadoutGroup
   id: PassengerJobTrinkets
@@ -936,14 +915,6 @@
   - FlowerWaterClown
 
 - type: loadoutGroup
-  id: ClownJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieClown
-  - FlowerWaterClown
-
-- type: loadoutGroup
   id: MimeHead
   name: loadout-group-mime-head
   minLimit: 0
@@ -1007,13 +978,6 @@
   - EmergencySilicon
   - EmergencyOxygenCarnivoreMime # Omu
   - EmergencyOxygenEthanolMime # Omu
-
-- type: loadoutGroup
-  id: MimeJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieMime
 
 - type: loadoutGroup
   id: MimeJobTrinkets
@@ -1089,13 +1053,6 @@
   loadouts:
   - LizardPlushieMusician
 
-- type: loadoutGroup
-  id: MusicianJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieMusician
-
 # Cargo
 - type: loadoutGroup
   id: QuartermasterHead
@@ -1149,13 +1106,6 @@
   - SalvageBoots # Omu
   - LaceupBoots # Omu
   - LeatherShoes # Omu
-
-- type: loadoutGroup
-  id: QuartermasterJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieQuartermaster
 
 - type: loadoutGroup
   id: QuartermasterJobTrinkets
@@ -1315,13 +1265,6 @@
   - EngineeringWinterBoots
   - LaceupBoots # Omu
   - LeatherShoes # Omu
-
-- type: loadoutGroup
-  id: ChiefEngineerJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieChiefEngineer
 
 - type: loadoutGroup
   id: ChiefEngineerJobTrinkets
@@ -1533,13 +1476,6 @@
   - LizardPlushieResearchDirector
 
 - type: loadoutGroup
-  id: ResearchDirectorJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieResearchDirector
-
-- type: loadoutGroup
   id: ScientistHead
   name: loadout-group-scientist-head
   minLimit: 0
@@ -1702,14 +1638,6 @@
   - SecStar
 
 - type: loadoutGroup
-  id: HeadofSecurityJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieHeadofSecurity
-  - SecStar
-
-- type: loadoutGroup
   id: WardenHead
   name: loadout-group-warden-head
   minLimit: 0
@@ -1739,14 +1667,6 @@
   - WardenCoatBlue #goob
   - WardenGreatCoatDV # Omu
   - WardenLongcoat # DeltaV Longcoats
-
-- type: loadoutGroup
-  id: WardenJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieWarden
-  - SecStar
 
 - type: loadoutGroup
   id: WardenJobTrinkets
@@ -1891,27 +1811,12 @@
   - SecStar
 
 - type: loadoutGroup
-  id: DetectiveJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieDetective
-  - SecStar
-
-- type: loadoutGroup
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
   - RedJumpsuit
   - RedJumpskirt
   - RedMJ #Goob
-
-- type: loadoutGroup
-  id: SecurityCadetJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieSecurityCadet
 
 - type: loadoutGroup
   id: SecurityCadetJobTrinkets
@@ -1995,13 +1900,6 @@
   - MedicalWinterBoots
   - LaceupBoots # Omu
   - LeatherShoes # Omu
-
-- type: loadoutGroup
-  id: ChiefMedicalOfficerJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieChiefMedicalOfficer
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJobTrinkets
@@ -2172,13 +2070,6 @@
   - LizardPlushieChemist
 
 - type: loadoutGroup
-  id: ChemistJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieChemist
-
-- type: loadoutGroup
   id: ParamedicHead
   name: loadout-group-paramedic-head
   minLimit: 0
@@ -2225,13 +2116,6 @@
   - MedicalWinterBoots
   - LaceupBoots # Omu
   - LeatherShoes # Omu
-
-- type: loadoutGroup
-  id: ParamedicJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieParamedic
 
 - type: loadoutGroup
   id: ParamedicJobTrinkets
@@ -2313,15 +2197,6 @@
   - EmergencySilicon
   - EmergencyOxygenCarnivoreSyndicate # Omu
   - EmergencyOxygenEthanolSyndicate # Omu
-
-- type: loadoutGroup
-  id: SurvivalMilitaryDouble
-  name: loadout-group-survival-military
-  minLimit: 2
-  hidden: true
-  loadouts:
-  - EmergencyNitrogenMilitaryDouble
-  - EmergencyOxygenMilitaryDouble
 
 - type: loadoutGroup
   id: SurvivalMilitaryDouble

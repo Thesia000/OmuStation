@@ -35,7 +35,7 @@
     outerClothing: ClothingOuterArmourDurathread
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentComLoudspeaker
-    belt: ClothingBeltAssaultFilled
+    belt: ClothingBeltMilitaryWebbingFilled
     pocket1: WeaponEnergyRevolver
     pocket2: FlashlightSeclite
     suitstorage: WeaponRifleLecter
@@ -88,7 +88,7 @@
     outerClothing: ClothingOuterArmorBasicSlim
     id: ERTSecurityPDABlue
     ears: ClothingHeadsetAltCentComSec
-    belt: ClothingBeltAssaultFilled
+    belt: ClothingBeltMilitaryWebbingFilled
     pocket1: OfficerGunCase
     pocket2: FlashlightSeclite
     suitstorage: WeaponRifleLecter

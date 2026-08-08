@@ -200,12 +200,6 @@
     jumpsuit: ClothingUniformJumpsuitMilitaryNTR
 
 - type: loadout
-  id: NTRMJ
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitMilitaryNTR
-
-
-- type: loadout
   id: NanotrasenRepresentativeEnvirosuit
   equipment:
     jumpsuit: ClothingUniformEnvirosuitNanotrasenRepresentative

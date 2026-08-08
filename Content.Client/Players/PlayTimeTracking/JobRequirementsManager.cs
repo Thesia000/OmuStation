@@ -270,8 +270,10 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     // begin Omustation - Remake EE Traits System
     /// <remarks>
     /// This method is almost identical to CheckRoleRequirements, but it takes a trait instead.
+    ///
+    /// Upstreamer note: Probably a bad idea to public it but we have other checks in place at least. todo unfuck this.
     /// </remarks>
-    private bool CheckTraitRequirements(TraitPrototype trait, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    public bool CheckTraitRequirements(TraitPrototype trait, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         var reqs = trait.Requirements;
         return CheckRoleRequirements(reqs, profile, out reason, true);

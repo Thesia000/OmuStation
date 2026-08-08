@@ -36,6 +36,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Server._Funkystation.ReagentFires.Systems;
 
 namespace Content.Shared.Fluids;
 
@@ -54,6 +55,7 @@ public abstract partial class SharedPuddleSystem : EntitySystem
     [Dependency] private readonly SpeedModifierContactsSystem _speedModContacts = default!;
     [Dependency] private readonly StepTriggerSystem _stepTrigger = default!;
     [Dependency] private readonly TileFrictionController _tile = default!;
+    [Dependency] private readonly ReagentFireSystem _fireSystem = default!; // Funky
 
     private ProtoId<ReagentPrototype>[] _standoutReagents = [];
 
@@ -136,6 +138,7 @@ public abstract partial class SharedPuddleSystem : EntitySystem
             return;
         }
 
+        _fireSystem.UpdateFire(entity); // Funky
         _deletionQueue.Remove(entity);
         UpdateSlip((entity, entity.Comp), args.Solution);
         UpdateSlow(entity, args.Solution);

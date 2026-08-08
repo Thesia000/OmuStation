@@ -13,7 +13,7 @@
     items:
     - HandheldHealthAnalyzerUnpowered
   # Swab and Vaccine Hand
-  - type: DroppableBorgModule
+  - type: DroppableBorgModule #todo omu
     moduleId: Virology
     items:
     - id: DiseaseSwab

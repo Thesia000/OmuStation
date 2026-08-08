@@ -8,7 +8,7 @@
     - id: Jug
     - id: LargeBeaker
     - id: Beaker
-    - id: BaseChemistryEmptyVial
+    - id: BaseChemistryVial
     - id: Syringe
 
 - type: entity

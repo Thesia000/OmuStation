@@ -130,22 +130,22 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobDionaTorso
+  id: MobDionaChest
   baseSprite:
     sprite: Mobs/Species/Diona/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobDionaTorsoMale
+  id: MobDionaChestMale
   baseSprite:
     sprite: Mobs/Species/Diona/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobDionaTorsoFemale
+  id: MobDionaChestFemale
   baseSprite:
     sprite: Mobs/Species/Diona/parts.rsi
-    state: torso_f
+    state: chest_f
 
 - type: humanoidBaseSprite
   id: MobDionaGroin

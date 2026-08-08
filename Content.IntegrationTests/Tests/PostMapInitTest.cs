@@ -227,13 +227,6 @@ namespace Content.IntegrationTests.Tests
             .Select(glob => new Regex(GlobToRegex(glob), RegexOptions.IgnoreCase | RegexOptions.Compiled))
             .ToArray();
 
-        /// <summary>
-        /// Converts the above globs into regex so your eyes dont bleed trying to add filepaths.
-        /// </summary>
-        private static readonly Regex[] DoNotMapWhiteListRegexes = DoNotMapWhitelist
-            .Select(glob => new Regex(GlobToRegex(glob), RegexOptions.IgnoreCase | RegexOptions.Compiled))
-            .ToArray();
-
         private static readonly string[] GameMaps =
         {
             // Goobstation edit:

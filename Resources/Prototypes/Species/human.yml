@@ -155,22 +155,22 @@
     state: head_f
 
 - type: humanoidBaseSprite
-  id: MobHumanTorso
+  id: MobHumanChest
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobHumanTorsoMale
+  id: MobHumanChestMale
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobHumanTorsoFemale
+  id: MobHumanChestFemale
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
-    state: torso_f
+    state: chest_f
 
 - type: humanoidBaseSprite
   id: MobHumanGroin

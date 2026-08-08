@@ -179,7 +179,7 @@
     - type: StatusIcon # Goobstation
       bounds: -0.5,-0.5,0.5,0.5
     - type: HasJobIcons # Goobstation
-    - type: #Omu
+    - type: Bloodstream #Omu
       damageBleedModifiers: BloodlossHuman
       bloodReferenceSolution:
       reagents:

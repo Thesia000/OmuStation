@@ -533,8 +533,6 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
 
         RaiseLocalEvent(new EvacShuttleDockedEvent()); // DeltaV
 
-        var query = AllEntityQuery<StationEmergencyShuttleComponent>();
-
         var dockResults = new List<ShuttleDockResult>();
 
         while (query.MoveNext(out var uid, out var comp))

@@ -104,9 +104,6 @@
   - !type:OverallPlaytimeRequirement
     time: 18000 # 5 hours - OmuStation
   guides: [ Traitors ]
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 1h
 
 - type: antag
   id: TraitorSleeper
@@ -118,9 +115,6 @@
   - !type:OverallPlaytimeRequirement
     time: 18000 # 5 hours - OmuStation
   guides: [ Traitors ]
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 1h
 
 # Syndicate Operative Outfit - Monkey
 - type: startingGear

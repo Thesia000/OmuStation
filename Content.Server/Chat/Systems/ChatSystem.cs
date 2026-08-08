@@ -1544,7 +1544,7 @@ public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Di
 /// <summary>
 ///     Raised broadcast in order to transform speech.transmit
 /// </summary>
-todo omu move this shit to shared
+// todo omu move this shit to shared
 public sealed class TransformSpeechEvent : EntityEventArgs
 {
     public EntityUid Sender;

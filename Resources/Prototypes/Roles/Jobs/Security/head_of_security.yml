@@ -142,29 +142,29 @@
   - !type:RoleTimeRequirement
     role: JobWarden
     time: 5h # Goobstation
-    - !type:RoleTimeRequirement
-      role: JobDetective
-      time: 5h # Omustation
-    - !type:RoleTimeRequirement
-      role: JobSecurityOfficer
-      time: 5h # Omustation
-    - !type:RoleTimeRequirement # Omustation
-      role: JobBrigmedic
-      time: 2h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 30h # Omustation
-#    - !type:SpeciesRequirement # Goob - None Felinid - # Omustation
-#      inverted: true
-#      species:
-#      - Felinid #Omu, add back Felinid
+  - !type:RoleTimeRequirement
+    role: JobDetective
+    time: 5h # Omustation
+  - !type:RoleTimeRequirement
+    role: JobSecurityOfficer
+    time: 5h # Omustation
+  - !type:RoleTimeRequirement # Omustation
+    role: JobBrigmedic
+    time: 2h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 30h # Omustation
+  #    - !type:SpeciesRequirement # Goob - None Felinid - # Omustation
+  #      inverted: true
+  #      species:
+  #      - Felinid #Omu, add back Felinid
   #  - !type:StyleRequirement
   #    styles:
   #    - HumanHairFloorlengthBedhead
   #    - HumanHairClassicFloorlengthBedhead
   #    - HumanHairFloorlengthBraid
-    - !type:OverallPlaytimeRequirement # Omustation
-      time: 20h
+  - !type:OverallPlaytimeRequirement # Omustation
+    time: 20h
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"

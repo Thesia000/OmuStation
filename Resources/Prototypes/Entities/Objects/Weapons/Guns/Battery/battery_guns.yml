@@ -1342,7 +1342,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg # Omu
     soundEmpty:
       path: /Audio/_DV/Weapons/Guns/Empty/dry_fire.ogg # Omu
-  - type: ProjectileBatteryAmmoProvider # Omu
+  - type: BatteryAmmoProvider # Omu
     proto: BulletTemperatureHot
   - type: EnergyGun # Omu
     fireModes:

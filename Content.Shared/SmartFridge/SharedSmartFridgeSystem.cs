@@ -45,6 +45,8 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
                 sub.Event<SmartFridgeDispenseItemMessage>(OnDispenseItem);
                 sub.Event<SmartFridgeRemoveEntryMessage>(OnRemoveEntry);
             });
+
+        SubscribeLocalEvent<SmartFridgeComponent, ActivatableUIOpenAttemptEvent>(OnOpenAttempt); // Omustation
     }
 
     private bool DoInsert(Entity<SmartFridgeComponent> ent, EntityUid user, IEnumerable<EntityUid> usedItems, bool playSound)
@@ -80,6 +82,14 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
 
         args.Handled = DoInsert(ent, args.User, [args.Used], true);
     }
+
+    // Omustation Start
+    private void OnOpenAttempt(Entity<SmartFridgeComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (!Allowed(ent, args.User))
+            args.Cancel();
+    }
+    // Omustation End
 
     private void OnItemInserted(Entity<SmartFridgeComponent> ent, ref EntInsertedIntoContainerMessage args)
     {

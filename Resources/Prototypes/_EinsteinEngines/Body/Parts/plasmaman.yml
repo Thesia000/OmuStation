@@ -33,7 +33,7 @@
   parent: [PartPlasmaman, BaseChest]
   components:
   - type: Sprite
-    state: torso_m
+    state: chest_m
   - type: Butcherable
     butcherDelay: 6.0
     spawned:
