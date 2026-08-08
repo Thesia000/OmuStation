@@ -5757,3 +5757,9 @@ Entries:
         for Queens).
   id: 755
   time: '2026-08-08T15:57:31.0000000+00:00'
+- author: Toaster-Box
+  changes:
+    - type: Add
+      message: Corpsman now gets auto chat highlights if you have the setting on
+  id: 756
+  time: '2026-08-08T20:02:03.0000000+00:00'
