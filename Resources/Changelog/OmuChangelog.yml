@@ -5763,3 +5763,9 @@ Entries:
       message: Corpsman now gets auto chat highlights if you have the setting on
   id: 756
   time: '2026-08-08T20:02:03.0000000+00:00'
+- author: ishkab
+  changes:
+    - type: Fix
+      message: diagonal lattice merges better with normal lattice
+  id: 757
+  time: '2026-08-08T20:10:40.0000000+00:00'
