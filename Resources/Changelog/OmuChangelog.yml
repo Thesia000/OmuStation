@@ -5786,3 +5786,11 @@ Entries:
         them from any techfab in which you can print standard LV cable.
   id: 759
   time: '2026-08-08T20:27:04.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: >-
+        There is now an option for IPC's to have a radio spawn in their backpack
+        instead for brigmed and admin assistant
+  id: 760
+  time: '2026-08-08T20:29:09.0000000+00:00'
