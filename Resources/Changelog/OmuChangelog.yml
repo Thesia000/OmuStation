@@ -5818,3 +5818,11 @@ Entries:
         grabbing alert.
   id: 763
   time: '2026-08-08T20:46:11.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Add
+      message: Added an airlock to the mimes room in Glacier.
+    - type: Tweak
+      message: Changed the clowns room airlock to a theatre airlock in Glacier.
+  id: 764
+  time: '2026-08-08T20:49:34.0000000+00:00'
