@@ -5870,3 +5870,11 @@ Entries:
       message: Ninjutsu now loses the sneak attack bonus when attacked.
   id: 769
   time: '2026-08-08T21:56:30.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: >-
+        Players will now be alerted by a message if they go berserk from a
+        changeling sting.
+  id: 770
+  time: '2026-08-08T21:59:47.0000000+00:00'
