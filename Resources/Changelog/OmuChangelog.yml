@@ -5773,3 +5773,16 @@ Entries:
   changes: []
   id: 758
   time: '2026-08-08T20:24:06.0000000+00:00'
+- author: ishkab
+  changes:
+    - type: Tweak
+      message: >-
+        You can now weld APCs to "damage" them. This is mostly unnoticeable. Fix
+        them again with LV cable.
+    - type: Add
+      message: >-
+        "Granular" LV cables. These are LV cables with less "reach" than
+        standard LV cable. They are intended for use with a damaged APC. Print
+        them from any techfab in which you can print standard LV cable.
+  id: 759
+  time: '2026-08-08T20:27:04.0000000+00:00'
