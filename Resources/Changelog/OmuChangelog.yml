@@ -5898,3 +5898,25 @@ Entries:
       message: Experimental shipments now only need 10 bananium instead of 30
   id: 773
   time: '2026-08-09T14:01:21.0000000+00:00'
+- author: PhantomDergwulf
+  changes:
+    - type: Add
+      message: >-
+        Added the Roboticist roundstart mantle & Researchable Janitorial mantle
+        (has cleanhud)
+    - type: Tweak
+      message: >-
+        all mantles now have at least 10% Blunt/Slash/Pierce to help accommodate
+        for the lack of wearing glasses and a face mask
+    - type: Tweak
+      message: most mantles have relevant contraband tags relating to their department
+    - type: Add
+      message: >-
+        added a BaseBartenderContraband  and various DepartmentCommandContraband
+        tags
+    - type: Fix
+      message: >-
+        removed the ChamelonWhitelist  tag for all mantles due to a bug with the
+        eyes not being coloured correctly when worn
+  id: 774
+  time: '2026-08-09T15:23:41.0000000+00:00'
