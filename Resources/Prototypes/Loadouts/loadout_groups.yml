@@ -370,6 +370,7 @@
   - CaptainHead
   - CaptainCap
   - CaptainCapcapSenior # goob
+  - CaptainHeadHatKepi # Omu
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -418,6 +419,7 @@
   minLimit: 0
   loadouts:
   - HoPHead
+  - HopHeadHatKepi # Omu
 
 - type: loadoutGroup
   id: HoPJumpsuit
@@ -1386,6 +1388,7 @@
   - HeadofSecurityHead
   - HeadofSecurityBeret
   - HeadofSecuritySpecialBeret # Goobstation
+  - HosHeadHatKepi # Omu
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -1435,6 +1438,7 @@
   loadouts:
   - WardenHead
   - WardenBeret
+  - WardenHeadHatKepi # Omu
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -1468,6 +1472,8 @@
   - SecurityHat
   - SecurityBandana # Omu
   - TrooperHat
+  - SecoffHeadHatKepi # Omu
+  - SecoffSeniorHeadHatKepi # Omu
 
 - type: loadoutGroup
   id: SecurityJumpsuit
