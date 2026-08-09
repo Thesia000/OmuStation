@@ -5920,3 +5920,11 @@ Entries:
         eyes not being coloured correctly when worn
   id: 774
   time: '2026-08-09T15:23:41.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: >-
+        Added képi hats to various command and security roles. Embrace your
+        inner frenchman.
+  id: 775
+  time: '2026-08-09T15:32:56.0000000+00:00'
