@@ -5884,3 +5884,11 @@ Entries:
       message: Avali now look sleeker in various helmets including hardsuits.
   id: 771
   time: '2026-08-08T22:36:17.0000000+00:00'
+- author: angiogen
+  changes:
+    - type: Add
+      message: >-
+        Add 2 new hairstyles, 1 new tail, and some other cool stuff (including
+        fangs/freckles) for Xelthia
+  id: 772
+  time: '2026-08-09T13:51:41.0000000+00:00'
