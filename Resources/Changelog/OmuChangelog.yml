@@ -5892,3 +5892,9 @@ Entries:
         fangs/freckles) for Xelthia
   id: 772
   time: '2026-08-09T13:51:41.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Experimental shipments now only need 10 bananium instead of 30
+  id: 773
+  time: '2026-08-09T14:01:21.0000000+00:00'
