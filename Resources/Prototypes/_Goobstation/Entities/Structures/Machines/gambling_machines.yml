@@ -160,7 +160,7 @@
     mediumPrizeAmount: 0
     bigPrizeAmount: 0
     jackPotPrizeAmount: 1000000
-    godPotPrize: Throngler
+    godPotPrize: Emag #omu edit
     smallWinChance: 0
     mediumWinChance: 0
     bigWinChance: 0
@@ -397,7 +397,30 @@
 #    - PlushieWachtel # Omu
 #    - PlushieLeguia # Omu
 #    - PlushiePasha # Omu
-    - PlushieRestful # Omu
+# Omu Start
+    - PlushieRestfulOmuStaff
+    - PlushieCygOmuStaff
+    - PlushieAureuOmuStaff
+    - PlushieThesiaOmuStaff
+    - PlushieMarikiiiOmuStaff
+    - PlushieNagollOmuStaff
+    - PlushieArtemisOmuStaff
+    - PlushieCliveOmuStaff
+    - PlushieRestfulOmuStaff
+    - PlushieTossornOmuStaff
+    - PlushieDishwasherOmuStaff
+    - PlushieDoglettuceOmuStaff
+    - PlushieHayrayOmuStaff
+    - PlushieKabukiOmuStaffish
+    - PlushieGinoOmuStaff
+    - PlushiePuntsssOmuStaff
+    - PlushieNnifOmuStaff
+    - PlushieMednogOmuStaff
+    - PlushieYuriOmuStaff
+    - PlushiePickelSillyOmuStaffish
+    - PlushieXiOmuStaff
+    - PlushieSammyOmuStaff
+# Omu End
     evilRewards:
 #    - EvilPlushieXeve # Omu
 #    - EvilPlushieBoggle # Omu
