@@ -137,6 +137,47 @@ namespace Content.Server.NodeContainer.EntitySystems
             node3 = null;
             return false;
         }
+        //OMU start
+        //this exists here to keep all the base call functions in one place!!!
+        public bool TryGetNodes<T1, T2, T3, T4>(
+            Entity<NodeContainerComponent?> ent,
+            string id1,
+            string id2,
+            string id3,
+            string id4,
+            [NotNullWhen(true)] out T1? node1,
+            [NotNullWhen(true)] out T2? node2,
+            [NotNullWhen(true)] out T3? node3,
+            [NotNullWhen(true)] out T4? node4)
+            where T1 : Node
+            where T2 : Node
+            where T3 : Node
+            where T4 : Node
+        {
+            if (_query.Resolve(ent, ref ent.Comp, false)
+                && ent.Comp.Nodes.TryGetValue(id1, out var n1)
+                && n1 is T1 t1
+                && ent.Comp.Nodes.TryGetValue(id2, out var n2)
+                && n2 is T2 t2
+                && ent.Comp.Nodes.TryGetValue(id3, out var n3)
+                && n3 is T3 t3
+                && ent.Comp.Nodes.TryGetValue(id4, out var n4)
+                && n4 is T4 t4)
+            {
+                node1 = t1;
+                node2 = t2;
+                node3 = t3;
+                node4 = t4;
+                return true;
+            }
+
+            node1 = null;
+            node2 = null;
+            node3 = null;
+            node4 = null;
+            return false;
+        }
+        //OMU end
 
         private void OnInitEvent(EntityUid uid, NodeContainerComponent component, ComponentInit args)
         {

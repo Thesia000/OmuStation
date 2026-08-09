@@ -55,13 +55,11 @@
             True: { state: gasFilterOn }
             False: { state: gasFilter }
     - type: PipeColorVisuals
+    - type: ControlledHeatExchanger
     - type: UserInterface
       interfaces:
         enum.GasFilterUiKey.Key:
           type: GasFilterBoundUserInterface
-    - type: Construction
-      graph: GasTrinary
-      node: filter
     - type: AmbientSound
       enabled: false
       volume: -9
