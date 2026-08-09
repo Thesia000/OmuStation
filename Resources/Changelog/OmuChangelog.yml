@@ -5928,3 +5928,11 @@ Entries:
         inner frenchman.
   id: 775
   time: '2026-08-09T15:32:56.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: >-
+        Added the bluespace miner from starlight, use immense amounts of power
+        for gamer loot and invasions from hell
+  id: 776
+  time: '2026-08-09T15:55:03.0000000+00:00'
