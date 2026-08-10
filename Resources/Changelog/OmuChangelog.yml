@@ -5948,3 +5948,9 @@ Entries:
       message: Changed the Chefvend access permissions from Service to Kitchen.
   id: 778
   time: '2026-08-10T18:42:07.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed Oni being unable to use the Terminus.
+  id: 779
+  time: '2026-08-10T23:04:14.0000000+00:00'
