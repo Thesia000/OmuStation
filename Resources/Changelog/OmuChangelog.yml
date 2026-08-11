@@ -5960,3 +5960,11 @@ Entries:
       message: fixed an infinite money exploit with cargo
   id: 780
   time: '2026-08-11T08:09:01.0000000+00:00'
+- author: ishkab
+  changes:
+    - type: Add
+      message: >-
+        spray painter now has dedicated pipe colors for Oxygen, Nitrogen, and
+        Plasma.
+  id: 781
+  time: '2026-08-11T21:27:08.0000000+00:00'
