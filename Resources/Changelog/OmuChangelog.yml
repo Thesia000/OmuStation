@@ -5994,3 +5994,9 @@ Entries:
       message: Added Awebo lollypop to sweettoof vedor
   id: 784
   time: '2026-08-13T00:46:29.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Add
+      message: Aloxadone now heals cold damage as implied by its description.
+  id: 785
+  time: '2026-08-13T18:40:28.0000000+00:00'
