@@ -5982,3 +5982,15 @@ Entries:
       message: Removed the random chinese characters from the autodoc.
   id: 783
   time: '2026-08-12T06:07:55.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Added missing Hews and Meows to a couple species that were missing them
+    - type: Add
+      message: New "pandemonically feathery" chemical
+    - type: Tweak
+      message: Harpy can now awebo
+    - type: Add
+      message: Added Awebo lollypop to sweettoof vedor
+  id: 784
+  time: '2026-08-13T00:46:29.0000000+00:00'
