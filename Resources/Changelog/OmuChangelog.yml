@@ -6000,3 +6000,15 @@ Entries:
       message: Aloxadone now heals cold damage as implied by its description.
   id: 785
   time: '2026-08-13T18:40:28.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: >-
+        Fixed Mirror maidens spawning for ghosts that read the books and being a
+        ghost role despite already having a player
+    - type: Tweak
+      message: Ensure ghouls can see heretic fixtures
+    - type: Tweak
+      message: The bible can be used to reduce madness. Beat sense into people.
+  id: 786
+  time: '2026-08-14T22:37:44.0000000+00:00'
