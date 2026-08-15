@@ -6018,3 +6018,11 @@ Entries:
       message: 'Ai can no longer play in the dispo bin '
   id: 787
   time: '2026-08-14T23:53:32.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: >-
+        Space Garbage component will no longer delete Steal targets (Prime cut
+        corgi meat) on collision
+  id: 788
+  time: '2026-08-15T00:00:48.0000000+00:00'
