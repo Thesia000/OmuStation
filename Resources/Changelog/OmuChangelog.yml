@@ -6034,3 +6034,15 @@ Entries:
         things like spirit candles and taking apart items.
   id: 789
   time: '2026-08-15T00:15:16.0000000+00:00'
+- author: Toaster-Box
+  changes:
+    - type: Fix
+      message: QM loadout no longer has two winter boots
+    - type: Fix
+      message: Trinkets are now grouped properly
+    - type: Tweak
+      message: >-
+        Renamed RD jumpsuits to be more consistent, it's no longer infested with
+        turtlenecks), and they are sorted better
+  id: 790
+  time: '2026-08-15T00:17:01.0000000+00:00'
