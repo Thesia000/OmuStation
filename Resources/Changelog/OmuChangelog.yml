@@ -6084,3 +6084,9 @@ Entries:
       message: Added Omu's Birthday to the Holiday list from August 17th to 31st!
   id: 795
   time: '2026-08-16T21:31:22.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Tweak
+      message: Adjusted Shadowkin hand markings.
+  id: 796
+  time: '2026-08-16T21:54:29.0000000+00:00'
