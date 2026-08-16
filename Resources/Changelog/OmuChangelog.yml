@@ -6078,3 +6078,9 @@ Entries:
       message: Ported the SELF antag. Not self antagging.
   id: 794
   time: '2026-08-16T18:34:13.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Added Omu's Birthday to the Holiday list from August 17th to 31st!
+  id: 795
+  time: '2026-08-16T21:31:22.0000000+00:00'
