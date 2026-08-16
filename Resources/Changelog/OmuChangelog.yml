@@ -6090,3 +6090,9 @@ Entries:
       message: Adjusted Shadowkin hand markings.
   id: 796
   time: '2026-08-16T21:54:29.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: Made the Xelthia Backspikes marking actually visible.
+  id: 797
+  time: '2026-08-16T21:57:17.0000000+00:00'
