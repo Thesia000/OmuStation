@@ -6096,3 +6096,9 @@ Entries:
       message: Made the Xelthia Backspikes marking actually visible.
   id: 797
   time: '2026-08-16T21:57:17.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Loneop no longer overrides your species (in most cases)
+  id: 798
+  time: '2026-08-16T21:58:42.0000000+00:00'
