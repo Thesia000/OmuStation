@@ -6166,3 +6166,9 @@ Entries:
       message: On Delta, removed some reinforced windows from the eva room.
   id: 799
   time: '2026-08-16T22:01:54.0000000+00:00'
+- author: GNUtopia
+  changes:
+    - type: Add
+      message: Cyborgs gain a new hat in loadouts after 100 hours
+  id: 800
+  time: '2026-08-16T23:35:17.0000000+00:00'
