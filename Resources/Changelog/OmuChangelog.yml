@@ -6172,3 +6172,9 @@ Entries:
       message: Cyborgs gain a new hat in loadouts after 100 hours
   id: 800
   time: '2026-08-16T23:35:17.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: IAA spawn now uses the sleeper agent SFX for its announcement
+  id: 801
+  time: '2026-08-17T02:03:37.0000000+00:00'
