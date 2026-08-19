@@ -32,3 +32,16 @@
     - type: ActivatableUIRequiresAccess # Omu start
     - type: AccessReader
       access: [["Salvage"]] # Omu end
+
+
+# todo get like a legacy namespace or something
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SalvageShuttleConsoleCircuitboard
+  name: salvage shuttle console board
+  description: A computer printed circuit board for a salvage shuttle console.
+  components:
+  - type: ComputerBoard
+    prototype: ComputerShuttleSalvage
+  - type: StealTarget
+    stealGroup: SalvageShuttleConsoleCircuitboard

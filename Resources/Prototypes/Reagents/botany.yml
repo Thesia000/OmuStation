@@ -250,12 +250,11 @@
       effects:
       - !type:HealthChange
         conditions: #Starlight
-        - !type:OrganType
-            type: Resomi
-            shouldHave: false
-        - !type:OrganType
-            type: Avali
-            shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Resomi
+          - Avali
+          inverted: true
         damage:
           types:
             Caustic: 1
@@ -263,15 +262,10 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-            type: Resomi
-        damage:
-          types:
-            Asphyxiation: -1
-      - !type:HealthChange
-        conditions:
-        - !type:OrganType
-            type: Avali
+        - !type:MetabolizerTypeCondition
+          type:
+          - Resomi
+          - Avali
         damage:
           types:
             Asphyxiation: -1

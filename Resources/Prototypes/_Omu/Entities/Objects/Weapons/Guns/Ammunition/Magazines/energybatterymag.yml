@@ -13,9 +13,7 @@
     proto: RifleBulletEnergyGunLethal
     fireCost: 50
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 50 # if balance is fucked probably just halve this number
-    autoRechargePause: true
     autoRechargePauseTime: 12
   - type: Tag
     tags:
@@ -36,9 +34,7 @@
     proto: RifleBulletEnergyGunDisabler
     fireCost: 25
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 50 # if balance is fucked probably just halve this number
-    autoRechargePause: true
     autoRechargePauseTime: 12
   - type: Tag
     tags:
@@ -60,9 +56,7 @@
     proto: RifleBulletEnergyGunOverchargeLethal
     fireCost: 66 #15 shot hopefully
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 50 # if balance is fucked probably just halve this number
-    autoRechargePause: true
     autoRechargePauseTime: 12
   - type: Tag
     tags:

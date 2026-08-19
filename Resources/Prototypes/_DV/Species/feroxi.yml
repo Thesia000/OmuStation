@@ -89,10 +89,10 @@
       points: 8
       required: false
     # omu start
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: false
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: false
     # omu end

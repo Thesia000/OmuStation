@@ -81,7 +81,7 @@
       food:
         maxVol: 15
         reagents:
-        - ReagentId: PenteticAcid
+        - ReagentId: PentenicAcid
           Quantity: 10
         - ReagentId: WhiskeySoda
           Quantity: 5

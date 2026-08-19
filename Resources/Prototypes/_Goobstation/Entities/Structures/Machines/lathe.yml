@@ -126,7 +126,6 @@
     - MiscSignallersStatic
     - CargoStatic
     - RecipePackShipmentNoticesStatic
-    - CargoOmu #omu edit
     dynamicPacks:
     - AdvancedTools
     - Mining

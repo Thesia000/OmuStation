@@ -93,7 +93,7 @@
     #- item: BoneGel
     #- item: Bonesetter
     #- item: OrganHumanBrain
-    - item: HandheldHealthAnalyzerUnpowered
+    - item: HandheldHealthAnalyzer
     - item: CyborgOmnimedTool
       # Omustation End
       hand:
@@ -120,7 +120,7 @@
     - state: icon-advanced-surgery
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzerUnpowered #omu edit. edded health analyzer
+    - item: HandheldHealthAnalyzer #omu edit. edded health analyzer
     - item: EnergyScalpel
     - item: EnergyCautery
     - item: AdvancedRetractor

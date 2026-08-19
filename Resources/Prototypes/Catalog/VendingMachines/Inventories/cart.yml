@@ -75,7 +75,6 @@
     SecurityCadetPDA: 2
     TechnicalAssistantPDA: 2
     VirologistPDA: 2
-    ZookeeperPDA: 2
     # Omu end
   contrabandInventory:
     BalloonNT: 2

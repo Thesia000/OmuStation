@@ -324,14 +324,16 @@
       - !type:Drunk
         boozePower: 2
         conditions: # Omu start
-        - !type:OrganType #todo omu
-          type: Allulalo
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type:
+          - Allulalo # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
+          inverted: true
       - !type:SatiateThirst
         factor: 4
         conditions:
-        - !type:OrganType
-          type: Allulalo # Omu end
+        - !type:MetabolizerTypeCondition
+          type:
+          - Allulalo # Omu Go fuck yourself you stupid fucking bird motherfucker stealing my time as im upstream merging.
 
 - type: reagent
   id: Gin
@@ -2700,10 +2702,13 @@
       effects:
       - !type:Drunk
         boozePower: 10
-        conditions: # Omu start
-        - !type:OrganType
-          type: Allulalo
-          shouldHave: false # Omu end
+        conditions:
+        # Omu start
+        - !type:MetabolizerTypeCondition
+          type:
+          - Allulalo
+          inverted: true
+        # Omu end
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition

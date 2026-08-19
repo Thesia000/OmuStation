@@ -41,6 +41,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly ReagentFireSystem _fireSystem = default!; // Funky
 
 
     [ValidatePrototypeId<ReagentPrototype>]
@@ -631,4 +632,13 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         return false;
     }
+
+    // Funky edit - handle reagent fire
+    // omu wrong event here todo kill me.
+    protected override void OnSolutionUpdate(Entity<PuddleComponent> entity, ref SolutionContainerChangedEvent args)
+    {
+        base.OnSolutionUpdate(entity, ref args);
+        _fireSystem.UpdateFire(entity);
+    }
+    // Funky edit end
 }

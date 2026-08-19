@@ -737,10 +737,6 @@
     - TurretCompatibleWeapon
     - Rifle # Goobstation
     - LaserCannon # Goobstation
-  - type: Item # Goobstation
-    size: Huge
-    shape:
-    - 0,0,4,1
 
 - type: entity
   name: portable particle decelerator
@@ -824,10 +820,6 @@
     tags:
     - Rifle
     - XrayCannon # Goobstation
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,4,1
 
 - type: entity
   name: practice disabler

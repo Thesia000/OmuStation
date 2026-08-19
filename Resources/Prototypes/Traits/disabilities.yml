@@ -137,7 +137,7 @@
   id: Hemophilia
   name: trait-hemophilia-name
   description: trait-hemophilia-desc
-  category: Disabilities
+  # category: Disabilities
   specials:
   - !type:ApplyStatusEffectSpecial
     statusEffects:
@@ -148,6 +148,6 @@
   name: trait-impaired-mobility-name
   description: trait-impaired-mobility-desc
   traitGear: OffsetCane
-  category: Disabilities
+  # category: Disabilities
   components:
     - type: ImpairedMobility

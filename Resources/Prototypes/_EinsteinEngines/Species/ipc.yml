@@ -146,16 +146,16 @@
 # Torso
 
 - type: humanoidBaseSprite
-  id: MobIPCTorso
+  id: MobIPCChest
 
 - type: humanoidBaseSprite
-  id: MobIPCTorsoMale
+  id: MobIPCChestMale
 
 - type: humanoidBaseSprite
-  id: MobIPCTorsoFemale
+  id: MobIPCChestFemale
 
 - type: marking
-  id: MobIPCTorsoDefault
+  id: MobIPCChestDefault
   bodyPart: Chest
   markingCategory: Chest
   speciesRestriction: [ IPC ]

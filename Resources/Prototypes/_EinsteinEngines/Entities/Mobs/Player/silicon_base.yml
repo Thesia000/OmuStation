@@ -140,8 +140,8 @@
         - map: ["enum.HumanoidVisualLayers.LFoot"]
         - map: ["enum.HumanoidVisualLayers.RFoot"]
         - map: ["socks"]
-        - map: ["underpants"]
-        - map: ["undershirt"]
+        - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+        - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
         - map: ["jumpsuit"]
         - map: ["enum.HumanoidVisualLayers.LHand"]
         - map: ["enum.HumanoidVisualLayers.RHand"]
@@ -179,25 +179,21 @@
     - type: StatusIcon # Goobstation
       bounds: -0.5,-0.5,0.5,0.5
     - type: HasJobIcons # Goobstation
-    - type: Bloodstream #Omu
+    - type: Bloodstream  #Omu
       damageBleedModifiers: BloodlossHuman
-      bloodReferenceSolution:
-      reagents:
-        - ReagentId: CoolantIPC
-          Quantity: 200
       bleedReductionAmount: 0
-      bloodMaxVolume: 500
-      chemicalMaxVolume: 0
       bleedPuddleThreshold: 3
-      bleedRefreshAmount: 0
-      bloodLossThreshold: 0
       maxBleedAmount: 14
       bloodlossDamage:
         types:
-          Heat: .30
+          Heat: 0.3
       bloodlossHealDamage:
         types:
           Heat: 0
+      bloodReferenceSolution:
+        reagents:
+        - ReagentId: CoolantIPC
+          Quantity: 500
     - type: Flammable
       fireSpread: true
       canResistFire: true

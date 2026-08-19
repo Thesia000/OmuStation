@@ -343,7 +343,7 @@
             scale: 1.6
           damage:
             Airloss: -3
-            Brute: -4.5 # Omustation Start
+            Brute: -4.5
             Burn: -6
             Toxin: -2
         - !type:HealthChange # Double effect on corpses
@@ -357,16 +357,17 @@
             max: 213.0
             scale: 1.6
           damage:
-            Airloss: -3
-            Brute: -4.5
-            Burn: -6
-            Toxin: -2
+            groups:
+              Airloss: -3
+              Brute: -4.5
+              Burn: -6
+              Toxin: -2
         - !type:ModifyBloodLevel
           conditions:
           - !type:TemperatureCondition
             max: 213.0
           amount: 8
-        - !type:ModifyBleedAmount
+        - !type:ModifyBleed
           conditions:
           - !type:TemperatureCondition
             max: 213.0
@@ -549,13 +550,9 @@
         conditions:
         - !type:MetabolizerTypeCondition # Goobstation - Yowie
           type:
-          - Yowie
           - Avali # Omu
           - Resomi # Omu
           inverted: true
-        - !type:OrganType
-          type: Avali
-          shouldHave: false
         damage:
           types:
             Asphyxiation: -3.5
@@ -1882,7 +1879,7 @@
           - !type:TemperatureCondition
             max: 213.0
           amount: 10
-        - !type:ModifyBleedAmount
+        - !type:ModifyBleed
           conditions:
           - !type:TemperatureCondition
             max: 213.0

@@ -38,7 +38,7 @@
     - id: PlushieMoth
     - id: PlushieArachind
     - id: PlushiePenguin
-    - id: PlushieVulp
+    # - id: PlushieVulp Die
     - !type:GroupSelector
       children:
       - id: PlushieBee
@@ -204,13 +204,13 @@
     - id: ToyNuke
     - id: ToyFigurineOwlman
     - id: PlushieBingle # Goobstation
-    - id: PlushieSamantha # Goobstation
-    - id: PlushieJvne # Goobstation
-    - id: PlushieFern # Goobstation
+    #- id: PlushieSamantha # Goobstation # Omu
+    #- id: PlushieJvne # Goobstation  # Omu
+    #- id: PlushieFern # Goobstation  # Omu
     - id: PlushieAbductor # Goobstation
     - id: ToyFigurineCosmicCultist # DeltaV
     # WD EDIT START
-    - FaceHuggerToys
+    - id: FaceHuggerToys
     # WD EDIT END
     - !type:NestedSelector
       tableId: AllFigurineMechsTable

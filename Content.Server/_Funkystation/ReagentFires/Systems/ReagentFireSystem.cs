@@ -100,7 +100,7 @@ namespace Content.Server._Funkystation.ReagentFires.Systems
             var ratio = Math.Clamp(volume.Float() / _volumeScalingReference, 0f, 1f);
             return MathF.Pow(ratio, _volumeScalingCurve);
         }
-        // todo omu marty
+
         public void UpdateFire(Entity<PuddleComponent> ent)
         {
             if (ent.Comp.Solution == null)

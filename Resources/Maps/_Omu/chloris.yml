@@ -229900,7 +229900,7 @@ entities:
     - type: Transform
       pos: 52.49684,134.6185
       parent: 2
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 34900
     components:

@@ -115,13 +115,14 @@
         damage:
           types:
             Bloodloss: -1
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         amount: -1
       - !type:ModifyBloodLevel
         amount: 1
       - !type:HealthChange # Overdose can cause blood to clot in the veins
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: SerakaExtract
           min: 8
         damage:
           groups:

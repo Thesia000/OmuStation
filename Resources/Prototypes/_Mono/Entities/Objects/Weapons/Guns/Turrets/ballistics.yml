@@ -57,7 +57,6 @@
     proto: Bullet8x65mmSKR
     fireCost: 25
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 25
   - type: StaticPrice
     price: 1500

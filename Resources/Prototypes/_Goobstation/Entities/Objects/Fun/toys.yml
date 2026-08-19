@@ -492,97 +492,97 @@
 #    soundHit:
 #      path: /Audio/Effects/adminhelp.ogg
 #
-#- type: entity
-#  parent: BasePlushie
-#  id: PlushieBrizby
-#  name: Brizby plushie
-#  description: Will always admit to being evil.
-#  components:
-#  - type: Sprite
-#    sprite: _Goobstation/Objects/Fun/toys.rsi
-#    state: plushie_brizby
-#  - type: Clothing
-#    quickEquip: true
-#    sprite: _Goobstation/Objects/Fun/toys.rsi
-#    equippedPrefix: plushiebrizby
-#    slots:
-#    - HEAD
-#  - type: Item
-#    heldPrefix: plushiebrizby
-#  - type: EmitSoundOnUse
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnActivate
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnTrigger
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnCollide
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: MeleeWeapon
-#    damage:
-#      types:
-#        Blunt: 0
-#    soundHit:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: Damageable
-#    damageContainer: Inorganic
-#  - type: Destructible
-#    thresholds:
-#    - trigger:
-#        !type:DamageTypeTrigger
-#        damageType: Piercing
-#        damage: 6
-#      behaviors:
-#      - !type:DoActsBehavior
-#        acts: [ "Destruction" ]
-#      - !type:PlaySoundBehavior
-#        sound:
-#          path: /Audio/Items/scissors.ogg
-#      - !type:SpawnEntitiesBehavior
-#        spawn:
-#          PlushieBaldzby:
-#            min: 1
-#            max: 1
-#
-#- type: entity
-#  parent: BasePlushie
-#  id: PlushieBaldzby
-#  name: Baldzby plushie
-#  description: Now the truth is open for all to see.
-#  components:
-#  - type: Sprite
-#    sprite: _Goobstation/Objects/Fun/toys.rsi
-#    state: plushie_baldzby
-#  - type: Clothing
-#    quickEquip: true
-#    sprite: _Goobstation/Objects/Fun/toys.rsi
-#    equippedPrefix: plushiebaldzby
-#    slots:
-#    - HEAD
-#  - type: Item
-#    heldPrefix: plushiebaldzby
-#  - type: EmitSoundOnUse
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnActivate
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnTrigger
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: EmitSoundOnCollide
-#    sound:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#  - type: MeleeWeapon
-#    damage:
-#      types:
-#        Blunt: 0
-#    soundHit:
-#      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
-#
+- type: entity
+  parent: BasePlushie
+  id: PlushieBrizby # Brizby has my family hostage and thus is the only goobstaff to not be killed on an upstream merge
+  name: Brizby plushie
+  description: Will always admit to being evil.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Fun/toys.rsi
+    state: plushie_brizby
+  - type: Clothing
+    quickEquip: true
+    sprite: _Goobstation/Objects/Fun/toys.rsi
+    equippedPrefix: plushiebrizby
+    slots:
+    - HEAD
+  - type: Item
+    heldPrefix: plushiebrizby
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 0
+    soundHit:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Piercing
+        damage: 6
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Items/scissors.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PlushieBaldzby:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieBaldzby # See above
+  name: Baldzby plushie
+  description: Now the truth is open for all to see.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Fun/toys.rsi
+    state: plushie_baldzby
+  - type: Clothing
+    quickEquip: true
+    sprite: _Goobstation/Objects/Fun/toys.rsi
+    equippedPrefix: plushiebaldzby
+    slots:
+    - HEAD
+  - type: Item
+    heldPrefix: plushiebaldzby
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 0
+    soundHit:
+      path: /Audio/_DV/Voice/Vulpkanin/dog_whine.ogg
+
 #- type: entity
 #  parent: BasePlushie
 #  id: PlushieBoggle
@@ -615,7 +615,7 @@
 #        Blunt: 0
 #    soundHit:
 #      path: /Audio/Effects/kaching.ogg
-#
+
 #- type: entity
 #  parent: BasePlushie
 #  id: PlushieLehmin
@@ -1033,11 +1033,11 @@
 #  id: EvilPlushieBoggle
 #  suffix: Evil
 
-#- type: entity
-#  name: evil Brizby plush
-#  parent: PlushieBrizby
-#  id: EvilPlushieBrizby
-#  suffix: Evil
+- type: entity
+  name: evil Brizby plush
+  parent: PlushieBrizby # See above
+  id: EvilPlushieBrizby
+  suffix: Evil
 
 #- type: entity
 #  name: evil Nigel plush

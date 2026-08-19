@@ -124,7 +124,7 @@
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
-  - LauncherSyringe
+  # - LauncherSyringe # Goob
   #- MiniSyringe # Goob i think  we dont have these
   - AdvancedJetInjector
   - MedkitCombat #goob - Move combat kit to research

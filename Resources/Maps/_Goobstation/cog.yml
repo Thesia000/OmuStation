@@ -144707,7 +144707,7 @@ entities:
     - type: Transform
       pos: 31.56834,36.946865
       parent: 2
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 22067
     components:

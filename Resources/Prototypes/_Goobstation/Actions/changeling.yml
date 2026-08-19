@@ -432,7 +432,6 @@
       - Body
       tags:
       - FoodSnack    #OMU
-      - DrinkGlass   #OMU
       - DrinkCan     #OMU
       - Meat         #OMU
     canTargetSelf: false
@@ -468,7 +467,6 @@
       - Body
       tags:
       - FoodSnack    #OMU
-      - DrinkGlass   #OMU
       - DrinkCan     #OMU
       - Meat         #OMU
     canTargetSelf: false
@@ -504,7 +502,6 @@
       - Body
       tags:
       - FoodSnack    #OMU
-      - DrinkGlass   #OMU
       - DrinkCan     #OMU
       - Meat         #OMU
     canTargetSelf: false
@@ -540,7 +537,6 @@
       - Body
       tags:
       - FoodSnack    #OMU
-      - DrinkGlass   #OMU
       - DrinkCan     #OMU
       - Meat         #OMU
     canTargetSelf: false

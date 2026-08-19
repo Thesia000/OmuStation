@@ -353,22 +353,24 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 
         if (undergarmentTop && humanoid.UndergarmentTop != null)
         {
-            var marking = new Marking(humanoid.UndergarmentTop, new List<Color> { new Color() });
+            var marking = new Marking(humanoid.UndergarmentTop, new List<Color> { new Color() },
+                0); // omu
             if (_markingManager.TryGetMarking(marking, out var prototype))
             {
                 // Markings are added to ClientOldMarkings because otherwise it causes issues when toggling the feature on/off.
                 humanoid.ClientOldMarkings.Markings.Add(MarkingCategories.UndergarmentTop, new List<Marking> { marking });
-                ApplyMarking(prototype, null, true, entity);
+                ApplyMarking(prototype, null, marking.GlowyBits, true, entity);
             }
         }
 
         if (undergarmentBottom && humanoid.UndergarmentBottom != null)
         {
-            var marking = new Marking(humanoid.UndergarmentBottom, new List<Color> { new Color() });
+            var marking = new Marking(humanoid.UndergarmentBottom, new List<Color> { new Color() },
+                0); // omu
             if (_markingManager.TryGetMarking(marking, out var prototype))
             {
                 humanoid.ClientOldMarkings.Markings.Add(MarkingCategories.UndergarmentBottom, new List<Marking> { marking });
-                ApplyMarking(prototype, null, true, entity);
+                ApplyMarking(prototype, null, marking.GlowyBits, true, entity);
             }
         }
     }

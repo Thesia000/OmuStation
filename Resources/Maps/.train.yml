@@ -76434,7 +76434,7 @@ entities:
     - type: Transform
       pos: -1.713614,-166.57089
       parent: 2
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 11483
     components:

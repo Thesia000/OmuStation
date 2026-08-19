@@ -78118,7 +78118,7 @@ entities:
     - type: Transform
       pos: -7.6716914,-272.02634
       parent: 2
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 11483
     components:

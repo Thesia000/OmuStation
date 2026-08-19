@@ -42,6 +42,12 @@
     - id: FoodMeatFish
       amount: 2
   - type: Bloodstream
+    bloodlossDamage: # OMu????
+      types:
+        Bloodloss: 1
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -0.25 #Omu End
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood

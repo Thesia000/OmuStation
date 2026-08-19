@@ -50706,7 +50706,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 21.750116,-4.5862775
       parent: 2
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 7875
     components:

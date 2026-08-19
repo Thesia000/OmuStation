@@ -271,7 +271,6 @@
   components:
   - type: Tag
     tags:
-    - Katana
     - NinjutsuWeapon # Omu
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi

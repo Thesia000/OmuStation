@@ -108,7 +108,6 @@
 - type: entity
   parent: BasicHitscan
   id: PTL
-  maxLength: 50 # Omu
   components:
   - type: HitscanBasicDamage
     damage:

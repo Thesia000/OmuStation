@@ -29,11 +29,11 @@
   groupBy: "jumpsuit"
 
 # Back
-- type: loadout
-  id: MailCarrierMessenger
-  equipment:
-    back: ClothingBackpackMessengerMailman
-  groupBy: "messenger"
+#- type: loadout
+#  id: MailCarrierMessenger
+#  equipment:
+#    back: ClothingBackpackMessengerMailman
+#  groupBy: "messenger"
 
 - type: loadout
   id: CourierMessenger

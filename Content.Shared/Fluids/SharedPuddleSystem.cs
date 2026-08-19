@@ -36,7 +36,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Server._Funkystation.ReagentFires.Systems;
 
 namespace Content.Shared.Fluids;
 
@@ -55,7 +54,6 @@ public abstract partial class SharedPuddleSystem : EntitySystem
     [Dependency] private readonly SpeedModifierContactsSystem _speedModContacts = default!;
     [Dependency] private readonly StepTriggerSystem _stepTrigger = default!;
     [Dependency] private readonly TileFrictionController _tile = default!;
-    [Dependency] private readonly ReagentFireSystem _fireSystem = default!; // Funky
 
     private ProtoId<ReagentPrototype>[] _standoutReagents = [];
 
@@ -127,7 +125,9 @@ public abstract partial class SharedPuddleSystem : EntitySystem
         _standoutReagents = [.. _prototypeManager.EnumeratePrototypes<ReagentPrototype>().Where(x => x.Standsout).Select(x => x.ID)];
     }
 
-    private void OnSolutionUpdate(Entity<PuddleComponent> entity, ref SolutionContainerChangedEvent args)
+    // Funky edit - Make protected virtual so that it can be overriden server side
+    // Omu note this is so fucking ass
+    protected virtual void OnSolutionUpdate(Entity<PuddleComponent> entity, ref SolutionContainerChangedEvent args)
     {
         if (args.SolutionId != entity.Comp.SolutionName)
             return;
@@ -138,7 +138,6 @@ public abstract partial class SharedPuddleSystem : EntitySystem
             return;
         }
 
-        _fireSystem.UpdateFire(entity); // Funky
         _deletionQueue.Remove(entity);
         UpdateSlip((entity, entity.Comp), args.Solution);
         UpdateSlow(entity, args.Solution);
