@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Map;
 
 namespace Content.Omu.Server._BSD.SignalSalv.Components;
@@ -18,13 +19,19 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
     public float FTLCharge = 10.0f;
 
     [DataField]
-    public float StoredChargeFTLCapacitiors = 0f;
+    public float FTLCapacitiorsStoredCharge = 0f;
 
     /// <summary>
     /// Amount of MJ moved to the FTL capacitors every second
     /// </summary>
     [DataField]
     public float FTLCapacitiorChargeRate = 1.0f;
+
+    /// <summary>
+    /// Amount of MJ moved to the FTL capacitors every second
+    /// </summary>
+    [DataField]
+    public float FTLCapacitiorChargeEfficency = 0.25f;
 
     [DataField]
     public float DistanceFromZeroZeroForJumpPoint = 300.0f;
@@ -49,4 +56,30 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
     /// </summary>
     [DataField]
     public bool PreConfigedPlanet = false;
+
+    [DataField]
+    public TimeSpan LastUpdate;
+
+    /// <summary>
+    /// save the map we are comming from (in case we somehow have multiple stations or station maps)
+    /// </summary>
+    [DataField]
+    public EntityUid? Originmap;
+
+
+    /// <summary>
+    /// saved map we generated so we know what to delete when we FTL away and WHERE to FTL too
+    /// </summary>
+    [DataField]
+    public EntityUid? CurrentlyLinkedMapUid;
+
+
+    /// <summary>
+    /// Stores the Datadisk for the planet generation
+    /// </summary>
+    [DataField]
+    public ItemSlot GenerationSettingsDiskSlot = new();
+
+    [DataField]
+    public bool DeleteLinkedMapOnFTLArrival = false;
 }

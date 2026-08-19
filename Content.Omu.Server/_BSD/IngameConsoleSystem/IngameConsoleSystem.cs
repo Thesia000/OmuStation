@@ -17,6 +17,7 @@ public sealed class IngameConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleHistoryChangeEvent>(IngameConsoleHistoryChangeViaEvent);
         SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleCommandAttemptMessage>(OnCommandAttempt);
+        SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleCommandCalledEvent>(OnCommand);
     }
     #region ConsoleHistory handeling
     public void IngameConsoleHistoryChangeViaEvent(Entity<IngameConsoleComponent> ent, ref IngameConsoleHistoryChangeEvent args)
@@ -32,6 +33,15 @@ public sealed class IngameConsoleSystem : EntitySystem
             if (iterator == null) continue;
             comp.History.Add(iterator);
         }
+        var state = new IngameConsoleBoundUserInterfaceState(
+            comp.History.ToArray<string>());
+        _uiSystem.SetUiState(ent.Owner, IngameConsoleUiKey.Key, state);
+        return;
+    }
+    public void IngameConsoleHistoryReset(Entity<IngameConsoleComponent> ent)
+    {
+        if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
+        comp.History = new List<string>(["Start"]);
         var state = new IngameConsoleBoundUserInterfaceState(
             comp.History.ToArray<string>());
         _uiSystem.SetUiState(ent.Owner, IngameConsoleUiKey.Key, state);
@@ -56,6 +66,13 @@ public sealed class IngameConsoleSystem : EntitySystem
             return;
         }
         return;
+    }
+    public void OnCommand(Entity<IngameConsoleComponent> ent, ref IngameConsoleCommandCalledEvent args)
+    {
+        if (args.Type == IngameConsoleCommandType.ICC_CLS_EXCLUSIVE)
+        {
+            IngameConsoleHistoryReset(ent);
+        }
     }
     #endregion
     #region Assistance in converstion

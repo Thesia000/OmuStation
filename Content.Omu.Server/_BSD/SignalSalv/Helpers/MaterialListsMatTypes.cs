@@ -32,6 +32,6 @@ public struct TotalMaterialMiningRateList
         AdvancedMaterials.Add(new Material("Silver", 10, 25));
         AdvancedMaterials.Add(new Material("Uranium", 10, 25));
         SpecialMaterials = new();
-        AdvancedMaterials.Add(new Material("Plasma", 1, 10));
+        SpecialMaterials.Add(new Material("Plasma", 1, 10));
     }
 }

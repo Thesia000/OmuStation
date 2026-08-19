@@ -10,10 +10,13 @@ namespace Content.Omu.Shared.IngameConsoleSystem;
 public enum IngameConsoleCommandType
 {//ICC == Ingame Concole Command
     ICC_Exit,//recomended unified close the ui via console input
+    ICC_START,//recomended unified start command
+    ICC_STOP,//recommended unified stop command
     ICC_Print,//recomended unified print command aka print the information the user needs, takes one argument to determin what info should be printed
     ICC_Print_ALL,//recomended unified print all command, prints all available information
     ICC_HELP,//recomended unified help command prints all commands available to the console
     ICC_ASSIGN,//General use assign command
+    ICC_CLS_EXCLUSIVE,//General use RESERVED command clears history
     ISCL_UNASSIGN,//removes a server client link
     SSA_FTL,//SignalSAlvage engaged FTL to destination(predefined by default)
 }
@@ -41,6 +44,9 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("help", IngameConsoleCommandType.ICC_HELP, 0));
         List.Add(new IngameConsoleCommand("assign", IngameConsoleCommandType.ICC_ASSIGN, 1));
         List.Add(new IngameConsoleCommand("ftl", IngameConsoleCommandType.SSA_FTL, 0));
+        List.Add(new IngameConsoleCommand("start", IngameConsoleCommandType.ICC_START, 0));
+        List.Add(new IngameConsoleCommand("stop", IngameConsoleCommandType.ICC_STOP, 0));
+        List.Add(new IngameConsoleCommand("cls", IngameConsoleCommandType.ICC_CLS_EXCLUSIVE, 0));
     }
 
 

@@ -8,7 +8,7 @@
     allowedTypes:
     - SSA_FTL
     - ICC_Print
-  - type: SignalSalvFtlDevice
+  - type: SignalSalvMiningRigStructre
   - type: MultiBlockPart
     structureType: 
     - PlanetaryMiningRigStructureCore

@@ -1,5 +1,8 @@
 using Content.Shared.Materials;
 using Robust.Shared.Prototypes;
+using Content.Shared.Parallax.Biomes;
+using Content.Shared.Atmos;
+using Robust.Shared.Utility;
 
 namespace Content.Omu.Server._BSD.SignalSalv.Components;
 
@@ -11,16 +14,20 @@ public sealed partial class SignalSalvGenerationSettingsComponent : Component
     /// Figure out how the fuck we can get the POI map prototypes
     /// </summary>
     [DataField]
-    public int POIApperanceList = new();
+    public HashSet<ResPath> POIApperanceList = new();
 
+    /// <summary>
+    /// Defaults to Continental
+    /// declares what planet biom is used
+    /// </summary>
     [DataField]
-    public int PlanetType = new();
+    public ProtoId<BiomeTemplatePrototype> PlanetType = "Continental";
 
     /// <summary>
     /// Atmospheric temprature in K
     /// </summary>
     [DataField]
-    public float AtmosTemp = new();
+    public float AtmosTemp = Atmospherics.T20C;
 
     /// <summary>
     /// Atmospheric composition in mols
