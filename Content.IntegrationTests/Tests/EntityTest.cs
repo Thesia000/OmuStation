@@ -686,7 +686,7 @@ namespace Content.IntegrationTests.Tests
         /// if you actually manage to only catch bad ents on this when two entities exist at the same time in separate maps,
         /// dm me, @notactuallymarty, I've never seen that shit.
         /// todo marty this is kinda shitcode.
-        /// </summary>
+        /// </summary>s
         [Test, Explicit]
         public async Task FindBadPrototype()
         {
@@ -823,6 +823,12 @@ namespace Content.IntegrationTests.Tests
             {
                 await TestContext.Progress.WriteLineAsync(
                     $"Entering branch: #{subset.First().Index}-{subset.Last().Index} ({subset.Count})");
+
+                if (subset.Count <= 16)
+                {
+                    await TestContext.Progress.WriteLineAsync(
+                        $"Remaining prototypes: {string.Join(", ", subset.Select(p => $"#{p.Index} {p.Id}"))}");
+                }
 
                 if (subset.Count == 0)
                     return;

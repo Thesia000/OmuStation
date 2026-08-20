@@ -7,6 +7,7 @@
   description: A rapid-fire swarm missile pod manufactured by Aetherion Dynamics. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # Omu
     powerLoad: 950
   - type: StaticPrice
     price: 2000
@@ -17,6 +18,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # Omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -56,6 +58,7 @@
   description: ASM-501 Smerchs heavy torpedo launcher. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # Omu
     powerLoad: 450
   - type: StaticPrice
     price: 7500
@@ -66,6 +69,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # Omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -104,6 +108,7 @@
   description: ASM-302 Vanyk basic guided missile pod. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 950
   - type: StaticPrice
     price: 5000
@@ -114,6 +119,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # Omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -170,6 +176,7 @@
   description: A hybrid EMP missile pod manufactured by Aetherion Dynamics. Deals both physical and EMP damage. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 3000
   - type: StaticPrice
     price: 10000
@@ -180,6 +187,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery

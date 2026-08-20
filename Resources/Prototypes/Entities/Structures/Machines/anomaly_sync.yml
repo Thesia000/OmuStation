@@ -57,10 +57,12 @@
     #powerLoad: 2000
     #needsPower: true
   - type: ApcPowerReceiverBattery
+    netsync: false
     idleLoad: 2000
     batteryRechargeRate: 500
     batteryRechargeEfficiency: 1.0
   - type: Battery
+    netsync: false
     maxCharge: 300000 # 2m30s of unpowered buffer.
     startingCharge: 0
   - type: ExaminableBattery

@@ -57,6 +57,7 @@
     powerLoad: 200
   # Omustation start - internal battery, lasts ~2 min when disconnected from power
   - type: Battery
+    netsync: false
     maxCharge: 12000
     startingCharge: 12000
   - type: ApcPowerReceiverBattery

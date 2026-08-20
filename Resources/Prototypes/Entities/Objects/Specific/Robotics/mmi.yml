@@ -193,14 +193,8 @@
       whitelist:
         components:
         - Brain
-  - type: ItemSlots # Omu
-    slots:
-      brain_slot:
-        name: "Brain"
-        startingItem: OrganHumanBrain
-        whitelist:
-          tags: # EE Change - IPCMMI - changed component requirement to a tag bc you'd be able to infinitely stack regular + reverse MMIs otherwise
-            - Brain
+        tags: # Omu
+        - Brain
 
 - type: entity
   parent: BaseItem

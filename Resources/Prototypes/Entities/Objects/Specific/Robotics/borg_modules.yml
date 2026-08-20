@@ -1124,9 +1124,9 @@
     - item: BorgHypo
     - item: Gauze
     # Omustation Start
-    - item: BorgBluespaceChemistryVial
-    - item: BorgBluespaceChemistryVial
-    - item: BorgBluespaceChemistryVial
+    - item: BluespaceChemistryVial
+    - item: BluespaceChemistryVial
+    - item: BluespaceChemistryVial
     # Omustation End
       hand:
         emptyLabel: borg-slot-topicals-empty

@@ -378,6 +378,15 @@ public sealed partial class ParticleEffectPrototype : IPrototype, IInheritingPro
     [DataField]
     public bool WorldSpace { get; private set; } = true;
 
+    // Omu start funky edit????
+    /// <summary>
+    /// World-space offset from the emitter origin applied to particle spawn positions.
+    /// Useful for nudging effects away from entity anchor points.
+    /// </summary>
+    [DataField]
+    public Vector2 SpawnOffset { get; private set; }
+    // Omu end
+
     #endregion
     #region Shape
 

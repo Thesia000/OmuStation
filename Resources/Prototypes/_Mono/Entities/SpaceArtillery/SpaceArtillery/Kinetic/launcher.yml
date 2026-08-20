@@ -7,6 +7,7 @@
   description: A cheap and light 20mm autocannon. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 200
   - type: StaticPrice
     price: 250
@@ -15,6 +16,7 @@
     layers:
     - state: space_artillery
   - type: Battery
+    netsync: false # omu
     maxCharge: 20000
     startingCharge: 20000
   - type: ExaminableBattery
@@ -72,6 +74,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 30000
     startingCharge: 30000
   - type: ExaminableBattery
@@ -102,6 +105,7 @@
   - type: ShipGunClass
     shipClass: Medium
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 970
 
 # AK570 90mm
@@ -113,6 +117,7 @@
   description: A dual barrel, heavy autocannon. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 725
   - type: StaticPrice
     price: 1250
@@ -123,6 +128,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -167,6 +173,7 @@
   description: A heavy EMP Cannon made by Aetherion Dynamics. It can disable massive parts of an enemy ship, making it effective in asymmetric combat. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 3714
   - type: StaticPrice
     price: 10000
@@ -177,6 +184,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -216,6 +224,7 @@
   description: A dual barrel, main-battery cannon firing 220mm auto shells with slight reduction in brute strength. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 13500
   - type: StaticPrice
     price: 20000
@@ -227,6 +236,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 12000
     startingCharge: 12000
   - type: ExaminableBattery
@@ -282,6 +292,7 @@
   description: One of the largest chemical-based kinetic weapons in the sector. Its power is only rivaled by mass drivers such as the M381.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 13500
   - type: StaticPrice
     price: 40000
@@ -293,6 +304,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 12000
     startingCharge: 12000
   - type: ExaminableBattery
@@ -348,6 +360,7 @@
   description: A heavy linear accelerator, capable of devastating targets with kinetic energy. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 1350
   - type: StaticPrice
     price: 40000
@@ -358,6 +371,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -425,6 +439,7 @@
   description: A single barrelled, heavy artillery cannon. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 2300
   - type: StaticPrice
     price: 20000
@@ -436,6 +451,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
@@ -487,6 +503,7 @@
   description: A single barrelled, medium-heavy artillery cannon. Can be remotely activated, or linked up to a GCS.
   components:
   - type: ApcPowerReceiver
+    netsync: false # omu
     powerLoad: 2200
   - type: StaticPrice
     price: 20000
@@ -498,6 +515,7 @@
   - type: Appearance
   - type: AmmoCounter
   - type: Battery
+    netsync: false # omu
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
