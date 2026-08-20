@@ -42,7 +42,7 @@ public sealed partial class ThievingSystem : EntitySystem
     private void OnCompInit(Entity<ThievingComponent> entity, ref ComponentInit args)
     {
         if (entity.Comp.Toggleable) // Omu edit - Thieving trait fixes
-            _alertsSystem.ShowAlert(entity.Owner, entity.Comp.StealthyAlertProtoId);
+            _alertsSystem.ShowAlert(entity.Owner, entity.Comp.StealthyAlertProtoId, 1);
     }
 
     private void OnCompRemoved(Entity<ThievingComponent> entity, ref ComponentRemove args)
