@@ -6,7 +6,7 @@
   components:
   - type: IngameConsole
     allowedTypes:
-    - SSA_FTL
+    - ICC_Start
     - ICC_Print
   - type: SignalSalvMiningRigStructre
   - type: MultiBlockPart

@@ -460,6 +460,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
         RaiseLocalEvent(transComp.GridUid!.Value, ref tagEv);
         var targetCoordinates = new EntityCoordinates((EntityUid) ftlComp.CurrentlyLinkedMapUid!, new Vector2(0, 0));
         Angle targetAngle = new();
+        ftlComp.Originmap = transComp.MapUid;
         _shuttle.FTLToCoordinates(transComp.GridUid.Value, shuttleComponent!, targetCoordinates, targetAngle);
         PostFTLCost(shuttleConsole, ftlComp);
         return;
@@ -712,6 +713,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
         var targetCoordinates = new EntityCoordinates((EntityUid) ftlComp.Originmap!, ftlComp.DesignatedJumpPoint);
         Angle targetAngle = new();
         _shuttle.FTLToCoordinates(transComp.GridUid!.Value, shuttleComponent!, targetCoordinates, targetAngle);
+        ftlComp.Originmap = null;
         return;
     }
     public void DeleteLinkedMap(Entity<SignalSalvFtlDeviceComponent> ent, ref FTLCompletedEvent args)
@@ -722,6 +724,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
         {
             if (_mapSys.GetMap(iterator) == ent.Comp.CurrentlyLinkedMapUid)
             {
+                ent.Comp.CurrentlyLinkedMapUid = null;
                 _mapSys.QueueDeleteMap(iterator);
                 return;
             }
