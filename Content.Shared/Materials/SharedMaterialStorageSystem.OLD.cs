@@ -17,7 +17,7 @@ namespace Content.Shared.Materials;
 /// This handles storing materials and modifying their amounts
 /// <see cref="MaterialStorageComponent"/>
 /// </summary>
-public abstract class SharedMaterialStorageSystem : EntitySystem
+public abstract class SharedMaterialStorageSystemOLD : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -129,10 +129,23 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     /// <param name="component"></param>
     /// <param name="localOnly"></param>
     /// <returns>If the specified volume will fit</returns>
-    public bool CanTakeVolume(EntityUid uid, int volume, MaterialStorageComponent? component = null, bool localOnly = false)
+    public bool CanTakeVolume(EntityUid uid, int volume, MaterialStorageComponent? component = null, string? material = null)
     {
         if (!Resolve(uid, ref component))
             return false;
+        //Omu start
+        if (component.StorageCapPerMaterialToggle)
+        {
+            if (material == null)
+            {
+                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task CanTakeVolume.");
+                return false;
+            }
+            if (!component.StorageMaxPerMaterial.ContainsKey(material)) component.StorageMaxPerMaterial.Add(material, component.StorageCapPerMaterialDefaultValue);
+            return GetMaterialAmount(uid, material) + volume <= component.StorageMaxPerMaterial[material];
+        }
+        //Omu end
+        return component.StorageLimit == null || GetTotalMaterialAmount(uid, component) + volume <= component.StorageLimit;
         return component.StorageLimit == null || GetTotalMaterialAmount(uid, component, true) + volume <= component.StorageLimit;
     }
 
@@ -154,6 +167,54 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         return ent.Comp.MaterialWhiteList.Contains(material);
     }
+    //Omu start
+    /// <summary>
+    /// Get the maxiumum of a material that fits in a specified volume
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="volume"></param>
+    /// <param name="component"></param>
+    /// <returns>The maximum amount that will fit in the specified volume</returns>
+    public int GetMaxAddableVolume(EntityUid uid, MaterialStorageComponent? component = null, string? material = null)
+    {
+        if (!Resolve(uid, ref component))
+            return 0;
+        if (component.StorageCapPerMaterialToggle)
+        {
+            if (material == null)
+            {
+                Log.Error("MaterialSystemShared: " + uid + " Material Volume request did not contain a Material reference failing task GetMaxAddableVolume.");
+                return 0;
+            }
+            if (!component.StorageMaxPerMaterial.ContainsKey(material)) component.StorageMaxPerMaterial.Add(material, component.StorageCapPerMaterialDefaultValue);
+            return Math.Min(component.StorageMaxPerMaterial[material] - GetMaterialAmount(uid, material), 0);//clamed for safty reasons
+        }
+        if (component.StorageLimit == null) return int.MaxValue;
+        return Math.Min((int) component.StorageLimit - GetTotalMaterialAmount(uid, component), 0);//clamed for safty reasons
+    }
+
+
+    /// <todo>
+    /// Find out a decent way to make this function nativly used by inserting sheets that does not completele delete the entire sheet on insert
+    /// <\todo>
+    /// <summary>
+    /// Tries to change the amount of a specific material in the storage.
+    /// Forces the maximum of the materials if they dont fit instantly
+    /// Still respects the filters in place.
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="materialId"></param>
+    /// <param name="volume"></param>
+    /// <param name="component"></param>
+    /// <param name="dirty"></param>
+    /// <returns>If it was successful</returns>
+    public bool TryChangeMaterialAmountMax(EntityUid uid, string materialId, int volume, MaterialStorageComponent? component = null, bool dirty = true)
+    {
+        var deltaVolume = Math.Min(volume, GetMaxAddableVolume(uid, component, materialId));
+        if (TryChangeMaterialAmount(uid, materialId, deltaVolume, component, dirty)) return false;
+        return true;
+    }
+    //Omu end
 
     /// <summary>
     /// Checks if the specified material can be changed by the specified volume.
@@ -169,7 +230,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
 
-        if (!CanTakeVolume(uid, volume, component))
+        if (!CanTakeVolume(uid, volume, component, materialId))
             return false;
 
         if (!IsMaterialWhitelisted((uid, component), materialId))
@@ -239,6 +300,35 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         var localChange = Math.Clamp(remaining, localLowerLimit, localUpperLimit);
 
         existing += localChange;
+        // Goob start
+        EntityUid storageUid;
+        Dictionary<ProtoId<MaterialPrototype>, int> storage;
+        Entity<MaterialStorageComponent>? silo = null;
+        if (component.ConnectToSilo)
+        {
+            silo = _silo.GetSilo(uid);
+            if (dirty && silo != null)
+                Dirty(silo.Value);
+            storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
+            storageUid = silo != null ? silo.Value : uid;
+        }
+        else
+        {
+            storage = component.Storage;
+            storageUid = uid;
+        }
+
+        var existing = storage.GetOrNew(materialId);
+        // Goob end
+        //Omu start GOOB we will not be bypassing the checks
+        if (!CanChangeMaterialAmount(uid, materialId, volume, component) && silo == null)
+            return false;
+        else if (silo != null)
+            if (!CanChangeMaterialAmount(silo.Value, materialId, volume, silo.Value.Comp))
+                return false;
+        //Omue end
+
+        existing += volume;
 
         if (existing == 0)
             component.Storage.Remove(materialId);
@@ -354,13 +444,23 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         var multiplier = TryComp<StackComponent>(toInsert, out var stackComponent) ? stackComponent.Count : 1;
         var totalVolume = 0;
+        bool allMaterialStorageCapacityPresent = true;//Omu
         foreach (var (mat, vol) in composition.MaterialComposition)
         {
             if (!CanChangeMaterialAmount(receiver, mat, vol * multiplier, storage))
                 return false;
             totalVolume += vol * multiplier;
+            //Omu start
+            if (storage.StorageCapPerMaterialToggle && allMaterialStorageCapacityPresent)
+            {
+                allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat);
+            }
         }
-
+        if (storage.StorageCapPerMaterialToggle)
+        {
+            return allMaterialStorageCapacityPresent;
+        }
+        //Omu end
         return CanTakeVolume(receiver, totalVolume, storage);
     }
 
@@ -390,14 +490,25 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
         var multiplier = TryComp<StackComponent>(toInsert, out var stackComponent) ? stackComponent.Count : 1;
         var totalVolume = 0;
+        bool allMaterialStorageCapacityPresent = true;//Omu
         foreach (var (mat, vol) in composition.MaterialComposition)
         {
             if (!CanChangeMaterialAmount(receiver, mat, vol * multiplier, storage))
                 return false;
             totalVolume += vol * multiplier;
+            //Omu start
+            if (storage.StorageCapPerMaterialToggle && allMaterialStorageCapacityPresent)
+            {
+                allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat, localOnly: true);
+            }
         }
-
-        if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
+        if (storage.StorageCapPerMaterialToggle)
+        {
+            if (!allMaterialStorageCapacityPresent)
+                return false;
+        }
+        //Omu end
+        else if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
             return false;
 
         foreach (var (mat, vol) in composition.MaterialComposition)
