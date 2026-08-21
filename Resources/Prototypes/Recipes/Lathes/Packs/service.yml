@@ -50,7 +50,6 @@
   recipes:
   - BiogeneratorMachineCircuitboard
   - UniformPrinterMachineCircuitboard
-  - SmartfridgeCircuitboard # Mono
   - MicrowaveMachineCircuitboard
   - ReagentGrinderMachineCircuitboard
   - ElectricGrillMachineCircuitboard

@@ -1229,3 +1229,46 @@ BorgModuleAdvancedChemical: BorgModuleAdvancedTopical
 
 # 2026-07-27; omu - remove GhostBarSpawner
 GhostBarSpawner: null # Omu
+
+# 2026-08-20 Omu upstream
+BaseChemistryVial: ChemistryEmptyVial
+PlushieLouie: null
+PlushieDurk: null
+PlushieSamantha: null
+PlushieJvne: null
+PlushieFern: null
+PlushieNigel: null
+PlushieBoggle: null
+PlushieLehmin: null
+PlushieMnwaar: null
+PlushieXeve: null
+PlushieTheHolyCrusader: null
+PlushiePasha: null
+PlushieLeguia: null
+PlushieWachtel: null
+PlushieTwofish: null
+PlushieLeoMalone: null
+EvilPlushieXeve: null
+EvilPlushieBoggle: null
+EvilPlushieNigel: null
+EvilPlushieFern: null
+EvilPlushieJvne: null
+EvilPlushieMnwaar: null
+EvilPlushieDurk: null
+EvilPlushieLouie: null
+EvilPlushieWachtel: null
+EvilPlushieLeguia: null
+EvilPlushiePasha: null
+EvilPlushieTwofish: null
+EvilPlushieLeoMalone: null
+ClothingNeckMantleCE: ClothingNeckMantleWhiteCE # Should probably be orange i dont care
+ClothingNeckEnsembleChiefEngineer: ClothingNeckEnsembleChiefEngineerWhite
+ClothingNeckCloakCe: ClothingNeckCloakWhiteCe
+BoxBuildABuddySlime: null #????
+Gauze10Lingering: Gauze
+Ointment10Lingering: Ointment
+Brutepack10Lingering: Brutepack
+Bloodpack10Lingering: Bloodpack
+MedicatedSuture10Lingering: MedicatedSuture
+RegenerativeMesh10Lingeing: RegenerativeMesh
+

@@ -41,17 +41,11 @@
     spawned:
     - id: FoodMeatFish
       amount: 2
-  - type: Bloodstream
-    bloodlossDamage: # OMu????
-      types:
-        Bloodloss: 1
-    bloodlossHealDamage:
-      types:
-        Bloodloss: -0.25 #Omu End
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 20
+  #- type: Bloodstream # Omu fuck off
+  #  bloodReferenceSolution:
+  #    reagents:
+  #    - ReagentId: Blood
+  #      Quantity: 20
   - type: ZombieImmune
 
 - type: entity
@@ -173,11 +167,11 @@
     state: clown
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Laughter
-        Quantity: 20
+#  - type: Bloodstream # Omu die
+#    bloodReferenceSolution:
+#      reagents:
+#      - ReagentId: Laughter
+#        Quantity: 20
 
 - type: entity
   id: FishNukeDisk
@@ -286,11 +280,11 @@
     state: tropical
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Laughter
-        Quantity: 10
+#  - type: Bloodstream # Omu Fuck off
+#    bloodReferenceSolution:
+#      reagents:
+#      - ReagentId: Laughter
+#        Quantity: 10
 
 - type: entity
   id: FishIan

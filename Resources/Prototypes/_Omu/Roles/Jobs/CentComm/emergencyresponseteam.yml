@@ -22,6 +22,15 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplantCentComm, FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, DeathRattleImplantCentcomm ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 15h
+  - !type:DepartmentTimeRequirement
+    department: Command
+    time: 30h
 
 - type: startingGear
   id: ERTLeaderGearBlue

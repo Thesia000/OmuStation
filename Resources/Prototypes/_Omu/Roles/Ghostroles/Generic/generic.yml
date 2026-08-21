@@ -15,48 +15,6 @@
     time: 15h #15 hrs
 
 - type: antag
-  id: SecurityNanotrasenOmu
-  name: "dog"
-  antagonist: true # Not true. But fuck you im not touching systems right now.
-  objective: never-shown
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 5h #5 hours
-  - !type:DepartmentTimeRequirement
-    department: Security
-    time: 5h #5 hrs
-
-- type: antag
-  id: SpectreNanotrasenOmu
-  name: "spectre"
-  antagonist: true # Not true. But fuck you im not touching systems right now.
-  objective: never-shown
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 5h
-  - !type:DepartmentTimeRequirement
-    department: Security
-    time: 10h
-  - !type:DepartmentTimeRequirement
-    department: Command
-    time: 30h
-
-- type: antag
-  id: GenericERTOmu
-  name: "ERT"
-  antagonist: true # Not true. But fuck you im not touching systems right now.
-  objective: never-shown
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 5h
-  - !type:DepartmentTimeRequirement
-    department: Security
-    time: 15h
-  - !type:DepartmentTimeRequirement
-    department: Command
-    time: 30h
-
-- type: antag
   id: ChimerahostRoleSoloAntagonistOmu
   name: Chimera
   antagonist: true
@@ -72,6 +30,7 @@
   name: Ghost Role (Free Agent)
   components:
   - type: MindRole
+    antag: true
     roleType: FreeAgent
     antagPrototype: AsakimGhostRoleFreeAgentOmu
     sortWeight: 30
@@ -81,6 +40,7 @@
   name: Ghost Role (Solo Antagonist)
   components:
   - type: MindRole
+    antag: true
     roleType: SoloAntagonist
     antagPrototype: ChimerahostRoleSoloAntagonistOmu
     sortWeight: 30
@@ -90,25 +50,28 @@
   id: MindRoleGhostRoleNanoTrasenSecurityOmu
   name: Ghost Role (NanoTrasen)
   components:
+  - type: JobRole # Uh oh this is probably a bad idea
   - type: MindRole
     roleType: NanoTrasen
-    antagPrototype: SecurityNanotrasenOmu
+    jobPrototype: SecurityCadet
     sortWeight: 30
 
 - type: entity
   id: MindRoleGhostRoleNanotrasenSpectreOmu
   name: What
   components:
+  - type: JobRole # Uh oh this is probably a bad idea
   - type: MindRole
     roleType: NanoTrasen
-    antagPrototype: SpectreNanotrasenOmu
+    jobPrototype: NanoTrasenSpectre
     sortWeight: 30
 
 - type: entity
   id: MindRoleGhostRoleNanotrasenERTOmu
   name: Why are you looking at a mindrole, you freak
   components:
+  - type: JobRole # Uh oh this is probably a bad idea
   - type: MindRole
     roleType: NanoTrasen
-    antagPrototype: GenericERTOmu
+    jobPrototype: ERTLeaderBlue
     sortWeight: 30
