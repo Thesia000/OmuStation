@@ -6243,3 +6243,11 @@ Entries:
         to 3rd! Thank you for putting up with the bugs from upstream <3
   id: 809
   time: '2026-08-22T16:28:56.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: >-
+        Increased the storage size of dead drop briefcases to prevent test
+        fails.
+  id: 810
+  time: '2026-08-22T17:00:10.0000000+00:00'
