@@ -6251,3 +6251,9 @@ Entries:
         fails.
   id: 810
   time: '2026-08-22T17:00:10.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: lobby message background properly shows after upstream
+  id: 811
+  time: '2026-08-22T17:12:35.0000000+00:00'
