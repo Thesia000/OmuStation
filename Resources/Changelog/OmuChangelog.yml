@@ -6217,3 +6217,9 @@ Entries:
       message: Borgs are no longer able to drop the wrong items in some modules
   id: 805
   time: '2026-08-22T04:15:21.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Linged bodies can no longer have cpr done to revive them
+  id: 806
+  time: '2026-08-22T04:20:39.0000000+00:00'
