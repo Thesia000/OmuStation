@@ -6229,3 +6229,9 @@ Entries:
       message: End of round screen no longer shows sprites due to lag
   id: 807
   time: '2026-08-22T16:11:46.0000000+00:00'
+- author: raincall
+  changes:
+    - type: Add
+      message: Added evil beaker of sludge (Eckeyiaeai Eooae) to the booze-o-mat
+  id: 808
+  time: '2026-08-22T16:13:42.0000000+00:00'
