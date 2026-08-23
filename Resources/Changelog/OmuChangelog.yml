@@ -6315,3 +6315,9 @@ Entries:
       message: 'Fixing spam mail from cargo by adding in missing ftl file from goob; '
   id: 820
   time: '2026-08-23T13:59:33.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed broken locales
+  id: 821
+  time: '2026-08-23T14:22:15.0000000+00:00'
