@@ -6435,3 +6435,9 @@ Entries:
       message: Jet Injectors are now medical contraband.
   id: 837
   time: '2026-08-23T23:16:16.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Surgical tools are now considered Medical and Science contraband.
+  id: 838
+  time: '2026-08-23T23:17:34.0000000+00:00'
