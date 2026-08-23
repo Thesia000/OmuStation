@@ -6423,3 +6423,9 @@ Entries:
       message: On most maps, unlinked the old non existent global silo.
   id: 835
   time: '2026-08-23T23:12:32.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Diona slow resistance from 100% immunity to 25% resistance
+  id: 836
+  time: '2026-08-23T23:15:09.0000000+00:00'
