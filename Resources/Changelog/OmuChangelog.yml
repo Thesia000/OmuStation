@@ -6279,3 +6279,9 @@ Entries:
         players
   id: 814
   time: '2026-08-23T13:18:18.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Laika is no longer locked behind playing less than 5 hours of security.
+  id: 815
+  time: '2026-08-23T13:21:43.0000000+00:00'
