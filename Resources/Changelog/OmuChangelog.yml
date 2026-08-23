@@ -6453,3 +6453,9 @@ Entries:
       message: Added some new loadout options for Nanotrasen Representative.
   id: 840
   time: '2026-08-23T23:26:18.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Changed Binary back into being a radio channel, it can be used on :b
+  id: 841
+  time: '2026-08-23T23:32:21.0000000+00:00'
