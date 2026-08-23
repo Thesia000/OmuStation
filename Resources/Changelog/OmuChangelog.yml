@@ -6483,3 +6483,9 @@ Entries:
       message: Split up "point" markings for Vulpkanins into left and right versions.
   id: 845
   time: '2026-08-23T23:43:53.0000000+00:00'
+- author: izzwu
+  changes:
+    - type: Add
+      message: Added the paramedic ATV. It can be ordered from the cargo console.
+  id: 846
+  time: '2026-08-23T23:54:56.0000000+00:00'
