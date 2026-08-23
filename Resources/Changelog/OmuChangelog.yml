@@ -6285,3 +6285,9 @@ Entries:
       message: Laika is no longer locked behind playing less than 5 hours of security.
   id: 815
   time: '2026-08-23T13:21:43.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Add
+      message: Warden's headset now has a loudspeaker.
+  id: 816
+  time: '2026-08-23T13:23:05.0000000+00:00'
