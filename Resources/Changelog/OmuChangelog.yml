@@ -6329,3 +6329,11 @@ Entries:
         borgs are no longer immune to them)
   id: 822
   time: '2026-08-23T22:05:07.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: >-
+        Changed game director to care more about the number of people on the
+        server rather than the number of people ready.
+  id: 823
+  time: '2026-08-23T22:05:27.0000000+00:00'
