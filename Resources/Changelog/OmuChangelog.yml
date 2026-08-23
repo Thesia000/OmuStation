@@ -6489,3 +6489,9 @@ Entries:
       message: Added the paramedic ATV. It can be ordered from the cargo console.
   id: 846
   time: '2026-08-23T23:54:56.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Added Paramedic and Cybersun recolors of the medical bags.
+  id: 847
+  time: '2026-08-23T23:55:49.0000000+00:00'
