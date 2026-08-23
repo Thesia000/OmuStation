@@ -6345,3 +6345,9 @@ Entries:
         hands.
   id: 824
   time: '2026-08-23T22:28:56.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Fixed crash caused by anchoring held items
+  id: 825
+  time: '2026-08-23T22:30:04.0000000+00:00'
