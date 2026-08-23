@@ -6321,3 +6321,11 @@ Entries:
       message: Fixed broken locales
   id: 821
   time: '2026-08-23T14:22:15.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: >-
+        Coscult mobs now deal ion damage alongside their normal damage (ipcs and
+        borgs are no longer immune to them)
+  id: 822
+  time: '2026-08-23T22:05:07.0000000+00:00'
