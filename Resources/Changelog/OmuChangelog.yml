@@ -6465,3 +6465,9 @@ Entries:
       message: 'Two new cat ear styles: "Lynx" and "Alt. Tall"'
   id: 842
   time: '2026-08-23T23:34:31.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Humanoid Species heretic ghouls no longer gib on death.
+  id: 843
+  time: '2026-08-23T23:35:23.0000000+00:00'
