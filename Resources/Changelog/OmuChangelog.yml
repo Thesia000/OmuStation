@@ -6297,3 +6297,9 @@ Entries:
       message: Removed the transparency from CMO's hardsuit helmet.
   id: 817
   time: '2026-08-23T13:27:09.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: Changed max character slots from 20 to 30.
+  id: 818
+  time: '2026-08-23T13:58:18.0000000+00:00'
