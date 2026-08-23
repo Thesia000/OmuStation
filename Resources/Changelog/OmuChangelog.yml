@@ -6417,3 +6417,9 @@ Entries:
       message: Berserk sting can now target food and drinks as intended
   id: 834
   time: '2026-08-23T23:12:12.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: On most maps, unlinked the old non existent global silo.
+  id: 835
+  time: '2026-08-23T23:12:32.0000000+00:00'
