@@ -6263,3 +6263,9 @@ Entries:
       message: agent id's spawn with their preset accesses (Wizard/Nukie) again
   id: 812
   time: '2026-08-23T10:07:36.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed adminchat relay sending messages to non-admins
+  id: 813
+  time: '2026-08-23T10:38:15.0000000+00:00'
