@@ -6383,3 +6383,9 @@ Entries:
       message: Arachnids now have more winter clothing crafting options.
   id: 829
   time: '2026-08-23T22:48:32.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Remove
+      message: Monkeys no longer randomly become sentient on spawn.
+  id: 830
+  time: '2026-08-23T22:49:11.0000000+00:00'
