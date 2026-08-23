@@ -6411,3 +6411,9 @@ Entries:
       message: Musiver no longer clears itself from the blood
   id: 833
   time: '2026-08-23T23:00:27.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Berserk sting can now target food and drinks as intended
+  id: 834
+  time: '2026-08-23T23:12:12.0000000+00:00'
