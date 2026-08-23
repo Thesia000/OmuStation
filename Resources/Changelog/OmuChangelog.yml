@@ -6477,3 +6477,9 @@ Entries:
       message: Slaughter demon stomachs now protect you from rot
   id: 844
   time: '2026-08-23T23:41:29.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Tweak
+      message: Split up "point" markings for Vulpkanins into left and right versions.
+  id: 845
+  time: '2026-08-23T23:43:53.0000000+00:00'
