@@ -6291,3 +6291,9 @@ Entries:
       message: Warden's headset now has a loudspeaker.
   id: 816
   time: '2026-08-23T13:23:05.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Removed the transparency from CMO's hardsuit helmet.
+  id: 817
+  time: '2026-08-23T13:27:09.0000000+00:00'
