@@ -6471,3 +6471,9 @@ Entries:
       message: Humanoid Species heretic ghouls no longer gib on death.
   id: 843
   time: '2026-08-23T23:35:23.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Tweak
+      message: Slaughter demon stomachs now protect you from rot
+  id: 844
+  time: '2026-08-23T23:41:29.0000000+00:00'
