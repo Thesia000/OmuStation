@@ -6269,3 +6269,13 @@ Entries:
       message: Fixed adminchat relay sending messages to non-admins
   id: 813
   time: '2026-08-23T10:38:15.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: ' '
+    - type: Fix
+      message: >-
+        Fixed admin logging overlaying over itself when displaying multiple
+        players
+  id: 814
+  time: '2026-08-23T13:18:18.0000000+00:00'
