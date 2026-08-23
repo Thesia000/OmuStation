@@ -6459,3 +6459,9 @@ Entries:
       message: Changed Binary back into being a radio channel, it can be used on :b
   id: 841
   time: '2026-08-23T23:32:21.0000000+00:00'
+- author: Salty145
+  changes:
+    - type: Add
+      message: 'Two new cat ear styles: "Lynx" and "Alt. Tall"'
+  id: 842
+  time: '2026-08-23T23:34:31.0000000+00:00'
