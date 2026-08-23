@@ -6403,3 +6403,11 @@ Entries:
         role.
   id: 832
   time: '2026-08-23T22:58:00.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Pent no longer clears itself from the blood
+    - type: Fix
+      message: Musiver no longer clears itself from the blood
+  id: 833
+  time: '2026-08-23T23:00:27.0000000+00:00'
