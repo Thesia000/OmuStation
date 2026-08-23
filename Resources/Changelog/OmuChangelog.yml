@@ -6363,3 +6363,11 @@ Entries:
         Manipulation guidebook entry.
   id: 826
   time: '2026-08-23T22:33:44.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: >-
+        Salic/Oxan/Holy water Pre-filled chemical containers will now spawn
+        properly
+  id: 827
+  time: '2026-08-23T22:41:04.0000000+00:00'
