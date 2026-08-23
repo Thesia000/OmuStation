@@ -6303,3 +6303,9 @@ Entries:
       message: Changed max character slots from 20 to 30.
   id: 818
   time: '2026-08-23T13:58:18.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Adds the Bagawk sound back to the Vox emote.
+  id: 819
+  time: '2026-08-23T13:58:59.0000000+00:00'
