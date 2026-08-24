@@ -6591,3 +6591,9 @@ Entries:
         have their own voice! Yay!
   id: 861
   time: '2026-08-24T23:56:20.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Cryo chems should heal every body part now rather than just vital part
+  id: 862
+  time: '2026-08-24T23:58:43.0000000+00:00'
