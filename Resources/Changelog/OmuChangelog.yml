@@ -6517,3 +6517,9 @@ Entries:
         under Capital Crimes
   id: 850
   time: '2026-08-24T00:24:02.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Remove
+      message: self destructing weapon orders(yes this is in the same publish)
+  id: 851
+  time: '2026-08-24T00:46:17.0000000+00:00'
