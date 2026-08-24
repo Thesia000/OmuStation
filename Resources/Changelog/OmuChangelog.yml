@@ -6569,3 +6569,11 @@ Entries:
       message: Fixes lollypops spamming popups in chat.
   id: 858
   time: '2026-08-24T22:19:28.0000000+00:00'
+- author: raincall
+  changes:
+    - type: Add
+      message: >-
+        Added a "steal small species objective" for thief (Avali, Resomi,
+        Rodentia, Tajaran, Felinid)  (This was not my idea)
+  id: 859
+  time: '2026-08-24T22:20:14.0000000+00:00'
