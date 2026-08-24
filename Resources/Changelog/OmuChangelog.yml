@@ -6549,3 +6549,9 @@ Entries:
         them
   id: 855
   time: '2026-08-24T19:31:08.0000000+00:00'
+- author: nnif1
+  changes:
+    - type: Remove
+      message: 'Removed Snowball from rotation '
+  id: 856
+  time: '2026-08-24T22:02:58.0000000+00:00'
