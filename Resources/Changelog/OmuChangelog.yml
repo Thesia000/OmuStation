@@ -6535,3 +6535,9 @@ Entries:
       message: Black screen bug on displacement issues
   id: 853
   time: '2026-08-24T02:17:09.0000000+00:00'
+- author: pinktanuki
+  changes:
+    - type: Fix
+      message: Surgery GUI for Borgs
+  id: 854
+  time: '2026-08-24T02:35:57.0000000+00:00'
