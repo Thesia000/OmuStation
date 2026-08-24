@@ -6523,3 +6523,9 @@ Entries:
       message: self destructing weapon orders(yes this is in the same publish)
   id: 851
   time: '2026-08-24T00:46:17.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Add
+      message: Upstream merge
+  id: 852
+  time: '2026-08-24T01:51:23.0000000+00:00'
