@@ -306,7 +306,7 @@ public abstract class SharedMaterialStorageSystemOLD : EntitySystem
         Entity<MaterialStorageComponent>? silo = null;
         if (component.ConnectToSilo)
         {
-            silo = _silo.GetSilo(uid);
+            //silo = _silo.GetSilo(uid);
             if (dirty && silo != null)
                 Dirty(silo.Value);
             storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
@@ -318,7 +318,7 @@ public abstract class SharedMaterialStorageSystemOLD : EntitySystem
             storageUid = uid;
         }
 
-        var existing = storage.GetOrNew(materialId);
+        //var existing = storage.GetOrNew(materialId);
         // Goob end
         //Omu start GOOB we will not be bypassing the checks
         if (!CanChangeMaterialAmount(uid, materialId, volume, component) && silo == null)
@@ -499,7 +499,7 @@ public abstract class SharedMaterialStorageSystemOLD : EntitySystem
             //Omu start
             if (storage.StorageCapPerMaterialToggle && allMaterialStorageCapacityPresent)
             {
-                allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat, localOnly: true);
+                //allMaterialStorageCapacityPresent = CanTakeVolume(receiver, totalVolume, storage, mat, localOnly: true);
             }
         }
         if (storage.StorageCapPerMaterialToggle)
@@ -508,8 +508,8 @@ public abstract class SharedMaterialStorageSystemOLD : EntitySystem
                 return false;
         }
         //Omu end
-        else if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
-            return false;
+        //else if (!CanTakeVolume(receiver, totalVolume, storage, localOnly: true))
+        //    return false;
 
         foreach (var (mat, vol) in composition.MaterialComposition)
         {

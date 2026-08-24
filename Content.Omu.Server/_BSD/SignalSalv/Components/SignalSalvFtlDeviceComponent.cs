@@ -13,25 +13,25 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
     public float MaxFTLGridMass = 100.0f;
 
     /// <summary>
-    /// Amount of MJ needed to perform a FTL jump, yes this is a lot I recomend getting power from engi
+    /// Amount of J needed to perform a FTL jump, yes this is a lot I recomend getting power from engi
     /// </summary>
     [DataField]
-    public float FTLCharge = 10.0f;
+    public int FTLCharge = 10000000;
 
     [DataField]
-    public float FTLCapacitiorsStoredCharge = 0f;
-
-    /// <summary>
-    /// Amount of MJ moved to the FTL capacitors every second
-    /// </summary>
-    [DataField]
-    public float FTLCapacitiorChargeRate = 1.0f;
+    public int FTLCapacitiorsStoredCharge = 0;
 
     /// <summary>
     /// Amount of MJ moved to the FTL capacitors every second
     /// </summary>
     [DataField]
-    public float FTLCapacitiorChargeEfficency = 0.25f;
+    public int FTLCapacitiorChargeRate = 1000000;
+
+    /// <summary>
+    /// Amount of MJ moved to the FTL capacitors every second
+    /// </summary>
+    [DataField]
+    public int FTLCapacitiorChargeEfficency = 25;
 
     [DataField]
     public float DistanceFromZeroZeroForJumpPoint = 300.0f;

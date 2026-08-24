@@ -437,12 +437,12 @@ public sealed partial class SignalSalvSystem : EntitySystem
         float deltaTime = (float) _timing.CurTime.TotalMilliseconds - (float) ftlComp.LastUpdate.TotalMilliseconds;
         ftlComp.LastUpdate = _timing.CurTime;
         if (!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var energyComp)) return;
-        float chargeRate = ftlComp.FTLCapacitiorChargeRate * 1000000;
+        int chargeRate = ftlComp.FTLCapacitiorChargeRate * 1000000;
         if (energyComp.StoredEnergy < (chargeRate * (deltaTime / 1000.0f)))
         {
-            chargeRate = Math.Max(energyComp.StoredEnergy, 0);//in case we SOMEHOW get negative energy
+            chargeRate = Math.Max((int) energyComp.StoredEnergy, 0);//in case we SOMEHOW get negative energy
         }
-        ftlComp.FTLCapacitiorsStoredCharge += chargeRate / 1000000 * ftlComp.FTLCapacitiorChargeEfficency;
+        ftlComp.FTLCapacitiorsStoredCharge += (int) (chargeRate / 1000000 * (ftlComp.FTLCapacitiorChargeEfficency / 100.0f));
         energyComp.StoredEnergy -= chargeRate;
     }
     public void GenerateExpeditionMapAndFTL(EntityUid shuttleConsole, SignalSalvFtlDeviceComponent ftlComp)
