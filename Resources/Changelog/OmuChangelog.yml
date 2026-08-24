@@ -6529,3 +6529,9 @@ Entries:
       message: Upstream merge
   id: 852
   time: '2026-08-24T01:51:23.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Black screen bug on displacement issues
+  id: 853
+  time: '2026-08-24T02:17:09.0000000+00:00'
