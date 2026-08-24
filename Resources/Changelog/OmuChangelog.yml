@@ -6503,3 +6503,9 @@ Entries:
         contents if broken open before being unlocked.
   id: 848
   time: '2026-08-23T23:58:02.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Added an evil counterpart to the Weh auto-injector. Lizards beware.
+  id: 849
+  time: '2026-08-24T00:01:07.0000000+00:00'
