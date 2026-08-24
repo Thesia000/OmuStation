@@ -6555,3 +6555,11 @@ Entries:
       message: 'Removed Snowball from rotation '
   id: 856
   time: '2026-08-24T22:02:58.0000000+00:00'
+- author: raincall
+  changes:
+    - type: Tweak
+      message: >-
+        The m1 garand duty case set now has 2 extra clips just like the rest of
+        the duty case guns
+  id: 857
+  time: '2026-08-24T22:18:54.0000000+00:00'
