@@ -6509,3 +6509,11 @@ Entries:
       message: Added an evil counterpart to the Weh auto-injector. Lizards beware.
   id: 849
   time: '2026-08-24T00:01:07.0000000+00:00'
+- author: Marikiii
+  changes:
+    - type: Tweak
+      message: >-
+        Adjusted crimes necessary for DNR, read spacelaw for further information
+        under Capital Crimes
+  id: 850
+  time: '2026-08-24T00:24:02.0000000+00:00'
