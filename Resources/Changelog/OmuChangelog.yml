@@ -6563,3 +6563,9 @@ Entries:
         the duty case guns
   id: 857
   time: '2026-08-24T22:18:54.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixes lollypops spamming popups in chat.
+  id: 858
+  time: '2026-08-24T22:19:28.0000000+00:00'
