@@ -6583,3 +6583,11 @@ Entries:
       message: Added the stock market, for enlightened gambling addicts.
   id: 860
   time: '2026-08-24T22:23:03.0000000+00:00'
+- author: pceererthegreat
+  changes:
+    - type: Add
+      message: >-
+        Added Hydrakin voice to the selection, now Hydrakins (and Harpies) can
+        have their own voice! Yay!
+  id: 861
+  time: '2026-08-24T23:56:20.0000000+00:00'
