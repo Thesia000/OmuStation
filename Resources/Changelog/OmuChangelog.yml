@@ -6603,3 +6603,9 @@ Entries:
       message: Players can now heal their blood back.
   id: 863
   time: '2026-08-25T09:17:02.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Polymorph chems no longer transform at lower than expected values
+  id: 864
+  time: '2026-08-25T10:31:05.0000000+00:00'
