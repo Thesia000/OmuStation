@@ -6641,3 +6641,9 @@ Entries:
       message: Sprites for when sake gourds are closed
   id: 868
   time: '2026-08-25T21:23:37.0000000+00:00'
+- author: Toaster-Box
+  changes:
+    - type: Fix
+      message: Chimera who were crew now have to be spiked to be butchered
+  id: 869
+  time: '2026-08-25T21:24:54.0000000+00:00'
