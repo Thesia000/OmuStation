@@ -6635,3 +6635,9 @@ Entries:
         invalid target.
   id: 867
   time: '2026-08-25T20:51:30.0000000+00:00'
+- author: Holorain4312
+  changes:
+    - type: Add
+      message: Sprites for when sake gourds are closed
+  id: 868
+  time: '2026-08-25T21:23:37.0000000+00:00'
