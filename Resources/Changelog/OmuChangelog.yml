@@ -6647,3 +6647,9 @@ Entries:
       message: Chimera who were crew now have to be spiked to be butchered
   id: 869
   time: '2026-08-25T21:24:54.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Shutters and blast doors have been resprited.
+  id: 870
+  time: '2026-08-25T21:39:26.0000000+00:00'
