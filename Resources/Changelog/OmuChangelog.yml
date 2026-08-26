@@ -6653,3 +6653,9 @@ Entries:
       message: Shutters and blast doors have been resprited.
   id: 870
   time: '2026-08-25T21:39:26.0000000+00:00'
+- author: Holorain
+  changes:
+    - type: Tweak
+      message: Robust harvest now turns dionas into trees at 40u instead of 80u
+  id: 871
+  time: '2026-08-26T09:49:05.0000000+00:00'
