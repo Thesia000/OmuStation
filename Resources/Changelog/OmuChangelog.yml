@@ -6685,3 +6685,11 @@ Entries:
       message: Fixed chat messages from not sending because of invalid markdown tags.
   id: 875
   time: '2026-08-26T09:58:58.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Fix
+      message: >-
+        The Janitor's Key ring now shows the proper message when successfully
+        unlocking a door.
+  id: 876
+  time: '2026-08-26T10:10:38.0000000+00:00'
