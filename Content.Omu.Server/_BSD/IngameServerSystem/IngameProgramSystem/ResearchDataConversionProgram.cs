@@ -1,16 +1,17 @@
+using Content.Omu.Server._BSD.IngameServerSystem;
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
 
 using Content.Shared.Research.Components;
 
-using Content.Omu.Server.IngameConsoleSystem.IngameProgramSystem.Components;
+using Content.Omu.Server._BSD.IngameConsoleSystem.IngameProgramSystem.Components;
 
-namespace Content.Omu.Server.IngameConsoleSystem.IngameProgramSystem;
+namespace Content.Omu.Server._BSD.IngameConsoleSystem.IngameProgramSystem;
 
-public sealed class IngamePointConversionProgramSystem : EntitySystem
+public sealed class BSDIngamePointConversionProgramSystem : EntitySystem
 {
-    [Dependency] private readonly IngameServerSystem _ingameServerSys = default!;
+    [Dependency] private readonly BSDIngameServerSystem _ingameServerSys = default!;
     public float UpdateFrequencyInSeconds = 0.25f;//needs help how to more easily scny this probably a CVar probably a CVar
     public override void Initialize()
     {
@@ -36,18 +37,18 @@ public sealed class IngamePointConversionProgramSystem : EntitySystem
         // conversion maths: f(time) = time * Min(RawData, capacity) * converstion factor * dynamic conversion factor
         //
         IngameServerPointConversions loadedConversion = new();
-        foreach (IngameServerPoints iterator in programComp.EnabeledConversions)
+        foreach (string iterator in programComp.EnabeledConversions)
         {
             if (!loadedConversion.PointAToPointB.ContainsKey(iterator)) continue;
             if (!loadedConversion.ConversionRate.ContainsKey(iterator)) continue;
-            if (!comp.StoredPoints.ContainsKey(iterator)) comp.StoredPoints.Add(iterator, 0.0f);
-            if (!comp.StoredPoints.ContainsKey(loadedConversion.PointAToPointB[iterator])) comp.StoredPoints.Add(loadedConversion.PointAToPointB[iterator], 0.0f);
+            if (!comp.StoredPoints.ContainsKey(iterator)) comp.StoredPoints.Add(iterator, 0);
+            if (!comp.StoredPoints.ContainsKey(loadedConversion.PointAToPointB[iterator])) comp.StoredPoints.Add(loadedConversion.PointAToPointB[iterator], 0);
             float convertedData = 0f;
             convertedData += Math.Min(comp.StoredPoints[iterator], 300f) * (UpdateFrequencyInSeconds / 1);
-            comp.StoredPoints[iterator] -= convertedData;//remove the points we took
+            comp.StoredPoints[iterator] -= (int) convertedData;//remove the points we took
             convertedData *= comp.ActivePrograms[IngameServerProgramTypes.ResearchProgram].Efficency;
             convertedData *= loadedConversion.ConversionRate[iterator];
-            comp.StoredPoints[loadedConversion.PointAToPointB[iterator]] += convertedData;
+            comp.StoredPoints[loadedConversion.PointAToPointB[iterator]] += (int) convertedData;
         }
         return;
     }
@@ -61,8 +62,8 @@ public sealed class IngamePointConversionProgramSystem : EntitySystem
     //dumps points into the RND budget every second
     public void TEMPORARYInterfacingWithRndSystem(Entity<IngameServerComponent> source, ref ResearchServerGetPointsPerSecondEvent args)
     {
-        args.Points += (int) source.Comp.StoredPoints[IngameServerPoints.SciGeneralPoint];
-        source.Comp.StoredPoints[IngameServerPoints.SciGeneralPoint] = 0;
+        args.Points += source.Comp.StoredPoints["SciGeneralPoint"];
+        source.Comp.StoredPoints["SciGeneralPoint"] = 0;
     }
 
     #endregion

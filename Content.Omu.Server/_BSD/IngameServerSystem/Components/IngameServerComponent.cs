@@ -11,7 +11,10 @@ namespace Content.Omu.Server._BSD.IngameServerSystem.Components;
 public sealed partial class IngameServerComponent : Component//there can only be ONE of these PER server, not sure if I want to attach the UI to this one
 {
     [DataField]
-    public Dictionary<IngameServerPoints, float> StoredPoints = new();
+    public Dictionary<string, int> StoredPoints = new();
+
+    [DataField]
+    public Dictionary<string, int?> StoredPointsCapacity = new();
 
     [DataField]
     public float ProcessingPower = 0f;

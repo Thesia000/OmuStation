@@ -2,13 +2,13 @@ using System.Linq;
 
 using Robust.Server.GameObjects;
 
-using Content.Omu.Shared.IngameConsoleSystem;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
-using Content.Omu.Server.IngameConsoleSystem.Components;
+using Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 
-namespace Content.Omu.Server.IngameConsoleSystem;
+namespace Content.Omu.Server._BSD.IngameConsoleSystem;
 
-public sealed class IngameConsoleSystem : EntitySystem
+public sealed class BSDIngameConsoleSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     public override void Initialize()

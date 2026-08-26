@@ -1,7 +1,7 @@
 using Robust.Shared.Serialization;
 
 
-namespace Content.Omu.Shared.IngameConsoleSystem;
+namespace Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 [ByRefEvent]
 public readonly record struct IngameConsoleCommandCalledEvent(IngameConsoleCommandType Type,

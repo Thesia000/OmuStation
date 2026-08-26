@@ -4,21 +4,21 @@ using Robust.Server.GameObjects;
 
 using Robust.Shared.Timing;
 
-using Content.Omu.Shared.IngameConsoleSystem;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
-using Content.Omu.Server.IngameConsoleSystem.Components;
+using Content.Omu.Server._BSD.IngameConsoleSystem;
+using Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
-using Linguini.Bundle.Errors;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds;
-namespace Content.Omu.Server.IngameConsoleSystem;
 
-public sealed class IngameServerSystem : EntitySystem
+namespace Content.Omu.Server._BSD.IngameServerSystem;
+
+public sealed partial class BSDIngameServerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IngameConsoleSystem _consoleSys = default!;
+    [Dependency] private readonly BSDIngameConsoleSystem _consoleSys = default!;
     public float UpdateFrequencyInSeconds = 0.25f;//I recomend Programs use this to do math as there tickrate
     public override void Initialize()
     {

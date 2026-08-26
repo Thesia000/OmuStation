@@ -1,5 +1,5 @@
 
-using Content.Omu.Shared.IngameConsoleSystem;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 using Content.Omu.Server._BSD.SignalSalv.Components;
 using Content.Omu.Server._BSD.SignalSalv.Events;
@@ -7,6 +7,10 @@ using Content.Omu.Server._BSD.SignalSalv.Helpers;
 
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
+
+using Content.Omu.Server._BSD.IngameServerSystem;
+
+using Content.Omu.Server._BSD.IngameConsoleSystem;
 
 using Robust.Shared.Timing;
 
@@ -33,11 +37,9 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Shuttles.Events;
 
-
-
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class SignalSalvSystem : EntitySystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem
 {
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
@@ -48,6 +50,7 @@ public sealed partial class SignalSalvSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly BSDIngameServerSystem _ingameServer = default!;
 
     private static readonly TotalMaterialMiningRateList MaterialMiningRatesBase = new();
     private static readonly ProtoId<BiomeTemplatePrototype> BiomeTemplate = "Continental";
@@ -92,33 +95,6 @@ public sealed partial class SignalSalvSystem : EntitySystem
     }
     #endregion
     #region User Interfacing
-    public void IngameConsoleCommandMatReciver(Entity<SignalSalvMaterialReciverStructureComponent> ent, ref IngameConsoleCommandCalledEvent args)
-    {
-
-        // assign reciver | sets this machine to be the material reciver
-        if (args.Type == IngameConsoleCommandType.ICC_ASSIGN && args.Args!.Length > 1 && args.Args[1] == "reciver")
-        {
-            ChangeMaterialReciverOnTransitComp(ent);
-            IngameConsoleHistoryChangeEvent ev = new("-> Material destination changed");
-            RaiseLocalEvent(ent, ref ev);
-            //Now add stuff to history to update that it worked;
-        }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 1 && args.Args[1] == "materials")
-        {
-            IngameConsoleHistoryChangeEvent ev = new(PrintMaterialInbound(ent));
-            RaiseLocalEvent(ent, ref ev);
-        }
-    }
-    public void IngameConsoleCommandSignalSalvMiningRig(Entity<SignalSalvMiningRigStructreComponent> ent, ref IngameConsoleCommandCalledEvent args)
-    {
-        if (args.Type == IngameConsoleCommandType.ICC_START)
-        {
-            MiningRigRecalculation(ent, overRide: true);
-            IngameConsoleHistoryChangeEvent ev = new("-> Machine started");
-            RaiseLocalEvent(ent, ref ev);
-            //Now add stuff to history to update that it worked;
-        }
-    }
     public void IngameConsoleCommandSignalSalvFTLDevice(Entity<SignalSalvFtlDeviceComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
         if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "jump")
@@ -285,152 +261,6 @@ public sealed partial class SignalSalvSystem : EntitySystem
         return returnString;
     }
     #endregion
-    #region Material Transit
-    public void UpdateProductionRates(Entity<SignalSalvMaterialTransitMapComponent> ent, ref SignalSalvMiningRigProductionChangeEvent args)
-    {
-        foreach (var iterator in args.NewProductionRate.Keys)
-        {
-            ent.Comp.MaterialProductionPerSecond[iterator] -= args.OldProductionRate[iterator];
-            ent.Comp.MaterialProductionPerSecond[iterator] += args.NewProductionRate[iterator];
-        }
-        return;
-    }
-    public SignalSalvMaterialTransitMapComponent SetupMapMaterialTransitComp(EntityUid mapUid)
-    {
-        EnsureComp<SignalSalvMaterialTransitMapComponent>(mapUid);//ensure the map of the station has signals
-        TryComp<SignalSalvMaterialTransitMapComponent>(mapUid, out var comp);
-        return comp!;
-    }
-    public void ChangeMaterialReciverOnTransitComp(EntityUid newDestination)
-    {
-        EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(newDestination).MapID);
-        if (!TryComp<SignalSalvMaterialTransitMapComponent>(mapUid, out var comp))
-        {
-            comp = SetupMapMaterialTransitComp(mapUid);
-        }
-        comp.LinkedMaterialReciver = newDestination;
-        return;
-    }
-    public void MaterialProductionTimeBased(EntityUid mapUid, SignalSalvMaterialTransitMapComponent comp)
-    {
-        TimeSpan deltaTime = _timing.CurTime - comp.LastUpdate;
-        comp.LastUpdate = _timing.CurTime;
-        int deltaTimeInt = (int) deltaTime.TotalMilliseconds;
-        foreach (var iterator in comp.MaterialProductionPerSecond.Keys)
-        {
-            if (!comp.MaterialInTransit.ContainsKey(iterator))
-            {
-                comp.MaterialInTransit.Add(iterator, 0);
-            }
-            comp.MaterialInTransit[iterator] += comp.MaterialProductionPerSecond[iterator] * (int) (deltaTimeInt / 1000.0f);
-            if (comp.MaterialInTransit[iterator] > comp.MaterialInTransitStorageCap) comp.MaterialInTransit[iterator] = comp.MaterialInTransitStorageCap;
-        }
-        //exit in case we dont have a linked reciver
-        if (!TryComp<SignalSalvMaterialReciverStructureComponent>(comp.LinkedMaterialReciver, out var reciverComp)) return;
-        if (!TryComp<MaterialStorageComponent>(comp.LinkedMaterialReciver, out var matStorageComp)) return;
-        foreach (var iterator in comp.MaterialInTransit.Keys)
-        {
-            if (comp.MaterialInTransit[iterator] < reciverComp.MaterialCargoMin) continue;
-            int deltaMaterialChange = Math.Min(reciverComp.MaterialCargoMin, _material.GetMaxAddableVolume(comp.LinkedMaterialReciver, matStorageComp, iterator));
-            if (_material.TryChangeMaterialAmount(comp.LinkedMaterialReciver, iterator, deltaMaterialChange, matStorageComp)) continue;
-            comp.MaterialInTransit[iterator] -= deltaMaterialChange;
-        }
-        return;
-    }
-    #endregion
-    #region Mining Rig
-    public void MiningRigRecalculationStructureChange(Entity<SignalSalvMiningRigStructreComponent> ent, ref MultiStructChangeEvent args)
-    {
-        if (!TryComp<MultiBlockStructureComponent>(ent, out var structureComp)) return;
-        foreach (string providerType in ent.Comp.ProductivityTypes)
-        {
-            if (!structureComp.TypesPresent.ContainsKey(providerType)) continue;
-            ent.Comp.ProductivityPoints += (int) structureComp.TypesPresent[providerType];
-        }
-        MiningRigRecalculation(ent);
-        return;
-    }
-    public void OnAfterInteractOutpostData(Entity<SignalSalvOutpostDataComponent> ent, ref AfterInteractEvent args)
-    {
-        Random rand = new((int) _timing.CurTime.TotalSeconds);
-        if (args.Handled || !args.CanReach || args.Target is not { } target)
-            return;
-
-        if (!HasComp<SignalSalvMiningRigStructreComponent>(target))
-            return;
-        float deltaData = ent.Comp.OutpostData;
-        if (ent.Comp.OutpostDataRandom)
-        {
-            deltaData = rand.NextFloat(ent.Comp.OutpostDataMin, ent.Comp.OutpostDataMax);
-        }
-        TryAddAdditonalRandomMaterialToPlanetMining(target);
-        MiningRigRecalculationOutpostDataChange(target, deltaData);
-    }
-    public bool TryAddAdditonalRandomMaterialToPlanetMining(EntityUid ent)
-    {
-        Random rand = new((int) _timing.CurTime.TotalSeconds);
-        EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(ent).MapID);
-        if (!TryComp<SignalSalvPlanetResourcesComponent>(mapUid, out var mapResourceComp)) return false;
-        bool returnBool = false;
-        int attempts;
-        attempts = 10;
-        while (attempts > 0)
-        {
-            if (mapResourceComp.AdvancedResourcePlanet)
-            {
-                //time to add a random special resource AND a advanced resource after -> advanced planets are good
-                Material randomSpecialMat = MaterialMiningRatesBase.SpecialMaterials.ElementAt((int) rand.NextInt64(0, MaterialMiningRatesBase.SpecialMaterials.Count));
-                if (!mapResourceComp.MiningRates.ContainsKey(randomSpecialMat.MaterialType))
-                {
-                    mapResourceComp.MiningRates.Add(randomSpecialMat.MaterialType, (int) rand.NextInt64(randomSpecialMat.MinResoucePerSecond, randomSpecialMat.MaxResoucePerSecond));
-                    returnBool = true;
-                    break;
-                }
-            }
-            attempts--;
-        }
-        attempts = 10;
-        while (attempts > 0)
-        {
-            Material randomAdvancedMat = MaterialMiningRatesBase.AdvancedMaterials.ElementAt((int) rand.NextInt64(0, MaterialMiningRatesBase.AdvancedMaterials.Count));
-            if (!mapResourceComp.MiningRates.ContainsKey(randomAdvancedMat.MaterialType))
-            {
-                mapResourceComp.MiningRates.Add(randomAdvancedMat.MaterialType, (int) rand.NextInt64(randomAdvancedMat.MinResoucePerSecond, randomAdvancedMat.MaxResoucePerSecond));
-                returnBool = true;
-                break;
-            }
-            attempts--;
-        }
-        return returnBool;
-    }
-    public void MiningRigRecalculationOutpostDataChange(EntityUid ent, float deltaData)
-    {
-        if (!TryComp<SignalSalvMiningRigStructreComponent>(ent, out var comp)) return;
-        comp.OutpostData += deltaData;
-        Entity<SignalSalvMiningRigStructreComponent> passdownEnt = ent!;//we know this is not null
-        MiningRigRecalculation(passdownEnt);
-    }
-    public void MiningRigRecalculation(Entity<SignalSalvMiningRigStructreComponent> ent, bool overRide = false)
-    {
-        float oldMiningRateModifier = ent.Comp.MiningRateModifier;
-        ent.Comp.MiningRateModifier = 1;
-        ent.Comp.MiningRateModifier += ent.Comp.GroundSurveyData;
-        ent.Comp.MiningRateModifier += ent.Comp.OutpostData;
-        ent.Comp.MiningRateModifier += (float) Math.Log(ent.Comp.ProductivityPoints, ent.Comp.ProductivityScalingBase);
-        if (ent.Comp.MiningRateModifier == oldMiningRateModifier || overRide) return;
-        Dictionary<ProtoId<MaterialPrototype>, int> oldMiningRates = new();
-        Dictionary<ProtoId<MaterialPrototype>, int> newMiningRates = new();
-        EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(ent).MapID);
-        if (TryComp<SignalSalvPlanetResourcesComponent>(mapUid, out var mapResourceComp))
-            foreach (var iterator in mapResourceComp.MiningRates.Keys)
-            {
-                oldMiningRates.Add(iterator, (int) (mapResourceComp.MiningRates[iterator] * oldMiningRateModifier));
-                newMiningRates.Add(iterator, (int) (mapResourceComp.MiningRates[iterator] * ent.Comp.MiningRateModifier));
-            }
-        SignalSalvMiningRigProductionChangeEvent ev = new(oldMiningRates, newMiningRates);
-        //RAISE THE EVENT!!!
-    }
-    #endregion
     #region Generate Map and travel systems
     public void ChargeFTLCapacitiors(EntityUid uid, SignalSalvFtlDeviceComponent ftlComp)
     {
@@ -543,12 +373,12 @@ public sealed partial class SignalSalvSystem : EntitySystem
     /// Uses a linked disk that is inserted into the controll device to generate the Expedition Map
     /// </summary>
     /// <param name="ftlComp"></param>
-    public void UsePredefinedSettingsJumpPointGeneration(SignalSalvFtlDeviceComponent ftlComp)
+    public void UsePredefinedSettingsJumpPointGeneration(EntityUid consoleUid, SignalSalvFtlDeviceComponent ftlComp)
     {
         if (!ftlComp.GenerationSettingsDiskSlot.HasItem)
         {
             IngameConsoleHistoryChangeEvent ev = new("-> Jump point could not be calculated due to a lack of a Destination Coordinate Disk (DCD)");
-            RaiseLocalEvent(ftlComp.Owner, ref ev);//TODO: find the proper methode later
+            RaiseLocalEvent(consoleUid, ref ev);//TODO: find the proper methode later
             return;
         }
         EntityUid expedMapUid = _mapSys.CreateMap(out var mapId);

@@ -7,6 +7,8 @@ public enum IngameServerProgramTypes : int//reminder add the IDs to the guidbook
     CrewMonitor,                //WIP
     Cameras,                    //WIP
     Telecommunication,          //WIP
+    Silo,                       //works as the material reciver needs to run to controll things
+    Lath,                       //handles local printing of things, no proper functionality YET
 }
 
 public struct IngameServerProgram

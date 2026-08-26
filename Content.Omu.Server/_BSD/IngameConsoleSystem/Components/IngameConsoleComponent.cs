@@ -1,6 +1,6 @@
-using Content.Omu.Shared.IngameConsoleSystem;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
-namespace Content.Omu.Server.IngameConsoleSystem.Components;
+namespace Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 
 [RegisterComponent]
 public sealed partial class IngameConsoleComponent : Component

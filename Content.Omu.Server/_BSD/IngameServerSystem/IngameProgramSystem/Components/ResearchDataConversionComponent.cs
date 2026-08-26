@@ -1,6 +1,6 @@
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 
-namespace Content.Omu.Server.IngameConsoleSystem.IngameProgramSystem.Components;
+namespace Content.Omu.Server._BSD.IngameConsoleSystem.IngameProgramSystem.Components;
 
 [RegisterComponent]
 public sealed partial class IngamePointConversionProgramComponent : Component
@@ -9,6 +9,6 @@ public sealed partial class IngamePointConversionProgramComponent : Component
     /// Includes all datatypes that automaticly get converted, more can be added later via ingame commands
     /// </summary>
     [DataField]
-    public HashSet<IngameServerPoints> EnabeledConversions =
-    new HashSet<IngameServerPoints> { IngameServerPoints.SciRawData, IngameServerPoints.SigSciRawTelemetry };
+    public HashSet<string> EnabeledConversions =
+    new HashSet<string> { "SciRawData", "SigSciRawTelemetry" };
 }

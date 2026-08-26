@@ -5,7 +5,7 @@ This file is used to declare the types of commands we have in the IngameConsole 
 To add a new one is rather simple, define the key add a enum and link them then declare the number of arguments it takes and you are done.
 
 */
-namespace Content.Omu.Shared.IngameConsoleSystem;
+namespace Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 public enum IngameConsoleCommandType
 {//ICC == Ingame Concole Command
