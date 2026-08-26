@@ -6667,3 +6667,9 @@ Entries:
         supposed to.
   id: 872
   time: '2026-08-26T09:50:51.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Tweak
+      message: Voxes can now be a lot more colorful.
+  id: 873
+  time: '2026-08-26T09:54:38.0000000+00:00'
