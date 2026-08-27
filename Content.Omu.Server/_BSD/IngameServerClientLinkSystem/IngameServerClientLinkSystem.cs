@@ -15,6 +15,8 @@ primary work way:
 - when a querry is made it querries for all entities with the component and returns the specialised lists
 - lastly we safe the link in a directory, this happens on both the client and the server[important note this is 2 devices/entites not server/clientside]
 
+
+TODO: update this descriptor
 */
 using System.Linq;
 
@@ -26,7 +28,7 @@ using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
 namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
 
-public sealed partial class IngameServerClientLinkSystem : EntitySystem
+public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     public override void Initialize()
@@ -123,7 +125,7 @@ public sealed partial class IngameServerClientLinkSystem : EntitySystem
     }
     public int[] GetServerIdsUnselected(EntityUid client, string channel)
     {
-        return GetServers(client, channel).Select(x => x.DeviceSuffix).ToArray();
+        return GetServers(client, channel).Select(x => x.NetworkId).ToArray();
     }
     public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
     {
@@ -147,7 +149,7 @@ public sealed partial class IngameServerClientLinkSystem : EntitySystem
                 set.Add(compToSave);
             }
         }
-        return set.Select(x => x.DeviceSuffix).ToArray();
+        return set.Select(x => x.NetworkId).ToArray();
     }
     #endregion
     //mostly the same as server logic but for the clients
@@ -195,7 +197,7 @@ public sealed partial class IngameServerClientLinkSystem : EntitySystem
     public int[] GetClientIds(EntityUid client, string channel)
     {
         if (!TryComp<IngameServerClientLinkInfrastructureComponent>(client, out var serverComp)) return new int[0];
-        return GetClients(client, serverComp, channel).Select(x => x.DeviceSuffix).ToArray();
+        return GetClients(client, serverComp, channel).Select(x => x.NetworkId).ToArray();
     }
 
     #endregion

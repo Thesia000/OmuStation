@@ -12,6 +12,7 @@ using Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem;
 
 namespace Content.Omu.Server._BSD.IngameServerSystem;
 
@@ -19,6 +20,7 @@ public sealed partial class BSDIngameServerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly BSDIngameConsoleSystem _consoleSys = default!;
+    [Dependency] private readonly BSDIngameServerClientLinkSystem _clientLinkSystem = default!;
     public float UpdateFrequencyInSeconds = 0.25f;//I recomend Programs use this to do math as there tickrate
     public override void Initialize()
     {

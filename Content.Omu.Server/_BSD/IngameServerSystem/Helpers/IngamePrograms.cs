@@ -7,7 +7,7 @@ public enum IngameServerProgramTypes : int//reminder add the IDs to the guidbook
     CrewMonitor,                //WIP
     Cameras,                    //WIP
     Telecommunication,          //WIP
-    Silo,                       //works as the material reciver needs to run to controll things
+    CargoManagment,             //for easier managment of resources by cargo
     Lath,                       //handles local printing of things, no proper functionality YET
 }
 

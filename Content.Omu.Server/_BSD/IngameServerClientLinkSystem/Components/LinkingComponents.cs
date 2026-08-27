@@ -17,7 +17,7 @@ public sealed partial class IngameServerClientLinkInfrastructureComponent : Comp
     /// Components Present to what servers this client is liked
     /// </summary>
     [DataField]
-    public Dictionary<string, EntityUid> EntityDicClient = new Dictionary<string, EntityUid>();
+    public Dictionary<string, HashSet<EntityUid>> EntityDicClient = new Dictionary<string, HashSet<EntityUid>>();
 
     /// <summary>
     /// Types for when this acts as a cleint, cant be in ServerTypes
@@ -71,6 +71,6 @@ public sealed partial class IngameServerClientLinkInfrastructureComponent : Comp
     /// number ID identifier to allow differenciation;
     /// </summary>
     [DataField]
-    public int DeviceSuffix = 0;
+    public int NetworkId = 0;
 
 }

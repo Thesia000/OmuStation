@@ -17,3 +17,11 @@ public struct IngameServerPointConversions
 
     public Dictionary<string, float> ConversionRate { get; init; }
 }
+
+public enum QuerryTypes
+{
+    local,
+    networkTotal,
+    networkUpwards,
+    networkDownwards
+}

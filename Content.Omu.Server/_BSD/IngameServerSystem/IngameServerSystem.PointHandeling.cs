@@ -2,6 +2,8 @@ using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
 using System.Linq;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
+using System.Drawing;
 
 namespace Content.Omu.Server._BSD.IngameServerSystem
 {
@@ -50,6 +52,56 @@ namespace Content.Omu.Server._BSD.IngameServerSystem
             if (!TryComp<IngameServerComponent>(entityUid, out var comp))
                 return deltaAdd;
             return TryAddMaxPoints(comp, type, deltaAdd);
+        }
+        /// <summary>
+        /// Get the total points of a point type, used the ServerClientLinkSystem for this
+        /// </summary>
+        /// <param name="pointType">Type of point stored in the ServerComponent</param>
+        /// <param name="connectionType">Connection type of the serverclientlink</param>
+        /// <param name="querryType"></param>
+        /// <returns></returns>
+        public bool TryGetPointsTotalNetwork(EntityUid uid, string pointType, string connectionType, QuerryTypes querryType,
+                                            out int pointsPresent)
+        {
+            pointsPresent = 0;
+            switch (querryType)
+            {
+                case QuerryTypes.local:
+                    return TryGetLocalPoints(uid, pointType, out pointsPresent);
+                case QuerryTypes.networkTotal:
+                    if (!_clientLinkSystem.TryGetNetworkTotal(uid, connectionType, out var network)) return false;
+                    GetNetworkPointsTotal(network, pointType, out pointsPresent);
+                    return true;
+                case QuerryTypes.networkDownwards:
+                    if (!_clientLinkSystem.TryGetNetworkDownwards(uid, connectionType, out var networkDown)) return false;
+                    GetNetworkPointsTotal(networkDown, pointType, out pointsPresent);
+                    return true;
+                case QuerryTypes.networkUpwards:
+                    if (!_clientLinkSystem.TryGetNetworkUpwards(uid, connectionType, out var networkUp)) return false;
+                    GetNetworkPointsTotal(networkUp, pointType, out pointsPresent);
+                    return true;
+                default:
+                    break;
+            }
+            return false;
+        }
+        private bool TryGetLocalPoints(EntityUid uid, string type, out int pointsPresent)
+        {
+            pointsPresent = 0;
+            if (!TryComp<IngameServerComponent>(uid, out var serverComp)) return false;
+            if (!serverComp.StoredPoints.ContainsKey(type)) return false;
+            pointsPresent = serverComp.StoredPoints[type];
+            return true;
+        }
+        private void GetNetworkPointsTotal(HashSet<EntityUid> uidHash, string type, out int pointsPresent)
+        {
+            pointsPresent = 0;
+            foreach (var iterator in uidHash)
+            {
+                if (!TryComp<IngameServerComponent>(iterator, out var iteratorComp)) continue;
+                if (!iteratorComp.StoredPoints.ContainsKey(type)) continue;
+                pointsPresent += iteratorComp.StoredPoints[type];
+            }
         }
     }
 }
