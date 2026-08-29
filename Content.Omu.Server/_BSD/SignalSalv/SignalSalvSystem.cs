@@ -27,6 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Utility;
 using Robust.Shared.Physics.Components;
 
@@ -36,6 +37,7 @@ using Content.Shared.Parallax.Biomes;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Shuttles.Events;
+using Content.Shared.Shuttles.Systems;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
@@ -64,7 +66,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         SubscribeLocalEvent<SignalSalvMaterialReciverStructureComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommandMatReciver);
 
         SubscribeLocalEvent<SignalSalvFtlDeviceComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommandSignalSalvFTLDevice);
-        SubscribeLocalEvent<SignalSalvFtlDeviceComponent, FTLCompletedEvent>(DeleteLinkedMap);
+        SubscribeLocalEvent<SignalSalvFtlDeviceBasedFTLComponent, FTLCompletedEvent>(DeleteLinkedMap);
 
         SubscribeLocalEvent<SignalSalvMiningRigStructreComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommandSignalSalvMiningRig);
         SubscribeLocalEvent<SignalSalvMiningRigStructreComponent, MultiStructChangeEvent>(MiningRigRecalculationStructureChange);
@@ -249,13 +251,17 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         float deltaTime = (float) _timing.CurTime.TotalMilliseconds - (float) ftlComp.LastUpdate.TotalMilliseconds;
         ftlComp.LastUpdate = _timing.CurTime;
         if (!TryComp<MultiBlockEnergyManagmentComponent>(uid, out var energyComp)) return;
-        int chargeRate = ftlComp.FTLCapacitiorChargeRate * 1000000;
+        Int64 chargeRate = ftlComp.FTLCapacitiorChargeRate;
         if (energyComp.StoredEnergy < (chargeRate * (deltaTime / 1000.0f)))
         {
-            chargeRate = Math.Max((int) energyComp.StoredEnergy, 0);//in case we SOMEHOW get negative energy
+            chargeRate = Math.Max((Int64) energyComp.StoredEnergy, 0);//in case we SOMEHOW get negative energy
         }
-        ftlComp.FTLCapacitiorsStoredCharge += (int) (chargeRate / 1000000 * (ftlComp.FTLCapacitiorChargeEfficency / 100.0f));
-        energyComp.StoredEnergy -= chargeRate;
+        if (chargeRate * (ftlComp.FTLCapacitiorChargeEfficency / 100.0f) + ftlComp.FTLCapacitiorsStoredCharge >= ftlComp.FTLCharge)
+        {
+            chargeRate = (Int64) ((ftlComp.FTLCharge - ftlComp.FTLCapacitiorsStoredCharge) / (ftlComp.FTLCapacitiorChargeEfficency / 100.0f));
+        }
+        ftlComp.FTLCapacitiorsStoredCharge += Math.Max((Int64) (chargeRate * (ftlComp.FTLCapacitiorChargeEfficency / 100.0f)), 0);//FTL discharges otherwise
+        energyComp.StoredEnergy -= (Int64) chargeRate;
     }
     public void GenerateExpeditionMapAndFTL(EntityUid shuttleConsole, SignalSalvFtlDeviceComponent ftlComp)
     {
@@ -273,14 +279,19 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         var targetCoordinates = new EntityCoordinates((EntityUid) ftlComp.CurrentlyLinkedMapUid!, new Vector2(0, 0));
         Angle targetAngle = new();
         ftlComp.Originmap = transComp.MapUid;
+        PostFTLCost(shuttleConsole, transComp.GridUid.Value, ftlComp);
         _shuttle.FTLToCoordinates(transComp.GridUid.Value, shuttleComponent!, targetCoordinates, targetAngle);
-        PostFTLCost(shuttleConsole, ftlComp);
         return;
     }
-    private void PostFTLCost(EntityUid uid, SignalSalvFtlDeviceComponent comp)
+    private void PostFTLCost(EntityUid consoleUid, EntityUid gridUid, SignalSalvFtlDeviceComponent comp)
     {
         comp.FTLCapacitiorsStoredCharge -= comp.FTLCharge;
         comp.JumpPointSet = false;
+        EnsureComp<SignalSalvFtlDeviceBasedFTLComponent>(gridUid, out var compFTL);
+        compFTL.LinkedFTLDevice = consoleUid;
+        RemCompDeferred<FTLComponent>(gridUid);//Bypasses the FTL cooldown
+        if (!TryComp<FTLComponent>(gridUid, out var ftlComp)) return;
+        ftlComp.State = FTLState.Available;//it is deleted and readded NEXT tick but we need to jump
     }
     /// <summary>
     /// Ensure that the FTL drive is:
@@ -538,20 +549,24 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         ftlComp.DeleteLinkedMapOnFTLArrival = true;
         var targetCoordinates = new EntityCoordinates((EntityUid) ftlComp.Originmap!, ftlComp.DesignatedJumpPoint);
         Angle targetAngle = new();
+        PostFTLCost(shuttleConsole, transComp.GridUid!.Value, ftlComp);
         _shuttle.FTLToCoordinates(transComp.GridUid!.Value, shuttleComponent!, targetCoordinates, targetAngle);
         return;
     }
-    public void DeleteLinkedMap(Entity<SignalSalvFtlDeviceComponent> ent, ref FTLCompletedEvent args)
+    public void DeleteLinkedMap(Entity<SignalSalvFtlDeviceBasedFTLComponent> ent, ref FTLCompletedEvent args)
     {
-        if (!ent.Comp.DeleteLinkedMapOnFTLArrival) return;
-        if (ent.Comp.CurrentlyLinkedMapUid == null) return;
+        if (!TryComp<SignalSalvFtlDeviceComponent>(ent.Comp.LinkedFTLDevice, out var deviceComp)) return;
+        RemCompDeferred<SignalSalvFtlDeviceBasedFTLComponent>(ent);
+        if (deviceComp.DeleteLinkedMapOnFTLArrival == false) return;
+        if (deviceComp.CurrentlyLinkedMapUid == null) return;
         foreach (var iterator in _mapSys.GetAllMapIds())//TODO: add a better methode to find the map ID, possibly safe it alond side/instead of the map UID
         {
-            if (_mapSys.GetMap(iterator) == ent.Comp.CurrentlyLinkedMapUid)
+            if (_mapSys.GetMap(iterator) == deviceComp.CurrentlyLinkedMapUid)
             {
-                ent.Comp.CurrentlyLinkedMapUid = null;
+                deviceComp.CurrentlyLinkedMapUid = null;
                 _mapSys.QueueDeleteMap(iterator);
-                return;
+                deviceComp.DeleteLinkedMapOnFTLArrival = false;
+                break;
             }
         }
         return;

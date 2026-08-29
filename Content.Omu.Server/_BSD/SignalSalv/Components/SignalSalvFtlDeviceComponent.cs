@@ -16,22 +16,22 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
     /// Amount of J needed to perform a FTL jump, yes this is a lot I recomend getting power from engi
     /// </summary>
     [DataField]
-    public int FTLCharge = 10000000;
+    public Int64 FTLCharge = 1000000;
 
     [DataField]
-    public int FTLCapacitiorsStoredCharge = 0;
-
-    /// <summary>
-    /// Amount of MJ moved to the FTL capacitors every second
-    /// </summary>
-    [DataField]
-    public int FTLCapacitiorChargeRate = 1000000;
+    public Int64 FTLCapacitiorsStoredCharge = 0;
 
     /// <summary>
-    /// Amount of MJ moved to the FTL capacitors every second
+    /// Amount of J moved to the FTL capacitors every second
     /// </summary>
     [DataField]
-    public int FTLCapacitiorChargeEfficency = 25;
+    public Int64 FTLCapacitiorChargeRate = 25000;
+
+    /// <summary>
+    /// percentrage efficency
+    /// </summary>
+    [DataField]
+    public int FTLCapacitiorChargeEfficency = 50;
 
     [DataField]
     public float DistanceFromZeroZeroForJumpPoint = 300.0f;
@@ -82,4 +82,14 @@ public sealed partial class SignalSalvFtlDeviceComponent : Component
 
     [DataField]
     public bool DeleteLinkedMapOnFTLArrival = false;
+}
+
+/// <summary>
+/// Special FTL component that overrides the FTL cooldowns cause ye know a special machine did it also needed to delete the MAPs after
+/// </summary>
+[RegisterComponent]
+public sealed partial class SignalSalvFtlDeviceBasedFTLComponent : Component
+{
+    [DataField]
+    public EntityUid LinkedFTLDevice;
 }

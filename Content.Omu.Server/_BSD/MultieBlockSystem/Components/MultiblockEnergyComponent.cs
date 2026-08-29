@@ -9,19 +9,19 @@ public sealed partial class MultiBlockEnergyManagmentComponent : Component
     /// Energy stored in the machine in J
     /// </summary>
     [DataField]
-    public float StoredEnergy = 0;
+    public Int64 StoredEnergy = 0;
 
     /// <summary>
     /// Max Energy stored in the machine in J
     /// </summary>
     [DataField]
-    public float StoredEnergyCapacity = 0;
+    public Int64 StoredEnergyCapacity = 1000000;//1MJ default
 
     /// <summary>
     /// Energy drain in W
     /// </summary>
     [DataField]
-    public float EnergyDelta = 0;
+    public Int64 EnergyDelta = 0;
 
     /// <summary>
     /// If a multistruct is powered
@@ -49,7 +49,7 @@ public sealed partial class MultiBlockEnergyStorageComponent : Component
     /// Energy stored in the machine in J
     /// </summary>
     [DataField]
-    public float StoreEnergy = 20e+6f;//adds 20 MJ of energy storage
+    public Int64 StoreEnergy = 20000000;//adds 20 MJ of energy storage
 
 }
 [RegisterComponent]
@@ -59,6 +59,6 @@ public sealed partial class MultiBlockEnergyTransfairComponent : Component
     /// Energy stored in the machine in J
     /// </summary>
     [DataField]
-    public float TransEnergy = 0.5e+6f;//adds 0.5 MW positive value adds chage to system
+    public Int64 TransEnergy = 500000;//adds 0.5 MW positive value adds chage to system
 
 }

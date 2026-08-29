@@ -111,7 +111,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
             foreach (Node iterator in comp.EntityDic[energyStorageType])
             {
                 if (!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp)) continue;
-                powerComp.StoredEnergyCapacity += storageComp.StoreEnergy * iterator.Efficency;
+                powerComp.StoredEnergyCapacity += (int) (storageComp.StoreEnergy * iterator.Efficency);
             }
         }
         return;

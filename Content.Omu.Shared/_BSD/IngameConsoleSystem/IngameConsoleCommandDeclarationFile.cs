@@ -5,6 +5,8 @@ This file is used to declare the types of commands we have in the IngameConsole 
 To add a new one is rather simple, define the key add a enum and link them then declare the number of arguments it takes and you are done.
 
 */
+using Content.Shared._EinsteinEngines.Language.Components;
+
 namespace Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 public enum IngameConsoleCommandType
@@ -22,15 +24,17 @@ public enum IngameConsoleCommandType
 }
 public readonly struct IngameConsoleCommand
 {
-    public IngameConsoleCommand(string key, IngameConsoleCommandType type, int argumentsNumber)
+    public IngameConsoleCommand(string key, IngameConsoleCommandType type, int argumentsNumber, bool universalCommand = false)
     {
         Key = key;
         Type = type;
         ArgumentsNumberMin = argumentsNumber;
+        UniversalCommand = universalCommand;
     }
     public string Key { get; init; }
     public IngameConsoleCommandType Type { get; init; }
     public int ArgumentsNumberMin { get; init; }//Number of Arguments
+    public bool UniversalCommand { get; init; }
 };
 public readonly struct IngameConsoleCommandList
 {
@@ -46,7 +50,7 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("ftl", IngameConsoleCommandType.SSA_FTL, 0));
         List.Add(new IngameConsoleCommand("start", IngameConsoleCommandType.ICC_START, 0));
         List.Add(new IngameConsoleCommand("stop", IngameConsoleCommandType.ICC_STOP, 0));
-        List.Add(new IngameConsoleCommand("cls", IngameConsoleCommandType.ICC_CLS_EXCLUSIVE, 0));
+        List.Add(new IngameConsoleCommand("cls", IngameConsoleCommandType.ICC_CLS_EXCLUSIVE, 0, true));
     }
 
 

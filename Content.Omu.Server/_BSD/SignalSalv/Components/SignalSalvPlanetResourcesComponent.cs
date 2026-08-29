@@ -41,13 +41,13 @@ public sealed partial class SignalSalvPlanetResourcesComponent : Component
     /// mind distance for a POI
     /// </summary>
     [DataField]
-    public float POIDistanceMin = 75;
+    public float POIDistanceMin = 100;
 
     /// <summary>
     /// max distance for POI
     /// </summary>
     [DataField]
-    public float POIDistanceMax = 150;
+    public float POIDistanceMax = 250;
 
     /// <summary>
     /// in PI radiay

@@ -1,7 +1,8 @@
 ﻿- type: entity
-  id: FTLDriveMultistructCore
+  id: FTLDriveMultistructCoreDEBUG
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
   name: FTLDriveCoreName
+  suffix: DEBUG
   description: FTLDriveMultistructCoreDesc
   components:
   - type: IngameConsole
@@ -9,6 +10,9 @@
     - SSA_FTL
     - ICC_Print
   - type: SignalSalvFtlDevice
+    jumpPointTolerance: 2500000
+    fTLCapacitiorsStoredCharge: 100
+    fTLCharge: 1
   - type: MultiBlockEnergyManagment
   - type: MultiBlockPart
     structureType: 
