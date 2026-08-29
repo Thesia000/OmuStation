@@ -7,7 +7,7 @@ using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
 
 using Content.Omu.Client._BSD.IngameConsoleUI.UI;
 
-using Content.Omu.Shared.IngameConsoleSystem;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 namespace Content.Omu.Client._BSD.IngameConsoleUI.UI
 {

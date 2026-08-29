@@ -14,12 +14,12 @@ namespace Content.Omu.Client._BSD.ServerClientLink.UI;
 [GenerateTypedNameReferences]
 public sealed partial class IngameServerClientLinkMenu : FancyWindow
 {
-    private int _unlinkedServerCount;
+    /*private int _unlinkedServerCount;
     private int _linkedServerCount;
     private string[] _unlinkedServerNames = Array.Empty<string>();
     private string[] _linkedServerNames = Array.Empty<string>();
     private int[] _unlinkedServerIds = Array.Empty<int>();
-    private int[] _linkedServerIds = Array.Empty<int>();
+    private int[] _linkedServerIds = Array.Empty<int>();*/
     public event Action<int>? OnServerSelected;
     public event Action<int>? OnServerDeselected;
 
@@ -45,6 +45,6 @@ public sealed partial class IngameServerClientLinkMenu : FancyWindow
     public void PopulateUnselected(int availableServerCount, string[] availableServerNames, int[] availableServerIds,
                                     int connectedServerCount, string[] connectedServerNames, int[] connectedServerIds)
     {
-        
+        return;
     }
 }

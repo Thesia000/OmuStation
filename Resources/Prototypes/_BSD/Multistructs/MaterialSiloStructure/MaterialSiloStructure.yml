@@ -13,7 +13,6 @@
   - type: MaterialStorage
     ignoreColor: true
     StorageCapPerMaterialDefaultValue: 10000
-  - type: Silo
   - type: DeviceNetwork
     deviceNetId: Wireless
   - type: WirelessNetworkConnection

@@ -24,7 +24,6 @@ public sealed partial class SignalDishSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] private readonly SharedTransformSystem _trans = default!;
     [Dependency] private readonly SignalMapSystem _signalMap = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
     public override void Initialize()
     {
         base.Initialize();

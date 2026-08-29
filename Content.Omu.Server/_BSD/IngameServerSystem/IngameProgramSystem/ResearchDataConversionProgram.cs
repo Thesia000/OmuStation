@@ -11,7 +11,7 @@ namespace Content.Omu.Server._BSD.IngameConsoleSystem.IngameProgramSystem;
 
 public sealed class BSDIngamePointConversionProgramSystem : EntitySystem
 {
-    [Dependency] private readonly BSDIngameServerSystem _ingameServerSys = default!;
+    //[Dependency] private readonly BSDIngameServerSystem _ingameServerSys = default!;
     public float UpdateFrequencyInSeconds = 0.25f;//needs help how to more easily scny this probably a CVar probably a CVar
     public override void Initialize()
     {

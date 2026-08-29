@@ -65,14 +65,14 @@ public sealed partial class MultiBlockSystem : EntitySystem
             if (!comp.EntityDic.ContainsKey(providerType)) continue;
             foreach (Node iterator in comp.EntityDic[providerType])
             {
-                if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
+                /*if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
                 if (!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair)) continue;
                 float deltaChange = 0;
                 if (transfair.TransEnergy > 0) deltaChange = Math.Min(battery.CurrentCharge, transfair.TransEnergy * iterator.Efficency);
-                else deltaChange = Math.Max(battery.CurrentCharge - battery.MaxCharge, transfair.TransEnergy * iterator.Efficency);
+                //else deltaChange = Math.Max(battery.CurrentCharge - battery.MaxCharge, transfair.TransEnergy * iterator.Efficency);
                 ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange, battery.MaxCharge);
                 RaiseLocalEvent(iterator.Id, ref ev, true);
-                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy + deltaChange, powerComp.StoredEnergyCapacity);
+                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy + deltaChange, powerComp.StoredEnergyCapacity);*/
             }
         }
         powerComp.StoredEnergy += powerComp.EnergyDelta;//structs own powergeneration/consumption

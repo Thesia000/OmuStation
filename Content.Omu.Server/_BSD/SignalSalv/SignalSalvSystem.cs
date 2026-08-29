@@ -44,7 +44,6 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly BiomeSystem _biome = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
@@ -212,27 +211,10 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         if (compFTL.JumpPointSet)
         {
             returnString += "-> Jump Point at location: (" + compFTL.DesignatedJumpPoint.X + "|" + compFTL.DesignatedJumpPoint.Y + ")\n";
-            returnString += "-> Approximate Jump Point distance: " + GetDistance(vector, compFTL.DesignatedJumpPoint);
-            returnString += "\n(";
-            counter = 1;
+            returnString += "-> Approximate Jump Point distance: " + GetDistance(vector, compFTL.DesignatedJumpPoint) + "\n";
             var distance = GetDistance(vector, compFTL.DesignatedJumpPoint);
-            while (counter < 11)
-            {
-                if (distance <= (compFTL.JumpPointTolerance * (counter / 10.0f)))
-                {
-                    returnString += "|";
-                    if (counter == 10)
-                    {
-                        returnString += ") -> (SHIP IN POSITION";
-                    }
-                }
-                else
-                {
-                    returnString += "-";
-                }
-                counter++;
-            }
-            returnString += ")\n";
+            if (distance <= compFTL.JumpPointTolerance)
+                returnString += "-> (SHIP IN POSITION)\n";
         }
         else
         {
@@ -300,6 +282,20 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         comp.FTLCapacitiorsStoredCharge -= comp.FTLCharge;
         comp.JumpPointSet = false;
     }
+    /// <summary>
+    /// Ensure that the FTL drive is:
+    /// - anchored
+    /// - has a grid
+    /// - the grid is a shuttle
+    /// - the grid has enought FTL strength
+    /// - ensure we have a linked map
+    /// </summary>
+    /// <param name="transComp"></param>
+    /// <param name="shuttleConsole"></param>
+    /// <param name="ftlComp"></param>
+    /// <param name="shuttleComp"></param>
+    /// <param name="bypassDistanceCheck">Bypass for the distance check</param>
+    /// <returns></returns>
     public bool FTLChecklist(TransformComponent transComp, EntityUid shuttleConsole, SignalSalvFtlDeviceComponent ftlComp, out ShuttleComponent? shuttleComp, bool bypassDistanceCheck = false)
     {
         shuttleComp = null;
@@ -538,12 +534,11 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
             RaiseLocalEvent(shuttleConsole, ref ev);
             return;
         }
-        ftlComp.DeleteLinkedMapOnFTLArrival = true;
         if (!FTLChecklist(transComp, shuttleConsole, ftlComp, out var shuttleComponent, true)) return;
+        ftlComp.DeleteLinkedMapOnFTLArrival = true;
         var targetCoordinates = new EntityCoordinates((EntityUid) ftlComp.Originmap!, ftlComp.DesignatedJumpPoint);
         Angle targetAngle = new();
         _shuttle.FTLToCoordinates(transComp.GridUid!.Value, shuttleComponent!, targetCoordinates, targetAngle);
-        ftlComp.Originmap = null;
         return;
     }
     public void DeleteLinkedMap(Entity<SignalSalvFtlDeviceComponent> ent, ref FTLCompletedEvent args)
