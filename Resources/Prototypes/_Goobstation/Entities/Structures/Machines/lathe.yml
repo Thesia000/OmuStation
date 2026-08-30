@@ -112,6 +112,7 @@
     - CargoStatic
     - RecipePackShipmentNoticesStatic
     dynamicPacks:
+    #- AdvancedTools #omu
     - Mining
     - PowerCells
     - Equipment
