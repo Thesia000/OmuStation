@@ -6755,3 +6755,9 @@ Entries:
       message: 'Removed malign rifts announcement '
   id: 885
   time: '2026-08-29T20:55:13.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Changed Fish Inc. Identifier from FIN to FIH
+  id: 886
+  time: '2026-08-30T10:41:26.0000000+00:00'
