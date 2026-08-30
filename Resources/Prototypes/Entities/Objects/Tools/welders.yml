@@ -223,7 +223,7 @@
 
 - type: entity
   name: emergency welding tool
-  parent: WelderBase
+  parent: WelderBase #omu
   id: WelderMini
   description: "A miniature welder used during emergencies."
   components:
