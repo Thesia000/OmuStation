@@ -6761,3 +6761,9 @@ Entries:
       message: Changed Fish Inc. Identifier from FIN to FIH
   id: 886
   time: '2026-08-30T10:41:26.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Tweak
+      message: Decreased the advanced mops usage delay.
+  id: 887
+  time: '2026-08-30T16:29:36.0000000+00:00'
