@@ -6785,3 +6785,9 @@ Entries:
       message: Fixed guidebook description for mannitol and psicodiene
   id: 890
   time: '2026-08-30T19:55:29.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Resprited the Psychologist's job icon.
+  id: 891
+  time: '2026-08-30T20:04:55.0000000+00:00'
