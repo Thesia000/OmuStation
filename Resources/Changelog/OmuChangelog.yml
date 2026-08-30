@@ -6773,3 +6773,9 @@ Entries:
       message: Fixed hydrakin from being so loud.
   id: 888
   time: '2026-08-30T16:30:59.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed heretic's being able to sac the same person endlessly
+  id: 889
+  time: '2026-08-30T18:51:16.0000000+00:00'
