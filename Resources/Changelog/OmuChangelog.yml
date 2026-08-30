@@ -6767,3 +6767,9 @@ Entries:
       message: Decreased the advanced mops usage delay.
   id: 887
   time: '2026-08-30T16:29:36.0000000+00:00'
+- author: PhosphateWithManyOs
+  changes:
+    - type: Fix
+      message: Fixed hydrakin from being so loud.
+  id: 888
+  time: '2026-08-30T16:30:59.0000000+00:00'
