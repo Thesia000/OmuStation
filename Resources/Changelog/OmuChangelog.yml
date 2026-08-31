@@ -6828,3 +6828,9 @@ Entries:
         its speed, currently does not change any in game projectile.
   id: 896
   time: '2026-08-31T02:22:01.0000000+00:00'
+- author: jellygato
+  changes:
+    - type: Add
+      message: Rakk Proper, the language of high caste Vox.
+  id: 897
+  time: '2026-08-31T11:30:18.0000000+00:00'
