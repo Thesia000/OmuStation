@@ -6922,3 +6922,9 @@ Entries:
         target from going to CC via the main evac shuttle.
   id: 903
   time: '2026-09-01T16:11:24.0000000+00:00'
+- author: Jerulean
+  changes:
+    - type: Fix
+      message: Burning your eyes with a welder now works as expected.
+  id: 904
+  time: '2026-09-01T20:56:33.0000000+00:00'
