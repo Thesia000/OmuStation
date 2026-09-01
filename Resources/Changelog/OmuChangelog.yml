@@ -6928,3 +6928,9 @@ Entries:
       message: Burning your eyes with a welder now works as expected.
   id: 904
   time: '2026-09-01T20:56:33.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Fix
+      message: Vox Couriers now spawn with an air tank harness.
+  id: 905
+  time: '2026-09-01T21:18:28.0000000+00:00'
