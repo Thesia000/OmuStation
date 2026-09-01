@@ -6900,3 +6900,9 @@ Entries:
         instead of being a placebo.
   id: 901
   time: '2026-09-01T00:17:46.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed cargo PDA not having nanochat
+  id: 902
+  time: '2026-09-01T10:46:59.0000000+00:00'
