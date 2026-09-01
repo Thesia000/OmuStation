@@ -3,8 +3,6 @@ using Content.Shared.Research.Components;
 
 using Robust.Client.UserInterface;
 
-using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
-
 using Content.Omu.Client._BSD.IngameConsoleUI.UI;
 
 using Content.Omu.Shared._BSD.IngameConsoleSystem;

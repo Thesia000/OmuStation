@@ -5,15 +5,15 @@ namespace Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 [RegisterComponent]
 public sealed partial class IngameConsoleComponent : Component
 {
-    /// <summary>
-    /// allowed 
-    /// </summary>
     [DataField]
     public HashSet<IngameConsoleCommandType> AllowedTypes = new();
 
-    /// <summary>
-    /// allowed 
-    /// </summary>
     [DataField]
     public List<string> History = ["Start"];
+
+    /// <summary>
+    /// if the channel permits proxy, null is interpreted as a NO
+    /// </summary>
+    [DataField]
+    public Dictionary<string, bool> PermitsProxy = new();
 }

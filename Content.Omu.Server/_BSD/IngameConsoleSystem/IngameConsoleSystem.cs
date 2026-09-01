@@ -3,14 +3,18 @@ using System.Linq;
 using Robust.Server.GameObjects;
 
 using Content.Omu.Shared._BSD.IngameConsoleSystem;
-
 using Content.Omu.Server._BSD.IngameConsoleSystem.Components;
+
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem;
+
 
 namespace Content.Omu.Server._BSD.IngameConsoleSystem;
 
-public sealed class BSDIngameConsoleSystem : EntitySystem
+public sealed partial class BSDIngameConsoleSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly BSDIngameServerClientLinkSystem _ingameServerClientLink = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -18,6 +22,8 @@ public sealed class BSDIngameConsoleSystem : EntitySystem
         SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleHistoryChangeEvent>(IngameConsoleHistoryChangeViaEvent);
         SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleCommandAttemptMessage>(OnCommandAttempt);
         SubscribeLocalEvent<IngameConsoleComponent, IngameConsoleCommandCalledEvent>(OnCommand);
+
+        SubscribeLocalEvent<IngameConsoleActiveProxyComponent, IngameConsoleCommandCalledEvent>(ProxyRelayCommands);
     }
     #region ConsoleHistory handeling
     public void IngameConsoleHistoryChangeViaEvent(Entity<IngameConsoleComponent> ent, ref IngameConsoleHistoryChangeEvent args)
@@ -56,6 +62,14 @@ public sealed class BSDIngameConsoleSystem : EntitySystem
         if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
         IngameConsoleHistoryChangeEvent evHistory = new(args.InputString);
         RaiseLocalEvent(ent, ref evHistory);
+        if (TryComp<IngameConsoleActiveProxyComponent>(ent, out var compProxy))
+        {
+            if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var compInfra)) return;
+            string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:\n->";
+            appendedString += args.InputString;
+            OnProxyCommand(compProxy.ProxyTarget, splitInput, appendedString);
+            return;
+        }
         foreach (IngameConsoleCommand iterator in ingameCommandList.List)
         {
             if (!comp.AllowedTypes.Contains(iterator.Type)) continue;
@@ -72,6 +86,17 @@ public sealed class BSDIngameConsoleSystem : EntitySystem
         if (args.Type == IngameConsoleCommandType.ICC_CLS_EXCLUSIVE)
         {
             IngameConsoleHistoryReset(ent);
+        }
+        else if (args.Type == IngameConsoleCommandType.ICC_PROXY && args.Args!.Length > 2 && args.Args[1] == "link")
+        {
+            TryProxy(ent, args.Args);
+        }
+        else if (args.Type == IngameConsoleCommandType.ISCL_PROXY_TERMINATE && args.Args!.Length > 1)
+        {
+            if (!Int32.TryParse(args.Args[1], out int netID)) return;
+            if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var compInfra)) return;
+            if (netID != compInfra.NetworkId) return;
+            OnProxyEnd(ent);
         }
     }
     #endregion

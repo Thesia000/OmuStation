@@ -19,6 +19,9 @@ public enum IngameConsoleCommandType
     ICC_HELP,//recomended unified help command prints all commands available to the console
     ICC_ASSIGN,//General use assign command
     ICC_CLS_EXCLUSIVE,//General use RESERVED command clears history
+    ICC_PROXY,//Used to remote connect into things
+    //ISCL -> Ingame Server Client Link
+    ISCL_PROXY_TERMINATE,//Used to disconnect from remote connection
     ISCL_UNASSIGN,//removes a server client link
     SSA_FTL,//SignalSAlvage engaged FTL to destination(predefined by default)
 }
@@ -51,6 +54,9 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("start", IngameConsoleCommandType.ICC_START, 0));
         List.Add(new IngameConsoleCommand("stop", IngameConsoleCommandType.ICC_STOP, 0));
         List.Add(new IngameConsoleCommand("cls", IngameConsoleCommandType.ICC_CLS_EXCLUSIVE, 0, true));
+        List.Add(new IngameConsoleCommand("unassign", IngameConsoleCommandType.ISCL_UNASSIGN, 1));
+        List.Add(new IngameConsoleCommand("proxy", IngameConsoleCommandType.ICC_PROXY, 1));
+        List.Add(new IngameConsoleCommand("proxy_terminate", IngameConsoleCommandType.ISCL_PROXY_TERMINATE, 1));
     }
 
 

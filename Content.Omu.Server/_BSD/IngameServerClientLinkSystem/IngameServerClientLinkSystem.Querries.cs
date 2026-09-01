@@ -107,4 +107,19 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         }
         return true;
     }
+
+    public bool TryGetEntityUidFromNetID(int netID, out EntityUid? entUid)
+    {
+        entUid = null;
+        var querry = EntityQueryEnumerator<IngameServerClientLinkInfrastructureComponent>();
+        while (querry.MoveNext(out var interatorEnt, out var iteratorComp))
+        {
+            if (iteratorComp.NetworkId == netID)
+            {
+                entUid = interatorEnt;
+                return true;
+            }
+        }
+        return false;
+    }
 }

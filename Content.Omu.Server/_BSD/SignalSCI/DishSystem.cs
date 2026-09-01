@@ -12,7 +12,6 @@ using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem;
 
-using Content.Omu.Shared._BSD.SignalSCI.SharedDishConsole;
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -28,7 +27,6 @@ public sealed partial class SignalDishSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValues);
-        SubscribeLocalEvent<SignalSciDishComponent, DishConsoleSetRequestedAngleMessage>(OnRequestedAngleSet);
     }
     public override void Update(float frameTime)
     {
@@ -43,11 +41,6 @@ public sealed partial class SignalDishSystem : EntitySystem
             }
             RotationUpdate(dishEnt, comp);
         }
-    }
-    private void OnRequestedAngleSet(EntityUid uid, SignalSciDishComponent comp, DishConsoleSetRequestedAngleMessage args)
-    {
-        comp.DesiredAngle = args.RequestedAngle;
-        return;
     }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
     {

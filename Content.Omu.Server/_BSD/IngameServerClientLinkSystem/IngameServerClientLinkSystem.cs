@@ -22,183 +22,61 @@ using System.Linq;
 
 using Robust.Server.GameObjects;
 
+using Content.Shared.Examine;
+
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
-using Content.Omu.Shared._BSD.ServerClientLinkSystem.SharedServerConsole;
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
 
 public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, RequestServerListUpdateMessage>(OnSyncServerMessage);
-        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, RequestClientListUpdateMessage>(OnSyncClientMessage);
+        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, ExaminedEvent>(OnExamin);
 
-        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, ServerClientMenueOpenMessage>(OnServerClientMenueOpenRequest);
+        SubscribeLocalEvent<IngameServerClientLinkInfrastructureComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
+    }
+    public void OnCompInit(Entity<IngameServerClientLinkInfrastructureComponent> ent, ref ComponentStartup args)
+    {
+        var unusedId = EntityQuery<IngameServerClientLinkInfrastructureComponent>(true)
+            .Max(s => s.NetworkId) + 1;
+        ent.Comp.NetworkId = unusedId;
+        Dirty(ent, ent.Comp);
     }
     #region UI
-    private void OnServerClientMenueOpenRequest(EntityUid uid, IngameServerClientLinkInfrastructureComponent component, ServerClientMenueOpenMessage args)
+    public void OnExamin(Entity<IngameServerClientLinkInfrastructureComponent> ent, ref ExaminedEvent args)
     {
-        //temp: cant fail for testing reasons
-        _uiSystem.TryToggleUi(uid, ServerClientUiKey.Key, args.Actor);
+        string details;
+        details = Loc.GetString("ISCL-netID-examin", ("ID", ent.Comp.NetworkId));
+        args.PushMarkup(details, -1);
     }
-    private void OnSyncServerMessage(EntityUid uid, IngameServerClientLinkInfrastructureComponent comp, RequestServerListUpdateMessage args)
+    public void IngameConsoleCommand(Entity<IngameServerClientLinkInfrastructureComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
-        var namesUnselected = GetServerNamesUnselected(uid, args.Channel);
-        var namesSelected = GetServerNamesUnselected(comp.EntityDicServer[args.Channel]);
-        var state = new ServerClientSelectionBoundUserInterfaceState(
-            namesUnselected.Length,
-            namesUnselected,
-            GetServerIdsUnselected(uid, args.Channel),
-            namesSelected.Length,
-            namesSelected,
-            GetServerIdsUnselected(comp.EntityDicServer[args.Channel])
-            );
-
-        _uiSystem.SetUiState(uid, ServerClientUiKey.Key, state);
+        if (args.Type == IngameConsoleCommandType.ICC_ASSIGN && args.Args!.Length > 3)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Attempt_Link_Start", ("NID", args.Args[1]), ("Channel", args.Args[2]), ("ServerConnection", args.Args[3])));
+            RaiseLocalEvent(ent, ref ev);
+        }
+        else if (args.Type == IngameConsoleCommandType.ISCL_UNASSIGN && args.Args!.Length > 1)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Attempt_Disconnet_Start", ("NID", args.Args[1])));
+            RaiseLocalEvent(ent, ref ev);
+        }
+        else if (args.Type == IngameConsoleCommandType.ICC_Print_ALL)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_All_Start"));
+            RaiseLocalEvent(ent, ref ev);
+        }
+        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 1)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_Category_Start", ("Category", args.Args[1])));
+            RaiseLocalEvent(ent, ref ev);
+        }
         return;
     }
-    private void OnSyncClientMessage(EntityUid uid, IngameServerClientLinkInfrastructureComponent comp, RequestClientListUpdateMessage args)
-    {
-        var names = GetClientNames(uid, args.Channel);
-        var state = new ServerClientSelectionBoundUserInterfaceState(
-            names.Length,
-            names,
-            GetClientIds(uid, args.Channel),
-            names.Length,
-            names,
-            GetClientIds(uid, args.Channel)
-            );
-
-        _uiSystem.SetUiState(uid, ServerClientUiKey.Key, state);
-        return;
-    }
-    #endregion
-    //logic related to servers, like getting all server, names, ids, lists checking areas
-    #region Logic Servers
-    public HashSet<IngameServerClientLinkInfrastructureComponent> GetServers(EntityUid uid, string channel)
-    {
-        var entityQuerry = AllEntityQuery<IngameServerClientLinkInfrastructureComponent, TransformComponent>();
-        TransformComponent transComp = Transform(uid);
-        var set = new HashSet<IngameServerClientLinkInfrastructureComponent>();
-        while (entityQuerry.MoveNext(out var serverEnt, out var serverComp, out var transCompServer))
-        {
-            if (!serverComp.ServerTypes.Contains(channel)) continue;
-            if (serverComp.ServerNeedsToIniciate[channel])
-            {
-                continue;//server does not answer pings and prevents connection attempts this way
-            }
-            if (serverComp.GlobalyAccessable[channel])
-            {
-                set.Add(serverComp);
-                continue;
-            }
-            if (transComp!.MapID != transCompServer!.MapID) continue;
-            if (serverComp.MapWideAccessable[channel])
-            {
-                set.Add(serverComp);
-                continue;
-            }
-            if (transComp.GridUid != transCompServer.GridUid || transCompServer.GridUid == null) continue;
-            if (serverComp.GridWideAccessable[channel])
-            {
-                set.Add(serverComp);
-                continue;
-            }
-            float distance = (float) Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompServer.Coordinates.X, 2) + Math.Pow(transComp.Coordinates.Y - transCompServer.Coordinates.Y, 2));
-            if (distance > serverComp.ConnectionRadius[channel])
-            {
-                set.Add(serverComp);
-                continue;
-            }
-        }
-
-        return set;
-    }
-
-    public string[] GetServerNamesUnselected(EntityUid client, string channel)
-    {
-        return GetServers(client, channel).Select(x => x.DeviceName).ToArray();
-    }
-    public int[] GetServerIdsUnselected(EntityUid client, string channel)
-    {
-        return GetServers(client, channel).Select(x => x.NetworkId).ToArray();
-    }
-    public string[] GetServerNamesUnselected(HashSet<EntityUid> entHash)
-    {
-        var set = new HashSet<IngameServerClientLinkInfrastructureComponent>();
-        foreach (var entUid in entHash)
-        {
-            if (TryComp<IngameServerClientLinkInfrastructureComponent>(entUid, out var compToSave))
-            {
-                set.Add(compToSave);
-            }
-        }
-        return set.Select(x => x.DeviceName).ToArray();
-    }
-    public int[] GetServerIdsUnselected(HashSet<EntityUid> entHash)
-    {
-        var set = new HashSet<IngameServerClientLinkInfrastructureComponent>();
-        foreach (var entUid in entHash)
-        {
-            if (TryComp<IngameServerClientLinkInfrastructureComponent>(entUid, out var compToSave))
-            {
-                set.Add(compToSave);
-            }
-        }
-        return set.Select(x => x.NetworkId).ToArray();
-    }
-    #endregion
-    //mostly the same as server logic but for the clients
-    #region Logic Client
-
-    public HashSet<IngameServerClientLinkInfrastructureComponent> GetClients(EntityUid uid, IngameServerClientLinkInfrastructureComponent serverComp, string channel)
-    {
-        var entityQuerry = AllEntityQuery<IngameServerClientLinkInfrastructureComponent, TransformComponent>();
-        TransformComponent transComp = Transform(uid);
-        var set = new HashSet<IngameServerClientLinkInfrastructureComponent>();
-        while (entityQuerry.MoveNext(out var serverEnt, out var clientComp, out var transCompClient))
-        {
-            if (!clientComp.ClientTypes.Contains(channel)) continue;
-            if (serverComp.GlobalyAccessable[channel])
-            {
-                set.Add(clientComp);
-                continue;
-            }
-            if (transComp.MapID != transCompClient.MapID) continue;
-            if (serverComp.MapWideAccessable[channel])
-            {
-                set.Add(clientComp);
-                continue;
-            }
-            if (transComp.GridUid != transCompClient.GridUid || transCompClient.GridUid == null) continue;
-            if (serverComp.GridWideAccessable[channel])
-            {
-                set.Add(clientComp);
-                continue;
-            }
-            float distance = (float) Math.Sqrt(Math.Pow(transComp.Coordinates.X - transCompClient.Coordinates.X, 2) + Math.Pow(transComp.Coordinates.Y - transCompClient.Coordinates.Y, 2));
-            if (distance > serverComp.ConnectionRadius[channel])
-            {
-                set.Add(clientComp);
-                continue;
-            }
-        }
-        return set;
-    }
-    public string[] GetClientNames(EntityUid client, string channel)
-    {
-        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(client, out var serverComp)) return new string[0];
-        return GetClients(client, serverComp, channel).Select(x => x.DeviceName).ToArray();
-    }
-    public int[] GetClientIds(EntityUid client, string channel)
-    {
-        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(client, out var serverComp)) return new int[0];
-        return GetClients(client, serverComp, channel).Select(x => x.NetworkId).ToArray();
-    }
-
     #endregion
 }

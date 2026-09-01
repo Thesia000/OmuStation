@@ -12,6 +12,8 @@
     - ICC_Print_ALL
     - ICC_Proxy
     - ISCL_UNASSIGN
+    PermitsProxy:
+    - DEBUG: true
   - type: IngameServer
     processingPower: 5.0
     processingPowerProvidingTypes:
@@ -20,6 +22,10 @@
     installedPrograms:
     - 0.0
     - 1.0
+    ServerTypes:
+    - DEBUG
+    ClientTypes:
+    - DEBUG
   - type: MultiBlockPart
     structureType: 
     - IngameServerCore
