@@ -39,7 +39,7 @@
 - type: entity
   parent: [BaseTraitorObjective, BaseLivingObjective]
   id: EscapeShuttleObjective
-  name: Escape to CentComm alive and unrestrained via the escape shuttle, without a active warent.
+  name: Escape to CentComm alive and unrestrained via the escape shuttle, without an active warrant.
   description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs or with a warrant out for your arrest. #Omu
   components:
   - type: Objective
