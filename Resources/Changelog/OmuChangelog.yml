@@ -7053,3 +7053,9 @@ Entries:
       message: R6 Shotgun fire rate decreased, and spread decreased a small amount.
   id: 916
   time: '2026-09-02T22:18:07.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Medical Doctors and Virologists now get a stethoscope in their loadouts.
+  id: 917
+  time: '2026-09-02T22:20:43.0000000+00:00'
