@@ -6940,3 +6940,15 @@ Entries:
       message: Fixed hydrakin getting the toxin alert for gases they can breath
   id: 906
   time: '2026-09-02T05:02:41.0000000+00:00'
+- author: Quill
+  changes:
+    - type: Add
+      message: >-
+        Vulpkanins, Tajarans, Felinids, Humans, and Dwarfs can now wag some of
+        their tails with an action.
+    - type: Tweak
+      message: >-
+        The tail wagging action now only shows up when the equipped tail marking
+        has an animation.
+  id: 907
+  time: '2026-09-02T05:26:30.0000000+00:00'
