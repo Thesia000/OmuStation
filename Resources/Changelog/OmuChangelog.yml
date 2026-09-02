@@ -6982,3 +6982,12 @@ Entries:
         when turning water into ice.
   id: 910
   time: '2026-09-02T06:04:13.0000000+00:00'
+- author: Duuckie, DuskTheSnep
+  changes:
+    - type: Add
+      message: >-
+        Paramedics have a new belt option in their loadout: the paramedic's
+        medical pouch, a 4x4 bag filled to the brim with cartridges and
+        autoinjectors. It can hold the same items as an EMT belt.
+  id: 911
+  time: '2026-09-02T06:06:26.0000000+00:00'
