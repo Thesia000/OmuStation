@@ -6952,3 +6952,15 @@ Entries:
         has an animation.
   id: 907
   time: '2026-09-02T05:26:30.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: >-
+        Added three new autoinjector cartridges, craftable in the medical
+        assembler: Weh, Copium, and Sobering.
+    - type: Tweak
+      message: >-
+        Added Copium autoinjector cartridges to the inventories of hacked
+        Nanomed+ and Sectech machines.
+  id: 908
+  time: '2026-09-02T05:34:00.0000000+00:00'
