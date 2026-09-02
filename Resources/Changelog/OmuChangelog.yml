@@ -6991,3 +6991,9 @@ Entries:
         autoinjectors. It can hold the same items as an EMT belt.
   id: 911
   time: '2026-09-02T06:06:26.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Tweak
+      message: Lowered damage explosions do
+  id: 912
+  time: '2026-09-02T06:07:48.0000000+00:00'
