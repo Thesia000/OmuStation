@@ -14,7 +14,7 @@ public sealed partial class IngameServerClientLinkInfrastructureComponent : Comp
     public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new Dictionary<string, HashSet<EntityUid>>();
 
     /// <summary>
-    /// Components Present to what servers this client is liked
+    /// Components Present entity dic of connected clients
     /// </summary>
     [DataField]
     public Dictionary<string, HashSet<EntityUid>> EntityDicClient = new Dictionary<string, HashSet<EntityUid>>();

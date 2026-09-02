@@ -122,4 +122,48 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         }
         return false;
     }
+    public bool CheckTransmissionRange(EntityUid entOne, EntityUid entTwo, string channel)
+    {
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(entOne, out var compInfaOne)) return false;
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(entTwo, out var compInfaTwo)) return false;
+        var compTransOne = Transform(entOne);
+        var compTransTwo = Transform(entTwo);
+        byte accessBase = 0;
+        if (compInfaOne.GlobalyAccessable[channel] || compInfaTwo.GlobalyAccessable[channel])
+        {
+            accessBase = 3;
+        }
+        else if (compInfaOne.MapWideAccessable[channel] || compInfaTwo.MapWideAccessable[channel])
+        {
+            accessBase = 2;
+        }
+        else if (compInfaOne.GridWideAccessable[channel] || compInfaTwo.GridWideAccessable[channel])
+        {
+            accessBase = 1;
+        }
+        switch (accessBase)
+        {
+            case 3:
+                return true;
+            case 2:
+                if (compTransOne.MapID == compTransTwo.MapID) return true;
+                return false;
+            case 1:
+                if (compTransOne.MapID != compTransTwo.MapID) return false;
+                if (compTransOne.GridUid == compTransTwo.GridUid) return true;
+                break;
+        }
+        if (compTransOne.MapID != compTransTwo.MapID) return false;
+        //if we reach here we are on same map but not grid, but we may still be in range of the emmissions
+        if (Math.Max(compInfaOne.ConnectionRadius[channel], compInfaTwo.ConnectionRadius[channel]) <
+                GetDistance(compTransOne.Coordinates.Position, compTransTwo.Coordinates.Position))
+            return false;
+        return true;
+    }
+    private float GetDistance(Vector2d a, Vector2d b)
+    {
+        var c = Math.Pow(a.X + b.X, 2);
+        var d = Math.Pow(a.Y + b.Y, 2);
+        return (float) Math.Sqrt(c + d);
+    }
 }
