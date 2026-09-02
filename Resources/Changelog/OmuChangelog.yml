@@ -6997,3 +6997,19 @@ Entries:
       message: Lowered damage explosions do
   id: 912
   time: '2026-09-02T06:07:48.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Fix
+      message: >-
+        "Paramedic Jumpsuit" and "Paramedic Uniform" no longer share the same
+        textures.
+    - type: Tweak
+      message: >-
+        Resprited the Paramedic Cap, Windbreaker, Winter Coat, Lizard plushie,
+        PDA, and Jumpsuits.
+    - type: Tweak
+      message: Gave every Paramedic Jacket and Jumpsuit the same protection values.
+    - type: Add
+      message: The Paramedic Windbreaker can now be unzipped.
+  id: 913
+  time: '2026-09-02T06:13:56.0000000+00:00'
