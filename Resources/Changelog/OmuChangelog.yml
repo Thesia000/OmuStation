@@ -7037,3 +7037,19 @@ Entries:
       message: 'Added new Plasmaman Envirogloves: Captain, RD, Quartermaster, Latex.'
   id: 915
   time: '2026-09-02T21:54:43.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Tweak
+      message: .30 Rifle no longer has AP.
+    - type: Tweak
+      message: >-
+        APDS shells are now more expensive, and deal less damage, but still
+        retain full AP.
+    - type: Tweak
+      message: >-
+        Colossus gets an extra tile of melee range to prevent people from
+        grabbing it and making it unable to move properly.
+    - type: Tweak
+      message: R6 Shotgun fire rate decreased, and spread decreased a small amount.
+  id: 916
+  time: '2026-09-02T22:18:07.0000000+00:00'
