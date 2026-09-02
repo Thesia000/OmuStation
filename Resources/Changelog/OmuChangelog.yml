@@ -6973,3 +6973,12 @@ Entries:
         0.25u/s metabolism, processed at 1u/s total when overdosed.
   id: 909
   time: '2026-09-02T05:42:45.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Fresium is now more potent and substantially easier to get, no longer
+        requiring frezon to make. As a result, Fresium no longer produces frezon
+        when turning water into ice.
+  id: 910
+  time: '2026-09-02T06:04:13.0000000+00:00'
