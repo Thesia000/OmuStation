@@ -6964,3 +6964,12 @@ Entries:
         Nanomed+ and Sectech machines.
   id: 908
   time: '2026-09-02T05:34:00.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Puncturase, Lacinerol, and Bruizine are all heavily toned down to the
+        following stats: 80/5u healing of their respective type (from 200/5u),
+        0.25u/s metabolism, processed at 1u/s total when overdosed.
+  id: 909
+  time: '2026-09-02T05:42:45.0000000+00:00'
