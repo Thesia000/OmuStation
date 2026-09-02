@@ -7019,3 +7019,21 @@ Entries:
       message: The energy shotgun now self-recharges again.
   id: 914
   time: '2026-09-02T21:28:17.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: >-
+        Resprited nearly every Plasmaman Envirosuit available! Cover that
+        scandalous, bony body of yours in _Style!_
+    - type: Tweak
+      message: >-
+        Resprited the Enviroglove icons to differentiate them from regular
+        gloves.
+    - type: Add
+      message: >-
+        Added new Plasmaman Envirosuits: Veteran CMO, Purple RD, Senior
+        Physician, Senior Chemist, Senior Engineer.
+    - type: Add
+      message: 'Added new Plasmaman Envirogloves: Captain, RD, Quartermaster, Latex.'
+  id: 915
+  time: '2026-09-02T21:54:43.0000000+00:00'
