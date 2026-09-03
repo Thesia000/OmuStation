@@ -7059,3 +7059,13 @@ Entries:
       message: Medical Doctors and Virologists now get a stethoscope in their loadouts.
   id: 917
   time: '2026-09-02T22:20:43.0000000+00:00'
+- author: asterisksoda
+  changes:
+    - type: Tweak
+      message: >-
+        Updated the word replacement list for the German accent; it now contains
+        more common words.
+    - type: Remove
+      message: Removed random umlauts from the German accent.
+  id: 918
+  time: '2026-09-03T00:07:33.0000000+00:00'
