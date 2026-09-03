@@ -7079,3 +7079,17 @@ Entries:
         helmet.
   id: 919
   time: '2026-09-03T08:10:00.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Hunger decreases at 1.5x the pre-upstream rate (compared to 2.5x the
+        pre-upstream rate before this). People should now need to eat less
+        frequently.
+    - type: Fix
+      message: >-
+        Non-Goobstation species now experience proportionally elevated hunger
+        like the rest of the species. Please report if chitinids starve
+        excessively easily.
+  id: 920
+  time: '2026-09-03T11:40:03.0000000+00:00'
