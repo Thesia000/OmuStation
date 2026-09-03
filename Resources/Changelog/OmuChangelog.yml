@@ -7069,3 +7069,13 @@ Entries:
       message: Removed random umlauts from the German accent.
   id: 918
   time: '2026-09-03T00:07:33.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: Resprited the Paramedic's "Sanitater" MODsuit
+    - type: Fix
+      message: >-
+        The Sanitater MODsuit now properly displays the feroxi variant of its
+        helmet.
+  id: 919
+  time: '2026-09-03T08:10:00.0000000+00:00'
