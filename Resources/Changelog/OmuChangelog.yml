@@ -7107,3 +7107,11 @@ Entries:
         of having to print one by one.
   id: 922
   time: '2026-09-03T22:15:55.0000000+00:00'
+- author: Jerulean
+  changes:
+    - type: Fix
+      message: Positronic brains are no longer deleted by maxing out organ damage.
+    - type: Add
+      message: Surgery to repair destroyed positronic brains.
+  id: 923
+  time: '2026-09-03T22:23:46.0000000+00:00'
