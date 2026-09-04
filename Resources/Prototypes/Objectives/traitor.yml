@@ -40,7 +40,7 @@
   parent: [BaseTraitorObjective, BaseLivingObjective]
   id: EscapeShuttleObjective
   name: Escape to CentComm alive and undetained on the escape shuttle.
-  description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs or with security right on your tails. #Omu
+  description: One of our undercover agents will debrief you when you arrive. Don't show up in cuffs or with security right on your tail. #Omu
   components:
   - type: Objective
     difficulty: 1.3
