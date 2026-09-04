@@ -7121,3 +7121,13 @@ Entries:
       message: Reverted Allulalo thirst rate to prior rate.
   id: 924
   time: '2026-09-04T03:50:42.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Tweak
+      message: >-
+        Escape to Central Command objective was changed to: escape to central
+        command alive and undetained on the evacuation shuttle || One of our
+        undercover agents will debrief you when you arrive. Don't show up in
+        cuffs or security right on your tails.
+  id: 925
+  time: '2026-09-04T13:52:08.0000000+00:00'
