@@ -20,6 +20,7 @@ public enum IngameConsoleCommandType
     ICC_ASSIGN,//General use assign command
     ICC_CLS_EXCLUSIVE,//General use RESERVED command clears history
     ICC_PROXY,//Used to remote connect into things
+    ICC_SET,//Used to set variables
     //ISCL -> Ingame Server Client Link
     ISCL_PROXY_TERMINATE,//Used to disconnect from remote connection
     ISCL_UNASSIGN,//removes a server client link
@@ -57,6 +58,7 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("unassign", IngameConsoleCommandType.ISCL_UNASSIGN, 1));
         List.Add(new IngameConsoleCommand("proxy", IngameConsoleCommandType.ICC_PROXY, 1));
         List.Add(new IngameConsoleCommand("proxy_terminate", IngameConsoleCommandType.ISCL_PROXY_TERMINATE, 1));
+        List.Add(new IngameConsoleCommand("set", IngameConsoleCommandType.ICC_SET, 2));
     }
 
 

@@ -20,12 +20,13 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
         if (!compConsoleTarget.PermitsProxy[input[1]]) return false;
         if (!_ingameServerClientLink.TryGetNetworkTotal(proxyController, input[1], out var network)) return false;
         if (!network.Contains((EntityUid) proxyTarget)) return false;
-        OnProxyStart(proxyController, (EntityUid) proxyTarget);
+        OnProxyStart(proxyController, (EntityUid) proxyTarget, input[1]);
         return false;
     }
-    public void OnProxyStart(EntityUid proxyController, EntityUid proxyTarget)
+    public void OnProxyStart(EntityUid proxyController, EntityUid proxyTarget, string channel)
     {
         EnsureComp<IngameConsoleActiveProxyComponent>(proxyController, out var compContoll);
+        compContoll.Channel = channel;
         compContoll.ProxyTarget = proxyTarget;
         EnsureComp<IngameConsoleActiveProxyTargetComponent>(proxyTarget, out var compTarget);
         compTarget.ProxyContollers.Add(proxyController);
@@ -82,6 +83,7 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
                 }
             }
         }
+        if (!_ingameServerClientLink.CheckTransmissionRange(ent, ent.Comp.ProxyTarget, ent.Comp.Channel)) return;
         var ev = args;
         RaiseLocalEvent(ent.Comp.ProxyTarget, ref ev);
     }

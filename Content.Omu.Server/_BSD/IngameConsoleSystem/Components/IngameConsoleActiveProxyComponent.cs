@@ -7,6 +7,7 @@ namespace Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 public sealed partial class IngameConsoleActiveProxyComponent : Component
 {
     public EntityUid ProxyTarget;
+    public string Channel;
 }
 
 [RegisterComponent]

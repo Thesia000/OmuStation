@@ -12,6 +12,8 @@ using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem;
 
+using Content.Omu.Shared._BSD.IngameConsoleSystem;
+
 
 namespace Content.Omu.Server._BSD.SignalSCI;
 
@@ -26,7 +28,8 @@ public sealed partial class SignalDishSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValues);
+        SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValuesMultiStruct);
+        SubscribeLocalEvent<SignalSciDishComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
     }
     public override void Update(float frameTime)
     {
@@ -40,6 +43,14 @@ public sealed partial class SignalDishSystem : EntitySystem
                 DishSignalHarvest(dishEnt, comp);
             }
             RotationUpdate(dishEnt, comp);
+        }
+    }
+    private void IngameConsoleCommand(Entity<SignalSciDishComponent> ent, ref IngameConsoleCommandCalledEvent args)
+    {
+        if (args.Type == IngameConsoleCommandType.ICC_ASSIGN && args.Args!.Length > 3)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Attempt_Link_Start", ("NID", args.Args[1]), ("Channel", args.Args[2]), ("ServerConnection", args.Args[3])));
+            RaiseLocalEvent(ent, ref ev);
         }
     }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
@@ -63,7 +74,7 @@ public sealed partial class SignalDishSystem : EntitySystem
         _trans.SetWorldRotation(gridTransformComp, newAngel);
         return;
     }
-    private void UpdateValues(EntityUid uid, SignalSciDishComponent comp, ref MultiStructChangeEvent args)
+    private void UpdateValuesMultiStruct(EntityUid uid, SignalSciDishComponent comp, ref MultiStructChangeEvent args)
     {
         if (!TryComp<MultiBlockStructureComponent>(uid, out var structureComp)) return;
         //harvesting rate
