@@ -7115,3 +7115,9 @@ Entries:
       message: Surgery to repair destroyed positronic brains.
   id: 923
   time: '2026-09-03T22:23:46.0000000+00:00'
+- author: Jerulean
+  changes:
+    - type: Tweak
+      message: Reverted Allulalo thirst rate to prior rate.
+  id: 924
+  time: '2026-09-04T03:50:42.0000000+00:00'
