@@ -7166,3 +7166,11 @@ Entries:
         pre-upstream.
   id: 930
   time: '2026-09-05T22:05:51.0000000+00:00'
+- author: asterisksoda
+  changes:
+    - type: Add
+      message: Supermatter slivers can now be eaten by vox. (It's a bad idea.)
+    - type: Tweak
+      message: Supermatter crystals create slivers on their own more frequently now.
+  id: 931
+  time: '2026-09-05T22:14:17.0000000+00:00'
