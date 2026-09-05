@@ -7157,3 +7157,12 @@ Entries:
       message: Grapple guns can no longer pull you through walls.
   id: 929
   time: '2026-09-05T22:00:27.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Tweak
+      message: >-
+        Chitinids now starve at 1.33x the base rate instead of 2.8x the base
+        rate. This means that they overall starve less quickly than
+        pre-upstream.
+  id: 930
+  time: '2026-09-05T22:05:51.0000000+00:00'
