@@ -7174,3 +7174,9 @@ Entries:
       message: Supermatter crystals create slivers on their own more frequently now.
   id: 931
   time: '2026-09-05T22:14:17.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: The medical belt is now worn slightly lower.
+  id: 932
+  time: '2026-09-05T22:18:19.0000000+00:00'
