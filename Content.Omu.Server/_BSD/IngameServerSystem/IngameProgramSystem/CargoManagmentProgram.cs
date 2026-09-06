@@ -14,17 +14,17 @@ public sealed class BSDIngamCarogManagmentProgramSystem : EntitySystem
 
     public void IngameConsoleCommandCargoManagmentProgram(Entity<IngameCargoManagmentProgramComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
-        if (args.Type == IngameConsoleCommandType.ICC_Print_ALL && args.Args!.Length > 1 && args.Args[1] == "materials")
+        if (args.Type == IngameConsoleCommandType.ICC_PRINT_ALL && args.Args!.Length > 1 && args.Args[1] == "materials")
         {
             PrintAllMaterial(ent);
             //Now add stuff to history to update that it worked;
         }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 2 && args.Args[1] == "material")
+        else if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 2 && args.Args[1] == "material")
         {
             PrintMaterialsAcrossDepartments(ent, args.Args[2]);
             //Now add stuff to history to update that it worked;
         }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 2 && args.Args[1] == "department")
+        else if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 2 && args.Args[1] == "department")
         {
             PrintDepartmentsMaterials(ent, args.Args[2]);
             //Now add stuff to history to update that it worked;

@@ -1,7 +1,7 @@
 using Robust.Shared.Prototypes;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
-
+//TODO: should probably add a blacklist feature later on!!! -> note for thesia
 [RegisterComponent]
 
 public sealed partial class MultiBlockPartComponent : Component

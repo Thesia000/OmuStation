@@ -8,7 +8,7 @@
   - type: IngameConsole
     allowedTypes:
     - SSA_FTL
-    - ICC_Print
+    - ICC_PRINT
   - type: SignalSalvFtlDevice
     jumpPointTolerance: 2500000
     fTLCapacitiorsStoredCharge: 100

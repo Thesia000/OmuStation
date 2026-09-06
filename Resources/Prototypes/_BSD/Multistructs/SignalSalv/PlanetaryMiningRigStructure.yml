@@ -7,7 +7,7 @@
   - type: IngameConsole
     allowedTypes:
     - ICC_Start
-    - ICC_Print
+    - ICC_PRINT
   - type: SignalSalvMiningRigStructre
   - type: MultiBlockPart
     structureType: 

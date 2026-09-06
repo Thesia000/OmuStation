@@ -1,8 +1,8 @@
 ﻿- type: entity
-  id: StationServerMultistructCore
+  id: DebugProxy
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
-  name: StationServerCoreName
-  description: StationServerMultistructCoreDesc
+  name: DebugProxyName
+  description: DebugProxyDesc
   components:
   - type: IngameServerClientLinkInfrastructure
   - type: IngameConsole

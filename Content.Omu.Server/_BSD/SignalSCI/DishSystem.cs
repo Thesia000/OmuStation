@@ -37,7 +37,7 @@ public sealed partial class SignalDishSystem : EntitySystem
         var query = EntityQueryEnumerator<SignalSciDishComponent, MultiBlockEnergyManagmentComponent>();
         while (query.MoveNext(out var dishEnt, out var comp, out var energycomp))
         {
-            if (!energycomp.Powered) continue;//do nothing if no power is in the system
+            //if (!energycomp.Powered) continue;//do nothing if no power is in the system -> we ignore power for testing
             if (comp.Harvesting)//basicly if this machine is turned on -> needs to be move to multi struct possibly
             {
                 DishSignalHarvest(dishEnt, comp);
@@ -45,34 +45,70 @@ public sealed partial class SignalDishSystem : EntitySystem
             RotationUpdate(dishEnt, comp);
         }
     }
-    private void IngameConsoleCommand(Entity<SignalSciDishComponent> ent, ref IngameConsoleCommandCalledEvent args)
+    public void IngameConsoleCommand(Entity<SignalSciDishComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
-        if (args.Type == IngameConsoleCommandType.ICC_ASSIGN && args.Args!.Length > 3)
+        if (args.Type == IngameConsoleCommandType.ICC_SET && args.Args!.Length > 2)
         {
-            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Attempt_Link_Start", ("NID", args.Args[1]), ("Channel", args.Args[2]), ("ServerConnection", args.Args[3])));
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_Dish_Orientation_Set", ("Variable", args.Args[1]), ("Value", args.Args[2])));
             RaiseLocalEvent(ent, ref ev);
+            UpdateVariableIngameConsoleCommand(args.Args[1], args.Args[2], ent.Comp);
+        }
+    }
+    private void UpdateVariableIngameConsoleCommand(string varID, string value, SignalSciDishComponent comp)
+    {
+        int intParsRes = 0;//switch does not like local declaration so we doing it this way
+        switch (varID)
+        {
+            case ("rotation_1"):
+                if (!int.TryParse(value, out intParsRes)) return;
+                comp.DesiredAngles[0] = intParsRes % 360;
+                return;
+            case ("rotation_2"):
+                if (!int.TryParse(value, out intParsRes)) return;
+                comp.DesiredAngles[1] = intParsRes % 360;
+                return;
+            case ("rotation_3"):
+                if (!int.TryParse(value, out intParsRes)) return;
+                comp.DesiredAngles[2] = intParsRes % 360;
+                return;
+            default:
+                break;
         }
     }
     private void RotationUpdate(EntityUid uid, SignalSciDishComponent comp)
+    {
+        RotationUpdateUnobservedDimention(uid, comp);
+        RotationUpdateObservedDimention(uid, comp);//we only need to do visual changes for one dimention as the game is in 2d and not 3d OR even 4d
+        return;
+    }
+    private void RotationUpdateObservedDimention(EntityUid uid, SignalSciDishComponent comp)
     {
         if (!TryComp<MultiBlockStructureComponent>(uid, out var multistructcomp)) return;//consider making this a proper methode to call
         if (!multistructcomp.EntityDic.ContainsKey("SignalAntenna")) return;
         EntityUid antennaUid = multistructcomp.EntityDic["SignalAntenna"][0].Id;//gets the first entry
         TransformComponent transcomp = Transform(antennaUid);
         if (transcomp.GridUid == null) return;
-        TransformComponent gridTransformComp = Transform((EntityUid) transcomp.GridUid!);
-        float angle = (float) _trans.GetWorldRotation((EntityUid) transcomp.GridUid!) * (180 / (float) MathF.PI);
-        float maxRotation = 0f;
-        if (!(angle >= comp.AngleErrorMargine + comp.DesiredAngle || angle <= comp.AngleErrorMargine - comp.DesiredAngle))
-        {
-            return;
-        }
-        maxRotation = comp.DesiredAngle - angle;
-        if (maxRotation > 360.0f + angle - comp.DesiredAngle) maxRotation = 360.0f + angle - comp.DesiredAngle;
-        maxRotation = MathF.Min(maxRotation, comp.MaxRotationSpeed);
-        Angle newAngel = (Angle) ((float) _trans.GetWorldRotation((EntityUid) transcomp.GridUid!) + maxRotation);
+        TransformComponent gridTransformComp = Transform(transcomp.GridUid!.Value);
+        Angle newAngel = (Angle) comp.CurrentAngles[0] + transcomp.LocalRotation;
         _trans.SetWorldRotation(gridTransformComp, newAngel);
         return;
+    }
+    private void RotationUpdateUnobservedDimention(EntityUid uid, SignalSciDishComponent comp)
+    {
+        for (int iterator = 0; iterator < 3; iterator++)
+        {
+            float angle = comp.CurrentAngles[iterator] * (180.0f / MathF.PI);
+            float maxRotation = 0f;
+            if (angle <= comp.AngleErrorMargine + comp.DesiredAngles[iterator] && angle >= comp.DesiredAngles[iterator] - comp.AngleErrorMargine)
+            {
+                continue;
+            }
+            maxRotation = comp.DesiredAngles[iterator] - angle;
+            if (maxRotation > 360.0f + angle - comp.DesiredAngles[iterator]) maxRotation = 360.0f + angle - comp.DesiredAngles[iterator];
+            maxRotation = MathF.Max(MathF.Min(maxRotation, comp.MaxRotationSpeed), -1 * comp.MaxRotationSpeed) * (float) (Math.PI / 180.0f);
+            Angle newAngel = (Angle) (comp.CurrentAngles[iterator] + maxRotation);
+            comp.CurrentAngles[iterator] = (float) newAngel;
+        }
     }
     private void UpdateValuesMultiStruct(EntityUid uid, SignalSciDishComponent comp, ref MultiStructChangeEvent args)
     {

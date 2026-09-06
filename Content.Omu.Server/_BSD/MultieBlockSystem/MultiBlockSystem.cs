@@ -19,17 +19,10 @@ using Robust.Shared.Toolshed.Commands.Values;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
-/// <summary>
-/// This handles anomalous vessel as well as
-/// the calculations for how many points they
-/// should produce.
-/// </summary>
 public sealed partial class MultiBlockSystem : EntitySystem
 {
     //magic number sets the override key to allow all connections
     private readonly ProtoId<MultiStructTypePrototype> _protoAll = "ALL";
-    [Dependency] private readonly SharedMapSystem _maps = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -65,14 +58,14 @@ public sealed partial class MultiBlockSystem : EntitySystem
             if (!comp.EntityDic.ContainsKey(providerType)) continue;
             foreach (Node iterator in comp.EntityDic[providerType])
             {
-                /*if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
-                if (!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair)) continue;
-                float deltaChange = 0;
-                if (transfair.TransEnergy > 0) deltaChange = Math.Min(battery.CurrentCharge, transfair.TransEnergy * iterator.Efficency);
-                //else deltaChange = Math.Max(battery.CurrentCharge - battery.MaxCharge, transfair.TransEnergy * iterator.Efficency);
-                ChargeChangedEvent ev = new ChargeChangedEvent(deltaChange, battery.MaxCharge);
-                RaiseLocalEvent(iterator.Id, ref ev, true);
-                powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy + deltaChange, powerComp.StoredEnergyCapacity);*/
+                // if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
+                // if (!TryComp<MultiBlockEnergyTransfairComponent>(iterator.Id, out var transfair)) continue;
+                // float deltaChange = 0;
+                // if (transfair.TransEnergy > 0) deltaChange = Math.Min(battery.LastCharge, transfair.TransEnergy * iterator.Efficency);
+                // else deltaChange = Math.Max(battery.LastCharge - battery.MaxCharge, transfair.TransEnergy * iterator.Efficency);
+                // ChangeChargeEvent ev = new ChangeChargeEvent(deltaChange);
+                // RaiseLocalEvent(iterator.Id, ref ev, true);
+                // powerComp.StoredEnergy = Math.Min(powerComp.StoredEnergy + deltaChange, powerComp.StoredEnergyCapacity);
             }
         }
         powerComp.StoredEnergy += powerComp.EnergyDelta;//structs own powergeneration/consumption
@@ -158,7 +151,6 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 //first get the most efficent item, then remove it from the to search list
                 toSearchList.Sort((s1, s2) => s1.Efficency.CompareTo(s2.Efficency));
                 currentNode = toSearchList[0];
-                toSearchList.Remove(currentNode);
                 //then check the sides
                 MultiBlockPartComponent targetComp = Comp<MultiBlockPartComponent>(currentNode.Id);
                 targetComp.Claimed = true;
@@ -205,6 +197,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
                         foundNodeComp.Claimed = true;
                     }
                 }
+                toSearchList.Remove(currentNode);
             } while (toSearchList.Count > 0);
             //update the actual values to the master structure and link them all
             multiBlockStructureComp.EntityDic = new Dictionary<string, List<Node>>();
@@ -247,20 +240,29 @@ public sealed partial class MultiBlockSystem : EntitySystem
     }
     private EntityUid CheckSide(EntityUid uid, int sideNum, HashSet<ProtoId<MultiStructTypePrototype>> allowedTypes, HashSet<ProtoId<MultiStructTypePrototype>> structureTypesAllowed, float margineOfError)
     {
-        var targetCordVec = _maps.GetGridPosition(uid);//unideal use of a var, find proper datatype to optimise further
+        Vector2d targetCordVec = new();
+        Angle rotation = Transform(uid).LocalRotation;
+        float rotationOffset = (float) rotation / ((float) Math.PI * 1.0f / 2.0f);
+        sideNum -= (int) rotationOffset;
+        if (sideNum < 0)
+        {
+            sideNum += 4;
+        }
+        targetCordVec.X = Transform(uid).Coordinates.Position.X;
+        targetCordVec.Y = Transform(uid).Coordinates.Position.Y;
         switch (sideNum)
         {
             case 0://N
-                targetCordVec.X += 1.0f;
-                break;
-            case 1://E
                 targetCordVec.Y += 1.0f;
                 break;
-            case 2://s
-                targetCordVec.X -= 1.0f;
+            case 1://E
+                targetCordVec.X += 1.0f;
                 break;
-            default://4; W
+            case 2://s
                 targetCordVec.Y -= 1.0f;
+                break;
+            default://3; W
+                targetCordVec.X -= 1.0f;
                 break;
         }
         //get the entity on that cordinate
@@ -282,11 +284,13 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 allowedPart = true;
             }
             if (!allowedPart) continue;
-            if (Transform(uid).GridUid != Transform(uidLoop).GridUid || Transform(uidLoop).GridUid == null)//same grid check
+            if (Transform(uid).GridUid == null || Transform(uidLoop).GridUid == null || Transform(uid).GridUid!.Value != Transform(uidLoop).GridUid!.Value)//same grid check
             {
                 continue;
             }
-            var checkCordVec = _maps.GetGridPosition(uidLoop);
+            Vector2d checkCordVec = new();
+            checkCordVec.X = Transform(uidLoop).Coordinates.Position.X;
+            checkCordVec.Y = Transform(uidLoop).Coordinates.Position.Y;
             if (Math.Abs(checkCordVec.X - targetCordVec.X) > margineOfError)
             {
                 continue;

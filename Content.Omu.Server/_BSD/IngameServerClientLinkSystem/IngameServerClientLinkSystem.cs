@@ -125,12 +125,12 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
             IngameConsoleHistoryChangeEvent ev1 = new(Loc.GetString("ISCL_Link_Terminated"));
             RaiseLocalEvent(ent, ref ev1);
         }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print_ALL)
+        else if (args.Type == IngameConsoleCommandType.ICC_PRINT_ALL)
         {
             IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_All_Start"));
             RaiseLocalEvent(ent, ref ev);
         }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 1)
+        else if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 1)
         {
             IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_Category_Start", ("Category", args.Args[1])));
             RaiseLocalEvent(ent, ref ev);

@@ -5,10 +5,15 @@ namespace Content.Omu.Server._BSD.SignalSCI.Components;
 public sealed partial class SignalSciDishComponent : Component
 {
     /// <summary>
-    /// The angle the Disk is supposed to face
+    /// The angle the Disk is supposed to face in Pi radia
     /// </summary>
     [DataField]
-    public float DesiredAngle = 0f;
+    public float[] DesiredAngles = { 0f, 0f, 0f };
+    /// <summary>
+    /// current Angle in Pi radia
+    /// </summary>
+    [DataField]
+    public float[] CurrentAngles = { 0f, 0f, 0f };
     /// <summary>
     /// The angle the Disk is facing tollerance
     /// </summary>

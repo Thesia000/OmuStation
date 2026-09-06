@@ -116,7 +116,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
             RaiseLocalEvent(ent, ref ev);
             ReturnToStationSceduleDeleteMap(ent, ent.Comp);
         }
-        else if (args.Type == IngameConsoleCommandType.ICC_Print && args.Args!.Length > 1 && args.Args[1] == "ftl")
+        else if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 1 && args.Args[1] == "ftl")
         {
             IngameConsoleHistoryChangeEvent ev = new(PrintFTLStatus(ent));
             RaiseLocalEvent(ent, ref ev);

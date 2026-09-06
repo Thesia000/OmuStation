@@ -8,9 +8,9 @@
   - type: IngameConsole
     allowedTypes:
     - ICC_ASSIGN
-    - ICC_Print
-    - ICC_Print_ALL
-    - ICC_Proxy
+    - ICC_PRINT
+    - ICC_PRINT_ALL
+    - ICC_PROXY
     - ISCL_UNASSIGN
   - type: IngameServer
     processingPower: 5.0
