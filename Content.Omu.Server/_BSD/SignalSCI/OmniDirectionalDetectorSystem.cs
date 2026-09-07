@@ -27,7 +27,16 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
     {
         base.Initialize();
         //SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValuesMultiStruct);
-        //SubscribeLocalEvent<SignalSciDishComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
+        SubscribeLocalEvent<SignalSciOmniDirectonalDetectorComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
+    }
+
+    public void IngameConsoleCommand(Entity<SignalSciOmniDirectonalDetectorComponent> ent, ref IngameConsoleCommandCalledEvent args)
+    {
+        if (args.Type == IngameConsoleCommandType.ICC_SET && args.Args!.Length > 2)
+        {
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_Dish_Orientation_Set", ("Variable", args.Args[1]), ("Value", args.Args[2])));
+            RaiseLocalEvent(ent, ref ev);
+        }
     }
 
     public string GenerateHintDataTier1(Signal signal, SignalSciOmniDirectonalDetectorComponent comp)
