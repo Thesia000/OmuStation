@@ -30,17 +30,17 @@ public sealed partial class SignalMapSystem : EntitySystem
             //update the signals aka delete if there time has come
             if (comp.SignalList.Count > 0)
             {
-                foreach (var signal in comp.SignalList)
-                {
-                    if (signal == null) continue;
-                    if (signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
-                }
+                // foreach (var signal in comp.SignalList)
+                // {
+                //     if (signal == null) continue;
+                //     if (signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
+                // }
             }
             //add more singals if need be, this will lead to high and low times for signal amounts.
-            if (comp.SignalList.Count - comp.DesiredAmountOfSignals >= comp.SignalAmountVariance) continue;
-            while (comp.SignalList.Count < comp.DesiredAmountOfSignals) CreateSignal(comp);
-            int additional = _random.Next(0, comp.SignalAmountVariance);
-            for (int i = 0; i < additional; i++) CreateSignal(comp);
+            //if (comp.SignalList.Count - comp.DesiredAmountOfSignalsPerTierBase >= comp.SignalAmountVariance) continue;
+            //while (comp.SignalList.Count < comp.DesiredAmountOfSignalsPerTierBase) CreateSignal(comp);
+            //int additional = _random.Next(0, comp.SignalAmountVariance);
+            //for (int i = 0; i < additional; i++) CreateSignal(comp);
         }
     }
     public SignalMapComponent SetupMapSignals(EntityUid uid)//this is called in case the map lacks the component
@@ -49,12 +49,54 @@ public sealed partial class SignalMapSystem : EntitySystem
         TryComp<SignalMapComponent>(uid, out var comp);
         return comp!;
     }
-    public void CreateSignal(SignalMapComponent signalMapComp)
+    public void CreateSignalTier1(SignalMapComponent signalMapComp)
     {
         TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin, signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
         //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
-        Signal newSignal = new Signal(_random.NextFloat(0.0f, 360f), _random.NextFloat(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax), disaperanceTime);
-        signalMapComp.SignalList.Add(newSignal);
+        List<float> angleList = new();
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        angleList.Add(0f);
+        angleList.Add(0f);
+        Dictionary<string, int> dataPresent = new();
+        dataPresent.Add("RawTelemetry", _random.Next(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax));
+        Dictionary<string, int> dataHarvestingRatio = new();
+        dataPresent.Add("RawTelemetry", 1);
+        Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Standard, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Standard].Add(newSignal);
+        return;
+    }
+    public void CreateSignalTier2(SignalMapComponent signalMapComp)
+    {
+        TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin, signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
+        //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
+        List<float> angleList = new();
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        angleList.Add(0f);
+        Dictionary<string, int> dataPresent = new();
+        dataPresent.Add("RawTelemetry", _random.Next(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax));//Same cap on amount
+        Dictionary<string, int> dataHarvestingRatio = new();
+        dataPresent.Add("RawTelemetry", 2);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Enhanced, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Enhanced].Add(newSignal);
+        return;
+    }
+    public void CreateSignalTier3(SignalMapComponent signalMapComp)
+    {
+        TimeSpan disaperanceTime = TimeSpan.FromMinutes(_random.NextFloat(signalMapComp.SignalDurationMin, signalMapComp.SignalDurationMax)) + _gameTiming.RealTime;
+        //MAgic numbers, for the degrees any higher or lower makes no SENCE!!! oddly enought would not braek anything
+        List<float> angleList = new();
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        angleList.Add(_random.NextFloat(0.0f, (float) Math.PI * 2.0f));
+        Dictionary<string, int> dataPresent = new();
+        dataPresent.Add("RawTelemetry", int.MaxValue);
+        dataPresent.Add("RawBluespaceTelemetry", int.MaxValue);
+        Dictionary<string, int> dataHarvestingRatio = new();
+        dataPresent.Add("RawTelemetry", 4);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        dataPresent.Add("RawBluespaceTelemetry", 1);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Bluespace, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace].Add(newSignal);
         return;
     }
 }

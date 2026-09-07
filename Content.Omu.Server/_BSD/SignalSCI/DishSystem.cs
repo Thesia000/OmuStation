@@ -146,15 +146,15 @@ public sealed partial class SignalDishSystem : EntitySystem
         for (int move = 0; move < comp.SignalList.Count; move++)//this math needs to be done every tick as we can harvest multiple signals if they align
         {
             float efficency = 1.0f;
-            if (angle - comp.SignalList[move].Angle != 0f)
-            {
-                //the magic numbers used here are used to achive a repaeating tan function that has a periodicity of 360.0f currently fine tuned for a 6 degree missaligment before penelties
-                efficency = MathF.Min(MathF.Abs(MathF.Tan((angle - comp.SignalList[move].Angle + 180.0f) / (4.0f * 180.0f / (2 * (float) MathF.PI))) / 10.0f), 1.0f);
-            }
+            // if (angle - comp.SignalList[move].Angle != 0f)
+            // {
+            //     //the magic numbers used here are used to achive a repaeating tan function that has a periodicity of 360.0f currently fine tuned for a 6 degree missaligment before penelties
+            //     efficency = MathF.Min(MathF.Abs(MathF.Tan((angle - comp.SignalList[move].Angle + 180.0f) / (4.0f * 180.0f / (2 * (float) MathF.PI))) / 10.0f), 1.0f);
+            // }
             if (efficency > 0f)
             {
-                float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
-                comp.SignalList[move].DataRemaining -= harvestedAmount;
+                //float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
+                //comp.SignalList[move].DataRemaining -= harvestedAmount;
                 //if (!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp)) continue;
                 //serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
                 //_research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time

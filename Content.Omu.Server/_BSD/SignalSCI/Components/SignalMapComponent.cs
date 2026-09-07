@@ -8,13 +8,13 @@ public sealed partial class SignalMapComponent : Component
     /// Saves the Data needed for the Signals position
     /// </summary>
     [DataField]
-    public List<Signal> SignalList = new List<Signal>();
+    public Dictionary<SignalSciOmniDirectonalDetectorOperationMode, List<Signal>> SignalList = new();
 
     /// <summary>
-    /// how many signals should be active at the same tiem
+    /// how many signals should be active at the same time, multiplied by layer difficulty
     /// </summary>
     [DataField]
-    public int DesiredAmountOfSignals = 5;
+    public int[] DesiredAmountOfSignalsPerTierBase = { 2, 7, 1 };
 
     /// <summary>
     /// Randomised each time a new signal needs to be added
@@ -37,25 +37,42 @@ public sealed partial class SignalMapComponent : Component
     /// SignalPoints Min
     /// </summary>
     [DataField]
-    public float SingalPointsMin = 50000;//makes it require upgraded systems to fully harvest a signal
+    public int SingalPointsMin = 50000;//makes it require upgraded systems to fully harvest a signal
     /// <summary>
     /// SignalPoints Max
     /// </summary>
     [DataField]
-    public float SingalPointsMax = 100000;
+    public int SingalPointsMax = 100000;
 }
 
 public sealed class Signal
 {
-    public float Angle;//in degrees
-    public float DataRemaining;
+    public List<float> Angles;//in pi radia
+    public SignalSciOmniDirectonalDetectorOperationMode SignalType;
+    public Dictionary<string, int> RemainingData;
+    public Dictionary<string, int> DataHarvestingRatio;
     public float EventChanse = 0.05f;//the percentage chanse that a event is triggered upon signal depletion
     public TimeSpan SignalDisaperance;
-    public Signal(float angle, float dataRemaining, TimeSpan signalDisaperance)
+    public int HintRandomSeed = 0;
+    public bool TimeBasedRemoval;
+    public bool UnlimitedData;
+    public Signal(List<float> angles,
+        SignalSciOmniDirectonalDetectorOperationMode signalType,
+        Dictionary<string, int> presentData,
+        Dictionary<string, int> dataHarvestingRatio,
+        TimeSpan signalDisaperance,
+        int hintRandomSeed,
+        bool timeBasedRemoval = true,
+        bool unlimitedData = false)
     {
-        Angle = angle;
-        DataRemaining = dataRemaining;
+        Angles = angles;
+        SignalType = signalType;
+        RemainingData = presentData;
+        DataHarvestingRatio = dataHarvestingRatio;
         SignalDisaperance = signalDisaperance;
+        HintRandomSeed = hintRandomSeed;
+        TimeBasedRemoval = timeBasedRemoval;
+        UnlimitedData = unlimitedData;
     }
 }
 
