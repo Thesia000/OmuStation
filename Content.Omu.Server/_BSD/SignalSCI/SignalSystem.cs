@@ -27,20 +27,26 @@ public sealed partial class SignalMapSystem : EntitySystem
         var mapQuerry = AllEntityQuery<SignalMapComponent>();
         while (mapQuerry.MoveNext(out var mapEnt, out var comp))//this is done on update as we also manage the individual signals expration time here
         {
-            //update the signals aka delete if there time has come
-            if (comp.SignalList.Count > 0)
+            foreach (var iterator in comp.SignalList.Keys)
             {
-                // foreach (var signal in comp.SignalList)
-                // {
-                //     if (signal == null) continue;
-                //     if (signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList.Remove(signal);
-                // }
+                //update the signals aka delete if there time has come
+                if (comp.SignalList[iterator].Count > 0)
+                {
+                    foreach (var signal in comp.SignalList[iterator])
+                    {
+                        if (signal == null) continue;
+                        if (!signal.TimeBasedRemoval) continue;
+                        if (signal.SignalDisaperance < _gameTiming.RealTime) comp.SignalList[iterator].Remove(signal);
+                    }
+                }
+                //add more singals if need be, this will lead to high and low times for signal amounts.
+                if (comp.SignalList[iterator].Count - comp.DesiredAmountOfSignalsPerTierBase[0] < comp.SignalAmountVariance)
+                {
+                    while (comp.SignalList[iterator].Count < comp.DesiredAmountOfSignalsPerTierBase[0]) CreateSignal(iterator, comp);
+                    int additional = _random.Next(0, comp.SignalAmountVariance);
+                    for (int i = 0; i < additional; i++) CreateSignal(iterator, comp);
+                }
             }
-            //add more singals if need be, this will lead to high and low times for signal amounts.
-            //if (comp.SignalList.Count - comp.DesiredAmountOfSignalsPerTierBase >= comp.SignalAmountVariance) continue;
-            //while (comp.SignalList.Count < comp.DesiredAmountOfSignalsPerTierBase) CreateSignal(comp);
-            //int additional = _random.Next(0, comp.SignalAmountVariance);
-            //for (int i = 0; i < additional; i++) CreateSignal(comp);
         }
     }
     public SignalMapComponent SetupMapSignals(EntityUid uid)//this is called in case the map lacks the component
@@ -48,6 +54,22 @@ public sealed partial class SignalMapSystem : EntitySystem
         EnsureComp<SignalMapComponent>(uid);//ensure the map of the station has signals
         TryComp<SignalMapComponent>(uid, out var comp);
         return comp!;
+    }
+    public void CreateSignal(SignalSciOmniDirectonalDetectorOperationMode type, SignalMapComponent signalMapComp)
+    {
+        switch (type)
+        {
+            case SignalSciOmniDirectonalDetectorOperationMode.Standard:
+                CreateSignalTier1(signalMapComp);
+                return;
+            case SignalSciOmniDirectonalDetectorOperationMode.Enhanced:
+                CreateSignalTier2(signalMapComp);
+                return;
+            case SignalSciOmniDirectonalDetectorOperationMode.Bluespace:
+                CreateSignalTier3(signalMapComp);
+                return;
+        }
+        return;
     }
     public void CreateSignalTier1(SignalMapComponent signalMapComp)
     {
@@ -95,7 +117,7 @@ public sealed partial class SignalMapSystem : EntitySystem
         Dictionary<string, int> dataHarvestingRatio = new();
         dataPresent.Add("RawTelemetry", 4);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
         dataPresent.Add("RawBluespaceTelemetry", 1);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
-        Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Bluespace, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Bluespace, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next(), false, true);
         signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace].Add(newSignal);
         return;
     }
