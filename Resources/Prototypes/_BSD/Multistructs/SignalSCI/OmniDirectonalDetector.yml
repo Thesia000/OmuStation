@@ -1,0 +1,144 @@
+﻿- type: entity
+  id: OmniDirectionalDetectorMultistructCore
+  parent: [ MultistructBaseCore , BaseComputerAiAccess ]
+  name: OmniDirectionalDetectorMultistructCoreName
+  description: OmniDirectionalDetectorMultistructCoreNameDesc
+  components:
+  - type: IngameServerClientLinkInfrastructure
+  - type: IngameConsole
+    allowedTypes:
+    - ICC_PRINT
+  - type: MultiBlockPart
+    structureType: 
+    - OmniDirectionalDetectorControll
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesNorth:
+    - OmniDirectionalDetectorSensor
+    allowedConnectionTypesEast:
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesSouth:
+    - NONE
+    allowedConnectionTypesWest:
+    - OmniDirectionalDetectorHull
+  - type: MultiBlockStructure
+    allowedTypes:
+    - OmniDirectionalDetectorControll
+    - OmniDirectionalDetectorHull
+    - OmniDirectionalDetectorSensor
+    - EnergyTransfair
+    - EnergyCapacityProvider
+    - Productivity
+  - type: SignalSciOmniDirectonalDetector
+  - type: ActivatableUI
+    key: enum.IngameConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IngameConsoleUiKey.Key:
+        type: IngameConsoleBoundUserInterface
+
+- type: entity
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  id: OmniDirectionalDetectorMultistructHull
+  name: OmniDirectionalDetectorMultistructHullName
+  description: OmniDirectionalDetectorMultistructHullDesc
+  components:
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesNorth:
+    - OmniDirectionalDetectorSensor
+    allowedConnectionTypesEast:
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesSouth:
+    - EnergyTransfair
+    - EnergyCapacityProvider
+    - Productivity
+    allowedConnectionTypesWest:
+    - OmniDirectionalDetectorHull
+
+- type: entity
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  id: OmniDirectionalDetectorMultistructHullCorner
+  name: OmniDirectionalDetectorMultistructHullCornerName
+  description: OmniDirectionalDetectorMultistructHullCornerDesc
+  components:
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesNorth:
+    - EnergyTransfair
+    - EnergyCapacityProvider
+    - Productivity
+    allowedConnectionTypesEast:
+    - EnergyTransfair
+    - EnergyCapacityProvider
+    - Productivity
+    allowedConnectionTypesSouth:
+    - OmniDirectionalDetectorHull
+    allowedConnectionTypesWest:
+    - OmniDirectionalDetectorHull
+
+- type: entity
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  id: OmniDirectionalDetectorMultistructSensorTier1
+  name: OmniDirectionalDetectorMultistructSensorTier1Name
+  description: OmniDirectionalDetectorMultistructSensorTier1Desc
+  components:
+  - type: SignalSciOmniDirectonalDetectorSensor
+    SupportedOperationMode: 1
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - OmniDirectionalDetectorSensor
+    allowedConnectionTypesNorth:
+    - NONE
+    allowedConnectionTypesEast:
+    - NONE
+    allowedConnectionTypesSouth:
+    - NONE
+    allowedConnectionTypesWest:
+    - NONE
+
+- type: entity
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  id: OmniDirectionalDetectorMultistructSensorTier2
+  name: OmniDirectionalDetectorMultistructSensoTier2Name
+  description: OmniDirectionalDetectorMultistructSensorTier2Desc
+  components:
+  - type: SignalSciOmniDirectonalDetectorSensor
+    SupportedOperationMode: 2
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - OmniDirectionalDetectorSensor
+    allowedConnectionTypesNorth:
+    - NONE
+    allowedConnectionTypesEast:
+    - NONE
+    allowedConnectionTypesSouth:
+    - NONE
+    allowedConnectionTypesWest:
+    - NONE
+
+- type: entity
+  parent: [ MultistructPartBase , BaseComputerAiAccess]
+  id: OmniDirectionalDetectorMultistructSensorTier3
+  name: OmniDirectionalDetectorMultistructSensoTier3Name
+  description: OmniDirectionalDetectorMultistructSensorTier3Desc
+  components:
+  - type: SignalSciOmniDirectonalDetectorSensor
+    SupportedOperationMode: 3
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - OmniDirectionalDetectorSensor
+    allowedConnectionTypesNorth:
+    - NONE
+    allowedConnectionTypesEast:
+    - NONE
+    allowedConnectionTypesSouth:
+    - NONE
+    allowedConnectionTypesWest:
+    - NONE

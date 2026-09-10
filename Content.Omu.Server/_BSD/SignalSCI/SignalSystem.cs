@@ -20,6 +20,7 @@ public sealed partial class SignalMapSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<SignalMapComponent, ComponentStartup>(OnCompInit);
     }
     public override void Update(float frameTime)
     {
@@ -27,8 +28,10 @@ public sealed partial class SignalMapSystem : EntitySystem
         var mapQuerry = AllEntityQuery<SignalMapComponent>();
         while (mapQuerry.MoveNext(out var mapEnt, out var comp))//this is done on update as we also manage the individual signals expration time here
         {
+            int counter = -1;
             foreach (var iterator in comp.SignalList.Keys)
             {
+                counter++;
                 //update the signals aka delete if there time has come
                 if (comp.SignalList[iterator].Count > 0)
                 {
@@ -40,14 +43,31 @@ public sealed partial class SignalMapSystem : EntitySystem
                     }
                 }
                 //add more singals if need be, this will lead to high and low times for signal amounts.
-                if (comp.SignalList[iterator].Count - comp.DesiredAmountOfSignalsPerTierBase[0] < comp.SignalAmountVariance)
+                if (comp.SignalList[iterator].Count - comp.DesiredAmountOfSignalsPerTierBase[counter] < comp.SignalAmountVariance)
                 {
-                    while (comp.SignalList[iterator].Count < comp.DesiredAmountOfSignalsPerTierBase[0]) CreateSignal(iterator, comp);
+                    while (comp.SignalList[iterator].Count < comp.DesiredAmountOfSignalsPerTierBase[counter]) CreateSignal(iterator, comp);
                     int additional = _random.Next(0, comp.SignalAmountVariance);
                     for (int i = 0; i < additional; i++) CreateSignal(iterator, comp);
                 }
             }
         }
+    }
+    public void OnCompInit(Entity<SignalMapComponent> ent, ref ComponentStartup args)
+    {
+        CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Standard, ent.Comp);
+        CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Enhanced, ent.Comp);
+        CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Bluespace, ent.Comp);
+        while (ent.Comp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Standard].Count < ent.Comp.DesiredAmountOfSignalsPerTierBase[0]) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Standard, ent.Comp);
+        int additional = _random.Next(0, ent.Comp.SignalAmountVariance);
+        for (int i = 0; i < additional; i++) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Standard, ent.Comp);
+
+        while (ent.Comp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Enhanced].Count < ent.Comp.DesiredAmountOfSignalsPerTierBase[1]) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Enhanced, ent.Comp);
+        additional = _random.Next(0, ent.Comp.SignalAmountVariance);
+        for (int i = 0; i < additional; i++) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Enhanced, ent.Comp);
+
+        while (ent.Comp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace].Count < ent.Comp.DesiredAmountOfSignalsPerTierBase[2]) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Bluespace, ent.Comp);
+        additional = _random.Next(0, ent.Comp.SignalAmountVariance);
+        for (int i = 0; i < additional; i++) CreateSignal(SignalSciOmniDirectonalDetectorOperationMode.Bluespace, ent.Comp);
     }
     public SignalMapComponent SetupMapSignals(EntityUid uid)//this is called in case the map lacks the component
     {
@@ -82,8 +102,9 @@ public sealed partial class SignalMapSystem : EntitySystem
         Dictionary<string, int> dataPresent = new();
         dataPresent.Add("RawTelemetry", _random.Next(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax));
         Dictionary<string, int> dataHarvestingRatio = new();
-        dataPresent.Add("RawTelemetry", 1);
+        dataHarvestingRatio.Add("RawTelemetry", 1);
         Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Standard, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        if (signalMapComp.SignalList.ContainsKey(SignalSciOmniDirectonalDetectorOperationMode.Standard) == false) signalMapComp.SignalList.Add(SignalSciOmniDirectonalDetectorOperationMode.Standard, new());
         signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Standard].Add(newSignal);
         return;
     }
@@ -98,8 +119,9 @@ public sealed partial class SignalMapSystem : EntitySystem
         Dictionary<string, int> dataPresent = new();
         dataPresent.Add("RawTelemetry", _random.Next(signalMapComp.SingalPointsMin, signalMapComp.SingalPointsMax));//Same cap on amount
         Dictionary<string, int> dataHarvestingRatio = new();
-        dataPresent.Add("RawTelemetry", 2);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        dataHarvestingRatio.Add("RawTelemetry", 2);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
         Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Enhanced, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next());
+        if (signalMapComp.SignalList.ContainsKey(SignalSciOmniDirectonalDetectorOperationMode.Enhanced) == false) signalMapComp.SignalList.Add(SignalSciOmniDirectonalDetectorOperationMode.Enhanced, new());
         signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Enhanced].Add(newSignal);
         return;
     }
@@ -115,9 +137,10 @@ public sealed partial class SignalMapSystem : EntitySystem
         dataPresent.Add("RawTelemetry", int.MaxValue);
         dataPresent.Add("RawBluespaceTelemetry", int.MaxValue);
         Dictionary<string, int> dataHarvestingRatio = new();
-        dataPresent.Add("RawTelemetry", 4);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
-        dataPresent.Add("RawBluespaceTelemetry", 1);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        dataHarvestingRatio.Add("RawTelemetry", 4);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
+        dataHarvestingRatio.Add("RawBluespaceTelemetry", 1);//better harvesting ratio for higher tier(flat modifier. magic number bad is known modularity costs more rn)
         Signal newSignal = new Signal(angleList, SignalSciOmniDirectonalDetectorOperationMode.Bluespace, dataPresent, dataHarvestingRatio, disaperanceTime, _random.Next(), false, true);
+        if (signalMapComp.SignalList.ContainsKey(SignalSciOmniDirectonalDetectorOperationMode.Bluespace) == false) signalMapComp.SignalList.Add(SignalSciOmniDirectonalDetectorOperationMode.Bluespace, new());
         signalMapComp.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace].Add(newSignal);
         return;
     }

@@ -4,9 +4,6 @@ namespace Content.Omu.Server._BSD.SignalSCI.Components;
 
 public sealed partial class SignalSciOmniDirectonalDetectorComponent : Component
 {
-    [DataField]
-    public SignalSciOmniDirectonalDetectorOperationMode CurrentOperationMode = SignalSciOmniDirectonalDetectorOperationMode.Standard;
-
     /// <summary>
     /// Error margine in pi radia
     /// </summary>
@@ -26,11 +23,23 @@ public sealed partial class SignalSciOmniDirectonalDetectorComponent : Component
 
     [DataField]
     public string[] ErrorMargineImprovmentStructure = ["Productivity"];
+
+    [DataField]
+    public string[] OperationModeStructure = ["OmniDirectionalDetectorSensor"];
 }
 
-public enum SignalSciOmniDirectonalDetectorOperationMode
+[RegisterComponent]
+
+public sealed partial class SignalSciOmniDirectonalDetectorSensorComponent : Component
 {
+    [DataField]
+    public SignalSciOmniDirectonalDetectorOperationMode SupportedOperationMode = SignalSciOmniDirectonalDetectorOperationMode.Standard;
+}
+
+public enum SignalSciOmniDirectonalDetectorOperationMode : int
+{
+    Unoperable = 0,
     Standard = 1,
-    Enhanced,
-    Bluespace,
+    Enhanced = 2,
+    Bluespace = 3,
 }

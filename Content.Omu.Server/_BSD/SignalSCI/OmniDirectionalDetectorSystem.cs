@@ -14,6 +14,7 @@ using Content.Omu.Server._BSD.MultiBlockSystem;
 
 using Content.Omu.Shared._BSD.IngameConsoleSystem;
 using Robust.Shared.Random;
+using Robust.Shared.Toolshed.Commands.Values;
 
 
 namespace Content.Omu.Server._BSD.SignalSCI;
@@ -23,6 +24,8 @@ namespace Content.Omu.Server._BSD.SignalSCI;
 /// </summary>
 public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMapSystem _mapSys = default!;
+    [Dependency] private readonly SignalMapSystem _signalMap = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -32,11 +35,70 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
 
     public void IngameConsoleCommand(Entity<SignalSciOmniDirectonalDetectorComponent> ent, ref IngameConsoleCommandCalledEvent args)
     {
-        if (args.Type == IngameConsoleCommandType.ICC_SET && args.Args!.Length > 2)
+        if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 2 && args.Args[1] == "signal")
         {
-            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_Dish_Orientation_Set", ("Variable", args.Args[1]), ("Value", args.Args[2])));
+            IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_ODD_print_hint", ("Type", args.Args[2])));
             RaiseLocalEvent(ent, ref ev);
+            PrintHint(ent, args.Args[2]);
+            return;
         }
+    }
+    private SignalSciOmniDirectonalDetectorOperationMode GetHighestOperationMode(Entity<SignalSciOmniDirectonalDetectorComponent> ent)
+    {
+        SignalSciOmniDirectonalDetectorOperationMode returnValue = SignalSciOmniDirectonalDetectorOperationMode.Unoperable;
+        if (!TryComp<MultiBlockStructureComponent>(ent, out var compStructure)) return returnValue;
+        foreach (var iteratorOne in ent.Comp.OperationModeStructure)
+        {
+            if (!compStructure.EntityDic.ContainsKey(iteratorOne)) continue;
+            foreach (var iteratorTwo in compStructure.EntityDic[iteratorOne])
+            {
+                if (!TryComp<SignalSciOmniDirectonalDetectorSensorComponent>(iteratorTwo.Id, out var compSensor)) continue;
+                if (returnValue > compSensor.SupportedOperationMode) continue;
+                returnValue = compSensor.SupportedOperationMode;
+            }
+        }
+        return returnValue;
+    }
+
+    public void PrintHint(Entity<SignalSciOmniDirectonalDetectorComponent> ent, string type)
+    {
+        EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(ent).MapID);
+        if (mapUid == EntityUid.Invalid) return;
+        if (!TryComp<SignalMapComponent>(mapUid, out var compSigMap))
+        {
+            compSigMap = _signalMap.SetupMapSignals(mapUid);
+        }
+        SignalSciOmniDirectonalDetectorOperationMode maxOpMode = GetHighestOperationMode(ent);
+        if (type == "tier1" && maxOpMode >= SignalSciOmniDirectonalDetectorOperationMode.Standard)
+        {
+            foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Standard])
+            {
+                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier1(iterator, ent.Comp));
+                RaiseLocalEvent(ent, ref ev);
+            }
+            return;
+        }
+        else if (type == "tier2" && maxOpMode >= SignalSciOmniDirectonalDetectorOperationMode.Enhanced)
+        {
+            foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Enhanced])
+            {
+                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier2(iterator, ent.Comp));
+                RaiseLocalEvent(ent, ref ev);
+            }
+            return;
+        }
+        else if (type == "tier3" && maxOpMode >= SignalSciOmniDirectonalDetectorOperationMode.Bluespace)
+        {
+            foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace])
+            {
+                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier3(iterator, ent.Comp));
+                RaiseLocalEvent(ent, ref ev);
+            }
+            return;
+        }
+        IngameConsoleHistoryChangeEvent ev2 = new("ERROR FAILED TO GENERATE TYPE UNKNOWN:" + type + " \nMAX OPERATION:" + maxOpMode);
+        RaiseLocalEvent(ent, ref ev2);
+        return;
     }
 
     public string GenerateHintDataTier1(Signal signal, SignalSciOmniDirectonalDetectorComponent comp)
@@ -44,13 +106,15 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         Random rand = new(signal.HintRandomSeed);//controlled randomness time:3
         string returnString = "";
         float variance = rand.NextFloat(0, 1);
+        int angleOne = (int) (signal.Angles[0] + variance * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
+        int angleTwo = (int) (signal.Angles[0] + (1 - variance) * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
         returnString += Loc.GetString
         (
             "ODD_Tier1_Hint",
-            (("VAR_start_angle", signal.Angles[0] + variance * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard])),
-            ("VAR_end_angle", (signal.Angles[0] + (1 - variance) * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]))
+            ("VAR_start_angle", angleOne),
+            ("VAR_end_angle", angleTwo)
         );
-        return "ERROR";
+        return returnString;
     }
     public string GenerateHintDataTier2(Signal signal, SignalSciOmniDirectonalDetectorComponent comp)
     {

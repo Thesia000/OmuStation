@@ -133,6 +133,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     private void DishSignalHarvest(EntityUid uid, SignalSciDishComponent dishComp)
     {
         EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(uid).MapID);
+        if (mapUid == EntityUid.Invalid) return;
         if (!TryComp<SignalMapComponent>(mapUid, out var comp))
         {
             comp = _signalMap.SetupMapSignals(mapUid);

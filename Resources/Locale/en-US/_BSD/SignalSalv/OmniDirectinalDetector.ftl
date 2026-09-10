@@ -1,3 +1,5 @@
+SSI_ODD_print_hint = -> Attempting to print hints for all signals of category: {$Type}
+
 ODD_Tier1_Hint = -> A Signal was detected somewhere between {$VAR_start_angle}° to {$VAR_end_angle}°
 
 ODD_Tier2_Hint = -> On a unit sphere we detected a Signal intercection at the X,Y plain \n-> from X=({$X_START},{$X_END})\n-> from Y=({$Y_START},{$Y_END})
