@@ -87,7 +87,7 @@
   description: OmniDirectionalDetectorMultistructSensorTier1Desc
   components:
   - type: SignalSciOmniDirectonalDetectorSensor
-    SupportedOperationMode: 1
+    supportedOperationMode: 1
   - type: MultiBlockPart
     transmissionEfficency: 1
     structureType: 
@@ -108,7 +108,7 @@
   description: OmniDirectionalDetectorMultistructSensorTier2Desc
   components:
   - type: SignalSciOmniDirectonalDetectorSensor
-    SupportedOperationMode: 2
+    supportedOperationMode: 2
   - type: MultiBlockPart
     transmissionEfficency: 1
     structureType: 
@@ -129,7 +129,7 @@
   description: OmniDirectionalDetectorMultistructSensorTier3Desc
   components:
   - type: SignalSciOmniDirectonalDetectorSensor
-    SupportedOperationMode: 3
+    supportedOperationMode: 3
   - type: MultiBlockPart
     transmissionEfficency: 1
     structureType: 

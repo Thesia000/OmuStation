@@ -54,7 +54,7 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
             if (pastProxies == null) pastProxies = new();
             pastProxies.Add(ent);
             if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var compInfra)) return;
-            string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:\n->";
+            string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:%n->";
             appendedString += appendedInput;
             OnProxyCommand(compProxy.ProxyTarget, splitInput, appendedString, pastProxies);
             return;

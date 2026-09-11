@@ -55,7 +55,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
         if (powerComp.EnergyProvidingTypes == null) return;
         foreach (string providerType in powerComp.EnergyProvidingTypes)
         {
-            if (!comp.EntityDic.ContainsKey(providerType)) continue;
+            if (!comp.EntityDic!.ContainsKey(providerType)) continue;
             foreach (Node iterator in comp.EntityDic[providerType])
             {
                 // if (!TryComp<BatteryComponent>(iterator.Id, out var battery)) continue;
@@ -100,7 +100,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
         if (powerComp.EnergyCapacityTypes == null) return;
         foreach (string energyStorageType in powerComp.EnergyCapacityTypes)
         {
-            if (!comp.EntityDic.ContainsKey(energyStorageType)) continue;
+            if (!comp.EntityDic!.ContainsKey(energyStorageType)) continue;
             foreach (Node iterator in comp.EntityDic[energyStorageType])
             {
                 if (!TryComp<MultiBlockEnergyStorageComponent>(iterator.Id, out var storageComp)) continue;
@@ -132,6 +132,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
             bool onlySaveOne = true;
             List<Node> toSearchList = new List<Node>();
             List<Node> foundSearchList = new List<Node>();
+            float minX = transComp.LocalPosition.X;
+            float minY = transComp.LocalPosition.Y;
             foreach (ProtoId<MultiStructTypePrototype> iterator in multiblockPartComp.StructureType)
             {
                 Node start = new Node();
@@ -190,6 +192,9 @@ public sealed partial class MultiBlockSystem : EntitySystem
                             temp.Type = iterator;
                             if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
                             {
+                                var foundTransComp = Transform(temp.Id);
+                                minX = Math.Min(minX, foundTransComp.LocalPosition.X);
+                                minY = Math.Min(minY, foundTransComp.LocalPosition.Y);
                                 toSearchList.Add(temp.Clone());
                                 foundSearchList.Add(temp.Clone());
                             }
@@ -202,6 +207,7 @@ public sealed partial class MultiBlockSystem : EntitySystem
             //update the actual values to the master structure and link them all
             multiBlockStructureComp.EntityDic = new Dictionary<string, List<Node>>();
             multiBlockStructureComp.TypesPresent = new Dictionary<string, float>();
+            multiBlockStructureComp.TypePresence2DMap = new Dictionary<string, List<List<bool>>>();
             foreach (Node addNode in foundSearchList)
             {
                 if (multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
@@ -222,6 +228,17 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 {
                     multiBlockStructureComp.TypesPresent.Add(addNode.Type, addNode.Efficency * Comp<MultiBlockPartComponent>(addNode.Id).MachinePower);
                 }
+                if (!multiBlockStructureComp.TypePresence2DMap.ContainsKey(addNode.Type))
+                {
+                    multiBlockStructureComp.TypePresence2DMap.Add(addNode.Type, new List<List<bool>>());
+                }
+                int gridPosX = 0;//TODO finish this
+                int gridPosY = 0;
+                if (multiBlockStructureComp.TypePresence2DMap[addNode.Type][gridPosY] == null)
+                {
+                    multiBlockStructureComp.TypePresence2DMap[addNode.Type].Insert(gridPosY, new List<bool>());
+                }
+                multiBlockStructureComp.TypePresence2DMap[addNode.Type][gridPosY].Insert(gridPosX, true);
             }
             var ev = new MultiStructChangeEvent();//let subsy know things happened
             RaiseLocalEvent(uidLoop, ref ev);

@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes;
+
 namespace Content.Omu.Server._BSD.SignalSCI.Components;
 
 [RegisterComponent]
@@ -26,6 +28,12 @@ public sealed partial class SignalSciOmniDirectonalDetectorComponent : Component
 
     [DataField]
     public string[] OperationModeStructure = ["OmniDirectionalDetectorSensor"];
+
+    /// <summary>
+    /// Paper that will spawn when printing transcript
+    /// </summary>
+    [DataField]
+    public EntProtoId PaperPrototype = "PaperArtifactAnalyzer";
 }
 
 [RegisterComponent]
@@ -33,7 +41,7 @@ public sealed partial class SignalSciOmniDirectonalDetectorComponent : Component
 public sealed partial class SignalSciOmniDirectonalDetectorSensorComponent : Component
 {
     [DataField]
-    public SignalSciOmniDirectonalDetectorOperationMode SupportedOperationMode = SignalSciOmniDirectonalDetectorOperationMode.Standard;
+    public int SupportedOperationMode = (int) SignalSciOmniDirectonalDetectorOperationMode.Standard;
 }
 
 public enum SignalSciOmniDirectonalDetectorOperationMode : int

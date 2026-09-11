@@ -1,1 +1,1 @@
-ICS_Proxy_Relay_Info = <From {$ID}>\n
+ICS_Proxy_Relay_Info = <From {$ID}>%n

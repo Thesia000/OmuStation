@@ -34,7 +34,7 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
     public void IngameConsoleHistoryChange(Entity<IngameConsoleComponent> ent, string historyAddition)
     {
         if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
-        foreach (string iterator in historyAddition.Split('\n'))
+        foreach (string iterator in historyAddition.Split("%n"))
         {
             if (iterator == null) continue;
             comp.History.Add(iterator);
@@ -65,7 +65,7 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
         if (TryComp<IngameConsoleActiveProxyComponent>(ent, out var compProxy))
         {
             if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var compInfra)) return;
-            string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:\n->";
+            string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:%n->";
             appendedString += args.InputString;
             OnProxyCommand(compProxy.ProxyTarget, splitInput, appendedString);
             return;

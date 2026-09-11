@@ -6,6 +6,7 @@ using Robust.Shared.GameObjects;
 using Content.Server.Research.Systems;
 using Content.Shared.Research.Components;
 using Content.Shared.Research;
+using Content.Shared.Paper;
 
 using Content.Omu.Server._BSD.SignalSCI.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem.Events;
@@ -13,8 +14,11 @@ using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem;
 
 using Content.Omu.Shared._BSD.IngameConsoleSystem;
+
+
 using Robust.Shared.Random;
 using Robust.Shared.Toolshed.Commands.Values;
+using Robust.Shared.Prototypes;
 
 
 namespace Content.Omu.Server._BSD.SignalSCI;
@@ -26,6 +30,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] private readonly SignalMapSystem _signalMap = default!;
+    [Dependency] private readonly PaperSystem _paper = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -49,12 +54,12 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         if (!TryComp<MultiBlockStructureComponent>(ent, out var compStructure)) return returnValue;
         foreach (var iteratorOne in ent.Comp.OperationModeStructure)
         {
-            if (!compStructure.EntityDic.ContainsKey(iteratorOne)) continue;
+            if (!compStructure.EntityDic!.ContainsKey(iteratorOne)) continue;
             foreach (var iteratorTwo in compStructure.EntityDic[iteratorOne])
             {
                 if (!TryComp<SignalSciOmniDirectonalDetectorSensorComponent>(iteratorTwo.Id, out var compSensor)) continue;
-                if (returnValue > compSensor.SupportedOperationMode) continue;
-                returnValue = compSensor.SupportedOperationMode;
+                if ((int) returnValue > compSensor.SupportedOperationMode) continue;
+                returnValue = (SignalSciOmniDirectonalDetectorOperationMode) compSensor.SupportedOperationMode;
             }
         }
         return returnValue;
@@ -91,7 +96,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         {
             foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace])
             {
-                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier3(iterator, ent.Comp));
+                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier3(iterator, ent.Comp, ent));
                 RaiseLocalEvent(ent, ref ev);
             }
             return;
@@ -124,10 +129,10 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         //first calculate the variance applied to the X,Y plain only
         float angle1 = signal.Angles[0] + variance * comp.ErrorMargineCurrent * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Enhanced];
         float angle2 = signal.Angles[0] - (1 - variance) * comp.ErrorMargineCurrent * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Enhanced];
-        float xStart = MathF.Sin(angle1) * MathF.Cos(signal.Angles[1]);
-        float xEnd = MathF.Sin(angle2) * MathF.Cos(signal.Angles[1]);
-        float yStart = MathF.Cos(angle1) * MathF.Cos(signal.Angles[1]);
-        float yEnd = MathF.Cos(angle2) * MathF.Cos(signal.Angles[1]);
+        int xStart = (int) (MathF.Sin(angle1) * MathF.Cos(signal.Angles[1])) * 100000;
+        int xEnd = (int) (MathF.Sin(angle2) * MathF.Cos(signal.Angles[1])) * 100000;
+        int yStart = (int) (MathF.Cos(angle1) * MathF.Cos(signal.Angles[1])) * 100000;
+        int yEnd = (int) (MathF.Cos(angle2) * MathF.Cos(signal.Angles[1])) * 100000;
         returnString += Loc.GetString
         (
             "ODD_Tier2_Hint",
@@ -148,7 +153,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
     /// <param name="signal"></param>
     /// <param name="comp"></param>
     /// <returns></returns>
-    public string GenerateHintDataTier3(Signal signal, SignalSciOmniDirectonalDetectorComponent comp)
+    public string GenerateHintDataTier3(Signal signal, SignalSciOmniDirectonalDetectorComponent comp, EntityUid uidPrinter)
     {
         Random rand = new(signal.HintRandomSeed);//controlled randomness time:3
         string returnString = "";
@@ -250,26 +255,36 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
             directionTwo[2] / normingFactorTwo,
             directionTwo[3] / normingFactorTwo,
         };
+        string[] inputsForLoc =
+        {
+            ((int) originPointOne[0] + ".").ToString()
+        };
         returnString += Loc.GetString
         (
             "ODD_Tier3_Hint",
-            ("W1", originPointOne[0]),
-            ("W1", originPointOne[1]),
-            ("W1", originPointOne[2]),
-            ("W1", originPointOne[3]),
-            ("W1D", directionOneNormed[0]),
-            ("W1D", directionOneNormed[1]),
-            ("W1D", directionOneNormed[2]),
-            ("W1D", directionOneNormed[3]),
-            ("W2", originPointTwo[0]),
-            ("W2", originPointTwo[1]),
-            ("W2", originPointTwo[2]),
-            ("W2", originPointTwo[3]),
-            ("W2D", directionTwoNormed[0]),
-            ("W2D", directionTwoNormed[1]),
-            ("W2D", directionTwoNormed[2]),
-            ("W2D", directionTwoNormed[3])
+            ("W1", originPointOne[0] % 0.00001f),
+            ("X1", originPointOne[1] % 0.00001f),
+            ("Y1", originPointOne[2] % 0.00001f),
+            ("Z1", originPointOne[3] % 0.00001f),
+            ("W1D", directionOneNormed[0] % 0.00001f),
+            ("X1D", directionOneNormed[1] % 0.00001f),
+            ("Y1D", directionOneNormed[2] % 0.00001f),
+            ("Z1D", directionOneNormed[3] % 0.00001f),
+            ("W2", originPointTwo[0] % 0.00001f),
+            ("X2", originPointTwo[1] % 0.00001f),
+            ("Y2", originPointTwo[2] % 0.00001f),
+            ("Z2", originPointTwo[3] % 0.00001f),
+            ("W2D", directionTwoNormed[0] % 0.00001f),
+            ("X2D", directionTwoNormed[1] % 0.00001f),
+            ("Y2D", directionTwoNormed[2] % 0.00001f),
+            ("Z2D", directionTwoNormed[3] % 0.00001f)
         );
+        var paper = Spawn(comp.PaperPrototype, Transform(uidPrinter).Coordinates);
+        if (TryComp<PaperComponent>(paper, out var paperComp))
+        {
+            _paper.SetContent((paper, paperComp), returnString.ToString());
+            returnString = Loc.GetString("ODD_Hint_Printed");
+        }
         return returnString;
     }
 }

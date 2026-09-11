@@ -33,7 +33,12 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// Components Present entity dic
     /// </summary>
     [DataField]
-    public Dictionary<string, List<Node>> EntityDic = new Dictionary<string, List<Node>>();
+    public Dictionary<string, List<Node>>? EntityDic = new Dictionary<string, List<Node>>();
+
+    /// <summary>
+    /// List containing every existing positon on a relative grid 0|0 is bottom left
+    /// </summary>
+    public Dictionary<string, List<List<bool>>> TypePresence2DMap;
 
 }
 
