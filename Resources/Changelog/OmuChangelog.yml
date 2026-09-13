@@ -7498,3 +7498,9 @@ Entries:
       message: Aghost now starts with a medical omnitool and an omnitool
   id: 972
   time: '2026-09-13T14:45:35.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Fix
+      message: The S1 "Pnuey" shotgun should properly inject fired syringes now.
+  id: 973
+  time: '2026-09-13T14:57:51.0000000+00:00'
