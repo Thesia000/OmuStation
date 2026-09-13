@@ -7527,3 +7527,13 @@ Entries:
         have their ODs lowered to 12u each.
   id: 976
   time: '2026-09-13T17:25:17.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: >-
+        Changed the resistance values of the Paramedic Hardsuit to focus more on
+        environmental protection. Now a proper sidegrade to the modsuit.
+    - type: Fix
+      message: The Xiézhù Hardsuit Helmet no longer lacks resistances.
+  id: 977
+  time: '2026-09-13T18:48:57.0000000+00:00'
