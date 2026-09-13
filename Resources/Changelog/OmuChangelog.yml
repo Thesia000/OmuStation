@@ -7567,3 +7567,11 @@ Entries:
       message: Magic mirror can now turn people into any species as intended
   id: 982
   time: '2026-09-13T22:30:58.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Changed cortical borer egg laying to inflict damage on the host
+    - type: Tweak
+      message: Changed the cortical borer chems list to be much less potent for combat
+  id: 983
+  time: '2026-09-13T22:39:29.0000000+00:00'
