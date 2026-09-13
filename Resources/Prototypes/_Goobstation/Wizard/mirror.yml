@@ -41,6 +41,10 @@
     - Chitinid
     - Feroxi
     - Allulalo #omu
+    - Xelthia #omu 
+    - Thaven #omu
+    - Hydrakin #omu
+    - Avali #omu
   - type: ActivatableUI
     key: enum.WizardMirrorUiKey.Key
     singleUser: true
