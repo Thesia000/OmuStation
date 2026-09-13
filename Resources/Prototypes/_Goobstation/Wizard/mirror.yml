@@ -40,7 +40,7 @@
     - Shadowkin
     - Chitinid
     - Feroxi
-    - Allulalo
+    - Allulalo #omu
   - type: ActivatableUI
     key: enum.WizardMirrorUiKey.Key
     singleUser: true
