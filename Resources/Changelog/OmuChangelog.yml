@@ -7492,3 +7492,9 @@ Entries:
       message: Squakroach density fixed so they no longer become hotter than the sun
   id: 971
   time: '2026-09-13T13:56:39.0000000+00:00'
+- author: PhantomDergwulf
+  changes:
+    - type: Add
+      message: Aghost now starts with a medical omnitool and an omnitool
+  id: 972
+  time: '2026-09-13T14:45:35.0000000+00:00'
