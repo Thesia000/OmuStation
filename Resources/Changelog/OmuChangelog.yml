@@ -7504,3 +7504,9 @@ Entries:
       message: The S1 "Pnuey" shotgun should properly inject fired syringes now.
   id: 973
   time: '2026-09-13T14:57:51.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Fix
+      message: Arachnid now only have one organ of each type
+  id: 974
+  time: '2026-09-13T17:01:16.0000000+00:00'
