@@ -7561,3 +7561,9 @@ Entries:
       message: Gang signs now start anchored
   id: 981
   time: '2026-09-13T20:53:08.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Fix
+      message: Magic mirror can now turn people into any species as intended
+  id: 982
+  time: '2026-09-13T22:30:58.0000000+00:00'
