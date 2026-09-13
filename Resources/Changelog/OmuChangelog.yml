@@ -7518,3 +7518,12 @@ Entries:
       message: Graytide spear can no longer duplicate items
   id: 975
   time: '2026-09-13T17:20:22.0000000+00:00'
+- author: Toaster-Box
+  changes:
+    - type: Tweak
+      message: >-
+        Salic, oxan, dex, and dex+ can no longer heal damage dealt by their own
+        overdoses and are overall more dangerous to overdose. Salic and oxan
+        have their ODs lowered to 12u each.
+  id: 976
+  time: '2026-09-13T17:25:17.0000000+00:00'
