@@ -31,10 +31,11 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] private readonly SignalMapSystem _signalMap = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private readonly BSDMultiBlockSystem _multiSys = default!;
     public override void Initialize()
     {
         base.Initialize();
-        //SubscribeLocalEvent<SignalSciDishComponent, MultiStructChangeEvent>(UpdateValuesMultiStruct);
+        SubscribeLocalEvent<SignalSciOmniDirectonalDetectorComponent, MultiStructChangeEvent>(UpdateValuesMultiStruct);
         SubscribeLocalEvent<SignalSciOmniDirectonalDetectorComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
     }
 
@@ -47,6 +48,12 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
             PrintHint(ent, args.Args[2]);
             return;
         }
+    }
+    public void UpdateValuesMultiStruct(Entity<SignalSciOmniDirectonalDetectorComponent> ent, ref MultiStructChangeEvent args)
+    {
+        if (!TryComp<MultiBlockStructureComponent>(ent, out var compStruct)) return;
+        compStruct.Complete = false;
+        if (!_multiSys.ValidateContainment(0, 0, ["OmniDirectionalDetectorHull"], compStruct)) return;//ensure we have a contained area
     }
     private SignalSciOmniDirectonalDetectorOperationMode GetHighestOperationMode(Entity<SignalSciOmniDirectonalDetectorComponent> ent)
     {

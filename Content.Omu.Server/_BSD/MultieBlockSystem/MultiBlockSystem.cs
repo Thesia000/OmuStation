@@ -19,7 +19,7 @@ using Robust.Shared.Toolshed.Commands.Values;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem;
 
-public sealed partial class MultiBlockSystem : EntitySystem
+public sealed partial class BSDMultiBlockSystem : EntitySystem
 {
     //magic number sets the override key to allow all connections
     private readonly ProtoId<MultiStructTypePrototype> _protoAll = "ALL";
@@ -134,6 +134,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
             List<Node> foundSearchList = new List<Node>();
             float minX = transComp.LocalPosition.X;
             float minY = transComp.LocalPosition.Y;
+            float maxX = transComp.LocalPosition.X;
+            float maxY = transComp.LocalPosition.Y;
             foreach (ProtoId<MultiStructTypePrototype> iterator in multiblockPartComp.StructureType)
             {
                 Node start = new Node();
@@ -195,6 +197,8 @@ public sealed partial class MultiBlockSystem : EntitySystem
                                 var foundTransComp = Transform(temp.Id);
                                 minX = Math.Min(minX, foundTransComp.LocalPosition.X);
                                 minY = Math.Min(minY, foundTransComp.LocalPosition.Y);
+                                maxX = Math.Max(maxX, foundTransComp.LocalPosition.X);
+                                maxY = Math.Max(maxY, foundTransComp.LocalPosition.Y);
                                 toSearchList.Add(temp.Clone());
                                 foundSearchList.Add(temp.Clone());
                             }
@@ -205,9 +209,11 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 toSearchList.Remove(currentNode);
             } while (toSearchList.Count > 0);
             //update the actual values to the master structure and link them all
+            multiBlockStructureComp.TypePresence2DMapDimentionX = (int) Math.Abs(maxX - minX);
+            multiBlockStructureComp.TypePresence2DMapDimentionY = (int) Math.Abs(maxY - minY);
             multiBlockStructureComp.EntityDic = new Dictionary<string, List<Node>>();
             multiBlockStructureComp.TypesPresent = new Dictionary<string, float>();
-            multiBlockStructureComp.TypePresence2DMap = new Dictionary<string, List<List<bool>>>();
+            multiBlockStructureComp.TypePresence2DMap = new Dictionary<string, bool?[,]>();
             foreach (Node addNode in foundSearchList)
             {
                 if (multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
@@ -228,17 +234,20 @@ public sealed partial class MultiBlockSystem : EntitySystem
                 {
                     multiBlockStructureComp.TypesPresent.Add(addNode.Type, addNode.Efficency * Comp<MultiBlockPartComponent>(addNode.Id).MachinePower);
                 }
-                if (!multiBlockStructureComp.TypePresence2DMap.ContainsKey(addNode.Type))
-                {
-                    multiBlockStructureComp.TypePresence2DMap.Add(addNode.Type, new List<List<bool>>());
-                }
                 int gridPosX = 0;//TODO finish this
                 int gridPosY = 0;
-                if (multiBlockStructureComp.TypePresence2DMap[addNode.Type][gridPosY] == null)
+                if (multiBlockStructureComp.TypePresence2DMap.ContainsKey(addNode.Type) == false)
                 {
-                    multiBlockStructureComp.TypePresence2DMap[addNode.Type].Insert(gridPosY, new List<bool>());
+                    multiBlockStructureComp.TypePresence2DMap.Add(addNode.Type, new bool?[multiBlockStructureComp.TypePresence2DMapDimentionY + 1, multiBlockStructureComp.TypePresence2DMapDimentionX + 1]);
+                    for (int genIterator1 = 0; genIterator1 < multiBlockStructureComp.TypePresence2DMapDimentionY; genIterator1++)
+                    {
+                        for (int genIterator2 = 0; genIterator2 < multiBlockStructureComp.TypePresence2DMapDimentionX; genIterator2++)
+                        {
+                            multiBlockStructureComp.TypePresence2DMap[addNode.Type][genIterator1, genIterator2] = false;
+                        }
+                    }
                 }
-                multiBlockStructureComp.TypePresence2DMap[addNode.Type][gridPosY].Insert(gridPosX, true);
+                multiBlockStructureComp.TypePresence2DMap[addNode.Type][gridPosY, gridPosX] = true;
             }
             var ev = new MultiStructChangeEvent();//let subsy know things happened
             RaiseLocalEvent(uidLoop, ref ev);

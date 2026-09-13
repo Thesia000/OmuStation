@@ -37,8 +37,10 @@ public sealed partial class MultiBlockStructureComponent : Component
 
     /// <summary>
     /// List containing every existing positon on a relative grid 0|0 is bottom left
-    /// </summary>
-    public Dictionary<string, List<List<bool>>> TypePresence2DMap;
+    /// </summary
+    public Dictionary<string, bool?[,]> TypePresence2DMap = new();
+    public int TypePresence2DMapDimentionX = 0;
+    public int TypePresence2DMapDimentionY = 0;
 
 }
 
