@@ -7486,3 +7486,9 @@ Entries:
       message: Feroxi lungs are now indestructible.
   id: 970
   time: '2026-09-13T13:55:56.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Squakroach density fixed so they no longer become hotter than the sun
+  id: 971
+  time: '2026-09-13T13:56:39.0000000+00:00'
