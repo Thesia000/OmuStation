@@ -7555,3 +7555,9 @@ Entries:
       message: Fixed Colossus being able to teleport through walls.
   id: 980
   time: '2026-09-13T20:52:29.0000000+00:00'
+- author: Thesia000
+  changes:
+    - type: Fix
+      message: Gang signs now start anchored
+  id: 981
+  time: '2026-09-13T20:53:08.0000000+00:00'
