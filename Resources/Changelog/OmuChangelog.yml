@@ -7581,3 +7581,9 @@ Entries:
       message: 'Added a new voice for IPCs and harpies: ST.'
   id: 984
   time: '2026-09-14T00:09:31.0000000+00:00'
+- author: Aureu-K
+  changes:
+    - type: Fix
+      message: Pink Slime Extract 'DNA Scramble' effect range reduced from 30 to 2
+  id: 985
+  time: '2026-09-14T00:56:32.0000000+00:00'
