@@ -7575,3 +7575,9 @@ Entries:
       message: Changed the cortical borer chems list to be much less potent for combat
   id: 983
   time: '2026-09-13T22:39:29.0000000+00:00'
+- author: asterisksoda
+  changes:
+    - type: Add
+      message: 'Added a new voice for IPCs and harpies: ST.'
+  id: 984
+  time: '2026-09-14T00:09:31.0000000+00:00'
