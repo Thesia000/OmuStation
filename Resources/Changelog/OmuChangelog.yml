@@ -7609,3 +7609,9 @@ Entries:
       message: Added resomi feathers
   id: 987
   time: '2026-09-14T14:06:32.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Updated Revs to work based on morale. Revs are still admin spawn only.
+  id: 988
+  time: '2026-09-14T14:18:10.0000000+00:00'
