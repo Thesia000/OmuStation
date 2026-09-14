@@ -7601,3 +7601,11 @@ Entries:
       message: Fixed a bug that stopped some uplinks from buying a lobbying bundle
   id: 986
   time: '2026-09-14T10:03:28.0000000+00:00'
+- author: Mariki
+  changes:
+    - type: Tweak
+      message: Resomi can now preen feathers too
+    - type: Add
+      message: Added resomi feathers
+  id: 987
+  time: '2026-09-14T14:06:32.0000000+00:00'
