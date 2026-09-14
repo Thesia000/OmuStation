@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 5
+        Piercing: 1 #OMU
   - type: SolutionContainerManager
     solutions:
       ammo:
@@ -33,11 +33,11 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Piercing: 1 #Omu
   - type: SolutionContainerManager
     solutions:
       ammo:
-        maxVol: 2.5
+        maxVol: 4 #OMU
   - type: RefillableSolution
     solution: ammo
   - type: DrainableSolution

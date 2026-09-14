@@ -61,7 +61,7 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 20
+        Radiation: 17 #omu
 #    ignoreResistances: true # Omu
     soundHit:
       collection: MeatLaserImpact

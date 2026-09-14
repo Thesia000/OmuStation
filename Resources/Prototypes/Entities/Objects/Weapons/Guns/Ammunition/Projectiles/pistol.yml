@@ -9,7 +9,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 16
+        Piercing: 6 #Omu
 
 - type: entity
   parent: BaseBulletPractice
@@ -43,5 +43,5 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 6
-        Piercing: 10
+        Radiation: 3 #omu
+        Piercing: 5 #omu

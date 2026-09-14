@@ -9,7 +9,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 19
+        Piercing: 10 #omu
       #armorPenetration: 0.4 # Goobstation # Omu, remove AP from .30
 
 - type: entity
@@ -44,5 +44,5 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 10 # Goobstation?
-        Piercing: 11  # Goobstation?
+        Radiation: 4 # OMU
+        Piercing: 11  # OMU

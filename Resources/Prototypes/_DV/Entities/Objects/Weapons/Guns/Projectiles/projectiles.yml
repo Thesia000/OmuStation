@@ -34,7 +34,7 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Heat: 15 # Slightly more damage than the 17heat from the Captain's Hitscan lasgun - Goobstation: Nerfed to 15 damage, to keep it less powerful than caps Lasgun
+        Heat: 22 # omu
     soundHit:
       collection: MeatLaserImpact
 
@@ -73,7 +73,7 @@
     impactEffect: BulletImpactEffectBlueDisabler
     damage:
       types:
-        Ion: 25
+        Ion: 22 #omu
     soundHit:
       collection: MeatLaserImpact
 
@@ -111,7 +111,7 @@
     impactEffect: BulletImpactEffectRedDisabler
     damage:
       types:
-        Blunt: 4
+        Blunt: 2 #omu
         Heat: 20
     soundHit:
       collection: MeatLaserImpact

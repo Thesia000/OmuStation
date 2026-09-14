@@ -12,6 +12,6 @@
     angle: -45
     damage:
       types:
-        Piercing: 10 # Your just going to overpen everything.
+        Piercing: 15 # Your just going to overpen everything.
         Structural: 20
-      armorPenetration: 1 # 100% AP is very balanced.
+      armorPenetration: 0.75 # 100% AP is very balanced.

@@ -9,8 +9,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 17
-      armorPenetration: 0.15 # Goobstation
+        Piercing: 8 #omu
+      #armorPenetration: 0.15 # Goobstation #omu
 
 - type: entity
   parent: BaseBulletPractice
@@ -44,5 +44,5 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 9 # Goobstation
-        Piercing: 10 # Goobstation
+        Radiation: 4 # OMU
+        Piercing: 6 # OMU

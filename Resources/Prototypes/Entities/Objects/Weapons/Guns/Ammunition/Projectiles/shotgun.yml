@@ -12,8 +12,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 15 #omu
         Structural: 15
+      armorPenetration: -0.15
 
 
 - type: entity
@@ -30,8 +31,9 @@
     damage:
       types:
         Blunt: 10
+      armorPenetration: -0.50 #omu
   - type: StaminaDamageOnCollide
-    damage: 60 # Goob edit
+    damage: 80 # Omu
 
 - type: entity
   parent: BaseBullet
@@ -42,8 +44,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Piercing: 3.5
         Structural: 15
+      armorPenetration: -0.25 #OMU
       woundSeverityMultipliers:
         Piercing: 1.5 # Minced Meat
 
@@ -116,8 +119,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
-        Slash: 3
+        Piercing: 1 #OMU
+        Slash: 1.5 #OMU
 
 - type: entity
   parent: PelletShotgunImprovised
@@ -203,8 +206,8 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 5
-        Piercing: 5
+        Radiation: 1 #OMU
+        Piercing: 3.5 #OMU
 
 - type: entity
   parent: PelletShotgunUranium
@@ -231,7 +234,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 6 #OMU
         Structural: 5
       woundSeverityMultipliers:
         Piercing: 3 # holy peak
@@ -263,7 +266,7 @@
     deleteOnCollide: false
     damage:
       types:
-        Slash: 25
+        Slash: 6 #OMU
       woundSeverityMultipliers:
         Slash: 3 # Holy Peak
 

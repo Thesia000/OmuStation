@@ -12,7 +12,7 @@
     deleteOnCollide: false
     damage:
       types:
-        Piercing: 15 #Low damage, but ensnaring
+        Piercing: 7 #Low damage, but ensnaring
   - type: Ensnaring
     canThrowTrigger: true
     destroyOnRemove: true
@@ -46,8 +46,8 @@
     - type: Projectile
       damage:
         types:
-          Piercing: 10
-          Ion: 20
+          Piercing: 7
+          Ion: 15
 
 - type: entity
   id: BulletMagnumFlash
@@ -74,4 +74,4 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 18
+        Piercing: 7
