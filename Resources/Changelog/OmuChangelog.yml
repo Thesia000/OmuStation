@@ -7627,3 +7627,11 @@ Entries:
       message: Added a command to list a heretic's sacrifice targets for admins.
   id: 990
   time: '2026-09-14T21:33:03.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: >-
+        Changed the collision layers to pre-node crawl - you can go under doors
+        as mice again
+  id: 991
+  time: '2026-09-15T00:16:56.0000000+00:00'
