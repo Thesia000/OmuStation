@@ -118,8 +118,8 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         Random rand = new(signal.HintRandomSeed);//controlled randomness time:3
         string returnString = "";
         float variance = rand.NextFloat(0, 1);
-        int angleOne = (int) (signal.Angles[0] + variance * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
-        int angleTwo = (int) (signal.Angles[0] + (1 - variance) * comp.ErrorMargineCurrent * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
+        int angleOne = (int) ((signal.Angles[0] + variance * comp.ErrorMargineCurrent) * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
+        int angleTwo = (int) ((signal.Angles[0] + (1 - variance) * comp.ErrorMargineCurrent) * (180 / MathF.PI) * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Standard]);
         returnString += Loc.GetString
         (
             "ODD_Tier1_Hint",
@@ -136,10 +136,10 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         //first calculate the variance applied to the X,Y plain only
         float angle1 = signal.Angles[0] + variance * comp.ErrorMargineCurrent * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Enhanced];
         float angle2 = signal.Angles[0] - (1 - variance) * comp.ErrorMargineCurrent * comp.ErrorMagineAmplification[SignalSciOmniDirectonalDetectorOperationMode.Enhanced];
-        int xStart = (int) (MathF.Sin(angle1) * MathF.Cos(signal.Angles[1])) * 100000;
-        int xEnd = (int) (MathF.Sin(angle2) * MathF.Cos(signal.Angles[1])) * 100000;
-        int yStart = (int) (MathF.Cos(angle1) * MathF.Cos(signal.Angles[1])) * 100000;
-        int yEnd = (int) (MathF.Cos(angle2) * MathF.Cos(signal.Angles[1])) * 100000;
+        int xStart = (int) (MathF.Sin(angle1) * MathF.Cos(signal.Angles[1]) * 100000f);
+        int xEnd = (int) (MathF.Sin(angle2) * MathF.Cos(signal.Angles[1]) * 100000f);
+        int yStart = (int) (MathF.Cos(angle1) * MathF.Cos(signal.Angles[1]) * 100000f);
+        int yEnd = (int) (MathF.Cos(angle2) * MathF.Cos(signal.Angles[1]) * 100000f);
         returnString += Loc.GetString
         (
             "ODD_Tier2_Hint",
@@ -166,7 +166,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         string returnString = "";
         float variance = rand.NextFloat(0, 1);
         //first calculate our point in 4d space
-        float distance = rand.NextFloat(10, 20);
+        float distance = rand.NextFloat(1000, 2000);
         float[] signalPosition =
         {
             distance * MathF.Sin(signal.Angles[0]),
@@ -269,22 +269,22 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         returnString += Loc.GetString
         (
             "ODD_Tier3_Hint",
-            ("W1", originPointOne[0] % 0.00001f),
-            ("X1", originPointOne[1] % 0.00001f),
-            ("Y1", originPointOne[2] % 0.00001f),
-            ("Z1", originPointOne[3] % 0.00001f),
-            ("W1D", directionOneNormed[0] % 0.00001f),
-            ("X1D", directionOneNormed[1] % 0.00001f),
-            ("Y1D", directionOneNormed[2] % 0.00001f),
-            ("Z1D", directionOneNormed[3] % 0.00001f),
-            ("W2", originPointTwo[0] % 0.00001f),
-            ("X2", originPointTwo[1] % 0.00001f),
-            ("Y2", originPointTwo[2] % 0.00001f),
-            ("Z2", originPointTwo[3] % 0.00001f),
-            ("W2D", directionTwoNormed[0] % 0.00001f),
-            ("X2D", directionTwoNormed[1] % 0.00001f),
-            ("Y2D", directionTwoNormed[2] % 0.00001f),
-            ("Z2D", directionTwoNormed[3] % 0.00001f)
+            ("W1", originPointOne[0]),
+            ("X1", originPointOne[1]),
+            ("Y1", originPointOne[2]),
+            ("Z1", originPointOne[3]),
+            ("W1D", directionOneNormed[0]),
+            ("X1D", directionOneNormed[1]),
+            ("Y1D", directionOneNormed[2]),
+            ("Z1D", directionOneNormed[3]),
+            ("W2", originPointTwo[0]),
+            ("X2", originPointTwo[1]),
+            ("Y2", originPointTwo[2]),
+            ("Z2", originPointTwo[3]),
+            ("W2D", directionTwoNormed[0]),
+            ("X2D", directionTwoNormed[1]),
+            ("Y2D", directionTwoNormed[2]),
+            ("Z2D", directionTwoNormed[3])
         );
         var paper = Spawn(comp.PaperPrototype, Transform(uidPrinter).Coordinates);
         if (TryComp<PaperComponent>(paper, out var paperComp))

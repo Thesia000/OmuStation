@@ -29,10 +29,22 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
         do
         {
             Vector2 currentLoc = toVisitLocations.First();
-            //if (!blockingMap[(int) currentLoc.Y - 1][(int) currentLoc.X]) toVisitLocations.Add(new((int) currentLoc.Y - 1, (int) currentLoc.X));
-            //if (!blockingMap[(int) currentLoc.Y + 1][(int) currentLoc.X]) toVisitLocations.Add(new((int) currentLoc.Y + 1, (int) currentLoc.X));
-            //if (!blockingMap[(int) currentLoc.Y][(int) currentLoc.X - 1]) toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X - 1));
-            //if (!blockingMap[(int) currentLoc.Y][(int) currentLoc.X + 1]) toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X + 1));
+            if ((int) currentLoc.Y - 1 >= 0 && !blockingMap[(int) currentLoc.Y - 1][(int) currentLoc.X])
+            {
+                toVisitLocations.Add(new((int) currentLoc.Y - 1, (int) currentLoc.X));
+            }
+            if ((int) currentLoc.Y + 1 < compStruct.TypePresence2DMapDimentionY && !blockingMap[(int) currentLoc.Y + 1][(int) currentLoc.X])
+            {
+                toVisitLocations.Add(new((int) currentLoc.Y + 1, (int) currentLoc.X));
+            }
+            if ((int) currentLoc.X - 1 >= 0 && !blockingMap[(int) currentLoc.Y][(int) currentLoc.X - 1])
+            {
+                toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X - 1));
+            }
+            if ((int) currentLoc.X + 1 < compStruct.TypePresence2DMapDimentionX && !blockingMap[(int) currentLoc.Y][(int) currentLoc.X + 1])
+            {
+                toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X + 1));
+            }
             visitedLocations.Add(currentLoc);
             toVisitLocations.Remove(currentLoc);
         } while (toVisitLocations.Count > 0);
