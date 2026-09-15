@@ -7635,3 +7635,11 @@ Entries:
         as mice again
   id: 991
   time: '2026-09-15T00:16:56.0000000+00:00'
+- author: 4Hangar, asterisksoda
+  changes:
+    - type: Tweak
+      message: >-
+        NanoChat can now be used without the users having to be on the same
+        station.
+  id: 992
+  time: '2026-09-15T18:11:15.0000000+00:00'
