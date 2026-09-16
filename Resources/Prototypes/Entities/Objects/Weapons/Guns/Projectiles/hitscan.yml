@@ -57,7 +57,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 14
+        Heat: 12 #omu
 
 - type: entity
   parent: BasicHitscan
@@ -68,7 +68,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 17
+        Heat: 26.4 #omu
 
 - type: entity
   parent: BasicHitscan
@@ -111,9 +111,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 10
-        Radiation: 10
-        Ion: 15 #Goobstation
+        Heat: 4 #omu
+        Radiation: 8 #omu
+        #Ion: 15 #Goobstation #Omu
   - type: HitscanBasicVisuals
     muzzleFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
@@ -134,7 +134,7 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 30 # Goobstation
+        Heat: 24 # OMU
         Blunt: 5 # Split damage is cool. - Goobstation
   - type: HitscanBasicVisuals
     muzzleFlash:

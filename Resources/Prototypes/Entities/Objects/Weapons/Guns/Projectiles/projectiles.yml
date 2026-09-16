@@ -830,7 +830,7 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Heat: 20
+        Heat: 26.4 #omu
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1401,7 +1401,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 13
+        Heat: 6.7 #omu
 
 - type: entity
   name: wide laser barrage
@@ -1411,7 +1411,7 @@
   components:
   - type: ProjectileSpread
     proto: BulletLaser
-    count: 5 #65 heat damage if you hit all your shots, but wide spread
+    count: 5 
     spread: 30
 
 - type: entity
@@ -1422,7 +1422,7 @@
   components:
   - type: ProjectileSpread
     proto: BulletLaser
-    count: 4 #52 heat damage if you hit all your shots, but narrower spread
+    count: 4 
     spread: 10
 
 - type: entity
@@ -1454,7 +1454,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 30
+        Heat: 24 #heat
 
 - type: entity
   name: magnum window-piercing bolt
@@ -1474,7 +1474,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 20
+        Heat: 14 #heat
   - type: Fixtures
     fixtures:
       projectile:

@@ -60,7 +60,7 @@
     activatedDamage:
       types:
         Slash: 15
-        Heat: 15
+        Heat: 25
         Structural: 20
       woundSeverityMultipliers: # Goobstation
         Slash: 2
@@ -163,8 +163,8 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 10
-            Heat: 10
+            Slash: 1 #omu
+            Heat: 3 #omu
         woundSeverityMultipliers:
           Slash: 1
     deactivatedSecret: true
@@ -193,7 +193,7 @@
     animationRotation: 135 # WWDP
     heavyStaminaCost: 1 # goob edit
     wideAnimationRotation: 145
-    attackRate: 1
+    attackRate: 10 #omu
     hidden: true
     damage:
       types:
@@ -239,8 +239,8 @@
         variation: 0.250
     activatedDamage:
       types:
-        Slash: 10
-        Heat: 10
+        Slash: 1 #omu
+        Heat: 3 #omu
       woundSeverityMultipliers:
         Slash: 1
   - type: ComponentToggler
@@ -273,7 +273,7 @@
   - type: MeleeWeapon
     heavyStaminaCost: 1 # goob edit
     wideAnimationRotation: 145
-    attackRate: 1
+    attackRate: 10 #omu
     hidden: true
     damage:
       types:
@@ -321,12 +321,12 @@
   id: EnergyCutlass
   description: An exotic energy weapon.
   components:
-  - type: ItemToggleMeleeWeapon
-    activatedDamage:
-        types:
-            Slash: 10
-            Heat: 12
-    deactivatedSecret: true
+  # - type: ItemToggleMeleeWeapon #omustat
+  #   activatedDamage:
+  #       types:
+  #           Slash: 10
+  #           Heat: 17 #omu end
+  #  deactivatedSecret: true
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
     layers:

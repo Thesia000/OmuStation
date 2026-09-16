@@ -55,7 +55,7 @@
       - CaneBlade
   - type: DisarmMalus
   - type: IgniteOnMeleeHit # Goobstation
-    fireStacks: 0.5
+    fireStacks: 1 #omu
 
 - type: entity
   parent: [Cane, SelectableLock]

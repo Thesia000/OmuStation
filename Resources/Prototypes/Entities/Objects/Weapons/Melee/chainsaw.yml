@@ -2,7 +2,7 @@
 
 - type: entity
   name: chainsaw
-  parent: BaseItem
+  parent: [ BaseItem , BaseMinorContraband ]
   id: Chainsaw
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:
@@ -23,9 +23,8 @@
     attackRate: 4
     damage:
       types:
-        Slash: 2
-        Blunt: 2
-        Structural: 4
+        Slash: 1 #omu
+        Blunt: 1 #omu
       woundSeverityMultipliers:
         Slash: 2
         Blunt: 2
@@ -36,8 +35,8 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 4
-        Structural: 4
+        Slash: 1 #omu
+        Structural: 1 #omu
   - type: Item
     size: Normal
     sprite: Objects/Weapons/Melee/chainsaw.rsi

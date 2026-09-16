@@ -90,8 +90,11 @@
   name: L6 SAW
   id: WeaponLightMachineGunL6
   parent: [BaseWeaponLightMachineGun, BaseSyndicateContraband]
-  description: Developed by the Waffle Corporation, the L6 Squad Automatic Weapon is a deadly light machine gun often used by Gorlex boarding parties. Although bulky and cumbersome, its heavy barrel and high ammo capacity make it perfect for suppressing combatants with a hail of bullets. Feeds from .30 Rifle box magazines. # Goobstation
+  description: Developed by the Waffle Corporation, the L6 Squad Automatic Weapon is a deadly light machine gun often used by Gorlex boarding parties. Although bulky and cumbersome, its heavy barrel and high ammo capacity make it perfect for suppressing combatants with a hail of bullets. Feeds from .30 Rifle box magazines. Sadly the L6 has a tendency to damage its muniton lowering the per bullet impact. # Goobstation #Omu
   components:
+  - type: Gun #omu
+    damageModifier: 0.3 #omu
+    fireRate: 16 #omu
   - type: Sprite
     sprite: Objects/Weapons/Guns/LMGs/l6.rsi
     layers:
@@ -125,7 +128,8 @@
       maxAngle: 25
       angleIncrease: 4
       angleDecay: 16
-      fireRate: 8
+      damageModifier: 0.3 #omu
+      fireRate: 16 #omu
       selectedMode: FullAuto
       availableModes:
         - FullAuto
@@ -149,11 +153,11 @@
       whitelist:
         tags:
         - CartridgeLightRifle
-      capacity: 100
+      capacity: 200 #omu
       proto: CartridgeLightRifle
       cycleable: false # No synthesizing ammo for your syndicate masters.
     - type: BallisticAmmoSelfRefiller
-      autoRefillRate: 4s
+      autoRefillRate: 2s #omu
       affectedByEmp: true
     #- type: RestrictGunshotsByUserTag # Goobstation # Omu, move this to the oni species proto instead.
     #  doesntContain:

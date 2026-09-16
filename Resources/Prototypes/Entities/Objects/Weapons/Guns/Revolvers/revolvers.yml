@@ -101,7 +101,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Gun
-    fireRate: 2.5 # Goobstation
+    fireRate: 1.8 # OMU
   - type: RevolverAmmoProvider
     capacity: 5
     chambers: [ True, True, True, True, True ]
@@ -120,6 +120,8 @@
   id: WeaponRevolverInspector
   description: A double-action revolver manufactured by various companies. It is readily available on the civilian market, making it a popular choice among private investigators. You feel lucky just holding it. Loads 6 rounds of .45 magnum.
   components:
+  - type: Gun
+    fireRate: 2.5 #omu
   - type: Sprite
     sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
   - type: Clothing
@@ -185,7 +187,7 @@
     storedOffset: 0,-2
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2.5 # Goobstation
+    fireRate: 2 # OMU
     availableModes:
     - SemiAuto
     soundGunshot:

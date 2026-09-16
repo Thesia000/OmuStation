@@ -581,8 +581,13 @@
   - type: Appearance
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
-  - type: Gun
-    fireRate: 2 # Goobstation
+  - type: Gun #Omu start
+    shotsPerBurst: 10 
+    selectedMode: Burst 
+    availableModes: 
+    - Burst 
+    burstFireRate: 10 
+    fireRate: 1 # Omu end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
@@ -639,6 +644,11 @@
   id: WeaponXrayCannon
   description: An experimental laser weapon that fires a dense x-ray beam. Leaves intense radiation burns.
   components:
+  - type: Gun
+    fireRate: 4 # <- its for this
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
   - type: Item
     size: Huge
     shape:

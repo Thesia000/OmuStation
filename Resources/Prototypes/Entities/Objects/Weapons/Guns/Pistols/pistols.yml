@@ -29,7 +29,7 @@
     - suitStorage
     - Belt
   - type: Gun
-    fireRate: 6
+    fireRate: 5 #omu
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -110,6 +110,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+  - type: Gun #omu
+    fireRate: 6 #omu
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -143,7 +145,7 @@
   description: A cyborg-mounted weapon system based on the Viper platform. Creates ammunition on the fly from an internal fabricator, which slowly self-charges. # Goobstation
   components:
   - type: Gun
-    fireRate: 5
+    fireRate: 6 #omu
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -190,7 +192,7 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 4
+    fireRate: 3 #OMU
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
       params:

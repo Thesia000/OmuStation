@@ -16,7 +16,7 @@
     damage:
       types:
         Blunt: 10
-        Structural: 5
+        #Structural: 5 #omu
     soundHit:
       collection: MetalThud
   - type: Wieldable
@@ -24,12 +24,12 @@
     damage:
       types:
         Blunt: 5
-        Structural: 10
-  - type: StaminaDamageOnHit # goob - bat makes you hurt and tired (but not as much as the real stun stick)
-    damage: 12 # goob - 8 hits to stamcrit someone with armor vest + helmet
-  - type: MeleeThrowOnHit # Goobstation
-    distance: 1
-    speed: 5
+        #Structural: 10 #omu
+  # - type: StaminaDamageOnHit # goob - bat makes you hurt and tired (but not as much as the real stun stick)
+  #   damage: 12 # goob - 8 hits to stamcrit someone with armor vest + helmet
+  # - type: MeleeThrowOnHit # Goobstation
+  #   distance: 1
+  #   speed: 5
   - type: Item
     size: Normal # Omu, And Moses said, let the transits put baseball bats in the microwaves (What? No he didn't)
     storedRotation: 0 # Omu, Goob you fucked this up

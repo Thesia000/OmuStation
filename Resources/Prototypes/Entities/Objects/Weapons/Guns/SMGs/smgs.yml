@@ -137,8 +137,9 @@
 #    minAngle: -19
 #    maxAngle: -16
   - type: Gun
-#    minAngle: 21 # Base SMG already has minAngle: 2 maxAngle: 16
-#    maxAngle: 32 # Goob - one-handed C20R - end
+    fireRate: 10 # OMU
+    minAngle: 20 # OMU
+    maxAngle: 35 # OMU
     shotsPerBurst: 5
     availableModes:
     - Burst
@@ -166,11 +167,10 @@
   description: A burst-fire C-20r submachine gun for use by cyborgs. Creates .35 caliber ammo on the fly from an internal ammo fabricator, which slowly self-charges.
   components:
   - type: Gun
-    minAngle: 2
-    maxAngle: 16
-    angleIncrease: 4
-    angleDecay: 16
-    fireRate: 8
+    fireRate: 10 # OMU
+    minAngle: 20 # OMU
+    maxAngle: 35 # OMU
+    shotsPerBurst: 5 # OMU
     burstFireRate: 8
     selectedMode: Burst
     availableModes:
@@ -224,7 +224,7 @@
     - type: Gun
       minAngle: 21
       maxAngle: 32
-      fireRate: 6
+      fireRate: 6.6 #Omu
       burstFireRate: 18
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
@@ -283,16 +283,16 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun # Goobstation - I am the one who nerfs the WT.
-    minAngle: 2
-    maxAngle: 16
-    fireRate: 5
-    burstFireRate: 8
-    angleIncrease: 3
-    angleDecay: 16
-    selectedMode: FullAuto
+    minAngle: 1 #omu
+    maxAngle: 3 #omu
+    fireRate: 6.6 #omu
+    burstFireRate: 10 #omu
+    shotsPerBurst: 6 # OMU
+    #angleIncrease: 3
+    #angleDecay: 16
+    selectedMode: Burst
     availableModes:
-    - FullAuto
-    - SemiAuto
+    - Burst
   - type: ItemSlots
     slots:
       gun_magazine:

@@ -93,6 +93,8 @@
   id: WeaponRifleAk
   description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 Rifle magazines.
   components:
+  - type: Gun
+    fireRate: 4 #omu
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
     layers:
@@ -178,7 +180,7 @@
     zeroVisible: true
   - type: Appearance
   - type: Gun
-    fireRate: 6
+    fireRate: 5 #Omu
 
 - type: entity
   name: Lecter
@@ -277,11 +279,12 @@
       path: /Audio/Weapons/Guns/Gunshots/estocshot.ogg
     minAngle: 30 # Goob
     maxAngle: 45 # Goob
-    shotsPerBurst: 3
+    fireRate: 3 #omu
+    shotsPerBurst: 7 #Omu
     selectedMode: Burst
     availableModes:
     - Burst
-    burstFireRate: 10 # Goob
+    burstFireRate: 15 # Omu
   - type: GunWieldBonus
     minAngle: -30 # Goob
     maxAngle: -40 # Goob
