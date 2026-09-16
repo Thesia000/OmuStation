@@ -23,6 +23,7 @@
   name: MultistructBaseCore
   abstract: true
   components:
+  - type: StationAiWhitelist
   - type: MultiBlockStructure
     AllowedTypes:
     - ERROR

@@ -54,6 +54,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         if (!TryComp<MultiBlockStructureComponent>(ent, out var compStruct)) return;
         compStruct.Complete = false;
         if (!_multiSys.ValidateContainment(0, 0, ["OmniDirectionalDetectorHull"], compStruct)) return;//ensure we have a contained area
+        compStruct.Complete = true;
     }
     private SignalSciOmniDirectonalDetectorOperationMode GetHighestOperationMode(Entity<SignalSciOmniDirectonalDetectorComponent> ent)
     {
