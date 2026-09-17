@@ -161,8 +161,8 @@
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #GoobStation resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-    fireRate: 3
+  #- type: Gun    #omu
+  #  fireRate: 3  #omu
   - type: GunSpreadModifier
     spread: 0.6
   - type: BallisticAmmoProvider

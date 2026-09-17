@@ -93,8 +93,6 @@
   id: WeaponRifleAk
   description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 Rifle magazines.
   components:
-  - type: Gun
-    fireRate: 4 #omu
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ak.rsi
     layers:
@@ -103,6 +101,7 @@
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
+    fireRate: 4 #omu
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider

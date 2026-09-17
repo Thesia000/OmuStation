@@ -649,6 +649,8 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: Item
     size: Huge
     shape:
@@ -663,9 +665,6 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/xray.rsi
-  - type: Gun
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
     proto: XrayLaser
     fireCost: 100
