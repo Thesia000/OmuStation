@@ -1,10 +1,23 @@
 ﻿
 - type: entity
   id: MultistructPartBase
-  parent: [ ConstructibleMachine]
+  parent: [ BaseStructure ]
   name: MultistructPartBase
+  placement:
+    mode: SnapgridCenter
   abstract: true
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
   - type: MultiBlockPart
     structureType: 
     - None
@@ -24,6 +37,10 @@
   abstract: true
   components:
   - type: StationAiWhitelist
+  - type: InteractedBlacklist # Goobstation - xenos too stupid to use computer
+    blacklist:
+      components:
+      - Xenomorph
   - type: MultiBlockStructure
     AllowedTypes:
     - ERROR
