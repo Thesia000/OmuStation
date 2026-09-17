@@ -7667,3 +7667,14 @@ Entries:
         NanoChat open.
   id: 994
   time: '2026-09-17T16:44:27.0000000+00:00'
+- author: Duuckie
+  changes:
+    - type: Fix
+      message: Thaven, avali, and allulalo can process ethanol again.
+    - type: Tweak
+      message: >-
+        Allulalo become thirsty at 130% the base rate (compared to 20% from
+        pre-upstream base) and metabolize ethanol like water (at 0.5u/s and
+        taking 40u to go from parched to not being thirsty at all).
+  id: 995
+  time: '2026-09-17T20:30:25.0000000+00:00'
