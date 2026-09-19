@@ -7752,3 +7752,9 @@ Entries:
         gameplay.)
   id: 1005
   time: '2026-09-19T21:38:41.0000000+00:00'
+- author: CliveOcelot
+  changes:
+    - type: Fix
+      message: Fixed X-ray arrows on the hardlight bow not penetrating walls properly.
+  id: 1006
+  time: '2026-09-19T22:20:08.0000000+00:00'
