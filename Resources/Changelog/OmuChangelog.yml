@@ -7758,3 +7758,11 @@ Entries:
       message: Fixed X-ray arrows on the hardlight bow not penetrating walls properly.
   id: 1006
   time: '2026-09-19T22:20:08.0000000+00:00'
+- author: SirCannonFodder
+  changes:
+    - type: Remove
+      message: >-
+        Removed goobstation syndicate derelicts from normal spawns. (we have
+        wizden's now)
+  id: 1007
+  time: '2026-09-19T22:38:08.0000000+00:00'
