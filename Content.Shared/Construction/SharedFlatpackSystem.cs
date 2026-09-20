@@ -38,7 +38,7 @@ public abstract class SharedFlatpackSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        //SubscribeLocalEvent<FlatpackComponent, InteractUsingEvent>(OnFlatpackInteractUsing); //Omu
+        SubscribeLocalEvent<FlatpackComponent, InteractUsingEvent>(OnFlatpackInteractUsing); //Omu
         SubscribeLocalEvent<FlatpackComponent, ExaminedEvent>(OnFlatpackExamined);
 
         SubscribeLocalEvent<FlatpackCreatorComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
@@ -64,6 +64,7 @@ public abstract class SharedFlatpackSystem : EntitySystem
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands is null)
             return;
+        if (ent.Comp.ToolNeeded) return;
         var user = args.User;
         AlternativeVerb verb = new()
         {
@@ -119,7 +120,7 @@ public abstract class SharedFlatpackSystem : EntitySystem
     private void OnFlatpackInteractUsing(Entity<FlatpackComponent> ent, ref InteractUsingEvent args)
     {
         var (uid, comp) = ent;
-        if (!_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))
+        if (!comp.ToolNeeded || !_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))//omu
             return;
         var xform = Transform(ent);
         if (xform.GridUid is not { } grid || !TryComp<MapGridComponent>(grid, out var gridComp))//this check is done twice, mainly to ensure that the event is properly handeled
@@ -134,7 +135,16 @@ public abstract class SharedFlatpackSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
-        args.PushMarkup(Loc.GetString("flatpack-examine"));
+        //Omu start
+        if (ent.Comp.ToolNeeded)
+        {
+            args.PushMarkup(Loc.GetString("flatpack-examine"));
+        }
+        else
+        {
+            args.PushMarkup(Loc.GetString("OMU-flatpack-examine-tool-not-needed"));
+        }
+        //Omu end
     }
 
     protected void SetupFlatpack(Entity<FlatpackComponent?> ent, EntProtoId proto, EntityUid board)
