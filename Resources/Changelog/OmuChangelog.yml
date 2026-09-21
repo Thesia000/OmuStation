@@ -7806,3 +7806,11 @@ Entries:
       message: Added a new shuttle for admins to use named the Honkmother's Sawblade.
   id: 1013
   time: '2026-09-21T01:45:01.0000000+00:00'
+- author: darcyaltezza-source
+  changes:
+    - type: Add
+      message: >-
+        Nanotrasen Representatives can now pick nanotrasen official's heel boots
+        and papercut-proof gloves in their loadout.
+  id: 1014
+  time: '2026-09-21T01:51:23.0000000+00:00'
