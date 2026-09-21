@@ -7794,3 +7794,9 @@ Entries:
       message: Added a Harmony Donovan plushie to the crew morale initiative crate.
   id: 1011
   time: '2026-09-21T00:41:45.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed the changeling leap stopping work on polymorph
+  id: 1012
+  time: '2026-09-21T01:04:22.0000000+00:00'
