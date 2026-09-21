@@ -21,7 +21,7 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
     /// <returns></returns>
     public bool ValidateContainment(int xOrigin, int yOrigin, string[] blockingLayers, MultiBlockStructureComponent compStruct)
     {
-        List<List<bool>> blockingMap = UnifyBlockingMaps(blockingLayers, compStruct);
+        bool[,] blockingMap = UnifyBlockingMaps(blockingLayers, compStruct);
         HashSet<Vector2> visitedLocations = new();
         HashSet<Vector2> toVisitLocations = new();
         HashSet<Vector2> edgeLocation = new();
@@ -29,19 +29,23 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
         do
         {
             Vector2 currentLoc = toVisitLocations.First();
-            if ((int) currentLoc.Y - 1 >= 0 && !blockingMap[(int) currentLoc.Y - 1][(int) currentLoc.X])
+            if (ValidatePosInArray((int) currentLoc.Y - 1, (int) currentLoc.X, compStruct.TypePresence2DMapDimentionY, compStruct.TypePresence2DMapDimentionX)
+                    && !blockingMap[(int) currentLoc.Y - 1, (int) currentLoc.X] && !visitedLocations.Contains(new((int) currentLoc.Y - 1, (int) currentLoc.X)))
             {
                 toVisitLocations.Add(new((int) currentLoc.Y - 1, (int) currentLoc.X));
             }
-            if ((int) currentLoc.Y + 1 < compStruct.TypePresence2DMapDimentionY && !blockingMap[(int) currentLoc.Y + 1][(int) currentLoc.X])
+            if (ValidatePosInArray((int) currentLoc.Y + 1, (int) currentLoc.X, compStruct.TypePresence2DMapDimentionY, compStruct.TypePresence2DMapDimentionX)
+                    && !blockingMap[(int) currentLoc.Y + 1, (int) currentLoc.X] && !visitedLocations.Contains(new((int) currentLoc.Y + 1, (int) currentLoc.X)))
             {
                 toVisitLocations.Add(new((int) currentLoc.Y + 1, (int) currentLoc.X));
             }
-            if ((int) currentLoc.X - 1 >= 0 && !blockingMap[(int) currentLoc.Y][(int) currentLoc.X - 1])
+            if (ValidatePosInArray((int) currentLoc.Y, (int) currentLoc.X - 1, compStruct.TypePresence2DMapDimentionY, compStruct.TypePresence2DMapDimentionX)
+                    && !blockingMap[(int) currentLoc.Y, (int) currentLoc.X - 1] && !visitedLocations.Contains(new((int) currentLoc.Y, (int) currentLoc.X - 1)))
             {
                 toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X - 1));
             }
-            if ((int) currentLoc.X + 1 < compStruct.TypePresence2DMapDimentionX && !blockingMap[(int) currentLoc.Y][(int) currentLoc.X + 1])
+            if (ValidatePosInArray((int) currentLoc.Y, (int) currentLoc.X + 1, compStruct.TypePresence2DMapDimentionY, compStruct.TypePresence2DMapDimentionX)
+                    && !blockingMap[(int) currentLoc.Y, (int) currentLoc.X + 1] && !visitedLocations.Contains(new((int) currentLoc.Y, (int) currentLoc.X + 1)))
             {
                 toVisitLocations.Add(new((int) currentLoc.Y, (int) currentLoc.X + 1));
             }
@@ -63,26 +67,31 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
         if (edgeLocation.Count == numEdgelocs) return true;
         return false;
     }
-    private List<List<bool>> UnifyBlockingMaps(string[] blockingLayers, MultiBlockStructureComponent compStruct)
+    private bool ValidatePosInArray(int y, int x, int maxY, int maxX)
     {
-        List<List<bool>> returnMap = new();
+        if (y < 0 || y > maxY) return false;
+        if (x < 0 || x > maxX) return false;
+        return true;
+    }
+    private bool[,] UnifyBlockingMaps(string[] blockingLayers, MultiBlockStructureComponent compStruct)
+    {
+        bool[,] returnMap = new bool[compStruct.TypePresence2DMapDimentionY + 1, compStruct.TypePresence2DMapDimentionX + 1];
         for (int iterator3 = 0; iterator3 < compStruct.TypePresence2DMapDimentionY; iterator3++)
         {
-            returnMap.Insert(iterator3, new());
             for (int iterator4 = 0; iterator4 < compStruct.TypePresence2DMapDimentionX; iterator4++)
             {
-                returnMap[iterator3].Insert(iterator4, false);
+                returnMap[iterator3, iterator4] = false;
             }
         }
         foreach (var iterator in blockingLayers)
         {
-            for (int iterator3 = 0; iterator3 < compStruct.TypePresence2DMapDimentionY; iterator3++)
+            for (int iterator3 = 0; iterator3 < compStruct.TypePresence2DMapDimentionY + 1; iterator3++)
             {
-                for (int iterator4 = 0; iterator4 < compStruct.TypePresence2DMapDimentionX; iterator4++)
+                for (int iterator4 = 0; iterator4 < compStruct.TypePresence2DMapDimentionX + 1; iterator4++)
                 {
                     if (compStruct.TypePresence2DMap[iterator][iterator3, iterator4] == null) continue;
                     if (compStruct.TypePresence2DMap[iterator][iterator3, iterator4] == false) continue;
-                    returnMap[iterator3][iterator4] = true;
+                    returnMap[iterator3, iterator4] = true;
                 }
             }
         }

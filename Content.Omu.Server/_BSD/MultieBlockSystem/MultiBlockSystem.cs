@@ -216,6 +216,10 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
             multiBlockStructureComp.TypePresence2DMap = new Dictionary<string, bool?[,]>();
             foreach (Node addNode in foundSearchList)
             {
+                int gridPosX = (int) (Transform(addNode.Id).LocalPosition.X - minX);
+                int gridPosY = (int) (Transform(addNode.Id).LocalPosition.Y - minY);
+                addNode.LocRelativeGRid.X = gridPosX;
+                addNode.LocRelativeGRid.Y = gridPosY;
                 if (multiBlockStructureComp.EntityDic.ContainsKey(addNode.Type))
                 {
                     multiBlockStructureComp.EntityDic[addNode.Type].Add(addNode.Clone());
@@ -234,8 +238,6 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
                 {
                     multiBlockStructureComp.TypesPresent.Add(addNode.Type, addNode.Efficency * Comp<MultiBlockPartComponent>(addNode.Id).MachinePower);
                 }
-                int gridPosX = 0;//TODO finish this
-                int gridPosY = 0;
                 if (multiBlockStructureComp.TypePresence2DMap.ContainsKey(addNode.Type) == false)
                 {
                     multiBlockStructureComp.TypePresence2DMap.Add(addNode.Type, new bool?[multiBlockStructureComp.TypePresence2DMapDimentionY + 1, multiBlockStructureComp.TypePresence2DMapDimentionX + 1]);

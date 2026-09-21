@@ -49,12 +49,26 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
             return;
         }
     }
+    /// <summary>
+    /// Ensure the structural integrity of the structure, sets the intrnaal MultistructStructure variable Complete to either true or false
+    /// </summary>
+    /// <param name="ent"></param>
+    /// <param name="args"></param>
     public void UpdateValuesMultiStruct(Entity<SignalSciOmniDirectonalDetectorComponent> ent, ref MultiStructChangeEvent args)
     {
         if (!TryComp<MultiBlockStructureComponent>(ent, out var compStruct)) return;
         compStruct.Complete = false;
-        if (!_multiSys.ValidateContainment(0, 0, ["OmniDirectionalDetectorHull"], compStruct)) return;//ensure we have a contained area
-        compStruct.Complete = true;
+        bool minOneValid = false;
+        foreach (var types in ent.Comp.OperationModeStructure)
+        {
+            if (!compStruct.EntityDic!.ContainsKey(types)) continue;
+            minOneValid = true;
+            foreach (var iterator in compStruct.EntityDic[types])
+            {
+                if (!_multiSys.ValidateContainment(iterator.LocRelativeGRid.X, iterator.LocRelativeGRid.Y, ["OmniDirectionalDetectorHull"], compStruct)) return;//ensure we have a contained area
+            }
+        }
+        compStruct.Complete = minOneValid;
     }
     private SignalSciOmniDirectonalDetectorOperationMode GetHighestOperationMode(Entity<SignalSciOmniDirectonalDetectorComponent> ent)
     {

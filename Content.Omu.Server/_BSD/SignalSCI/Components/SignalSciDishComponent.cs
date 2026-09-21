@@ -51,7 +51,7 @@ public sealed partial class SignalSciDishComponent : Component
     public float HarvestingBaseRate = 100f;
 
     /// <summary>
-    /// Harvesting of signals current
+    /// Harvesting of signals current DEBUG VALUE
     /// </summary>
     [DataField]
     public float HarvestingRate = 0f;

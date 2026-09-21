@@ -13,6 +13,9 @@ using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 using Content.Omu.Server._BSD.MultiBlockSystem;
 
 using Content.Omu.Shared._BSD.IngameConsoleSystem;
+using Content.Omu.Server._BSD.IngameServerSystem;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
+using System.Linq;
 
 
 namespace Content.Omu.Server._BSD.SignalSCI;
@@ -25,6 +28,7 @@ public sealed partial class SignalDishSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
     [Dependency] private readonly SharedTransformSystem _trans = default!;
     [Dependency] private readonly SignalMapSystem _signalMap = default!;
+    [Dependency] private readonly BSDIngameServerSystem _ingameServerSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -133,34 +137,57 @@ public sealed partial class SignalDishSystem : EntitySystem
     private void DishSignalHarvest(EntityUid uid, SignalSciDishComponent dishComp)
     {
         EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(uid).MapID);
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(uid, out var infraComp)) return;
+        if (!infraComp.EntityDicServer.ContainsKey("ResearchPoints")) return;//TODO: possibly make this modular and not hard coded!!!!
+        EntityUid linkedServer = infraComp.EntityDicServer["ResearchPoints"].First();//there should only be one anyway
         if (mapUid == EntityUid.Invalid) return;
         if (!TryComp<SignalMapComponent>(mapUid, out var comp))
         {
             comp = _signalMap.SetupMapSignals(mapUid);
         }
-        float angle = (float) _trans.GetWorldRotation(uid);
         if (comp == null)
         {
             Log.Error("MapEnt: " + mapUid + " did not contain the SignalMapComponent but was expected to.");
             return;
         }
-        for (int move = 0; move < comp.SignalList.Count; move++)//this math needs to be done every tick as we can harvest multiple signals if they align
+        dishComp.HarvestingRate = 0f;
+        //Treat every signal as if it is on the same 4d unit sphere lower tier signals simply only have 1 or 2 things that arent set to 0 degrees
+        for (SignalSciOmniDirectonalDetectorOperationMode mode = SignalSciOmniDirectonalDetectorOperationMode.Standard; mode <= SignalSciOmniDirectonalDetectorOperationMode.Bluespace; mode++)
         {
-            float efficency = 1.0f;
-            // if (angle - comp.SignalList[move].Angle != 0f)
-            // {
-            //     //the magic numbers used here are used to achive a repaeating tan function that has a periodicity of 360.0f currently fine tuned for a 6 degree missaligment before penelties
-            //     efficency = MathF.Min(MathF.Abs(MathF.Tan((angle - comp.SignalList[move].Angle + 180.0f) / (4.0f * 180.0f / (2 * (float) MathF.PI))) / 10.0f), 1.0f);
-            // }
-            if (efficency > 0f)
+            foreach (var iterator in comp.SignalList[mode])
             {
-                //float harvestedAmount = Math.Min(efficency * dishComp.HarvestingRate, comp.SignalList[move].DataRemaining);
-                //comp.SignalList[move].DataRemaining -= harvestedAmount;
-                //if (!TryComp<SignalSciServerComponent>(dishComp.LinkedServer, out var serverComp)) continue;
-                //serverComp.StoredData += harvestedAmount * dishComp.EfficencyConversion;
-                //_research.ModifyServerPoints(dishComp.LinkedServer, (int)Math.Round(harvestedAmount * dishComp.EfficencyConversion));//temporarly direct conversion time
+                //range 0 to 1
+                float allignment = CalculateAlignment(dishComp, iterator);
+                float harvestingRate = dishComp.HarvestingBaseRate * allignment;
+                dishComp.HarvestingRate += harvestingRate; //this is a debugging number and could be removed TODO: remove this once everything works
+                foreach (var signalData in iterator.RemainingData.Keys)
+                {
+                    _ingameServerSystem.TryAddMaxPoints(linkedServer, signalData, (int) MathF.Min(MathF.Round(harvestingRate), iterator.RemainingData[signalData]));
+                    if (iterator.UnlimitedData) continue;
+                    iterator.RemainingData[signalData] -= (int) MathF.Min(MathF.Round(harvestingRate), iterator.RemainingData[signalData]);
+                }
             }
         }
         return;
+    }
+
+    private float CalculateAlignment(SignalSciDishComponent comp, Signal signal)
+    {
+        double[] vectorA = new double[4];
+        double[] vectorB = new double[4];
+        vectorA[0] = Math.Sin(signal.Angles[0]);
+        vectorA[1] = Math.Cos(signal.Angles[0]);
+        vectorA[2] = Math.Sin(signal.Angles[1]);
+        vectorA[3] = Math.Sin(signal.Angles[2]);
+        vectorB[0] = Math.Sin(comp.CurrentAngles[0]);
+        vectorB[1] = Math.Cos(comp.CurrentAngles[0]);
+        vectorB[2] = Math.Sin(comp.CurrentAngles[1]);
+        vectorB[3] = Math.Sin(comp.CurrentAngles[2]);
+        double dotproductAB = 0.0;
+        dotproductAB += vectorA[0] * vectorB[0];
+        dotproductAB += vectorA[1] * vectorB[1];
+        dotproductAB += vectorA[2] * vectorB[2];
+        dotproductAB += vectorA[3] * vectorB[3];
+        return Math.Max(0, (float) dotproductAB);
     }
 }

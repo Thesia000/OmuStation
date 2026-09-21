@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
@@ -38,17 +39,21 @@ public sealed partial class MultiBlockStructureComponent : Component
     /// <summary>
     /// List containing every existing positon on a relative grid 0|0 is bottom left
     /// </summary
-    public Dictionary<string, bool?[,]> TypePresence2DMap = new();
+    public Dictionary<string, bool?[,]> TypePresence2DMap = new();//NEVER add VV to this it will just crash
+    [DataField]
     public int TypePresence2DMapDimentionX = 0;
+    [DataField]
     public int TypePresence2DMapDimentionY = 0;
 
 }
 
+[Serializable, NetSerializable]
 public sealed class Node
 {
     public float Efficency;
     public EntityUid Id;
     public string Type = "ERROR";
+    public Vector2i LocRelativeGRid = new();
 
     public Node Clone()
     {
