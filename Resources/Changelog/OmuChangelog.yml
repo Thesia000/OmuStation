@@ -7866,3 +7866,9 @@ Entries:
       message: Fixed incorrect name of Super Salvage Equipment research
   id: 1021
   time: '2026-09-21T22:44:37.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Fix
+      message: Fixed initial chimera not being antags
+  id: 1022
+  time: '2026-09-21T23:36:28.0000000+00:00'
