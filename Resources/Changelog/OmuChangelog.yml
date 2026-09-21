@@ -7860,3 +7860,9 @@ Entries:
         diseases.
   id: 1020
   time: '2026-09-21T22:29:25.0000000+00:00'
+- author: Petraea
+  changes:
+    - type: Fix
+      message: Fixed incorrect name of Super Salvage Equipment research
+  id: 1021
+  time: '2026-09-21T22:44:37.0000000+00:00'
