@@ -7788,3 +7788,9 @@ Entries:
         tile.
   id: 1010
   time: '2026-09-21T00:40:45.0000000+00:00'
+- author: Pceerer, asterisksoda
+  changes:
+    - type: Add
+      message: Added a Harmony Donovan plushie to the crew morale initiative crate.
+  id: 1011
+  time: '2026-09-21T00:41:45.0000000+00:00'
