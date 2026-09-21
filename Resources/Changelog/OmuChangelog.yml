@@ -7880,3 +7880,9 @@ Entries:
         host and when one talks to you.
   id: 1023
   time: '2026-09-21T23:45:07.0000000+00:00'
+- author: NotActuallyMarty
+  changes:
+    - type: Add
+      message: Station AI can point through holopads now.
+  id: 1024
+  time: '2026-09-21T23:50:25.0000000+00:00'
