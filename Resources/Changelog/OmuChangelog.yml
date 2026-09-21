@@ -7820,3 +7820,9 @@ Entries:
       message: The crew plushies crate can contain Soozie Bluoobus plushies.
   id: 1015
   time: '2026-09-21T02:23:51.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Add
+      message: Added the Marlen umbrella to the NTR duty case.
+  id: 1016
+  time: '2026-09-21T02:38:03.0000000+00:00'
