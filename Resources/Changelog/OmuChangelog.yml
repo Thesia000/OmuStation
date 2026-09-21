@@ -7834,3 +7834,11 @@ Entries:
       message: Wirebrushes can now change rust platings back to normal platings.
   id: 1017
   time: '2026-09-21T02:40:30.0000000+00:00'
+- author: darcyaltezza-source
+  changes:
+    - type: Add
+      message: >-
+        Nanotrasen Representatives with 50 hours in the role can now pick the
+        off-coat as a neck item in their loadout.
+  id: 1018
+  time: '2026-09-21T03:24:12.0000000+00:00'
