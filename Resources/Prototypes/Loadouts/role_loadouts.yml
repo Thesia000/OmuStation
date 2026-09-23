@@ -519,6 +519,7 @@
   - HeadofSecurityHead
   - HeadofSecurityNeck
   - HeadofSecurityJumpsuit
+  - HeadofSecurityGloves # Omu - ORGANIZING THIS SHIT - gloves should stay near other clothing, NOT envirosuits
   - SecurityBackpack
   - SecurityMelee # Goobstation
   - SecurityBelt
@@ -535,7 +536,6 @@
   - HeadofSecurityEnvirohelm
   - HeadofSecurityEnvirosuit
   - HeadofSecurityEnvirogloves
-  - HeadofSecurityGloves
 
 - type: roleLoadout
   id: JobWarden
