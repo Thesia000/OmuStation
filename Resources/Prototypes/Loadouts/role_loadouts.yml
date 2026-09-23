@@ -87,7 +87,8 @@
   - GroupTankHarness
   - BartenderHead
   - BartenderJumpsuit
-  - CommonBackpack
+ # - CommonBackpack # Omu
+  - BartenderBackpack # Omu
   - BartenderOuterClothing
   - Glasses
   - Survival
@@ -124,7 +125,8 @@
   - ChefHead
   - ChefMask
   - ChefJumpsuit
-  - CommonBackpack
+ # - CommonBackpack # Omu
+  - ChefBackpack # Omu
   - ChefOuterClothing
   - Glasses
   - Survival
@@ -205,7 +207,8 @@
   - JanitorHead
   - JanitorJumpsuit
   - JanitorGloves
-  - CommonBackpack
+ # - CommonBackpack # Omu
+  - JanitorBackpack # Omu
   - JanitorOuterClothing
   - JanitorNeck # Starlight
   - Glasses
