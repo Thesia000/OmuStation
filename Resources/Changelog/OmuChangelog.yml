@@ -7980,3 +7980,9 @@ Entries:
         you cough, whispering and the radio are safe.
   id: 1038
   time: '2026-09-24T20:01:26.0000000+00:00'
+- author: TheGoatSinofIust
+  changes:
+    - type: Fix
+      message: reverted wideswing stamina penalty nerf.
+  id: 1039
+  time: '2026-09-24T20:40:49.0000000+00:00'
