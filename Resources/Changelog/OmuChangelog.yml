@@ -7952,3 +7952,11 @@ Entries:
       message: Added Quellin Loba-Kuin and Benry Benry plushies.
   id: 1034
   time: '2026-09-24T11:43:11.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Add
+      message: >-
+        Added two new emitter types, emissive which increases SM radiation
+        output and Excitatory which explodes and triggers more events.
+  id: 1035
+  time: '2026-09-24T12:39:08.0000000+00:00'
