@@ -7960,3 +7960,9 @@ Entries:
         output and Excitatory which explodes and triggers more events.
   id: 1035
   time: '2026-09-24T12:39:08.0000000+00:00'
+- author: Willfullyheretical
+  changes:
+    - type: Add
+      message: 'Added the Kandy crew plushie to crew moral initiative crate '
+  id: 1036
+  time: '2026-09-24T19:28:05.0000000+00:00'
