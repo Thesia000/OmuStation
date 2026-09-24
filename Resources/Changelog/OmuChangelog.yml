@@ -7972,3 +7972,11 @@ Entries:
       message: Added a handheld science console which can be found in RDs locker.
   id: 1037
   time: '2026-09-24T19:41:34.0000000+00:00'
+- author: Natch
+  changes:
+    - type: Add
+      message: >-
+        Added the Damaged Throat trait. Talking at normal volume hurts and makes
+        you cough, whispering and the radio are safe.
+  id: 1038
+  time: '2026-09-24T20:01:26.0000000+00:00'
