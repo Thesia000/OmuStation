@@ -7966,3 +7966,9 @@ Entries:
       message: 'Added the Kandy crew plushie to crew moral initiative crate '
   id: 1036
   time: '2026-09-24T19:28:05.0000000+00:00'
+- author: bnuuy
+  changes:
+    - type: Add
+      message: Added a handheld science console which can be found in RDs locker.
+  id: 1037
+  time: '2026-09-24T19:41:34.0000000+00:00'
