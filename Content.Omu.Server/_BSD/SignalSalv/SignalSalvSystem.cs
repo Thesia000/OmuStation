@@ -41,7 +41,7 @@ using Content.Shared.Shuttles.Systems;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class BSDSignalSalvSystem : EntitySystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSystem
 {
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;

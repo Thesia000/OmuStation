@@ -17,7 +17,7 @@ using Robust.Shared.Random;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class BSDSignalSalvSystem : EntitySystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSystem
 {
     #region  User Interfacing
     public void IngameConsoleCommandSignalSalvMiningRig(Entity<SignalSalvMiningRigStructreComponent> ent, ref IngameConsoleCommandCalledEvent args)

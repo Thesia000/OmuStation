@@ -47,7 +47,7 @@ public sealed partial class MultiBlockStructureComponent : Component
 
 }
 
-[Serializable, NetSerializable]
+//[Serializable, NetSerializable]
 public sealed class Node
 {
     public float Efficency;

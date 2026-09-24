@@ -12,7 +12,7 @@ using Content.Shared.Materials;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class BSDSignalSalvSystem : EntitySystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSystem
 {
     #region  User Interfacing
     public void IngameConsoleCommandMatReciver(Entity<SignalSalvMaterialReciverStructureComponent> ent, ref IngameConsoleCommandCalledEvent args)
@@ -43,6 +43,18 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
         }
         return;
     }
+    public void OverrideProductionRate(SignalSalvMaterialTransitMapComponent comp, string[] type, int[] newAmount)
+    {
+        if (type.Length != newAmount.Length) return;
+        for (int i = 0; i < type.Length; i++)
+        {
+            OverrideProductionRate(comp, type[i], newAmount[i]);
+        }
+    }
+    public void OverrideProductionRate(SignalSalvMaterialTransitMapComponent comp, string type, int newAmount)
+    {
+        comp.MaterialProductionPerSecond[type] = newAmount;
+    }
     public SignalSalvMaterialTransitMapComponent SetupMapMaterialTransitComp(EntityUid mapUid)
     {
         EnsureComp<SignalSalvMaterialTransitMapComponent>(mapUid);//ensure the map of the station has signals
@@ -62,15 +74,16 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem
     public void MaterialProductionTimeBased(EntityUid mapUid, SignalSalvMaterialTransitMapComponent comp)
     {
         TimeSpan deltaTime = _timing.CurTime - comp.LastUpdate;
+        int deltaTimeInt = (int) deltaTime.TotalSeconds;
+        if (deltaTimeInt <= 0) return;
         comp.LastUpdate = _timing.CurTime;
-        int deltaTimeInt = (int) deltaTime.TotalMilliseconds;
         foreach (var iterator in comp.MaterialProductionPerSecond.Keys)
         {
             if (!comp.MaterialInTransit.ContainsKey(iterator))
             {
                 comp.MaterialInTransit.Add(iterator, 0);
             }
-            comp.MaterialInTransit[iterator] += comp.MaterialProductionPerSecond[iterator] * (int) (deltaTimeInt / 1000.0f);
+            comp.MaterialInTransit[iterator] += comp.MaterialProductionPerSecond[iterator] * deltaTimeInt;
             if (comp.MaterialInTransit[iterator] > comp.MaterialInTransitStorageCap) comp.MaterialInTransit[iterator] = comp.MaterialInTransitStorageCap;
         }
         //exit in case we dont have a linked reciver

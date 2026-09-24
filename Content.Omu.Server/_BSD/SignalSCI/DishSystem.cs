@@ -157,7 +157,7 @@ public sealed partial class SignalDishSystem : EntitySystem
             foreach (var iterator in comp.SignalList[mode])
             {
                 //range 0 to 1
-                float allignment = CalculateAlignment(dishComp, iterator);
+                float allignment = MathF.Pow(CalculateAlignment(dishComp, iterator), 3f);
                 float harvestingRate = dishComp.HarvestingBaseRate * allignment;
                 dishComp.HarvestingRate += harvestingRate; //this is a debugging number and could be removed TODO: remove this once everything works
                 foreach (var signalData in iterator.RemainingData.Keys)
@@ -175,14 +175,28 @@ public sealed partial class SignalDishSystem : EntitySystem
     {
         double[] vectorA = new double[4];
         double[] vectorB = new double[4];
-        vectorA[0] = Math.Sin(signal.Angles[0]);
-        vectorA[1] = Math.Cos(signal.Angles[0]);
-        vectorA[2] = Math.Sin(signal.Angles[1]);
-        vectorA[3] = Math.Sin(signal.Angles[2]);
-        vectorB[0] = Math.Sin(comp.CurrentAngles[0]);
-        vectorB[1] = Math.Cos(comp.CurrentAngles[0]);
-        vectorB[2] = Math.Sin(comp.CurrentAngles[1]);
-        vectorB[3] = Math.Sin(comp.CurrentAngles[2]);
+        // converting 4D hyperspherical coordinates (r, nu, theta, phi) to Cartesian coordinates (x, y, z, w)
+        var cosNu = Math.Cos(signal.Angles[0]);
+        var sinNu = Math.Sin(signal.Angles[0]);
+        var cosTheta = Math.Cos(signal.Angles[1]);
+        var sinTheta = Math.Sin(signal.Angles[1]);
+        var cosPhi = Math.Cos(signal.Angles[2]);
+        var sinPhi = Math.Sin(signal.Angles[2]);
+        // since r=1, we can ignore it in multiplication
+        vectorA[0] = cosNu * cosTheta * cosPhi;
+        vectorA[1] = cosNu * cosTheta * sinPhi;
+        vectorA[2] = cosNu * sinTheta;
+        vectorA[3] = sinNu;
+        cosNu = Math.Cos(comp.CurrentAngles[0]);
+        sinNu = Math.Sin(comp.CurrentAngles[0]);
+        cosTheta = Math.Cos(comp.CurrentAngles[1]);
+        sinTheta = Math.Sin(comp.CurrentAngles[1]);
+        cosPhi = Math.Cos(comp.CurrentAngles[2]);
+        sinPhi = Math.Sin(comp.CurrentAngles[2]);
+        vectorB[0] = cosNu * cosTheta * cosPhi;
+        vectorB[1] = cosNu * cosTheta * sinPhi;
+        vectorB[2] = cosNu * sinTheta;
+        vectorB[3] = sinNu;
         double dotproductAB = 0.0;
         dotproductAB += vectorA[0] * vectorB[0];
         dotproductAB += vectorA[1] * vectorB[1];
