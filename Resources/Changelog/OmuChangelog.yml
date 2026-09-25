@@ -8012,3 +8012,13 @@ Entries:
       message: Added Buroctracy lobby art by Kasichi.
   id: 1043
   time: '2026-09-25T15:37:47.0000000+00:00'
+- author: asterisksoda
+  changes:
+    - type: Fix
+      message: Premium Havanian cigars now correctly register as cigars and trash.
+    - type: Fix
+      message: >-
+        Spent premium Havanian cigars now correctly register as cigars, trash,
+        and burnt.
+  id: 1044
+  time: '2026-09-25T15:39:40.0000000+00:00'
