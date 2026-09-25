@@ -8006,3 +8006,9 @@ Entries:
       message: Minor bugfixes to Crystal Station.
   id: 1042
   time: '2026-09-25T03:12:17.0000000+00:00'
+- author: shackhorn
+  changes:
+    - type: Add
+      message: Added Buroctracy lobby art by Kasichi.
+  id: 1043
+  time: '2026-09-25T15:37:47.0000000+00:00'
