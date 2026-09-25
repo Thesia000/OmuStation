@@ -7992,3 +7992,11 @@ Entries:
       message: Added Ziggy D plush
   id: 1040
   time: '2026-09-25T00:44:43.0000000+00:00'
+- author: harryhulse12-alt
+  changes:
+    - type: Tweak
+      message: Capped SM radiation output factor.
+    - type: Tweak
+      message: Increased the rate at which SM rad output factor decays by 10 times
+  id: 1041
+  time: '2026-09-25T01:14:35.0000000+00:00'
