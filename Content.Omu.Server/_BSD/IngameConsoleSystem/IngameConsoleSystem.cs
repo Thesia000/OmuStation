@@ -72,7 +72,10 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
         }
         foreach (IngameConsoleCommand iterator in ingameCommandList.List)
         {
-            if (!comp.AllowedTypes.Contains(iterator.Type)) continue;
+            if (!iterator.UniversalCommand)
+            {
+                if (!comp.AllowedTypes.Contains(iterator.Type)) continue;
+            }
             if (iterator.Key != splitInput[0]) continue;
             if (iterator.ArgumentsNumberMin > splitInput.Length) continue;//ensure we got enought arguments
             IngameConsoleCommandCalledEvent ev = new(iterator.Type, splitInput);//still ships the type with it, aka start reading AFTER index 0 

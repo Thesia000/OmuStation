@@ -1,7 +1,40 @@
-﻿
+﻿- type: entity
+  id: MultistructPartBaseNoCollission
+  name: MultistructPartBase
+  placement:
+    mode: SnapgridCenter
+  abstract: true
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: GravityAffected
+  - type: Physics
+    bodyType: Static
+  - type: Pullable
+  - type: Tag
+    tags:
+      - Structure
+  - type: Penetratable
+    penetrateDamage: 25
+    damagePenalty: 0.1
+  - type: Structure
+  - type: MultiBlockPart
+    structureType: 
+    - None
+    allowedConnectionTypesNorth:
+    - ERROR-NONE
+    allowedConnectionTypesEast:
+    - ERROR-NONE
+    allowedConnectionTypesSouth:
+    - ERROR-NONE
+    allowedConnectionTypesWest:
+    - ERROR-NONE
+
+
 - type: entity
   id: MultistructPartBase
-  parent: [ BaseStructure ]
+  parent: [ MultistructPartBaseNoCollission ]
   name: MultistructPartBase
   placement:
     mode: SnapgridCenter
@@ -18,17 +51,6 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: MultiBlockPart
-    structureType: 
-    - None
-    allowedConnectionTypesNorth:
-    - ERROR-NONE
-    allowedConnectionTypesEast:
-    - ERROR-NONE
-    allowedConnectionTypesSouth:
-    - ERROR-NONE
-    allowedConnectionTypesWest:
-    - ERROR-NONE
 
 - type: entity
   id: MultistructBaseCore

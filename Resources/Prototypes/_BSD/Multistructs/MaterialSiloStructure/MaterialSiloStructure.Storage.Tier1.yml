@@ -225,9 +225,9 @@
 
 - type: entity
   parent: [ MultistructPartBase ]
-  id: MaterialSiloMultistructStorageTier1Combined
-  name: MaterialSiloMultistructStorageTier1CombinedName
-  description: MaterialSiloMultistructStorageTier1CombinedDesc
+  id: MaterialSiloMultistructStorageTier2Combined
+  name: MaterialSiloMultistructStorageTier2CombinedName
+  description: MaterialSiloMultistructStorageTier2CombinedDesc
   components:
   - type: Sprite
     sprite: _BSD/Structures/OmnidirectionalDetector.rsi
