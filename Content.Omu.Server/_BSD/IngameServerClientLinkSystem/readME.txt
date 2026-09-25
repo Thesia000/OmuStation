@@ -10,3 +10,5 @@ future networks to add:
 - "Research" -> used by Laths to know what they can print from RND techs and RND consoles [GRID WIDE]
 - "Telecoms" -> used by headsets to communicate [Unknown yet]
 - "AI" -> used by the AI to controll things [Unknown yet possibly entity dependent]
+- "Camera" -> used by cameras [GRID WIDE]
+- "CameraAccess" -> used by the camera monitor to access the camera system [GRID WISDE]

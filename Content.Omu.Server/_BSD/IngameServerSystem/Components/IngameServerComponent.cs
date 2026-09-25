@@ -3,6 +3,7 @@ using Robust.Shared.Prototypes;
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 
 using Content.Omu.Server._BSD.MultiBlockSystem.Components;
+using Content.Omu.Server._BSD.IngameServerSystem.Prototype;
 
 namespace Content.Omu.Server._BSD.IngameServerSystem.Components;
 
@@ -11,10 +12,10 @@ namespace Content.Omu.Server._BSD.IngameServerSystem.Components;
 public sealed partial class IngameServerComponent : Component//there can only be ONE of these PER server, not sure if I want to attach the UI to this one
 {
     [DataField]
-    public Dictionary<string, int> StoredPoints = new();
+    public Dictionary<ProtoId<IngameServerPointPrototypePrototype>, int> StoredPoints = new();
 
     [DataField]
-    public Dictionary<string, int?> StoredPointsCapacity = new();
+    public Dictionary<ProtoId<IngameServerPointPrototypePrototype>, int?> StoredPointsCapacity = new();
 
     [DataField]
     public float ProcessingPower = 0f;
