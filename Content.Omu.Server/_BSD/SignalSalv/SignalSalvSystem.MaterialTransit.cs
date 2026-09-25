@@ -88,7 +88,6 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
         }
         //exit in case we dont have a linked reciver
         if (!TryComp<SignalSalvMaterialReciverStructureComponent>(comp.LinkedMaterialReciver, out var reciverComp)) return;
-        if (!TryComp<MaterialStorageComponent>(comp.LinkedMaterialReciver, out var matStorageComp)) return;
         foreach (string iterator in comp.MaterialInTransit.Keys)
         {
             if (comp.MaterialInTransit[iterator] < reciverComp.MaterialCargoMin) continue;

@@ -8,8 +8,9 @@ using Content.Omu.Server._BSD.IngameServerSystem.Prototype;
 namespace Content.Omu.Server._BSD.IngameServerSystem.Components;
 
 [RegisterComponent]
-
-public sealed partial class IngameServerComponent : Component//there can only be ONE of these PER server, not sure if I want to attach the UI to this one
+//TODO split this class into a point manager and a server class, Thesia
+//Also processing power is a form of point just saying
+public sealed partial class IngameServerComponent : Component//there can only be ONE of these PER server, not sure if I want to attach the UI to this one -> will be solved with the multistruct refactor
 {
     [DataField]
     public Dictionary<ProtoId<IngameServerPointPrototypePrototype>, int> StoredPoints = new();

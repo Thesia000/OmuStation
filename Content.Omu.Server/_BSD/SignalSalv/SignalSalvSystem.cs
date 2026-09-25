@@ -459,23 +459,42 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
     {
         Random rand = new((int) _timing.CurTime.TotalSeconds);
         TotalMaterialMiningRateList matMiningList = new();
+        bool selected = false;
+        int failsaveCounter = 0;
         foreach (var iterator in matMiningList.BaseMaterials)//all base materials are always present
         {
+            if (!iterator.Minable) continue;
             planetResourcesComp.MiningRates.Add(iterator.MaterialType, (int) rand.NextInt64(iterator.MinResoucePerSecond, iterator.MaxResoucePerSecond));
         }
+        selected = false;
+        failsaveCounter = 0;
         if (planetResourcesComp.AdvancedResourcePlanet)//generate a randomly selected one
         {
-            int randomIndex = (int) rand.NextInt64(matMiningList.AdvancedMaterials.Count);
-            planetResourcesComp.MiningRates.Add(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MaterialType,
+            while (!selected && failsaveCounter < 10)
+            {
+                failsaveCounter++;
+                int randomIndex = (int) rand.NextInt64(matMiningList.AdvancedMaterials.Count);
+                if (!matMiningList.AdvancedMaterials.ElementAt(randomIndex).Minable) continue;
+                planetResourcesComp.MiningRates.Add(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MaterialType,
                                             (int) rand.NextInt64(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MinResoucePerSecond,
                                                                     matMiningList.AdvancedMaterials.ElementAt(randomIndex).MaxResoucePerSecond));
+                selected = true;
+            }
+
         }
+        selected = false;
+        failsaveCounter = 0;
         if (planetResourcesComp.SpecialResourcePlanet)//generate a randomly selected one
         {
-            int randomIndex = (int) rand.NextInt64(matMiningList.SpecialMaterials.Count);
-            planetResourcesComp.MiningRates.Add(matMiningList.SpecialMaterials.ElementAt(randomIndex).MaterialType,
+            while (!selected && failsaveCounter < 10)
+            {
+                failsaveCounter++;
+                int randomIndex = (int) rand.NextInt64(matMiningList.SpecialMaterials.Count);
+                if (!matMiningList.SpecialMaterials.ElementAt(randomIndex).Minable) continue;
+                planetResourcesComp.MiningRates.Add(matMiningList.SpecialMaterials.ElementAt(randomIndex).MaterialType,
                                             (int) rand.NextInt64(matMiningList.SpecialMaterials.ElementAt(randomIndex).MinResoucePerSecond,
                                                                     matMiningList.SpecialMaterials.ElementAt(randomIndex).MaxResoucePerSecond));
+            }
         }
         return;
     }
