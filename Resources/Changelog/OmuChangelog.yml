@@ -7986,3 +7986,9 @@ Entries:
       message: reverted wideswing stamina penalty nerf.
   id: 1039
   time: '2026-09-24T20:40:49.0000000+00:00'
+- author: TheGoatSinofIust
+  changes:
+    - type: Add
+      message: Added Ziggy D plush
+  id: 1040
+  time: '2026-09-25T00:44:43.0000000+00:00'
