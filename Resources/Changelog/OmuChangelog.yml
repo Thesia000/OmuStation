@@ -8000,3 +8000,9 @@ Entries:
       message: Increased the rate at which SM rad output factor decays by 10 times
   id: 1041
   time: '2026-09-25T01:14:35.0000000+00:00'
+- author: Willzile1
+  changes:
+    - type: Fix
+      message: Minor bugfixes to Crystal Station.
+  id: 1042
+  time: '2026-09-25T03:12:17.0000000+00:00'
