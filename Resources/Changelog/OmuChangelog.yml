@@ -8040,3 +8040,12 @@ Entries:
       message: Added a CC version of the handheld communications console for CCO's
   id: 1046
   time: '2026-09-26T16:36:02.0000000+00:00'
+- author: Natch
+  changes:
+    - type: Add
+      message: >-
+        Jobs can now be given a cosmetic alternate title in the character
+        editor. It shows on your ID, PDA, the crew manifest and your arrival
+        announcement.
+  id: 1047
+  time: '2026-09-26T20:05:41.0000000+00:00'
