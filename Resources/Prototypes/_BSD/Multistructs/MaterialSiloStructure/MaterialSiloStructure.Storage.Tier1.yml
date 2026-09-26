@@ -8,9 +8,10 @@
   description: MaterialSiloMultistructStorageSteelDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: steel
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Steel: 10000 #100 additional sheets
@@ -34,9 +35,10 @@
   description: MaterialSiloMultistructStoragePlasticDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: plastic
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Plastic: 10000 #100 additional sheets
@@ -60,9 +62,10 @@
   description: MaterialSiloMultistructStorageGlassDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: glass
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Glass: 10000 #100 additional sheets
@@ -90,9 +93,10 @@
   description: MaterialSiloMultistructStorageGoldDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: gold
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Gold: 3300 #33 additional sheets
@@ -116,9 +120,10 @@
   description: MaterialSiloMultistructStorageSilverDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: silver
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Silver: 3300 #33 additional sheets
@@ -142,9 +147,10 @@
   description: MaterialSiloMultistructStorageUraniumDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: uranium
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Uranium: 3300 #33 additional sheets
@@ -172,9 +178,10 @@
   description: MaterialSiloMultistructStoragePlasmaDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: plasma
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Uranium: 1000 #10 additional sheets
@@ -202,9 +209,10 @@
   description: MaterialSiloMultistructStorageTier1CombinedDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: tier1
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Steel: 3300 #33 additional sheets
@@ -230,9 +238,10 @@
   description: MaterialSiloMultistructStorageTier2CombinedDesc
   components:
   - type: Sprite
-    sprite: _BSD/Structures/OmnidirectionalDetector.rsi
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
     layers:
-    - state: hullPlaceHolder
+    - state: base
+    - state: tier2
   - type: IngameServerPointCapacity
     CapacityExpansion:
       Silver: 1100 #11 additional sheets
