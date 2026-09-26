@@ -22,7 +22,7 @@ public sealed partial class FlatpackComponent : Component
     public ProtoId<ToolQualityPrototype> QualityNeeded = "Pulsing";
 
     /// <summary>
-    /// If  flatpack needs a tool to be used or not. OMU change
+    /// Omu: If the flatpack needs a tool to be used or not.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool ToolNeeded = false;
