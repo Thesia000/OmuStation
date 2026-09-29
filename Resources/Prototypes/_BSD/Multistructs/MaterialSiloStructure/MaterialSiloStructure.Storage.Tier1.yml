@@ -21,10 +21,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -48,10 +50,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -75,10 +79,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -106,10 +112,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -133,10 +141,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -160,10 +170,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -191,10 +203,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -224,10 +238,12 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE
 
@@ -253,9 +269,11 @@
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesEast:
     - NONE
     allowedConnectionTypesSouth:
     - MaterialSiloStructureStorageHolder
+    - MaterialSiloStructureConnector
     allowedConnectionTypesWest:
     - NONE

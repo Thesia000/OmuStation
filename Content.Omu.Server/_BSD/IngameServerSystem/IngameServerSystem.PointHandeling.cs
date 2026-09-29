@@ -1,14 +1,47 @@
 using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
-using Content.Omu.Server._BSD.IngameServerSystem.Events;
+
+using Content.Omu.Server._BSD.MultiBlockSystem.Events;
+
 using System.Linq;
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 using System.Drawing;
+using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 namespace Content.Omu.Server._BSD.IngameServerSystem
 {
     public sealed partial class BSDIngameServerSystem : EntitySystem
     {
+        public void OnMultistructUpdatePointCapacity(Entity<IngameServerPointCapacityComponent> ent, ref MultiStructChangeEvent args)
+        {
+            if (ent.Comp.MultistructScaling == false) return;
+            if (!TryComp<MultiBlockStructureComponent>(ent, out var compStruct)) return;
+            float constructPower = 0f;
+            foreach (var constructPowerProvider in ent.Comp.CapacityProvidingTypes)
+            {
+                if (!compStruct.TypesPresent.ContainsKey(constructPowerProvider)) continue;
+                constructPower += compStruct.TypesPresent[constructPowerProvider];
+            }
+            foreach (var pointType in ent.Comp.CapacityExpansion.Keys)
+            {
+                ent.Comp.CapacityExpansion[pointType] = 0;
+                if (ent.Comp.CapacityBaseline.ContainsKey(pointType))
+                {
+                    ent.Comp.CapacityExpansion[pointType] += ent.Comp.CapacityBaseline[pointType];
+                }
+                if (ent.Comp.CapacityLinearGrowth.ContainsKey(pointType))
+                {
+                    ent.Comp.CapacityExpansion[pointType] += (int) (ent.Comp.CapacityLinearGrowth[pointType] * constructPower);
+                }
+                if (ent.Comp.CapacityQuadraticGrowth.ContainsKey(pointType))
+                {
+                    ent.Comp.CapacityExpansion[pointType] += (int) (ent.Comp.CapacityQuadraticGrowth[pointType] * constructPower * constructPower);
+                }
+            }
+            //TODO: trigger a structure wide point reevaluation!!!
+            //(not needed rn as any multistruct change rechecks EVERY other multistruct but for the future this is a note)
+        }
+
         /// <summary>
         /// returns (int) 0 in case there is no IngameServerComponent on the given entity
         /// </summary>

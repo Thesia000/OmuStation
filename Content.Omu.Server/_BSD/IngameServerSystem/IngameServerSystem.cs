@@ -13,6 +13,7 @@ using Content.Omu.Server._BSD.IngameServerSystem.Helpers;
 using Content.Omu.Server._BSD.IngameServerSystem.Components;
 using Content.Omu.Server._BSD.IngameServerSystem.Events;
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem;
+using Content.Omu.Server._BSD.MultiBlockSystem.Events;
 
 namespace Content.Omu.Server._BSD.IngameServerSystem;
 
@@ -27,6 +28,9 @@ public sealed partial class BSDIngameServerSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<IngameServerComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommand);
         SubscribeLocalEvent<IngameServerComponent, ComponentStartup>(OnComponentSetup);
+        SubscribeLocalEvent<IngameServerComponent, MultiStructChangeEvent>(OnMultistructUpdate);
+        //Point handeling
+        SubscribeLocalEvent<IngameServerPointCapacityComponent, MultiStructChangeEvent>(OnMultistructUpdatePointCapacity);
     }
     public override void Update(float frameTime)
     {
@@ -49,6 +53,10 @@ public sealed partial class BSDIngameServerSystem : EntitySystem
             if (!comp.InstalledPrograms.Contains((float) iterator.Type)) continue;
             comp.ActivePrograms.Add(iterator.Type, iterator);
         }
+    }
+    public void OnMultistructUpdate(Entity<IngameServerComponent> ent, ref MultiStructChangeEvent args)
+    {
+        return;
     }
     public void RunPrograms(EntityUid uid, IngameServerComponent comp)
     {

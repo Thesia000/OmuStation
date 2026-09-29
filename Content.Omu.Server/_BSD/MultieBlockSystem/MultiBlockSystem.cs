@@ -186,24 +186,23 @@ public sealed partial class BSDMultiBlockSystem : EntitySystem
                     {
                         continue;//this should never fail but ye know somethimes it may just happen
                     }
-                    if (!foundNodeComp.Claimed)
+                    temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
+                    foreach (ProtoId<MultiStructTypePrototype> iterator in foundNodeComp.StructureType)
                     {
-                        temp.Efficency = currentNode.Efficency * foundNodeComp.TransmissionEfficency;
-                        foreach (ProtoId<MultiStructTypePrototype> iterator in foundNodeComp.StructureType)
+                        temp.Type = iterator;
+                        if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null(and every EUID is unique so... yea)
                         {
-                            temp.Type = iterator;
-                            if (temp.Id != currentNode.Id)//this means there is no entity found but cant use null
+                            var foundTransComp = Transform(temp.Id);
+                            minX = Math.Min(minX, foundTransComp.LocalPosition.X);
+                            minY = Math.Min(minY, foundTransComp.LocalPosition.Y);
+                            maxX = Math.Max(maxX, foundTransComp.LocalPosition.X);
+                            maxY = Math.Max(maxY, foundTransComp.LocalPosition.Y);
+                            if (!foundSearchList.Contains(temp))//sadly only now can we test if this node already exists in the hashset
                             {
-                                var foundTransComp = Transform(temp.Id);
-                                minX = Math.Min(minX, foundTransComp.LocalPosition.X);
-                                minY = Math.Min(minY, foundTransComp.LocalPosition.Y);
-                                maxX = Math.Max(maxX, foundTransComp.LocalPosition.X);
-                                maxY = Math.Max(maxY, foundTransComp.LocalPosition.Y);
                                 toSearchList.Add(temp.Clone());
                                 foundSearchList.Add(temp.Clone());
                             }
                         }
-                        foundNodeComp.Claimed = true;
                     }
                 }
                 toSearchList.Remove(currentNode);

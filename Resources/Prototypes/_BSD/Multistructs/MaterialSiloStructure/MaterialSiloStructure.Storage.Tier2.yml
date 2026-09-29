@@ -1,0 +1,120 @@
+﻿#
+# Tier 1 materials
+#
+
+- type: entity
+  parent: [ MultistructPartBase ]
+  id: MaterialSiloMultistructStorageSteelTier2
+  name: MaterialSiloMultistructStorageSteelTier2Name
+  description: MaterialSiloMultistructStorageSteelTier2Desc
+  components:
+  - type: Sprite
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
+    layers:
+    - state: base
+    - state: steel
+  - type: IngameServerPointCapacity
+    CapacityExpansion:
+      Steel: 0 #100 additional sheets
+    MultistructScaling: true
+    MaxMultistructPower: 16
+    CapacityBaseline: 
+      Steel: 10000 #100 plates basline
+    CapacityLinearGrowth:
+      Steel: 20000 #200 plates per additional component
+  - type: MultiBlockStructure
+    allowedTypes:
+    - MaterialSiloSubSiloHull
+    - MaterialSiloSubSiloStorage
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - MaterialSiloSubSiloHull
+    - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
+    allowedConnectionTypesNorth:
+    - MaterialSiloSubSiloStorage
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesEast:
+    - MaterialSiloSubSiloHull
+    allowedConnectionTypesSouth:
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesWest:
+    - MaterialSiloSubSiloHull
+
+- type: entity
+  parent: [ MultistructPartBase ]
+  id: MaterialSiloMultistructStoragePlasticTier2
+  name: MaterialSiloMultistructStoragePlasticTier2Name
+  description: MaterialSiloMultistructStoragePlasticTier2Desc
+  components:
+  - type: Sprite
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
+    layers:
+    - state: base
+    - state: steel
+  - type: IngameServerPointCapacity
+    CapacityExpansion:
+      Plastic: 0 #100 additional sheets
+    MultistructScaling: true
+    MaxMultistructPower: 16
+    CapacityBaseline: 
+      Plastic: 10000 #100 plates basline
+    CapacityLinearGrowth:
+      Plastic: 20000 #200 plates per additional component
+  - type: MultiBlockStructure
+    allowedTypes:
+    - MaterialSiloSubSiloHull
+    - MaterialSiloSubSiloStorage
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - MaterialSiloSubSiloHull
+    - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
+    allowedConnectionTypesNorth:
+    - MaterialSiloSubSiloStorage
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesEast:
+    - MaterialSiloSubSiloHull
+    allowedConnectionTypesSouth:
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesWest:
+    - MaterialSiloSubSiloHull
+
+- type: entity
+  parent: [ MultistructPartBase ]
+  id: MaterialSiloMultistructStorageGlassTier2
+  name: MaterialSiloMultistructStorageGlassTier2Name
+  description: MaterialSiloMultistructStorageGlassTier2Desc
+  components:
+  - type: Sprite
+    sprite: _BSD/Structures/MaterialSiloTier1Storage.rsi
+    layers:
+    - state: base
+    - state: steel
+  - type: IngameServerPointCapacity
+    CapacityExpansion:
+      Glass: 0 #100 additional sheets
+    MultistructScaling: true
+    MaxMultistructPower: 16
+    CapacityBaseline: 
+      Glass: 10000 #100 plates basline
+    CapacityLinearGrowth:
+      Glass: 20000 #200 plates per additional component
+  - type: MultiBlockStructure
+    allowedTypes:
+    - MaterialSiloSubSiloHull
+    - MaterialSiloSubSiloStorage
+  - type: MultiBlockPart
+    transmissionEfficency: 1
+    structureType: 
+    - MaterialSiloSubSiloHull
+    - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
+    allowedConnectionTypesNorth:
+    - MaterialSiloSubSiloStorage
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesEast:
+    - MaterialSiloSubSiloHull
+    allowedConnectionTypesSouth:
+    - MaterialSiloStructureConnector
+    allowedConnectionTypesWest:
+    - MaterialSiloSubSiloHull
