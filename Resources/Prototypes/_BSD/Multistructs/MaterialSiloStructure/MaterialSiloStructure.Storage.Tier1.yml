@@ -196,7 +196,7 @@
     - state: plasma
   - type: IngameServerPointCapacity
     CapacityExpansion:
-      Uranium: 1000 #10 additional sheets
+      Plasma: 1000 #10 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
     structureType: 
