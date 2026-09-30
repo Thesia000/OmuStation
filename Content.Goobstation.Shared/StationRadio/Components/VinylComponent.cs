@@ -9,7 +9,7 @@ public sealed partial class VinylComponent : Component
     /// <summary>
     /// What song should be played when the vinyl is played
     /// </summary>
-    [DataField] public SoundPathSpecifier? Song;
+    [DataField] public SoundSpecifier? Song;
 
     /// <summary>
     /// Sets the volume of the sound track in %
