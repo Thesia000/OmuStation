@@ -15,7 +15,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Content.Shared.Verbs;
+
 
 namespace Content.Shared.Construction;
 
@@ -43,7 +43,6 @@ public abstract class SharedFlatpackSystem : EntitySystem
 
         SubscribeLocalEvent<FlatpackCreatorComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
 
-        SubscribeLocalEvent<FlatpackComponent, GetVerbsEvent<AlternativeVerb>>(OnAddInteractVerb);//Omu
     }
 
     private void OnInsertAttempt(Entity<FlatpackCreatorComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -60,22 +59,7 @@ public abstract class SharedFlatpackSystem : EntitySystem
         args.Cancelled = true;
     }
     //Omu start
-    private void OnAddInteractVerb(Entity<FlatpackComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!args.CanAccess || !args.CanInteract || args.Hands is null)
-            return;
-        if (ent.Comp.ToolNeeded) return;
-        var user = args.User;
-        AlternativeVerb verb = new()
-        {
-            Message = Loc.GetString("omu-flatpack-alt-click-message"),
-            Text = Loc.GetString("omu-flatpack-alt-click-text"),
-            Act = () => UnpackFlatpack(ent, user)
-        };
-
-        args.Verbs.Add(verb);
-    }
-    private void UnpackFlatpack(Entity<FlatpackComponent> ent, EntityUid user)
+    public void UnpackFlatpack(Entity<FlatpackComponent> ent, EntityUid user)
     {
         var (uid, comp) = ent;
         var xform = Transform(ent);
