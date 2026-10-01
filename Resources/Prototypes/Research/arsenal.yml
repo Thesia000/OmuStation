@@ -23,6 +23,7 @@
   - LavalandWeaponKineticMachete #omu
   - LavalandWeaponKineticClaws #omu
   - WeaponCrusherDagger #omu
+  - ClothingHandsConcussiveGauntlets #omu
   position: 1,1 # Goobstation R&D Console rework
 
 - type: technology
