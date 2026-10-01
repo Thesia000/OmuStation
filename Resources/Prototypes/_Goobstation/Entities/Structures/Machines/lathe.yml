@@ -136,7 +136,7 @@
     - ConstructionBagOfHolding
     - SalvageExplosivesStatic #it lies it is not static, omu
   - type: EmagLatheRecipes
-    emagStaticPacks:
+    #emagStaticPacks:
     #- SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
     emagDynamicPacks:
     - SecurityExplosives
