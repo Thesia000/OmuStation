@@ -61,7 +61,7 @@
   #- id: SurvivalMedipen #omu visit med
   #  cost: 1000 #Omu
   - id: SpaceCash5000
-    cost: 1000 #omu
+    cost: 10000 #omu
   #- id: PKAUpgradeRange #OMU
   #  cost: 1000 #OMU
   #- id: PKAUpgradeFireRate #OMU
@@ -122,7 +122,7 @@
   #- id: ClothingHandsConcussiveGauntlets # Omu
   #  cost: 4000 #OMU
   - id: SpaceCash50000 #Omu
-    cost: 9500 #Omu
+    cost: 10000 #Omu
   - id: ClothingNeckEnsembleSalvager #Earn. It.
     cost: 10000
   - id: BackpackPermaSalvage # Omu, Earn the drip
