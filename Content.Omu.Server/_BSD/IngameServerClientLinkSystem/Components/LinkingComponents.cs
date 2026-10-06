@@ -30,7 +30,7 @@ public sealed partial class IngameServerClientLinkInfrastructureComponent : Comp
     [DataField]
     public Dictionary<string, int> MaxAmountConnectionServerClient = new Dictionary<string, int>();
     /// <summary>
-    /// We are the client we try to link across the following Channels to available servers if available
+    /// We are the client we try to link across the following Channels to available servers if available, only establishes ONE link!!!!
     /// </summary>
     [DataField]
     public HashSet<ProtoId<IngameServerClientPrototypePrototype>> AutoLink = new();

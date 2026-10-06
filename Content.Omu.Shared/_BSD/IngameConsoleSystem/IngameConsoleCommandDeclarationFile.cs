@@ -23,7 +23,7 @@ public enum IngameConsoleCommandType
     ICC_SET,//Used to set variables
     //ISCL -> Ingame Server Client Link
     ISCL_PROXY_TERMINATE,//Used to disconnect from remote connection
-    ISCL_UNASSIGN,//removes a server client link
+    ISCL_UNASSIGN,//removes a server client link TOdo possibly mvoe this to be a ICC command instead
     SSA_FTL,//SignalSAlvage engaged FTL to destination(predefined by default)
 }
 public readonly struct IngameConsoleCommand
