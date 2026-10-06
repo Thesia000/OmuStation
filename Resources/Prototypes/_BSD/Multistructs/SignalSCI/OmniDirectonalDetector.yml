@@ -9,7 +9,7 @@
     allowedTypes:
     - ICC_PRINT
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorControll
     - OmniDirectionalDetectorHull
     allowedConnectionTypesNorth:
@@ -52,7 +52,7 @@
     - state: hullPlaceHolder
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorHull
     allowedConnectionTypesNorth:
     - OmniDirectionalDetectorSensor
@@ -77,7 +77,7 @@
     - state: hullCornerPlaceHolder
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorHull
     allowedConnectionTypesNorth:
     - EnergyTransfair
@@ -106,7 +106,7 @@
     supportedOperationMode: 1
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorSensor
     allowedConnectionTypesNorth:
     - NONE
@@ -131,7 +131,7 @@
     supportedOperationMode: 2
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorSensor
     allowedConnectionTypesNorth:
     - NONE
@@ -156,7 +156,7 @@
     supportedOperationMode: 3
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - OmniDirectionalDetectorSensor
     allowedConnectionTypesNorth:
     - NONE

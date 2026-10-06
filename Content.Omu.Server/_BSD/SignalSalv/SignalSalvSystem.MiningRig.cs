@@ -14,6 +14,7 @@ using Content.Shared.Interaction;
 
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
@@ -121,7 +122,15 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
                 newMiningRates.Add(iterator, (int) (mapResourceComp.MiningRates[iterator] * ent.Comp.MiningRateModifier));
             }
         SignalSalvMiningRigProductionChangeEvent ev = new(oldMiningRates, newMiningRates);
-        //RAISE THE EVENT!!!
+        //Setp one find the map where our station is located at rn (important cause this CAN change once the BSSD exists) -> jsut attach it to the station :3
+        //Possibly give the station a S-C-infra comp -> Station controll console?
+        //autolink to station but giving the station a S-C-infra comp allowes for multi stations to exist that all have resources produced seperatly
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var infraComp)) return;//we cant raise the event cause yea
+        if (!infraComp.EntityDicServer.ContainsKey("MaterialTransit")) return;//this basicly means we either disconnected it or the station no longer exists!!!
+        foreach (var iterator in infraComp.EntityDicServer["MaterialTransit"])//there should only be one less a admin messed something up
+        {
+            RaiseLocalEvent(iterator, ref ev);
+        }
     }
     #endregion
 }

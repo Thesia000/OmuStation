@@ -3,6 +3,7 @@ Evening this TXT file exists cause some channels are predefined already:
 List of current channels:
 - "ResearchPoints" -> used by things that want to add research points to a server [GRID WIDE]
 - "SiloNetwork" -> used by the silo network to distribute resources
+- "MaterialTransit" -> used by mining structures to move materials to grids [GLOBAL]
 - "LocalMatDistribution" -> used by the routers to link to the lathes
 - "Signal" -> used by the off station satelites to link to the Local controll [MAP WIDE]
 

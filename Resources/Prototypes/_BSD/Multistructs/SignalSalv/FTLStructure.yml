@@ -1,4 +1,16 @@
 ﻿- type: entity
+  id: FTLDriveControlEntityDEBUG
+  name: FTLDriveControlEntity
+  components:
+  - type: SignalSalvFtlDevice
+    jumpPointTolerance: 2500000
+    fTLCapacitiorsStoredCharge: 100
+    fTLCharge: 1
+  - type: MultiBlockStructure
+    allowedTypes:
+    - FTLDriveStructureCore
+
+- type: entity
   id: FTLDriveMultistructCoreDEBUG
   parent: [ MultistructBaseCore , BaseComputerAiAccess ]
   name: FTLDriveCoreName
@@ -9,13 +21,10 @@
     allowedTypes:
     - SSA_FTL
     - ICC_PRINT
-  - type: SignalSalvFtlDevice
-    jumpPointTolerance: 2500000
-    fTLCapacitiorsStoredCharge: 100
-    fTLCharge: 1
-  - type: MultiBlockEnergyManagment
+  - type: MultiBlockStructureCoreComponent
+    StructureCoreProdID: FTLDriveControlEntityDEBUG
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - FTLDriveStructureCore
     allowedConnectionTypesNorth:
     - ALL
@@ -25,10 +34,6 @@
     - ALL
     allowedConnectionTypesWest:
     - ALL
-  - type: MultiBlockStructure
-    allowedTypes:
-    - MaterialSiloReciver
-    - MaterialSiloStorageExtender
   - type: ActivatableUI
     key: enum.IngameConsoleUiKey.Key
   - type: UserInterface

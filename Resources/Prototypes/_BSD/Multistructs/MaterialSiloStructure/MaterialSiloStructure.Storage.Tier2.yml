@@ -28,7 +28,7 @@
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -68,7 +68,7 @@
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -108,7 +108,7 @@
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -143,16 +143,16 @@
     MultistructScaling: true
     MaxMultistructPower: 16
     CapacityBaseline: 
-      Gold: 10000 #100 plates basline
+      Gold: 3300 #33 plates basline
     CapacityLinearGrowth:
-      Gold: 20000 #200 plates per additional component
+      Gold: 6600 #66 plates per additional component
   - type: MultiBlockStructure
     allowedTypes:
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -183,16 +183,16 @@
     MultistructScaling: true
     MaxMultistructPower: 16
     CapacityBaseline: 
-      Silver: 10000 #100 plates basline
+      Silver: 3300 #33 plates basline
     CapacityLinearGrowth:
-      Silver: 20000 #200 plates per additional component
+      Silver: 6600 #66 plates per additional component
   - type: MultiBlockStructure
     allowedTypes:
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -223,16 +223,16 @@
     MultistructScaling: true
     MaxMultistructPower: 16
     CapacityBaseline: 
-      Uranium: 10000 #100 plates basline
+      Uranium: 3300 #33 plates basline
     CapacityLinearGrowth:
-      Uranium: 20000 #200 plates per additional component
+      Uranium: 6600 #66 plates per additional component
   - type: MultiBlockStructure
     allowedTypes:
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure
@@ -267,16 +267,16 @@
     MultistructScaling: true
     MaxMultistructPower: 16
     CapacityBaseline: 
-      Plasma: 10000 #100 plates basline
+      Plasma: 100 #10 plates basline
     CapacityLinearGrowth:
-      Plasma: 20000 #200 plates per additional component
+      Plasma: 2000 #20 plates per additional component
   - type: MultiBlockStructure
     allowedTypes:
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloStorage
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloSubSiloHull
     - MaterialSiloSubSiloCore
     - MaterialSiloStructureConnector #this is to permitt the master structure to connect via this substructure

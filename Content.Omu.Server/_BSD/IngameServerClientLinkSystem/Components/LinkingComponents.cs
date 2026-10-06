@@ -8,25 +8,41 @@ namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 public sealed partial class IngameServerClientLinkInfrastructureComponent : Component
 {
     /// <summary>
-    /// Components Present entity dic of connected to stated server
+    /// Components Present entity dic of connected to stated server (we are the client)
     /// </summary>
     [DataField]
     public Dictionary<string, HashSet<EntityUid>> EntityDicServer = new Dictionary<string, HashSet<EntityUid>>();
 
     /// <summary>
-    /// Components Present entity dic of connected clients
+    /// We are the client to how many servers we can connect, default is infinite if not declared!
+    /// </summary>
+    [DataField]
+    public Dictionary<string, int> MaxAmountConnectionClientServer = new Dictionary<string, int>();
+
+    /// <summary>
+    /// Components Present entity dic of connected clients (we are the server)
     /// </summary>
     [DataField]
     public Dictionary<string, HashSet<EntityUid>> EntityDicClient = new Dictionary<string, HashSet<EntityUid>>();
+    /// <summary>
+    /// We are the server to how many clients we can connect, default is infinite if not declared!
+    /// </summary>
+    [DataField]
+    public Dictionary<string, int> MaxAmountConnectionServerClient = new Dictionary<string, int>();
+    /// <summary>
+    /// We are the client we try to link across the following Channels to available servers if available
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<IngameServerClientPrototypePrototype>> AutoLink = new();
 
     /// <summary>
-    /// Types for when this acts as a cleint, cant be in ServerTypes
+    /// Types for when this acts as a cleint
     /// </summary>
     //[DataField]
     public HashSet<ProtoId<IngameServerClientPrototypePrototype>> ClientTypes = new HashSet<ProtoId<IngameServerClientPrototypePrototype>>();
 
     /// <summary>
-    /// Types for when this acts like a server, cant be in ClientTypes
+    /// Types for when this acts like a server
     /// </summary>
     //[DataField]
     public HashSet<ProtoId<IngameServerClientPrototypePrototype>> ServerTypes = new HashSet<ProtoId<IngameServerClientPrototypePrototype>>();

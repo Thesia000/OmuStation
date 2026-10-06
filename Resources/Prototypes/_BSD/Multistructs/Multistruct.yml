@@ -20,7 +20,7 @@
     damagePenalty: 0.1
   - type: Structure
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - None
     allowedConnectionTypesNorth:
     - ERROR-NONE
@@ -66,6 +66,16 @@
   - type: MultiBlockStructure
     AllowedTypes:
     - ERROR
+
+
+- type: entity
+  id: MultistructControllBase
+  abstract: true
+  suffix: controll entity
+  categories: [ HideSpawnMenu ]
+  name: Controll entity
+  desc: you should not be seeing this
+  components:
   - type: MultiBlockEnergyManagment
     EnergyProvidingTypes: 
     - EnergyTransfair
@@ -79,7 +89,7 @@
   abstract: true
   components:
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - EnergyTransfair
   - type: MultiBlockEnergyTransfair
   - type: ExaminableBattery
@@ -116,6 +126,6 @@
   abstract: true
   components:
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - EnergyCapacityProvider
   - type: MultiBlockEnergyStorage

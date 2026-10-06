@@ -10,7 +10,7 @@
     - ICC_SET
     - ICC_PRINT
   - type: MultiBlockPart
-    structureType: 
+    PartTypes: 
     - SignalDishControll
     allowedConnectionTypesNorth:
     - ALL
@@ -46,7 +46,7 @@
   components:
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - DishConnector
     allowedConnectionTypesNorth:
     - DishConnector
@@ -81,7 +81,7 @@
   components:
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - SignalAntennaBase
     allowedConnectionTypesNorth:
     - SignalAntenna
@@ -103,7 +103,7 @@
   components:
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - SignalAntenna
     allowedConnectionTypesNorth:
     - NONE
@@ -122,7 +122,7 @@
   components:
   - type: MultiBlockPart
     transmissionEfficency: 1.5 #intended to boost but also contributes itself to harveseting power
-    structureType: 
+    PartTypes: 
     - SignalDish
     allowedConnectionTypesNorth:
     - NONE
@@ -142,7 +142,7 @@
   - type: MultiBlockPart
     MachinePower: 5 #This is massive to encourage people to actually use them
     transmissionEfficency: 1.5
-    structureType: 
+    PartTypes: 
     - SignalDish
     allowedConnectionTypesNorth:
     - NONE

@@ -4,14 +4,21 @@ using Robust.Shared.Serialization;
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 [RegisterComponent]
+public sealed partial class MultiBlockStructureCoreComponent : Component
+{
+    /// <summary>
+    /// Prototype ID of the StructureControllComp
+    /// </summary>
+    [DataField]
+    public EntProtoId? StructureCoreProdID = null;
+}
+
+[RegisterComponent]
 //This is always present on origin blocks
 public sealed partial class MultiBlockStructureComponent : Component
 {
-    /// <summary>
-    /// Overall type of the main structure as 2 structure cores may not connect together if they are of the same type
-    /// </summary>
     [DataField]
-    public ProtoId<MultiStructTypePrototype> StructureType = new();
+    public EntityUid? LinkedOriginPart;
     /// <summary>
     /// if the structure can work
     /// </summary>

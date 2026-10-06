@@ -7,6 +7,7 @@ using Content.Omu.Server._BSD.IngameConsoleSystem.Components;
 
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem;
+using Content.Omu.Server._BSD.MultiBlockSystem.Components;
 
 
 namespace Content.Omu.Server._BSD.IngameConsoleSystem;
@@ -44,27 +45,35 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
         _uiSystem.SetUiState(ent.Owner, IngameConsoleUiKey.Key, state);
         return;
     }
-    public void IngameConsoleHistoryReset(Entity<IngameConsoleComponent> ent)
+    public void IngameConsoleHistoryReset(EntityUid ent)
     {
         if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
         comp.History = new List<string>(["Start"]);
         var state = new IngameConsoleBoundUserInterfaceState(
             comp.History.ToArray<string>());
-        _uiSystem.SetUiState(ent.Owner, IngameConsoleUiKey.Key, state);
+        _uiSystem.SetUiState(ent, IngameConsoleUiKey.Key, state);
         return;
     }
     #endregion
     #region Command handeling
     public void OnCommandAttempt(Entity<IngameConsoleComponent> ent, ref IngameConsoleCommandAttemptMessage args)
     {
+        EntityUid targetUid = ent;
+        if (TryComp<MultiBlockPartComponent>(ent, out var partComp))
+        {
+            if (partComp.ConstrollEntity != null)
+            {
+                targetUid = (EntityUid) partComp.ConstrollEntity;
+            }
+        }
         string[] splitInput = args.InputString.Split(' ');
         IngameConsoleCommandList ingameCommandList = new();
         if (!TryComp<IngameConsoleComponent>(ent, out var comp)) return;
         IngameConsoleHistoryChangeEvent evHistory = new(args.InputString);
         RaiseLocalEvent(ent, ref evHistory);
-        if (TryComp<IngameConsoleActiveProxyComponent>(ent, out var compProxy))
+        if (TryComp<IngameConsoleActiveProxyComponent>(targetUid, out var compProxy))
         {
-            if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var compInfra)) return;
+            if (!TryComp<IngameServerClientLinkInfrastructureComponent>(targetUid, out var compInfra)) return;
             string appendedString = "<PROXY FROM:" + compInfra.DeviceName + "(" + compInfra.NetworkId + ")send command:%n->";
             appendedString += args.InputString;
             OnProxyCommand(compProxy.ProxyTarget, splitInput, appendedString);
@@ -78,8 +87,8 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
             }
             if (iterator.Key != splitInput[0]) continue;
             if (iterator.ArgumentsNumberMin > splitInput.Length) continue;//ensure we got enought arguments
-            IngameConsoleCommandCalledEvent ev = new(iterator.Type, splitInput);//still ships the type with it, aka start reading AFTER index 0 
-            RaiseLocalEvent(ent, ref ev);
+            IngameConsoleCommandCalledEvent ev = new(iterator.Type, ent, splitInput);//still ships the type with it, aka start reading AFTER index 0 
+            RaiseLocalEvent(targetUid, ref ev);
             return;
         }
         return;
@@ -88,7 +97,7 @@ public sealed partial class BSDIngameConsoleSystem : EntitySystem
     {
         if (args.Type == IngameConsoleCommandType.ICC_CLS_EXCLUSIVE)
         {
-            IngameConsoleHistoryReset(ent);
+            IngameConsoleHistoryReset(args.TerminalUid);
         }
         else if (args.Type == IngameConsoleCommandType.ICC_PROXY && args.Args!.Length > 2 && args.Args[1] == "link")
         {

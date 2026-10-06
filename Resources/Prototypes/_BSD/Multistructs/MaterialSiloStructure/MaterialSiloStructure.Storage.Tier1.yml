@@ -17,7 +17,7 @@
       Steel: 10000 #100 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -46,7 +46,7 @@
       Plastic: 10000 #100 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -75,7 +75,7 @@
       Glass: 10000 #100 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -108,7 +108,7 @@
       Gold: 3300 #33 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -137,7 +137,7 @@
       Silver: 3300 #33 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -166,7 +166,7 @@
       Uranium: 3300 #33 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -199,7 +199,7 @@
       Plasma: 1000 #10 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -234,7 +234,7 @@
       Plastic: 3300 #33 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder
@@ -265,7 +265,7 @@
       Uranium: 1100 #11 additional sheets
   - type: MultiBlockPart
     transmissionEfficency: 1
-    structureType: 
+    PartTypes: 
     - MaterialSiloStructureStorageHolder
     allowedConnectionTypesNorth:
     - MaterialSiloStructureStorageHolder

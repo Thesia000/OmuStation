@@ -1,16 +1,18 @@
 using Robust.Shared.Prototypes;
 
 namespace Content.Omu.Server._BSD.MultiBlockSystem.Components;
-//TODO: should probably add a blacklist feature later on!!! -> note for thesia
+//TODO: should probably add a blacklist feature later on!!! -> note for thesia -> rewriting this rn so why not do this rn along side ajacency
 [RegisterComponent]
 
 public sealed partial class MultiBlockPartComponent : Component
 {
+    [DataField]
+    public EntityUid? ConstrollEntity;
     /// <summary>
     /// Type of the machine, varries from multiblock to multiblock
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<MultiStructTypePrototype>> StructureType = new();
+    public HashSet<ProtoId<MultiStructTypePrototype>> PartTypes = new();
 
     /// <summary>
     /// in witch directions the block allowes additions to itself

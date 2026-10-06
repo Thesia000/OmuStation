@@ -5,6 +5,7 @@ namespace Content.Omu.Shared._BSD.IngameConsoleSystem;
 
 [ByRefEvent]
 public readonly record struct IngameConsoleCommandCalledEvent(IngameConsoleCommandType Type,
+                                                                EntityUid TerminalUid,
                                                                 string[]? Args = null //still ships the type with it, aka start reading AFTER index 0
                                                                 );//raised on the entity that is effecting it
 
