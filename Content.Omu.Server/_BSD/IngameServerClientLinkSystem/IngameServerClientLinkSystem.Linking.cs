@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
@@ -9,6 +10,8 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         if (!TryComp<IngameServerClientLinkInfrastructureComponent>(startOfConnection, out var compStart)) return false;
         if (!TryComp<IngameServerClientLinkInfrastructureComponent>(targetOfConnection, out var compTarget)) return false;
         if (connectAsClient && compTarget.ServerNeedsToIniciate[channel]) return false;
+        if (compStart.MaxAmountConnectionClientServer.ContainsKey(channel) && compStart.MaxAmountConnectionClientServer[channel] < compStart.EntityDicClient[channel].Count) return false;
+        if (compTarget.MaxAmountConnectionServerClient.ContainsKey(channel) && compTarget.MaxAmountConnectionServerClient[channel] < compTarget.EntityDicServer[channel].Count) return false;
         if (!CheckTransmissionRange(startOfConnection, targetOfConnection, channel)) return false;
         compStart.EntityDicServer[channel].Add(targetOfConnection);
         compTarget.EntityDicClient[channel].Add(startOfConnection);
