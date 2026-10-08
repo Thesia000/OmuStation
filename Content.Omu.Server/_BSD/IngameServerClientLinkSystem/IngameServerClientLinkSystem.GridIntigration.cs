@@ -6,7 +6,7 @@ namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
 public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
 {
     private string[] _defaultGridServerTypes = ["MaterialTransit"];
-    private string[] _defaultGridClientTypes = ["MaterialTransit"];
+    private string[] _defaultGridClientTypes = [];
     public IngameServerClientLinkInfrastructureComponent TryAddSCICompToGridStandardGridSetup(EntityUid grid)
     {
         var comp = EnsureComp<IngameServerClientLinkInfrastructureComponent>(grid);
