@@ -24,6 +24,7 @@ public enum IngameConsoleCommandType
     //ISCL -> Ingame Server Client Link
     ISCL_PROXY_TERMINATE,//Used to disconnect from remote connection
     ISCL_UNASSIGN,//removes a server client link TOdo possibly mvoe this to be a ICC command instead
+    ISCL_REGISTER_GRID,//registers the grid
     SSA_FTL,//SignalSAlvage engaged FTL to destination(predefined by default)
 }
 public readonly struct IngameConsoleCommand
@@ -56,6 +57,7 @@ public readonly struct IngameConsoleCommandList
         List.Add(new IngameConsoleCommand("stop", IngameConsoleCommandType.ICC_STOP, 0));
         List.Add(new IngameConsoleCommand("cls", IngameConsoleCommandType.ICC_CLS_EXCLUSIVE, 0, true));
         List.Add(new IngameConsoleCommand("unassign", IngameConsoleCommandType.ISCL_UNASSIGN, 1));
+        List.Add(new IngameConsoleCommand("register_grid", IngameConsoleCommandType.ISCL_REGISTER_GRID, 0));
         List.Add(new IngameConsoleCommand("proxy", IngameConsoleCommandType.ICC_PROXY, 1));
         List.Add(new IngameConsoleCommand("proxy_terminate", IngameConsoleCommandType.ISCL_PROXY_TERMINATE, 1));
         List.Add(new IngameConsoleCommand("set", IngameConsoleCommandType.ICC_SET, 2));

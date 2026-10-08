@@ -129,6 +129,20 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
             IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_Category_Start", ("Category", args.Args[2])));
             RaiseLocalEvent(ent, ref ev);
         }
+        else if (args.Type == IngameConsoleCommandType.ISCL_REGISTER_GRID)
+        {
+            if (Transform(ent).GridUid == null)
+            {
+                IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_No_Grid_Found"));
+                RaiseLocalEvent(ent, ref ev);
+            }
+            else
+            {
+                TryAddSCICompToGridStandardGridSetup((EntityUid) Transform(ent).GridUid!);
+                IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("ISCL_Print_Grid_Registered"));
+                RaiseLocalEvent(ent, ref ev);
+            }
+        }
         return;
     }
     #endregion

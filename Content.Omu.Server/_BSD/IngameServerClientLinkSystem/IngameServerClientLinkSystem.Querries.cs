@@ -122,6 +122,19 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         }
         return false;
     }
+    public List<int> GetAllAvailableConnectionsNetID(EntityUid originEnt, string channel)
+    {
+        List<int> returnList = new();
+        var querry = EntityQueryEnumerator<IngameServerClientLinkInfrastructureComponent>();
+        while (querry.MoveNext(out var interatorEnt, out var iteratorComp))
+        {
+            if (CheckTransmissionRange(originEnt, interatorEnt, channel))
+            {
+                returnList.Add(iteratorComp.NetworkId);
+            }
+        }
+        return returnList;
+    }
     public bool CheckTransmissionRange(EntityUid entOne, EntityUid entTwo, string channel)
     {
         if (!TryComp<IngameServerClientLinkInfrastructureComponent>(entOne, out var compInfaOne)) return false;
