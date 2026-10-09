@@ -2,16 +2,12 @@ using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
-using Content.Omu.Server.MetashieldInformationBagles.Componets;
-
-
 namespace Content.Omu.Server.MetashieldInformationBagles.Commands;
 
 [AdminCommand(AdminFlags.Logs)]
 public sealed class PrintBrokenMetashield : IConsoleCommand
 {
     [Dependency] private readonly IEntityManager _entities = default!;
-
 
     public string Command => "printbrokenmetashields";
 
@@ -35,7 +31,6 @@ public sealed class PrintBrokenMetashield : IConsoleCommand
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
-
         return CompletionResult.Empty;
     }
 }

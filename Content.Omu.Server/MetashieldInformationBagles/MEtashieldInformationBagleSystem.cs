@@ -4,9 +4,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
 using Content.Shared.Database;
 
-
-
-using Content.Omu.Server.MetashieldInformationBagles.Componets;
+using Content.Omu.Server.MetashieldInformationBagles.Components;
 
 namespace Content.Omu.Server.MetashieldInformationBagles;
 
@@ -19,10 +17,10 @@ public sealed class MetashieldInformationBagleSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MetashieldInformationBagleComponent, UseInHandEvent>(OnBreack);
+        SubscribeLocalEvent<MetashieldInformationBagleComponent, UseInHandEvent>(OnBreak);
         SubscribeLocalEvent<RoundStartingEvent>(ResetOnRoundStart);
     }
-    public void OnBreack(Entity<MetashieldInformationBagleComponent> ent, ref UseInHandEvent args)
+    public void OnBreak(Entity<MetashieldInformationBagleComponent> ent, ref UseInHandEvent args)
     {
         var currentTime = _ticker.RoundDuration();
         string breakMessage = ent.Comp.MetashieldBroken;
@@ -38,4 +36,4 @@ public sealed class MetashieldInformationBagleSystem : EntitySystem
     {
         return _allBrokenMetashields;
     }
-};
+}

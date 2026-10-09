@@ -1,5 +1,4 @@
-
-namespace Content.Omu.Server.MetashieldInformationBagles.Componets;
+namespace Content.Omu.Server.MetashieldInformationBagles.Components;
 
 [RegisterComponent]
 public sealed partial class MetashieldInformationBagleComponent : Component
