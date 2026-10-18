@@ -24,7 +24,7 @@ public sealed partial class ToolComponent : Component
     ///     OMU in case we want to modify the speed a tool works at!! this gets reset when the tool is dropped to the default!!!
     /// </summary>
     [DataField]
-    public float ModifiedSpeedModifier = 1f;
+    public float BaseSpeedModifier = 1f;
     [DataField]
     public bool PreventUse = false;
 

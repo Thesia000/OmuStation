@@ -27,7 +27,7 @@
       - Prying
     useSound: /Audio/Items/jaws_pry.ogg
   - type: Prying
-    speedModifier: 1.5
+    baseSpeedModifier: 1.5 #omu
     pryPowered: true
     useSound: /Audio/Items/jaws_pry.ogg
   - type: UseDelay # Goobstation - For insta prying
@@ -93,7 +93,7 @@
     size: Normal
   - type: Prying
     force: true
-    speedModifier: 3.0
+    baseSpeedModifier: 3.0 #omu
   - type: MultipleTool
     entries:
       - behavior: Prying

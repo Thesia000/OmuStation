@@ -15,17 +15,17 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
 {
     public void StartUpToolCompModification(Entity<ToolComponent> ent, ref ComponentStartup args)
     {
-        ent.Comp.ModifiedSpeedModifier = ent.Comp.SpeedModifier;
+        ent.Comp.SpeedModifier = ent.Comp.BaseSpeedModifier;
     }
     public void ModifyToolComponent(ToolComponent toolComp, EntityUid user, EntityUid item)
     {
-        toolComp.ModifiedSpeedModifier = toolComp.SpeedModifier;
-        toolComp.ModifiedSpeedModifier *= GetSkillSpeedModifier(user, item, out var cancle);
+        toolComp.SpeedModifier = toolComp.BaseSpeedModifier;
+        toolComp.SpeedModifier *= GetSkillSpeedModifier(user, item, out var cancle);
         toolComp.PreventUse = cancle;
     }
     public void ResetToolComponent(ToolComponent comp)
     {
-        comp.ModifiedSpeedModifier = comp.SpeedModifier;
+        comp.SpeedModifier = comp.BaseSpeedModifier;
         comp.PreventUse = false;
     }
     public void StartUpHealingCompModification(Entity<HealingComponent> ent, ref ComponentStartup args)

@@ -76,3 +76,14 @@ public sealed partial class SkillGrantingComponent : Component
     [DataField]
     public bool DestroyAfterUse = true;
 }
+
+[RegisterComponent]
+public sealed partial class SkillStaminaAjustmentComponent : Component
+{
+    [DataField]
+    public HashSet<ProtoId<SkillNamePrototype>> Skill = new();
+    [DataField]
+    public Dictionary<ProtoId<SkillNamePrototype>, float> StaminaRegenModifiers = new();
+    [DataField]
+    public Dictionary<int, float> ParsedStaminaRegenModifiers = new();
+}

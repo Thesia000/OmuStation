@@ -1,4 +1,5 @@
 using Content.Omu.Server.SkillSystem.Components;
+using Content.Omu.Server.SkillSystem.Events;
 using Content.Omu.Common.SkillSystem;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
@@ -30,6 +31,8 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
         {
             CheckSpeciesBasedAdditions(ent, skillComp, speciesBased);
         }
+        SkillLevelChengeEvent ev = new();
+        RaiseLocalEvent(ent, ref ev);
     }
     public void CheckSpeciesBasedAdditions(EntityUid ent, SkillHolderComponent skillComp, SpeciesBasedSkillAdditionComponent speciesBasedComp)
     {
@@ -70,5 +73,7 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
         {
             CheckSpeciesBasedAdditions(ent, skillComp, speciesBased);
         }
+        SkillLevelChengeEvent ev = new();
+        RaiseLocalEvent(ent, ref ev);
     }
 }

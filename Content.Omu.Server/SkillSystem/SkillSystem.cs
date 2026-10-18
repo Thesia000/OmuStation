@@ -1,6 +1,7 @@
 using System.Numerics;
 using Robust.Shared.Prototypes;
 using Content.Omu.Server.SkillSystem.Components;
+using Content.Omu.Server.SkillSystem.Events;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
@@ -11,6 +12,7 @@ using Content.Shared.Medical.Healing;
 using Content.Shared.Mind.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Content.Shared.Clothing;
+using Content.Shared.Damage.Components;
 
 namespace Content.Omu.Server.SkillSystem;
 
@@ -28,6 +30,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<SkillRequermentComponent, GotUnequippedHandEvent>(ResetToolSpeed);
 
         SubscribeLocalEvent<SkillRequermentComponent, ComponentStartup>(RequStartUp);
+        SubscribeLocalEvent<SkillStaminaAjustmentComponent, ComponentStartup>(StaminaAjustStartup);
 
         SubscribeLocalEvent<RoundStartSkillGrantingComponent, MindAddedMessage>(RoundStartSkillGrantingStartup);
         SubscribeLocalEvent<RoundStartSkillGrantingComponent, ComponentStartup>(RoundStartSkillGrantingStartup);
@@ -36,6 +39,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         //Wizden components
         SubscribeLocalEvent<ToolComponent, ComponentStartup>(StartUpToolCompModification);
         SubscribeLocalEvent<HealingComponent, ComponentStartup>(StartUpHealingCompModification);
+        SubscribeLocalEvent<SkillStaminaAjustmentComponent, SkillLevelChengeEvent>(SkillStaminaModification);
         //Shitmed components
         SubscribeLocalEvent<BoneGelComponent, ComponentStartup>(StartUpShitmedToolCompModification);
         SubscribeLocalEvent<BoneSawComponent, ComponentStartup>(StartUpShitmedToolCompModification);
@@ -64,6 +68,23 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
                     return;
                 }
                 ent.Comp.ParsedModifiers.Add(parsedInt, ent.Comp.SpeedModifier[iterator]);
+            }
+        }
+    }
+    public void StaminaAjustStartup(Entity<SkillStaminaAjustmentComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.ParsedStaminaRegenModifiers = new();
+        foreach (var iterator in ent.Comp.StaminaRegenModifiers.Keys)
+        {
+            if (int.TryParse(iterator, out var parsedInt))
+            {
+                if (ent.Comp.StaminaRegenModifiers[iterator] == 0)
+                {
+                    Log.Error("WARNING SKILL COMPONENT SPEED MODIFER WAS EQUAL TO ZERO not permitted.");
+                    RemComp<SkillRequermentComponent>(ent);
+                    return;
+                }
+                ent.Comp.ParsedStaminaRegenModifiers.Add(parsedInt, ent.Comp.StaminaRegenModifiers[iterator]);
             }
         }
     }
@@ -188,6 +209,8 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         {
             QueueDel(ent);
         }
+        SkillLevelChengeEvent ev = new();
+        RaiseLocalEvent(ent, ref ev);
     }
     public void ModifyToolSpeed(Entity<SkillRequermentComponent> ent, ref GotEquippedHandEvent args)
     {
