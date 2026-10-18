@@ -58,6 +58,21 @@ public abstract class SharedFlatpackSystem : EntitySystem
 
         args.Cancelled = true;
     }
+
+    private void OnFlatpackInteractUsing(Entity<FlatpackComponent> ent, ref InteractUsingEvent args)
+    {
+        var (uid, comp) = ent;
+        if (!comp.ToolNeeded || !_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))//omu
+            return;
+        var xform = Transform(ent);
+        if (xform.GridUid is not { } grid || !TryComp<MapGridComponent>(grid, out var gridComp))//this check is done twice, mainly to ensure that the event is properly handeled
+            return;
+        args.Handled = true;
+        //Moved the flatpack unboxing to its own function this function remains so upstream does not want to die
+        // TODO for upstreamer move the changes to the flatpack that checks for free tile into the new UnpackFlatpack() function instead thanks ^^ (some wizden PR)
+        UnpackFlatpack(ent, args.User);//Omu
+    }
+
     //Omu start
     public void UnpackFlatpack(Entity<FlatpackComponent> ent, EntityUid user)
     {
@@ -100,20 +115,6 @@ public abstract class SharedFlatpackSystem : EntitySystem
         _audio.PlayPredicted(comp.UnpackSound, ent, user);
     }
     //Omu end
-
-    private void OnFlatpackInteractUsing(Entity<FlatpackComponent> ent, ref InteractUsingEvent args)
-    {
-        var (uid, comp) = ent;
-        if (!comp.ToolNeeded || !_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))//omu
-            return;
-        var xform = Transform(ent);
-        if (xform.GridUid is not { } grid || !TryComp<MapGridComponent>(grid, out var gridComp))//this check is done twice, mainly to ensure that the event is properly handeled
-            return;
-        args.Handled = true;
-        //Moved the flatpack unboxing to its own function this function remains so upstream does not want to die
-        // TODO for upstreamer move the changes to the flatpack that checks for free tile into the new UnpackFlatpack() function instead thanks ^^ (some wizden PR)
-        UnpackFlatpack(ent, args.User);//Omu
-    }
 
     private void OnFlatpackExamined(Entity<FlatpackComponent> ent, ref ExaminedEvent args)
     {
