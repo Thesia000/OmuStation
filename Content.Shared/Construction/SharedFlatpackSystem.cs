@@ -16,7 +16,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Shared.Construction;
 
 public abstract class SharedFlatpackSystem : EntitySystem
