@@ -137,14 +137,14 @@
 #Omu start
 - type: entity
   name: welding tool
-  parent: [ WelderBase ]
+  parent: [ WelderBase, BaseEngineeringSkillRequirments ]
   id: Welder
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
 #Omu end
 
 - type: entity
   name: industrial welding tool
-  parent: Welder
+  parent: [ WelderBase, BaseEngineeringSkillRequirments ]
   id: WelderIndustrial
   description: "An industrial welder with over double the fuel capacity."
   components:
@@ -182,7 +182,7 @@
 
 - type: entity
   name: experimental welding tool
-  parent: Welder
+  parent: [ WelderBase, BaseEngineeringSkillRequirmentsHard ]
   id: WelderExperimental
   description: "An experimental welder capable of self-fuel generation and less harmful to the eyes."
   components:
@@ -223,7 +223,7 @@
 
 - type: entity
   name: emergency welding tool
-  parent: WelderBase
+  parent: [ WelderBase, BaseEngineeringSkillRequirmentsEasy ]
   id: WelderMini
   description: "A miniature welder used during emergencies."
   components:

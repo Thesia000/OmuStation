@@ -51,6 +51,18 @@
     components:
       - type: CommandStaff
       - type: QuartermasterTraining
+      - type: RoundStartSkillGranting #omu skill system 
+        skillDic:
+          Cargo: 3
+          Command: 2
+      - type: SpeciesBasedSkillAddition #omu skill system
+        skillDic:
+          Harpy:
+            Cargo: -1
+            Combat: -1
+            Command: 1
+            Engineering: -1
+            Medical: -1
 
 - type: startingGear
   id: QuartermasterGear

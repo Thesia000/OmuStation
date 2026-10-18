@@ -2,7 +2,7 @@
 
 - type: entity
   name: jaws of life
-  parent: [BaseItem , BaseParamedicEngineeringContraband ] #omu
+  parent: [BaseItem , BaseParamedicEngineeringContraband, BaseEngineeringMedicalSkillRequirmentsHard ] #omu
   id: JawsOfLifeBase # Goobstation - Recycler Update
   abstract: true
   description: A set of jaws of life, compressed through the magic of science.
@@ -77,7 +77,7 @@
 
 - type: entity
   name: syndicate jaws of life
-  parent: [JawsOfLifeBase, BaseSyndicateContraband]
+  parent: [JawsOfLifeBase, BaseSyndicateContraband, BaseEngineeringMedicalSkillRequirments]
   id: SyndicateJawsOfLife
   description: Useful for entering the station or its departments.
   components:

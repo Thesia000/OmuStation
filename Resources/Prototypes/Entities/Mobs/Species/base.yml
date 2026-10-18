@@ -263,6 +263,7 @@
   #- type: VisibleContraband # Goobstation - Omu not here
   - type: MomentumSteering # Goobstation - No steer
   - type: Tackler # Trauma
+  - type: RoundStartSkillGranting #OMU skill system
 
 - type: entity
   save: false
