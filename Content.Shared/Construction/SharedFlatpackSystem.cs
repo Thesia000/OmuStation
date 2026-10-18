@@ -41,7 +41,6 @@ public abstract class SharedFlatpackSystem : EntitySystem
         SubscribeLocalEvent<FlatpackComponent, ExaminedEvent>(OnFlatpackExamined);
 
         SubscribeLocalEvent<FlatpackCreatorComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
-
     }
 
     private void OnInsertAttempt(Entity<FlatpackCreatorComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -64,6 +63,7 @@ public abstract class SharedFlatpackSystem : EntitySystem
         if (!comp.ToolNeeded || !_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))//omu
             return;
         var xform = Transform(ent);
+        
         if (xform.GridUid is not { } grid || !TryComp<MapGridComponent>(grid, out var gridComp))//this check is done twice, mainly to ensure that the event is properly handeled
             return;
         args.Handled = true;
