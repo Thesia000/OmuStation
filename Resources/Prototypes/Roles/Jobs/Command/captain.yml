@@ -53,6 +53,7 @@
       - type: CommandStaff
       - type: Condemned # Goobstation - Nanotrasen owns your soul pal.
         soulOwnedNotDevil: true
+      - type: CommandSkill
       - type: RoundStartSkillGranting #omu skill system 
         skillDic:
           Cargo: 2

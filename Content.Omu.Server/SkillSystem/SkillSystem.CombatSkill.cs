@@ -1,35 +1,21 @@
-using System.Numerics;
-using Robust.Shared.Prototypes;
 using Content.Omu.Server.SkillSystem.Components;
-using Content.Shared.Examine;
-using Content.Shared.Interaction.Events;
-using Robust.Shared.Map;
-using Content.Shared.Tools.Components;
-using Content.Shared.Hands;
 using Content.Omu.Common.SkillSystem;
-using Content.Shared.Medical.Healing;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mind.Components;
 using Content.Omu.Server.SkillSystem.Events;
+using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Omu.Server.SkillSystem;
 
 public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
 {
-    public void StartUpMelleWeaponCompModification(Entity<ToolComponent> ent, ref ComponentStartup args)
+    public void ModifyRangedWeaponComponent(Entity<SkillRequermentComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        ent.Comp.SpeedModifier = ent.Comp.BaseSpeedModifier;
-    }
-    public void ModifyMelleWeaponComponent(ToolComponent toolComp, EntityUid user, EntityUid item)
-    {
-        toolComp.SpeedModifier = toolComp.BaseSpeedModifier;
-        toolComp.SpeedModifier *= GetSkillSpeedModifier(user, item, out var cancle);
-        toolComp.PreventUse = cancle;
-    }
-    public void ResetMelleWeaponComponent(ToolComponent comp)
-    {
-        comp.SpeedModifier = comp.BaseSpeedModifier;
-        comp.PreventUse = false;
+        if (args.User == null) return;
+        //if (!TryComp<SkillRequermentComponent>(ent, out var _)) return; -> not needed as default is 1.0f
+        var modifier = GetSkillSpeedModifier((EntityUid) args.User, ent.Comp, out var cancle);
+        args.MaxAngle *= modifier;
+        args.MinAngle *= modifier;
     }
     public void SkillStaminaModification(Entity<SkillStaminaAjustmentComponent> ent, ref SkillLevelChengeEvent args)
     {

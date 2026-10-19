@@ -57,7 +57,9 @@ public sealed partial class CommandSkillComponent : Component
     [DataField]
     public HashSet<ProtoId<DepartmentNamePrototype>> EffectedDepartments = new();
     [DataField]
-    public Dictionary<int, float> SpeedModifier = new();
+    public Dictionary<ProtoId<SkillNamePrototype>, float> SpeedModifier = new();
+    [DataField]
+    public Dictionary<int, float> ParsedSpeedModifier = new();
 }
 // <summary>
 // This component should only be on CCOs and Mentor roles!!!!

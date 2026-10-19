@@ -12,7 +12,7 @@ using Content.Shared.Medical.Healing;
 using Content.Shared.Mind.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Content.Shared.Clothing;
-using Content.Shared.Damage.Components;
+using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Omu.Server.SkillSystem;
 
@@ -40,6 +40,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<ToolComponent, ComponentStartup>(StartUpToolCompModification);
         SubscribeLocalEvent<HealingComponent, ComponentStartup>(StartUpHealingCompModification);
         SubscribeLocalEvent<SkillStaminaAjustmentComponent, SkillLevelChengeEvent>(SkillStaminaModification);
+        SubscribeLocalEvent<SkillRequermentComponent, GunRefreshModifiersEvent>(ModifyRangedWeaponComponent);
         //Shitmed components
         SubscribeLocalEvent<BoneGelComponent, ComponentStartup>(StartUpShitmedToolCompModification);
         SubscribeLocalEvent<BoneSawComponent, ComponentStartup>(StartUpShitmedToolCompModification);
@@ -151,7 +152,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
             var refCords = Transform(commandUid).Coordinates;
             if (Transform(commandUid).MapID != refMapID) continue;
             if (Vector2.Distance(refCords.Position, centerCords.Position) > commandSkillComp.Range) continue;
-            float commandSpeedMod = GetHighestModifier(commandSkillComp.SpeedModifier, skillComp.SkillDic["command"]);
+            float commandSpeedMod = GetHighestModifier(commandSkillComp.ParsedSpeedModifier, skillComp.SkillDic["command"]);
             if (highestSpeedMod < commandSpeedMod)
             {
                 highestSpeedMod = commandSpeedMod;
