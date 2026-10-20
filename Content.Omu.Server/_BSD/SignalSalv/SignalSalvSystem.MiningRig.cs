@@ -18,7 +18,7 @@ using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem
 {
     #region  User Interfacing
     public void IngameConsoleCommandSignalSalvMiningRig(Entity<SignalSalvMiningRigStructreComponent> ent, ref IngameConsoleCommandCalledEvent args)
@@ -27,7 +27,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
         {
             MiningRigRecalculation(ent, overRide: true);
             IngameConsoleHistoryChangeEvent ev = new("-> Machine started");
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
             //Now add stuff to history to update that it worked;
         }
     }
@@ -50,15 +50,17 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
         if (args.Handled || !args.CanReach || args.Target is not { } target)
             return;
 
-        if (!HasComp<SignalSalvMiningRigStructreComponent>(target))
+        if (!TryComp<MultiBlockPartComponent>(args.Target, out var multiStructPartComp))
             return;
+        if (multiStructPartComp.ConstrollEntity == null) return;
         float deltaData = ent.Comp.OutpostData;
         if (ent.Comp.OutpostDataRandom)
         {
             deltaData = rand.NextFloat(ent.Comp.OutpostDataMin, ent.Comp.OutpostDataMax);
         }
-        TryAddAdditonalRandomMaterialToPlanetMining(target);
-        MiningRigRecalculationOutpostDataChange(target, deltaData);
+        TryAddAdditonalRandomMaterialToPlanetMining((EntityUid) multiStructPartComp.ConstrollEntity);
+        MiningRigRecalculationOutpostDataChange((EntityUid) multiStructPartComp.ConstrollEntity, deltaData);
+        QueueDel(ent);
     }
     public bool TryAddAdditonalRandomMaterialToPlanetMining(EntityUid ent)
     {
@@ -76,7 +78,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
                 Material randomSpecialMat = MaterialMiningRatesBase.SpecialMaterials.ElementAt((int) rand.NextInt64(0, MaterialMiningRatesBase.SpecialMaterials.Count));
                 if (!mapResourceComp.MiningRates.ContainsKey(randomSpecialMat.MaterialType))
                 {
-                    mapResourceComp.MiningRates.Add(randomSpecialMat.MaterialType, (int) rand.NextInt64(randomSpecialMat.MinResoucePerSecond, randomSpecialMat.MaxResoucePerSecond));
+                    mapResourceComp.MiningRates.Add(randomSpecialMat.MaterialType, (int) rand.NextFloat(randomSpecialMat.MinResoucePerSecond, randomSpecialMat.MaxResoucePerSecond));
                     returnBool = true;
                     break;
                 }
@@ -89,7 +91,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
             Material randomAdvancedMat = MaterialMiningRatesBase.AdvancedMaterials.ElementAt((int) rand.NextInt64(0, MaterialMiningRatesBase.AdvancedMaterials.Count));
             if (!mapResourceComp.MiningRates.ContainsKey(randomAdvancedMat.MaterialType))
             {
-                mapResourceComp.MiningRates.Add(randomAdvancedMat.MaterialType, (int) rand.NextInt64(randomAdvancedMat.MinResoucePerSecond, randomAdvancedMat.MaxResoucePerSecond));
+                mapResourceComp.MiningRates.Add(randomAdvancedMat.MaterialType, (int) rand.NextFloat(randomAdvancedMat.MinResoucePerSecond, randomAdvancedMat.MaxResoucePerSecond));
                 returnBool = true;
                 break;
             }
@@ -122,15 +124,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
                 newMiningRates.Add(iterator, (int) (mapResourceComp.MiningRates[iterator] * ent.Comp.MiningRateModifier));
             }
         SignalSalvMiningRigProductionChangeEvent ev = new(oldMiningRates, newMiningRates);
-        //Setp one find the map where our station is located at rn (important cause this CAN change once the BSSD exists) -> jsut attach it to the station :3
-        //Possibly give the station a S-C-infra comp -> Station controll console?
-        //autolink to station but giving the station a S-C-infra comp allowes for multi stations to exist that all have resources produced seperatly
-        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(ent, out var infraComp)) return;//we cant raise the event cause yea
-        if (!infraComp.EntityDicServer.ContainsKey("MaterialTransit")) return;//this basicly means we either disconnected it or the station no longer exists!!!
-        foreach (var iterator in infraComp.EntityDicServer["MaterialTransit"])//there should only be one less a admin messed something up
-        {
-            RaiseLocalEvent(iterator, ref ev);
-        }
+        RaiseLocalEvent(ref ev);
     }
     #endregion
 }

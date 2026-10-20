@@ -19,10 +19,10 @@
     allowedTypes:
     - ICC_Start
     - ICC_PRINT
-  - type: MultiBlockStructureCoreComponent
-    StructureCoreProdID: PlanetaryMiningRigControllEntity
+  - type: MultiBlockStructureCore
+    structureCoreProdID: PlanetaryMiningRigControllEntity
   - type: MultiBlockPart
-    PartTypes: 
+    partTypes: 
     - PlanetaryMiningRigStructureCore
     allowedConnectionTypesNorth:
     - ALL

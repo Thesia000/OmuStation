@@ -23,25 +23,14 @@ public sealed class ChangeMaterialIncome : IConsoleCommand
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        BSDSignalSalvSystem sigSalvSys = _entities.System<BSDSignalSalvSystem>();
+        BSDSignalSalvMaterialTransitSystem sigSalvmatTransSys = _entities.System<BSDSignalSalvMaterialTransitSystem>();
         //ensure we can execute it first
-        if (args.Length < 3)
+        if (args.Length < 2)
         {
             shell.WriteError(Loc.GetString($"shell-wrong-arguments-number"));
             return;
         }
-        if (!int.TryParse(args[2], out var prasedMapId))
-        {
-            shell.WriteError(Loc.GetString("map ID was not a number"));
-            return;
-        }
-        if (!sigSalvSys.ValidateMap(prasedMapId, out var mapUid) || mapUid == null)
-        {
-            shell.WriteError(Loc.GetString("map does not exist"));
-            return;
-        }
-        SignalSalvMaterialTransitMapComponent comp = sigSalvSys.SetupMapMaterialTransitComp((EntityUid) mapUid!);//ensure we actually have the comp present
-        if (!sigSalvSys.ValidMaterial(args[0]))
+        if (!sigSalvmatTransSys.ValidMaterial(args[0]))
         {
             shell.WriteError(Loc.GetString("Invalid material type"));
             return;
@@ -51,7 +40,7 @@ public sealed class ChangeMaterialIncome : IConsoleCommand
             shell.WriteError(Loc.GetString("production rate was not a number"));
             return;
         }
-        sigSalvSys.OverrideProductionRate(comp, args[0], prasedProdRate);
+        sigSalvmatTransSys.OverrideProductionRate(args[0], prasedProdRate);
         shell.WriteLine("Production rate has been altered");
     }
 

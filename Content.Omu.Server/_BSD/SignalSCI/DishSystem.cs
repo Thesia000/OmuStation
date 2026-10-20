@@ -54,7 +54,7 @@ public sealed partial class SignalDishSystem : EntitySystem
         if (args.Type == IngameConsoleCommandType.ICC_SET && args.Args!.Length > 2)
         {
             IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_Dish_Orientation_Set", ("Variable", args.Args[1]), ("Value", args.Args[2])));
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
             UpdateVariableIngameConsoleCommand(args.Args[1], args.Args[2], ent.Comp);
         }
     }

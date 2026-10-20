@@ -44,8 +44,8 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 2 && args.Args[1] == "signal")
         {
             IngameConsoleHistoryChangeEvent ev = new(Loc.GetString("SSI_ODD_print_hint", ("Type", args.Args[2])));
-            RaiseLocalEvent(ent, ref ev);
-            PrintHint(ent, args.Args[2]);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
+            PrintHint(ent, args.Args[2], args.TerminalUid);
             return;
         }
     }
@@ -87,7 +87,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         return returnValue;
     }
 
-    public void PrintHint(Entity<SignalSciOmniDirectonalDetectorComponent> ent, string type)
+    public void PrintHint(Entity<SignalSciOmniDirectonalDetectorComponent> ent, string type, EntityUid terminalUid)
     {
         EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(ent).MapID);
         if (mapUid == EntityUid.Invalid) return;
@@ -101,7 +101,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
             foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Standard])
             {
                 IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier1(iterator, ent.Comp));
-                RaiseLocalEvent(ent, ref ev);
+                RaiseLocalEvent(terminalUid, ref ev);
             }
             return;
         }
@@ -110,7 +110,7 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
             foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Enhanced])
             {
                 IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier2(iterator, ent.Comp));
-                RaiseLocalEvent(ent, ref ev);
+                RaiseLocalEvent(terminalUid, ref ev);
             }
             return;
         }
@@ -118,13 +118,13 @@ public sealed partial class OmniDirectionalDetectorSystem : EntitySystem
         {
             foreach (var iterator in compSigMap.SignalList[SignalSciOmniDirectonalDetectorOperationMode.Bluespace])
             {
-                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier3(iterator, ent.Comp, ent));
-                RaiseLocalEvent(ent, ref ev);
+                IngameConsoleHistoryChangeEvent ev = new(GenerateHintDataTier3(iterator, ent.Comp, terminalUid));
+                RaiseLocalEvent(terminalUid, ref ev);
             }
             return;
         }
         IngameConsoleHistoryChangeEvent ev2 = new("ERROR FAILED TO GENERATE TYPE UNKNOWN:" + type + " \nMAX OPERATION:" + maxOpMode);
-        RaiseLocalEvent(ent, ref ev2);
+        RaiseLocalEvent(terminalUid, ref ev2);
         return;
     }
 

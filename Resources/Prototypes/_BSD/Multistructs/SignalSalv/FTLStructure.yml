@@ -21,7 +21,7 @@
     allowedTypes:
     - SSA_FTL
     - ICC_PRINT
-  - type: MultiBlockStructureCoreComponent
+  - type: MultiBlockStructureCore
     StructureCoreProdID: FTLDriveControlEntityDEBUG
   - type: MultiBlockPart
     PartTypes: 

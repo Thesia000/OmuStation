@@ -41,7 +41,7 @@ using Content.Shared.Shuttles.Systems;
 
 namespace Content.Omu.Server._BSD.SignalSalv;
 
-public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSystem
+public sealed partial class BSDSignalSalvSystem : EntitySystem
 {
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedMapSystem _mapSys = default!;
@@ -52,16 +52,15 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly BSDIngameServerSystem _ingameServer = default!;
+    [Dependency] private readonly BSDSignalSalvMaterialTransitSystem _materialTransitSystem = default!;
 
-    private static readonly TotalMaterialMiningRateList MaterialMiningRatesBase = new();
+    public static readonly CompleteMaterialList MaterialMiningRatesBase = new();
     private static readonly ProtoId<BiomeTemplatePrototype> BiomeTemplate = "Continental";
     public const string PlanetGenerationSettingsDiskSlotName = "PlanetGenerationSettingsDiskSlotName";
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<SignalSalvFtlDeviceComponent, ComponentInit>(OnInitFTLDrive);
-
-        SubscribeLocalEvent<SignalSalvMaterialTransitMapComponent, SignalSalvMiningRigProductionChangeEvent>(UpdateProductionRates);
 
         SubscribeLocalEvent<SignalSalvMaterialReciverStructureComponent, IngameConsoleCommandCalledEvent>(IngameConsoleCommandMatReciver);
 
@@ -77,12 +76,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var queryMatInTransit = EntityQueryEnumerator<SignalSalvMaterialTransitMapComponent>();
         var queryFTLDrives = EntityQueryEnumerator<SignalSalvFtlDeviceComponent>();
-        while (queryMatInTransit.MoveNext(out var mapEnt, out var comp))
-        {
-            MaterialProductionTimeBased(mapEnt, comp);
-        }
         while (queryFTLDrives.MoveNext(out var driveEnt, out var drivecomp))
         {
             ChargeFTLCapacitiors(driveEnt, drivecomp);
@@ -101,49 +95,45 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
         if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "jump")
         {
             IngameConsoleHistoryChangeEvent ev = new("-> FTL Attempt started");
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
             GenerateExpeditionMapAndFTL(ent, ent.Comp);
         }
         else if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "calculate")
         {
             IngameConsoleHistoryChangeEvent ev = new("-> FTL Coordinates calculated");
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
             GenerateJumpPoint(ent.Comp);
         }
         else if (args.Type == IngameConsoleCommandType.SSA_FTL && args.Args!.Length > 1 && args.Args[1] == "return")
         {
             IngameConsoleHistoryChangeEvent ev = new("-> Returning to station");
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
             ReturnToStationSceduleDeleteMap(ent, ent.Comp);
         }
         else if (args.Type == IngameConsoleCommandType.ICC_PRINT && args.Args!.Length > 1 && args.Args[1] == "ftl")
         {
             IngameConsoleHistoryChangeEvent ev = new(PrintFTLStatus(ent));
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(args.TerminalUid, ref ev);
         }
     }
+    //TODO move this function into the MiningMaterialTransitSystem
     private string PrintMaterialInbound(EntityUid uidReciver)
     {
-        EntityUid mapUid = _mapSys.GetMapOrInvalid(Transform(uidReciver).MapID);
         if (!TryComp<SignalSalvMaterialReciverStructureComponent>(uidReciver, out var compReciver)) return "ERROR- THIS IS NOT A MATERIAL RECIVER";
-        if (!TryComp<SignalSalvMaterialTransitMapComponent>(mapUid, out var comp))
-        {
-            comp = SetupMapMaterialTransitComp(mapUid);
-        }
         string returnString = "";
-        if (comp.MaterialInTransit.Keys == null) return returnString;
-        foreach (var iterator in comp.MaterialInTransit.Keys)//TEMP REPLACE WITH PROPER LOCALISATION LATER!!!!
+        if (_materialTransitSystem.MaterialInTransit.Keys == null) return returnString;
+        foreach (var iterator in _materialTransitSystem.MaterialInTransit.Keys)//TEMP REPLACE WITH PROPER LOCALISATION LATER!!!!
         {
             string subAddition = "";
             subAddition += (string) iterator;
             subAddition += " -> stored off site:";
-            subAddition += comp.MaterialInTransit[iterator].ToString();
+            subAddition += _materialTransitSystem.MaterialInTransit[iterator].ToString();
             subAddition += " | next delivery at Offsite storage of: ";
             subAddition += compReciver.MaterialCargoMin.ToString();
-            if (comp.MaterialProductionPerSecond.ContainsKey(iterator))
+            if (_materialTransitSystem.MaterialProductionPerSecond.ContainsKey(iterator))
             {
                 subAddition += " | Offsite mining rate: ";
-                subAddition += comp.MaterialProductionPerSecond[iterator].ToString();
+                subAddition += _materialTransitSystem.MaterialProductionPerSecond[iterator].ToString();
             }
             else
             {
@@ -153,7 +143,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
             int counter = 1;
             while (counter < 11)
             {
-                if (comp.MaterialInTransit[iterator] >= (comp.MaterialProductionPerSecond[iterator] / (counter / 10.0f)))
+                if (_materialTransitSystem.MaterialInTransit[iterator] >= (_materialTransitSystem.MaterialProductionPerSecond[iterator] / (counter / 10.0f)))
                 {
                     subAddition += "|";
                 }
@@ -406,7 +396,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
     public void GenerateExpeditionMap(EntityUid expedMapUid, MapId mapId, SignalSalvPlanetResourcesComponent planetResourcesComp, SignalSalvGenerationSettingsComponent settingsComp)
     {
         Random rand = new((int) _timing.CurTime.TotalSeconds);
-        TotalMaterialMiningRateList matMiningList = new();
+        CompleteMaterialList matMiningList = new();
         //first configure the planet type and mining rates
         planetResourcesComp.AdvancedResourcePlanet = settingsComp.AdvancedResourcePlanet;
         planetResourcesComp.SpecialResourcePlanet = settingsComp.SpecialResourcePlanet;
@@ -458,13 +448,13 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
     private void GeneratePlanetMiningRates(SignalSalvPlanetResourcesComponent planetResourcesComp)
     {
         Random rand = new((int) _timing.CurTime.TotalSeconds);
-        TotalMaterialMiningRateList matMiningList = new();
+        CompleteMaterialList matMiningList = new();
         bool selected = false;
         int failsaveCounter = 0;
         foreach (var iterator in matMiningList.BaseMaterials)//all base materials are always present
         {
             if (!iterator.Minable) continue;
-            planetResourcesComp.MiningRates.Add(iterator.MaterialType, (int) rand.NextInt64(iterator.MinResoucePerSecond, iterator.MaxResoucePerSecond));
+            planetResourcesComp.MiningRates.Add(iterator.MaterialType, (int) rand.NextFloat(iterator.MinResoucePerSecond, iterator.MaxResoucePerSecond));
         }
         selected = false;
         failsaveCounter = 0;
@@ -476,7 +466,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
                 int randomIndex = (int) rand.NextInt64(matMiningList.AdvancedMaterials.Count);
                 if (!matMiningList.AdvancedMaterials.ElementAt(randomIndex).Minable) continue;
                 planetResourcesComp.MiningRates.Add(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MaterialType,
-                                            (int) rand.NextInt64(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MinResoucePerSecond,
+                                            (int) rand.NextFloat(matMiningList.AdvancedMaterials.ElementAt(randomIndex).MinResoucePerSecond,
                                                                     matMiningList.AdvancedMaterials.ElementAt(randomIndex).MaxResoucePerSecond));
                 selected = true;
             }
@@ -492,7 +482,7 @@ public sealed partial class BSDSignalSalvSystem : EntitySystem, IBSDSignalSalvSy
                 int randomIndex = (int) rand.NextInt64(matMiningList.SpecialMaterials.Count);
                 if (!matMiningList.SpecialMaterials.ElementAt(randomIndex).Minable) continue;
                 planetResourcesComp.MiningRates.Add(matMiningList.SpecialMaterials.ElementAt(randomIndex).MaterialType,
-                                            (int) rand.NextInt64(matMiningList.SpecialMaterials.ElementAt(randomIndex).MinResoucePerSecond,
+                                            (int) rand.NextFloat(matMiningList.SpecialMaterials.ElementAt(randomIndex).MinResoucePerSecond,
                                                                     matMiningList.SpecialMaterials.ElementAt(randomIndex).MaxResoucePerSecond));
             }
         }
