@@ -9325,3 +9325,11 @@ Entries:
         different amounts if they're between you and a sound source.
   id: 1204
   time: '2026-10-21T04:53:49.0000000+00:00'
+- author: raincall
+  changes:
+    - type: Fix
+      message: >-
+        Fixed Detective Warden and Corpsman spawning with an extra sec gas mask
+        in their bag
+  id: 1205
+  time: '2026-10-21T16:36:38.0000000+00:00'
