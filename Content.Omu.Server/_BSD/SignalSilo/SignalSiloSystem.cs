@@ -74,6 +74,7 @@ public sealed partial class SignalSiloSystem : EntitySystem
                 returnString += "\n" + (string) iterator + " | " + serverComp.StoredPoints[iterator].ToString();
             }
         }
-        return "ERROR";
+        returnString += "\n -------------------------------------------------------------------";
+        return returnString;
     }
 }

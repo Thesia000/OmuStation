@@ -1,4 +1,5 @@
 
+using System.Numerics;
 using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
@@ -135,22 +136,24 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         }
         return returnList;
     }
-    public bool CheckTransmissionRange(EntityUid entOne, EntityUid entTwo, string channel)
+    public bool CheckTransmissionRange(EntityUid server, EntityUid client, string channel, bool anyOverride = false)
     {
-        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(entOne, out var compInfaOne)) return false;
-        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(entTwo, out var compInfaTwo)) return false;
-        var compTransOne = Transform(entOne);
-        var compTransTwo = Transform(entTwo);
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(server, out var compInfaOne)) return false;
+        if (!TryComp<IngameServerClientLinkInfrastructureComponent>(client, out var compInfaTwo)) return false;
+        EnsureValidChannelExistance(compInfaOne, channel);
+        EnsureValidChannelExistance(compInfaTwo, channel);
+        var compTransOne = Transform(server);
+        var compTransTwo = Transform(client);
         byte accessBase = 0;
-        if (compInfaOne.GlobalyAccessable[channel] || compInfaTwo.GlobalyAccessable[channel])
+        if (compInfaOne.GlobalyAccessable[channel] || (compInfaTwo.GlobalyAccessable[channel] && anyOverride))
         {
             accessBase = 3;
         }
-        else if (compInfaOne.MapWideAccessable[channel] || compInfaTwo.MapWideAccessable[channel])
+        else if (compInfaOne.MapWideAccessable[channel] || (compInfaTwo.MapWideAccessable[channel] && anyOverride))
         {
             accessBase = 2;
         }
-        else if (compInfaOne.GridWideAccessable[channel] || compInfaTwo.GridWideAccessable[channel])
+        else if (compInfaOne.GridWideAccessable[channel] || (compInfaTwo.GridWideAccessable[channel] && anyOverride))
         {
             accessBase = 1;
         }
@@ -168,15 +171,32 @@ public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
         }
         if (compTransOne.MapID != compTransTwo.MapID) return false;
         //if we reach here we are on same map but not grid, but we may still be in range of the emmissions
-        if (Math.Max(compInfaOne.ConnectionRadius[channel], compInfaTwo.ConnectionRadius[channel]) <
-                GetDistance(compTransOne.Coordinates.Position, compTransTwo.Coordinates.Position))
+        float connectionDistance = compInfaOne.ConnectionRadius[channel];
+        if (anyOverride)
+        {
+            connectionDistance = Math.Max(compInfaOne.ConnectionRadius[channel], compInfaTwo.ConnectionRadius[channel]);
+        }
+        if (connectionDistance < Vector2.Distance(compTransOne.Coordinates.Position, compTransTwo.Coordinates.Position))
             return false;
         return true;
     }
-    private float GetDistance(Vector2d a, Vector2d b)
+    /// <summary>
+    /// This function ensure that every dictonary contains a defention for the given channel,
+    /// thereby setting the default values so to speak
+    /// </summary>
+    /// <param name="comp"></param>
+    /// <param name="channel"></param>
+    private void EnsureValidChannelExistance(IngameServerClientLinkInfrastructureComponent comp, string channel)
     {
-        var c = Math.Pow(a.X + b.X, 2);
-        var d = Math.Pow(a.Y + b.Y, 2);
-        return (float) Math.Sqrt(c + d);
+        if (!comp.ConnectionRadius.ContainsKey(channel)) comp.ConnectionRadius.Add(channel, 0);
+        if (!comp.ServerPriority.ContainsKey(channel)) comp.ServerPriority.Add(channel, 0);
+        if (!comp.MaxAmountConnectionClientServer.ContainsKey(channel)) comp.MaxAmountConnectionClientServer.Add(channel, int.MaxValue);
+        if (!comp.MaxAmountConnectionServerClient.ContainsKey(channel)) comp.MaxAmountConnectionServerClient.Add(channel, int.MaxValue);
+        if (!comp.GridWideAccessable.ContainsKey(channel)) comp.GridWideAccessable.Add(channel, false);
+        if (!comp.MapWideAccessable.ContainsKey(channel)) comp.MapWideAccessable.Add(channel, false);
+        if (!comp.GlobalyAccessable.ContainsKey(channel)) comp.GlobalyAccessable.Add(channel, false);
+        if (!comp.ServerNeedsToIniciate.ContainsKey(channel)) comp.ServerNeedsToIniciate.Add(channel, false);
+        if (!comp.EntityDicClient.ContainsKey(channel)) comp.EntityDicClient.Add(channel, new());
+        if (!comp.EntityDicServer.ContainsKey(channel)) comp.EntityDicServer.Add(channel, new());
     }
 }

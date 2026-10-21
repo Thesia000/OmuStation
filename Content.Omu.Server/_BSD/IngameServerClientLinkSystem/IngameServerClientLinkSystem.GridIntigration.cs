@@ -3,6 +3,7 @@ using Content.Omu.Server._BSD.IngameServerClientLinkSystem.Components;
 
 namespace Content.Omu.Server._BSD.IngameServerClientLinkSystem;
 
+//Think this is obsolite rn but you never know
 public sealed partial class BSDIngameServerClientLinkSystem : EntitySystem
 {
     private string[] _defaultGridServerTypes = ["MaterialTransit"];
