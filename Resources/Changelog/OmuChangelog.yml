@@ -9333,3 +9333,9 @@ Entries:
         in their bag
   id: 1205
   time: '2026-10-21T16:36:38.0000000+00:00'
+- author: feistyfedora
+  changes:
+    - type: Fix
+      message: Atmospheric belts do not replace your jumpsuit anymore.
+  id: 1206
+  time: '2026-10-21T23:26:20.0000000+00:00'
