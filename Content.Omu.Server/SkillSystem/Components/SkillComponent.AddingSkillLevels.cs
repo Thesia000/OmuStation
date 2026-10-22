@@ -1,3 +1,4 @@
+using Content.Omu.Shared.SkillSystem;
 using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid.Prototypes;
 

@@ -8,6 +8,7 @@ using Robust.Shared.Map;
 using Content.Shared.Tools.Components;
 using Content.Shared.Hands;
 using Content.Omu.Common.SkillSystem;
+using Content.Omu.Shared.SkillSystem;
 using Content.Shared.Medical.Healing;
 using Content.Shared.Mind.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
