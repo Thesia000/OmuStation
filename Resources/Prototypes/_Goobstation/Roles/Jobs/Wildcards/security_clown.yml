@@ -25,16 +25,32 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: Clumsy
-      clumsyDamage:
-        types: #literally just picked semi random valus. i tested this once and tweaked it.
-          Blunt: 5
-          Piercing: 4
-        groups:
-          Burn: 3
-    - type: SleepEmitSound
-      snore: /Audio/Voice/Misc/silly_snore.ogg
-      interval: 10
+      - type: Clumsy
+        clumsyDamage:
+          types: #literally just picked semi random valus. i tested this once and tweaked it.
+            Blunt: 5
+            Piercing: 4
+          groups:
+            Burn: 3
+      - type: SleepEmitSound
+        snore: /Audio/Voice/Misc/silly_snore.ogg
+        interval: 10
+      - type: RoundStartSkillGranting #omu skill system 
+        department: CentralCommand
+        skillDic:
+          Cargo: 0
+          Combat: 1
+          Command: 0
+          Engineering: 0
+          Medical: 0
+      - type: SpeciesBasedSkillAddition #omu skill system
+        skillDic:
+          Harpy:
+            Cargo: -1
+            Combat: 1
+            Command: -1
+            Engineering: -1
+            Medical: -1
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant, MindShieldImplant ]
 
