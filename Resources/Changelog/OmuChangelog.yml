@@ -9369,3 +9369,9 @@ Entries:
         survival kit).
   id: 1209
   time: '2026-10-22T12:22:03.0000000+00:00'
+- author: nnif1
+  changes:
+    - type: Add
+      message: Added the PKA upgrades back to the salvage vendor
+  id: 1210
+  time: '2026-10-22T13:17:35.0000000+00:00'
