@@ -28,7 +28,7 @@
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10
     - type: RoundStartSkillGranting #omu skill system 
-      department: Crew
+      department: [ Crew ]
       skillDic:
         Cargo: 0
         Combat: 0

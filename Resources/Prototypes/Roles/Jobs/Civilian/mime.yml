@@ -23,7 +23,7 @@
     - type: FrenchAccent
     - !type:AddComponentSpecial
     - type: RoundStartSkillGranting #omu skill system 
-      department: Crew
+      department: [ Crew ]
       skillDic:
         Cargo: 0
         Combat: 0

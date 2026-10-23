@@ -34,6 +34,7 @@
   - !type:AddComponentSpecial
     components:
     - type: RoundStartSkillGranting #omu skill system 
+      department: [ CentralCommand ]
       skillDic:
         Cargo: 1
         Combat: 1

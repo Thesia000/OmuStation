@@ -29,7 +29,7 @@
     components:
     - type: EngineeringStaff
     - type: RoundStartSkillGranting #omu skill system 
-      department: Engineering
+      department: [ Engineering, Crew ]
       skillDic:
         Cargo: 0
         Combat: 0

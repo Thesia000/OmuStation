@@ -77,6 +77,7 @@
     - type: CommandStaff
     - type: CommandSkill
     - type: RoundStartSkillGranting #omu skill system 
+      department: [ Command, Crew ]
       skillDic:
         Cargo: 1
         Combat: 1

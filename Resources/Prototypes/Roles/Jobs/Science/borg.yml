@@ -24,7 +24,8 @@
   - !type:AddComponentSpecial
     components:
     - type: RoundStartSkillGranting #omu skill system 
-      department: Medical
+      department: 
+      - Silicon
       skillDic:
         Cargo: 0
         Combat: 0
@@ -50,7 +51,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: Silicon
+        department: [ Silicon ]
         skillDic:
           Cargo: 2
           Combat: 2

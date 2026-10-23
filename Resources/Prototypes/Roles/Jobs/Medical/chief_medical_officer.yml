@@ -62,7 +62,7 @@
       #speedModifier: 2
     - type: CommandStaff
     - type: RoundStartSkillGranting #omu skill system 
-      department: Medical
+      department: [ Medical, Crew, Command ]
       skillDic:
         Cargo: 0
         Combat: 0

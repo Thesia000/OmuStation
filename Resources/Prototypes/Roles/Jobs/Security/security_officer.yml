@@ -36,7 +36,7 @@
     components:
     - type: SecurityStaff
     - type: RoundStartSkillGranting #omu skill system 
-      department: Security
+      department: [ Security, Crew  ]
       skillDic:
         Cargo: 0
         Combat: 2

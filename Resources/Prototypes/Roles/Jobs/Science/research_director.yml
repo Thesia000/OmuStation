@@ -50,7 +50,7 @@
     components:
     - type: CommandStaff
     - type: RoundStartSkillGranting #omu skill system 
-      department: Science
+      department: [ Medical, Crew, Command ]
       skillDic:
         Cargo: 0
         Combat: 0
