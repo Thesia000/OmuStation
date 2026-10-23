@@ -14,7 +14,7 @@
     Cough:
       collection: MaleCoughs
     Sigh:
-      collection: MaleSigh
+      collection: HarpySigh # Omu
     Crying:
       collection: HarpyCry
     Whistle:
@@ -133,12 +133,6 @@
       path: /Audio/_Floofstation/Voice/Vulpkanin/gekker.ogg
     Bagawk: # Omu
       collection: Bagawk
-    VulpLaugth: # Omu
-      collection: VulpLaughs
-    VulpSigh: # Omu
-      collection: VulpSighs
-    VulpCries: # Omu
-      collection: VulpCries 
 
 - type: emoteSounds
   id: SoundsHarpyMale
@@ -154,7 +148,7 @@
     Cough:
       collection: MaleCoughs
     Sigh:
-      collection: MaleSigh
+      collection: HarpySigh # Omu
     Crying:
       collection: HarpyCry
     Whistle:
@@ -273,12 +267,6 @@
       collection: AllulaloAwebo
     Bagawk: # Omu
       collection: Bagawk
-    VulpLaugth: # Omu
-      collection: VulpLaughs
-    VulpSigh: # Omu
-      collection: VulpSighs
-    VulpCries: # Omu
-      collection: VulpCries 
 
 - type: emoteSounds
   id: FemaleVulpkanin
