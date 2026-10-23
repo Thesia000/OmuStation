@@ -9445,3 +9445,9 @@ Entries:
       message: Added blueshield visors into BSO loadouts.
   id: 1218
   time: '2026-10-23T22:32:56.0000000+00:00'
+- author: shackhorn
+  changes:
+    - type: Add
+      message: Added custom Vulp laughing, sighing, and crying sounds.
+  id: 1219
+  time: '2026-10-23T22:48:02.0000000+00:00'
