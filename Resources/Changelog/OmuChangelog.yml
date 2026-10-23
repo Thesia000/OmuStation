@@ -9429,3 +9429,9 @@ Entries:
       message: Harpies can bagawk now
   id: 1216
   time: '2026-10-23T19:11:32.0000000+00:00'
+- author: DuskTheSnep
+  changes:
+    - type: Tweak
+      message: New Yorkers now call IPCs "Rowbits" instead of a slur.
+  id: 1217
+  time: '2026-10-23T22:26:35.0000000+00:00'
