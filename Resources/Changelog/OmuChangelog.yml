@@ -9435,3 +9435,13 @@ Entries:
       message: New Yorkers now call IPCs "Rowbits" instead of a slur.
   id: 1217
   time: '2026-10-23T22:26:35.0000000+00:00'
+- author: jckspjf, DuskTheSnep
+  changes:
+    - type: Add
+      message: Added security visors into security loadouts.
+    - type: Add
+      message: Added medsec visors into corpsman loadouts.
+    - type: Add
+      message: Added blueshield visors into BSO loadouts.
+  id: 1218
+  time: '2026-10-23T22:32:56.0000000+00:00'
