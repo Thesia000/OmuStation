@@ -8,38 +8,18 @@ using Content.Shared.Tools.Components;
 using Content.Shared.Hands;
 using Content.Omu.Common.SkillSystem;
 using Content.Shared.Medical.Healing;
+using Content.Omu.Common.DoAfter;
 
 namespace Content.Omu.Server.SkillSystem;
 
 public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
 {
-    public void StartUpToolCompModification(Entity<ToolComponent> ent, ref ComponentStartup args)
+    public void ModifyDoAfterTime(Entity<SkillRequermentComponent> ent, ref ModifyDelayOfDoAfter args)
     {
-        ent.Comp.SpeedModifier = ent.Comp.BaseSpeedModifier;
-    }
-    public void ModifyToolComponent(ToolComponent toolComp, EntityUid user, EntityUid item)
-    {
-        toolComp.SpeedModifier = toolComp.BaseSpeedModifier;
-        toolComp.SpeedModifier *= GetSkillSpeedModifier(user, item, out var cancle);
-        toolComp.PreventUse = cancle;
-    }
-    public void ResetToolComponent(ToolComponent comp)
-    {
-        comp.SpeedModifier = comp.BaseSpeedModifier;
-        comp.PreventUse = false;
-    }
-    public void StartUpHealingCompModification(Entity<HealingComponent> ent, ref ComponentStartup args)
-    {
-        ent.Comp.ModifiedDelay = ent.Comp.Delay;
-    }
-    public void ModifyHealingComponent(HealingComponent comp, EntityUid user, EntityUid item)
-    {
-        comp.ModifiedDelay = new((long) ((double) comp.Delay.Ticks / (double) GetSkillSpeedModifier(user, item, out var cancle)));
-        comp.PreventUse = cancle;
-    }
-    public void ResetHealingComponent(HealingComponent comp)
-    {
-        comp.ModifiedDelay = comp.Delay;
-        comp.PreventUse = false;
+        args.Multiplier *= 1.0f / GetSkillSpeedModifier(args.User, ent.Comp, out var cancle);
+        if (cancle)
+        {
+            args.Cancle = true;
+        }
     }
 }

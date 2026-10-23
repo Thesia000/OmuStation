@@ -14,12 +14,10 @@
   special: # Goobstation
   - !type:AddComponentSpecial
     components:
-    - type: NpcFactionMember
-      factions:
-      - NanoTrasen
-      - Assistant
-  - !type:AddComponentSpecial
-    components:
+      - type: NpcFactionMember
+        factions:
+        - NanoTrasen
+        - Assistant
       - type: RoundStartSkillGranting #omu skill system 
         department: Crew
         skillDic:

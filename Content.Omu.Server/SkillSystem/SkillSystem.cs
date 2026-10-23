@@ -14,6 +14,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Content.Shared.Clothing;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Omu.Common.DoAfter;
 
 namespace Content.Omu.Server.SkillSystem;
 
@@ -28,9 +29,9 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<SkillGrantingComponent, UseInHandEvent>(LearnSkill);
 
         SubscribeLocalEvent<SkillRequermentComponent, GotEquippedHandEvent>(ModifyToolSpeed);
-        SubscribeLocalEvent<SkillRequermentComponent, GotUnequippedHandEvent>(ResetToolSpeed);
 
         SubscribeLocalEvent<SkillRequermentComponent, ComponentStartup>(RequStartUp);
+        SubscribeLocalEvent<SkillRequermentComponent, ModifyDelayOfDoAfter>(ModifyDoAfterTime);
         SubscribeLocalEvent<SkillStaminaAjustmentComponent, ComponentStartup>(StaminaAjustStartup);
 
         SubscribeLocalEvent<RoundStartSkillGrantingComponent, MindAddedMessage>(RoundStartSkillGrantingStartup);
@@ -38,22 +39,8 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<AntagSkillGrantingComponent, ComponentStartup>(AntagStartSkillGrantingStartup);
 
         //Wizden components
-        SubscribeLocalEvent<ToolComponent, ComponentStartup>(StartUpToolCompModification);
-        SubscribeLocalEvent<HealingComponent, ComponentStartup>(StartUpHealingCompModification);
         SubscribeLocalEvent<SkillStaminaAjustmentComponent, SkillLevelChengeEvent>(SkillStaminaModification);
         SubscribeLocalEvent<SkillRequermentComponent, GunRefreshModifiersEvent>(ModifyRangedWeaponComponent);
-        //Shitmed components
-        SubscribeLocalEvent<BoneGelComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<BoneSawComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<CauteryComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<HemostatComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<RetractorComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<ScalpelComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<DrillComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<TendingComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<TweezersComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<BoneSetterComponent, ComponentStartup>(StartUpShitmedToolCompModification);
-        SubscribeLocalEvent<StitchesComponent, ComponentStartup>(StartUpShitmedToolCompModification);
     }
     public void RequStartUp(Entity<SkillRequermentComponent> ent, ref ComponentStartup args)
     {
@@ -217,38 +204,6 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
     public void ModifyToolSpeed(Entity<SkillRequermentComponent> ent, ref GotEquippedHandEvent args)
     {
         //Wizden things
-        if (TryComp<ToolComponent>(args.Equipped, out var toolComp)) ModifyToolComponent(toolComp, args.User, args.Equipped);
-        if (TryComp<HealingComponent>(args.Equipped, out var healingComp)) ModifyHealingComponent(healingComp, args.User, args.Equipped);
         if (TryComp<ClothingSpeedModifierComponent>(args.Equipped, out var speedComp)) ModifyCrateComponent(speedComp, args.User, args.Equipped);
-        //Shitmed
-        if (TryComp<BoneGelComponent>(args.Equipped, out var surgeryToolComp)) ModifyShitmedToolComponent(surgeryToolComp, args.User, args.Equipped);
-        if (TryComp<BoneSawComponent>(args.Equipped, out var surgeryToolComp1)) ModifyShitmedToolComponent(surgeryToolComp1, args.User, args.Equipped);
-        if (TryComp<CauteryComponent>(args.Equipped, out var surgeryToolComp2)) ModifyShitmedToolComponent(surgeryToolComp2, args.User, args.Equipped);
-        if (TryComp<HemostatComponent>(args.Equipped, out var surgeryToolComp3)) ModifyShitmedToolComponent(surgeryToolComp3, args.User, args.Equipped);
-        if (TryComp<RetractorComponent>(args.Equipped, out var surgeryToolComp4)) ModifyShitmedToolComponent(surgeryToolComp4, args.User, args.Equipped);
-        if (TryComp<ScalpelComponent>(args.Equipped, out var surgeryToolComp5)) ModifyShitmedToolComponent(surgeryToolComp5, args.User, args.Equipped);
-        if (TryComp<DrillComponent>(args.Equipped, out var surgeryToolComp6)) ModifyShitmedToolComponent(surgeryToolComp6, args.User, args.Equipped);
-        if (TryComp<TendingComponent>(args.Equipped, out var surgeryToolComp7)) ModifyShitmedToolComponent(surgeryToolComp7, args.User, args.Equipped);
-        if (TryComp<TweezersComponent>(args.Equipped, out var surgeryToolComp8)) ModifyShitmedToolComponent(surgeryToolComp8, args.User, args.Equipped);
-        if (TryComp<BoneSetterComponent>(args.Equipped, out var surgeryToolComp9)) ModifyShitmedToolComponent(surgeryToolComp9, args.User, args.Equipped);
-        if (TryComp<StitchesComponent>(args.Equipped, out var surgeryToolComp10)) ModifyShitmedToolComponent(surgeryToolComp10, args.User, args.Equipped);
-    }
-    public void ResetToolSpeed(Entity<SkillRequermentComponent> ent, ref GotUnequippedHandEvent args)
-    {
-        //Wizden things
-        if (TryComp<ToolComponent>(ent, out var toolComp)) ResetToolComponent(toolComp);
-        if (TryComp<HealingComponent>(ent, out var healingComp)) ResetHealingComponent(healingComp);
-        //Shitmed
-        if (TryComp<BoneGelComponent>(ent, out var surgeryToolComp)) ResetShitmedToolComponent(surgeryToolComp);
-        if (TryComp<BoneSawComponent>(ent, out var surgeryToolComp1)) ResetShitmedToolComponent(surgeryToolComp1);
-        if (TryComp<CauteryComponent>(ent, out var surgeryToolComp2)) ResetShitmedToolComponent(surgeryToolComp2);
-        if (TryComp<HemostatComponent>(ent, out var surgeryToolComp3)) ResetShitmedToolComponent(surgeryToolComp3);
-        if (TryComp<RetractorComponent>(ent, out var surgeryToolComp4)) ResetShitmedToolComponent(surgeryToolComp4);
-        if (TryComp<ScalpelComponent>(ent, out var surgeryToolComp5)) ResetShitmedToolComponent(surgeryToolComp5);
-        if (TryComp<DrillComponent>(ent, out var surgeryToolComp6)) ResetShitmedToolComponent(surgeryToolComp6);
-        if (TryComp<TendingComponent>(ent, out var surgeryToolComp7)) ResetShitmedToolComponent(surgeryToolComp7);
-        if (TryComp<TweezersComponent>(ent, out var surgeryToolComp8)) ResetShitmedToolComponent(surgeryToolComp8);
-        if (TryComp<BoneSetterComponent>(ent, out var surgeryToolComp9)) ResetShitmedToolComponent(surgeryToolComp9);
-        if (TryComp<StitchesComponent>(ent, out var surgeryToolComp10)) ResetShitmedToolComponent(surgeryToolComp10);
     }
 }

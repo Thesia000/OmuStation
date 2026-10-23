@@ -23,14 +23,14 @@
   special:
   - !type:AddComponentSpecial
     components:
-      - type: RoundStartSkillGranting #omu skill system 
-        department: Medical
-        skillDic:
-          Cargo: 0
-          Combat: 0
-          Command: 5
-          Engineering: 0
-          Medical: 0
+    - type: RoundStartSkillGranting #omu skill system 
+      department: Medical
+      skillDic:
+        Cargo: 0
+        Combat: 0
+        Command: 5
+        Engineering: 0
+        Medical: 0
 
 - type: job
   id: Borg

@@ -1,0 +1,23 @@
+﻿- type: departmentNamePrototype
+  id: Cargo
+
+- type: departmentNamePrototype
+  id: Security
+
+- type: departmentNamePrototype
+  id: Science
+
+- type: departmentNamePrototype
+  id: Command
+
+- type: departmentNamePrototype
+  id: CentralCommand
+
+- type: departmentNamePrototype
+  id: Medical
+
+- type: departmentNamePrototype
+  id: Civilian
+
+- type: departmentNamePrototype
+  id: Engineering
