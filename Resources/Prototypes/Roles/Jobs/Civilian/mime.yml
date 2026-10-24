@@ -21,7 +21,6 @@
     - type: MimePowers
       preventWriting: true
     - type: FrenchAccent
-    - !type:AddComponentSpecial
     - type: RoundStartSkillGranting #omu skill system 
       department: [ Crew ]
       skillDic:

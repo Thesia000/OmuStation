@@ -14,9 +14,8 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: CommandStaff
     - type: RoundStartSkillGranting #omu skill system 
-      department: CentralCommand
+      department: [ Crew ]
       skillDic:
         Cargo: 0
         Combat: 0

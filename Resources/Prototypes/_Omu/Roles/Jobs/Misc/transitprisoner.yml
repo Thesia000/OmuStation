@@ -21,7 +21,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: NONE
+        department: [ NONE ]
         skillDic:
           Cargo: 0
           Combat: 1

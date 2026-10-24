@@ -25,7 +25,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 0
           Combat: 3
@@ -105,7 +105,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 0
           Combat: 3
@@ -172,7 +172,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 0
           Combat: 3
@@ -237,7 +237,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 3
           Combat: 3
@@ -302,7 +302,7 @@
   - !type:AddComponentSpecial
     components:
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 0
           Combat: 3
@@ -374,7 +374,7 @@
       - type: CurseImmune
       - type: CanEnchant
       - type: RoundStartSkillGranting #omu skill system 
-        department: CentralCommand
+        department: [ CentralCommand ]
         skillDic:
           Cargo: 0
           Combat: 3

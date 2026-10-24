@@ -56,7 +56,7 @@
     - type: Condemned
       soulOwnedNotDevil: true
     - type: RoundStartSkillGranting #omu skill system 
-      department: CentralCommand
+      department: [ CentralCommand, Command ]
       skillDic:
         Cargo: 0
         Combat: 0

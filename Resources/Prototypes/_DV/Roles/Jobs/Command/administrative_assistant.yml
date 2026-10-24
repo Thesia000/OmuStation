@@ -34,7 +34,7 @@
     components:
       - type: CommandStaff # Goob - Left this here so they won't be other antags; BSO should just not implant them.
       - type: RoundStartSkillGranting #omu skill system 
-        department: Command
+        department: [ Command, Crew ]
         skillDic:
           Cargo: 0
           Combat: 0

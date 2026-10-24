@@ -37,7 +37,7 @@
       components:
         - type: DeathSquadMember
         - type: RoundStartSkillGranting #omu skill system 
-          department: CentralCommand
+          department: [ InternalAffairs ]
           skillDic:
             Cargo: 0
             Combat: 5
