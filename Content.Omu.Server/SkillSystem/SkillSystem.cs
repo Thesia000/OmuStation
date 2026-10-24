@@ -99,7 +99,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         if (!TryComp<MindContainerComponent>(ent, out var mindContainer)) return;
         if (!mindContainer.HasMind) return;
         AddCommandSkillToMind((EntityUid) mindContainer.Mind, ent.Comp);
-        RemComp<CommandSkillComponent>(ent);
+        //RemComp<CommandSkillComponent>(ent); this should not matter?
     }
     public void OnExaminSkillHolder(Entity<SkillHolderBodyComponent> ent, ref ExaminedEvent args)
     {
