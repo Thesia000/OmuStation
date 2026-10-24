@@ -76,4 +76,11 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
         SkillLevelChengeEvent ev = new();
         RaiseLocalEvent(ent, ref ev);
     }
+    public void AddCommandSkillToMind(EntityUid mindUid, CommandSkillComponent bodyCommandSkillComp)//ensure the mind has this as this is what we will be using primarly
+    {
+        var commandSkillComp = EnsureComp<CommandSkillComponent>(mindUid);
+        commandSkillComp.Range = bodyCommandSkillComp.Range;
+        commandSkillComp.EffectedDepartments = bodyCommandSkillComp.EffectedDepartments;
+        commandSkillComp.ParsedSpeedModifier = bodyCommandSkillComp.ParsedSpeedModifier;
+    }
 }

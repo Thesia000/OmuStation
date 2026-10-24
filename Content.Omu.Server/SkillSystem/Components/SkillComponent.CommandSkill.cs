@@ -1,0 +1,18 @@
+using Content.Omu.Shared.SkillSystem;
+using Robust.Shared.Prototypes;
+using Content.Shared.Humanoid.Prototypes;
+
+namespace Content.Omu.Server.SkillSystem.Components;
+
+[RegisterComponent]
+public sealed partial class CommandSkillComponent : Component
+{
+    [DataField]
+    public float Range = 6.0f;
+    [DataField]
+    public HashSet<ProtoId<DepartmentNamePrototype>> EffectedDepartments = new();
+    [DataField]
+    public Dictionary<ProtoId<SkillNamePrototype>, float> SpeedModifier = new();
+    [DataField]
+    public Dictionary<int, float> ParsedSpeedModifier = new();
+}

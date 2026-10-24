@@ -15,6 +15,7 @@ using Content.Shared._Shitmed.Medical.Surgery.Tools;
 using Content.Shared.Clothing;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Omu.Common.DoAfter;
+using Content.Shared.Mind;
 
 namespace Content.Omu.Server.SkillSystem;
 
@@ -37,6 +38,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<RoundStartSkillGrantingComponent, MindAddedMessage>(RoundStartSkillGrantingStartup);
         SubscribeLocalEvent<RoundStartSkillGrantingComponent, ComponentStartup>(RoundStartSkillGrantingStartup);
         SubscribeLocalEvent<AntagSkillGrantingComponent, ComponentStartup>(AntagStartSkillGrantingStartup);
+        SubscribeLocalEvent<CommandSkillComponent, ComponentStartup>(CommandCompStartup);
 
         //Wizden components
         SubscribeLocalEvent<SkillStaminaAjustmentComponent, SkillLevelChengeEvent>(SkillStaminaModification);
@@ -76,6 +78,28 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
                 ent.Comp.ParsedStaminaRegenModifiers.Add(parsedInt, ent.Comp.StaminaRegenModifiers[iterator]);
             }
         }
+    }
+    public void CommandCompStartup(Entity<CommandSkillComponent> ent, ref ComponentStartup args)
+    {
+        ent.Comp.ParsedSpeedModifier = new();
+        if (TryComp<MindComponent>(ent, out var _)) return;//if we are on the mind we just leave
+        foreach (var iterator in ent.Comp.SpeedModifier.Keys)
+        {
+            if (int.TryParse(iterator, out var parsedInt))
+            {
+                if (ent.Comp.SpeedModifier[iterator] == 0)
+                {
+                    Log.Error("WARNING SKILL COMPONENT SPEED MODIFER WAS EQUAL TO ZERO not permitted.");
+                    RemComp<SkillRequermentComponent>(ent);
+                    return;
+                }
+                ent.Comp.ParsedSpeedModifier.Add(parsedInt, ent.Comp.SpeedModifier[iterator]);
+            }
+        }
+        if (!TryComp<MindContainerComponent>(ent, out var mindContainer)) return;
+        if (!mindContainer.HasMind) return;
+        AddCommandSkillToMind((EntityUid) mindContainer.Mind, ent.Comp);
+        RemComp<CommandSkillComponent>(ent);
     }
     public void OnExaminSkillHolder(Entity<SkillHolderBodyComponent> ent, ref ExaminedEvent args)
     {
@@ -137,7 +161,9 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         float highestSpeedMod = 1.0f;
         while (commandSkillQuerry.MoveNext(out EntityUid commandUid, out var commandSkillComp, out var skillComp))
         {
-            var refCords = Transform(commandUid).Coordinates;
+            if (!TryComp<MindComponent>(commandUid, out var mindComp)) continue;//this should NEVER fail but you never know what admins do
+            if (mindComp.CurrentEntity == null) continue;
+            var refCords = Transform((EntityUid) mindComp.CurrentEntity).Coordinates;
             if (Transform(commandUid).MapID != refMapID) continue;
             if (Vector2.Distance(refCords.Position, centerCords.Position) > commandSkillComp.Range) continue;
             float commandSpeedMod = GetHighestModifier(commandSkillComp.ParsedSpeedModifier, skillComp.SkillDic["command"]);

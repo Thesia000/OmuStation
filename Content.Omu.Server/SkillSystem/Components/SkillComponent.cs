@@ -50,18 +50,7 @@ public sealed partial class SkillRequermentComponent : Component
     [DataField]
     public int HardRequirmentMinSkill = 1;
 }
-[RegisterComponent]
-public sealed partial class CommandSkillComponent : Component
-{
-    [DataField]
-    public float Range = 6.0f;
-    [DataField]
-    public HashSet<ProtoId<DepartmentNamePrototype>> EffectedDepartments = new();
-    [DataField]
-    public Dictionary<ProtoId<SkillNamePrototype>, float> SpeedModifier = new();
-    [DataField]
-    public Dictionary<int, float> ParsedSpeedModifier = new();
-}
+
 // <summary>
 // This component should only be on CCOs and Mentor roles!!!!
 /// </summary>
