@@ -180,7 +180,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             return false;
 
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
-        var doAfterLength = delay / toolComponent.SpeedModifier; // Goob - doAfterLength var OMU modifiedSpeedModInstead!!!
+        var doAfterLength = delay / toolComponent.SpeedModifier; // Goob - doAfterLength var
         var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterLength, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,

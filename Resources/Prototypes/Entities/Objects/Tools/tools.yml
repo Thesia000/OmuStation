@@ -326,7 +326,7 @@
   - type: Tool
     qualities:
     - Screwing
-    baseSpeedModifier: 1.5 #omu
+    speedModifier: 1.5 #omu
     useSound: /Audio/Items/drill_use.ogg
   - type: MultipleTool
     statusShowBehavior: true
@@ -542,7 +542,7 @@
   - type: Tool
     qualities:
     - Screwing
-    baseSpeedModifier: 2 # Kept for future adjustments. Currently 1.2x for balance #omu skill system
+    speedModifier: 2 # Kept for future adjustments. Currently 1.2x for balance #omu skill system
     useSound: /Audio/Items/drill_use.ogg
   - type: ToolTileCompatible
   - type: MultipleTool

@@ -14,9 +14,4 @@ public sealed partial class BoneGelComponent : Component, ISurgeryToolComponent
 
     [DataField]
     public float Speed { get; set; } = 1f;
-    //OMU
-    [DataField]
-    public float BaseSpeed { get; set; } = 1f;
-    [DataField]
-    public bool PreventUse { get; set; } = false;
 }

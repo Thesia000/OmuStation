@@ -12,9 +12,4 @@ public sealed partial class RetractorComponent : Component, ISurgeryToolComponen
     public bool? Used { get; set; } = null;
     [DataField]
     public float Speed { get; set; } = 1f;
-    //OMU
-    [DataField]
-    public float BaseSpeed { get; set; } = 1f;
-    [DataField]
-    public bool PreventUse { get; set; } = false;
 }

@@ -12,9 +12,4 @@ public sealed partial class BoneSawComponent : Component, ISurgeryToolComponent
     public bool? Used { get; set; } = null;
     [DataField, AutoNetworkedField]
     public float Speed { get; set; } = 1f;
-    //OMU
-    [DataField]
-    public float BaseSpeed { get; set; } = 1f;
-    [DataField]
-    public bool PreventUse { get; set; } = false;
 }

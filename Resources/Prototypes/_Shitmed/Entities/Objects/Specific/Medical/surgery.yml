@@ -65,9 +65,9 @@
       Glass: 37
       Gold: 37
   - type: Scalpel
-    baseSpeed: 1.5 #omu
+    speed: 1.5 #omu
   - type: BoneSaw
-    baseSpeed: 1.5 #omu
+    speed: 1.5 #omu
   - type: ItemSwitch
     showLabel: true
     state: scalpel
@@ -80,9 +80,9 @@
           state: e-scalpel
         components:
           - type: Scalpel
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
           - type: BoneSaw
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -96,7 +96,7 @@
           state: e-scalpel-on
         components:
         - type: Drill
-          baseSpeed: 1.5 #omu
+          speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -133,7 +133,7 @@
       Glass: 37
       Silver: 37
   - type: Retractor
-    baseSpeed: 1.5 #omu
+    speed: 1.5 #omu
   - type: ItemSwitch
     showLabel: true
     state: retractor
@@ -145,7 +145,7 @@
           state: adv-retractor
         components:
           - type: Retractor
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -159,11 +159,11 @@
           state: adv-retractor-on
         components:
           - type: Hemostat
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
           - type: Tweezers
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
           - type: Tending
-            baseSpeed: 1.5 #omu
+            speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -200,7 +200,7 @@
       Glass: 37
       Plasma: 37
   - type: Cautery
-    baseSpeed: 1.5 #omu
+    speed: 1.5 #omu
   - type: ItemSwitch
     showLabel: true
     state: cautery
@@ -212,7 +212,7 @@
           state: e-cautery
         components:
         - type: Cautery
-          baseSpeed: 1.5 #omu
+          speed: 1.5 #omu
         soundStateActivate:
           collection: WelderOn
           params:
@@ -226,7 +226,7 @@
           state: e-cautery-on
         components:
         - type: Stitches # should be unlimited when the actual stitches become limited
-          baseSpeed: 1.5 #omu
+          speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -262,7 +262,7 @@
       Glass: 37
       Plasma: 37
   - type: BoneGel # should be unlimited when the actual bone gel becomes limited
-    baseSpeed: 1.5 #omu
+    speed: 1.5 #omu
   - type: ItemSwitch
     showLabel: true
     state: bonegel
@@ -274,7 +274,7 @@
           state: e-bone-gel
         components:
         - type: BoneGel # should be unlimited when the actual bone gel becomes limited
-          baseSpeed: 1.5 #omu
+          speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -288,7 +288,7 @@
           state: e-bone-gel-on
         components:
         - type: BoneSetter
-          baseSpeed: 1.5 #omu
+          speed: 1.5 #omu
         soundStateActivate:
           collection: sparks
           params:
@@ -315,27 +315,27 @@
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
 #OMU start
   - type: Hemostat
-    baseSpeed: 3
+    speed: 3
   - type: Scalpel
-    baseSpeed: 3
+    speed: 3
   - type: Drill
-    baseSpeed: 3
+    speed: 3
   - type: BoneSetter
-    baseSpeed: 3
+    speed: 3
   - type: Retractor
-    baseSpeed: 3
+    speed: 3
   - type: Cautery
-    baseSpeed: 3
+    speed: 3
   - type: BoneGel
-    baseSpeed: 3
+    speed: 3
   - type: BoneSaw
-    baseSpeed: 3
+    speed: 3
   - type: Tweezers
-    baseSpeed: 3
+    speed: 3
   - type: Tending
-    baseSpeed: 3
+    speed: 3
   - type: Stitches
-    baseSpeed: 3
+    speed: 3
 #omu end
 
 # Omu edit start
@@ -355,27 +355,27 @@
     startSound:
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: Hemostat
-    baseSpeed: 3
+    speed: 3
   - type: Scalpel
-    baseSpeed: 3
+    speed: 3
   - type: Drill
-    baseSpeed: 3
+    speed: 3
   - type: BoneSetter
-    baseSpeed: 3
+    speed: 3
   - type: Retractor
-    baseSpeed: 3
+    speed: 3
   - type: Cautery
-    baseSpeed: 3
+    speed: 3
   - type: BoneGel
-    baseSpeed: 3
+    speed: 3
   - type: BoneSaw
-    baseSpeed: 3
+    speed: 3
   - type: Tweezers
-    baseSpeed: 3
+    speed: 3
   - type: Tending
-    baseSpeed: 3
+    speed: 3
   - type: Stitches
-    baseSpeed: 3
+    speed: 3
 # Omu edit end
 
 - type: entity
@@ -399,25 +399,25 @@
   components:
 #OMU START
   - type: Hemostat
-    baseSpeed: 10
+    speed: 10
   - type: Scalpel
-    baseSpeed: 10
+    speed: 10
   - type: Drill
-    baseSpeed: 10
+    speed: 10
   - type: BoneSetter
-    baseSpeed: 10
+    speed: 10
   - type: Retractor
-    baseSpeed: 10
+    speed: 10
   - type: Cautery
-    baseSpeed: 10
+    speed: 10
   - type: BoneGel
-    baseSpeed: 10
+    speed: 10
   - type: BoneSaw
-    baseSpeed: 10
+    speed: 10
   - type: Tweezers
-    baseSpeed: 10
+    speed: 10
   - type: Tending
-    baseSpeed: 10
+    speed: 10
   - type: Stitches
-    baseSpeed: 10
+    speed: 10
 #OMU end
