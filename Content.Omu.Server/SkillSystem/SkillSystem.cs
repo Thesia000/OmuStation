@@ -161,10 +161,16 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         float highestSpeedMod = 1.0f;
         while (commandSkillQuerry.MoveNext(out EntityUid commandUid, out var commandSkillComp, out var skillComp))
         {
+            bool proceed = false;
+            foreach (var testDep in effectReciverSkillComp.Department)
+            {
+                if (commandSkillComp.EffectedDepartments.Contains(testDep)) proceed = true;
+            }
+            if (!proceed) continue;
             if (!TryComp<MindComponent>(commandUid, out var mindComp)) continue;//this should NEVER fail but you never know what admins do
             if (mindComp.CurrentEntity == null) continue;
             var refCords = Transform((EntityUid) mindComp.CurrentEntity).Coordinates;
-            if (Transform(commandUid).MapID != refMapID) continue;
+            if (Transform((EntityUid) mindComp.CurrentEntity).MapID != refMapID) continue;
             if (Vector2.Distance(refCords.Position, centerCords.Position) > commandSkillComp.Range) continue;
             float commandSpeedMod = GetHighestModifier(commandSkillComp.ParsedSpeedModifier, skillComp.SkillDic["command"]);
             if (highestSpeedMod < commandSpeedMod)
