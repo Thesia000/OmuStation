@@ -21,8 +21,9 @@
 - type: entity
   parent: [ EngineeringSkilltrainer, BaseSyndicateContraband]
   id: EngineeringSkilltrainerSyndicate
-  name: EngineeringSkilltrainerSyndicate
-  description: EngineeringSkilltrainerSyndicateDesc
+  name: SkilltrainerSyndicate
+  description: SkilltrainerSyndicateDesc
+  suffix: Engineering
   components:
     - type: Sprite
       sprite: _Omu/Objects/SkillTrainers.rsi
@@ -30,3 +31,23 @@
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
       state: syndicate
+    - type: ExtendDescription
+      descriptionList:
+        - description: "SkillTrainerSyndicateDesc-extended-syndicate-engineering"
+          fontSize: 12
+          color: "#880000"
+          requireDetailRange: false
+          requirements:
+          - !type:CharacterAntagonistRequirement
+            antagonists:
+              - Traitor
+              - TraitorSleeper
+              - Nukeops
+              - NukeopsMedic
+              - NukeopsCommander
+        - description: "mindshield-extenddescription-emag"
+          fontSize: 12
+          color: "#11aaff"
+          requireDetailRange: true
+          requirements:
+          - !type:CharacterMindshieldRequirement
