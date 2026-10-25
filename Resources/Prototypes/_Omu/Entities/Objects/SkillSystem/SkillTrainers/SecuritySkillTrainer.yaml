@@ -1,17 +1,22 @@
 ﻿- type: entity
-  parent: BaseSkillTrainer
+  parent: BaseItem
   id: CombatSkilltrainer
   name: CombatSkilltrainer
   description: CombatSkilltrainerDesc
   components:
     - type: Sprite
-      sprite: _Omu/Objects/Misc/GunCases/hoscasegun.rsi
-      state: icon
+      sprite: _Omu/Objects/SkillTrainers.rsi
+      state: NT
     - type: Item
-      sprite: _Omu/Objects/Tools/bluespace_fulton.rsi
+      sprite: _Omu/Objects/SkillTrainers.rsi
+      state: NT
     - type: SkillGranting
       skillDicMaxSkillLevel:
         Combat: 2
+        Cargo: 0
+        Command: 0
+        Engineering: 0
+        Medical: 0
 
 - type: entity
   parent: [ CombatSkilltrainer, BaseSyndicateContraband]
@@ -20,7 +25,8 @@
   description: CombatSkilltrainerSyndicateDesc
   components:
     - type: Sprite
-      sprite: _Omu/Objects/Misc/GunCases/hoscasegun.rsi
-      state: icon
+      sprite: _Omu/Objects/SkillTrainers.rsi
+      state: syndicate
     - type: Item
-      sprite: _Omu/Objects/Tools/bluespace_fulton.rsi
+      sprite: _Omu/Objects/SkillTrainers.rsi
+      state: syndicate

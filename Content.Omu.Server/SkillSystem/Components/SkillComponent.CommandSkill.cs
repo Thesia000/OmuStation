@@ -8,7 +8,7 @@ namespace Content.Omu.Server.SkillSystem.Components;
 public sealed partial class CommandSkillComponent : Component
 {
     [DataField]
-    public float Range = 6.0f;
+    public float Range = 8.0f;
     [DataField]
     public HashSet<ProtoId<DepartmentNamePrototype>> EffectedDepartments = new();
     [DataField]
