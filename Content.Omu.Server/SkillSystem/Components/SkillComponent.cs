@@ -16,6 +16,8 @@ public sealed partial class SkillHolderComponent : Component
     /// </summary>
     [DataField]
     public HashSet<ProtoId<DepartmentNamePrototype>> Department = new();
+    [DataField]
+    public HashSet<ProtoId<DepartmentNamePrototype>> CommandSkillDepartment = new();
 }
 [RegisterComponent]
 public sealed partial class SkillHolderBodyComponent : Component

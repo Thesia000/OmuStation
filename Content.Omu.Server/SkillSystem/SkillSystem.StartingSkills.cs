@@ -27,6 +27,7 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
             skillComp.SkillDic.Add(iterator, ent.Comp.SkillDic[iterator]);
         }
         skillComp.Department = ent.Comp.Department;
+        skillComp.CommandSkillDepartment = ent.Comp.CommandSkillDepartment;
         if (TryComp<SpeciesBasedSkillAdditionComponent>(ent, out var speciesBased))
         {
             CheckSpeciesBasedAdditions(ent, skillComp, speciesBased);
