@@ -10,19 +10,21 @@ namespace Content.Omu.Server._BSD.SignalSalv.Helpers;
 //TODO expand material properties one mat sci gets added
 public struct Material
 {
-    public Material(ProtoId<MaterialPrototype> type, float min, float max, bool minable, int significantDataCost)
+    public Material(ProtoId<MaterialPrototype> type, float min, float max, bool minable, int significantDataCost, int latheGradeTransportCost = 1)
     {
         MaterialType = type;
         MinResoucePerSecond = min;
         MaxResoucePerSecond = max;
         Minable = minable;
         SignificantDataCostPerMiningUnit = significantDataCost;
+        LatheGradeTransportCost = latheGradeTransportCost;
     }
     public ProtoId<MaterialPrototype> MaterialType { get; init; }
     public float MinResoucePerSecond { get; init; }// Amount in /100 per second || aka 1 -> 0.01/s 100 is 1/s
     public float MaxResoucePerSecond { get; init; }// Amount in /100 per second || aka 1 -> 0.01/s 100 is 1/s
     public bool Minable { get; init; }
     public int SignificantDataCostPerMiningUnit { get; init; } //cost for 0.01 /s outpust
+    public int LatheGradeTransportCost { get; init; } //cost for 0.01 /s outpust
 }
 
 public struct CompleteMaterialList
@@ -47,7 +49,9 @@ public struct CompleteMaterialList
         AdvancedMaterials.Add(new Material("Uranium", 10, 25, true, 500));
         BaseMaterials.Add(new Material("BioMass", 10, 15, true, 2000));
         SpecialMaterials = new();
-        SpecialMaterials.Add(new Material("Plasma", 0.1f, 1, true, 500000));//yes 0.5 million is not a mistake you are not intended to do this
+        SpecialMaterials.Add(new Material("Plasma", 0.1f, 1, true, 500000, 10));
+        //yes 0.5 million is not a mistake you are not intended to do this
+        //And only a tenth of the capacity so only 30 sheets can be transported at a time (PLASMA is rare anyway, prevents mass robbing of it)
         AllMaterials = new();
         AllMaterials.UnionWith(BaseMaterials);
         AllMaterials.UnionWith(AdvancedMaterials);
