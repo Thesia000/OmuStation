@@ -1,9 +1,4 @@
-skill-allocation-title = Skill Training
-skill-allocation-verb = Assign skill points
 skill-allocation-points = Training points left
 skill-allocation-level = Level {$level}
-skill-allocation-level-raised = Level {$level} → {$raised}
-skill-allocation-hint = Assign every point to confirm your training.
 skill-allocation-empty = There are no skills to train.
-skill-allocation-confirm = Confirm
-skill-allocation-footer = Personnel training record
+skill-allocation-department-warning = Only applies to jobs in {$departments}!

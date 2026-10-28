@@ -1,4 +1,4 @@
-using Content.Omu.Shared.SkillSystem;
+using Content.Shared._Omu.SkillSystem;
 using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid.Prototypes;
 
@@ -12,7 +12,7 @@ public sealed partial class CommandSkillComponent : Component
     [DataField]
     public HashSet<ProtoId<DepartmentNamePrototype>> EffectedDepartments = new();
     [DataField]
-    public Dictionary<ProtoId<SkillNamePrototype>, float> SpeedModifier = new();
+    public Dictionary<string, float> SpeedModifier = new();
     [DataField]
     public Dictionary<int, float> ParsedSpeedModifier = new();
 }

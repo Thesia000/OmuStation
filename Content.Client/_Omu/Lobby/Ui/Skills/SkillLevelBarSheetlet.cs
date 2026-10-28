@@ -4,7 +4,7 @@ using Content.Client.Stylesheets;
 using Robust.Client.UserInterface;
 using static Content.Client.Stylesheets.StylesheetHelpers;
 
-namespace Content.Omu.Client.SkillSystem.UI;
+namespace Content.Client._Omu.Lobby.Ui.Skills;
 
 [CommonSheetlet]
 public sealed class SkillLevelBarSheetlet : Sheetlet<PalettedStylesheet>

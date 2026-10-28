@@ -7,7 +7,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 
-namespace Content.Omu.Client.SkillSystem.UI;
+namespace Content.Client._Omu.Lobby.Ui.Skills;
 
 public sealed class SkillLevelBar : Control
 {

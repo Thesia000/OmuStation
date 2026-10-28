@@ -1,4 +1,4 @@
-using Content.Omu.Shared.SkillSystem;
+using Content.Shared._Omu.SkillSystem;
 using Robust.Shared.Prototypes;
 
 namespace Content.Omu.Server.SkillSystem.Components;
@@ -38,7 +38,7 @@ public sealed partial class SkillRequermentComponent : Component
     /// If not defined assume 1.0f
     /// </summary>
     [DataField]
-    public Dictionary<ProtoId<SkillNamePrototype>, float> SpeedModifier = new();
+    public Dictionary<string, float> SpeedModifier = new();
     [DataField]
     public Dictionary<int, float> ParsedModifiers = new();
 
@@ -77,7 +77,7 @@ public sealed partial class SkillStaminaAjustmentComponent : Component
     [DataField]
     public HashSet<ProtoId<SkillNamePrototype>> Skill = new();
     [DataField]
-    public Dictionary<ProtoId<SkillNamePrototype>, float> StaminaRegenModifiers = new();
+    public Dictionary<string, float> StaminaRegenModifiers = new();
     [DataField]
     public Dictionary<int, float> ParsedStaminaRegenModifiers = new();
 }

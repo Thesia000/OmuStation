@@ -9,7 +9,6 @@
       state: NT
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
-      state: NT
     - type: SkillGranting
       skillDicMaxSkillLevel:
         Combat: 0
@@ -30,7 +29,6 @@
       state: syndicate
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
-      state: syndicate
     - type: ExtendDescription
       descriptionList:
         - description: "SkillTrainerSyndicateDesc-extended-syndicate-engineering"

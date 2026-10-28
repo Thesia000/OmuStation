@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
-namespace Content.Omu.Shared.SkillSystem;
+namespace Content.Shared._Omu.SkillSystem;
 
 [Prototype]
 public sealed partial class SkillNamePrototype : IPrototype
@@ -15,6 +16,9 @@ public sealed partial class SkillNamePrototype : IPrototype
 
     [DataField]
     public string? Description;
+
+    [DataField]
+    public List<ProtoId<DepartmentPrototype>> JobDepartments = new();
 }
 
 [Prototype]

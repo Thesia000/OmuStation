@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 using Content.Shared.Tools.Components;
 using Content.Shared.Hands;
 using Content.Omu.Common.SkillSystem;
-using Content.Omu.Shared.SkillSystem;
+using Content.Shared._Omu.SkillSystem;
 using Content.Shared.Medical.Healing;
 using Content.Shared.Mind.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Tools;
@@ -40,6 +40,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         SubscribeLocalEvent<AntagSkillGrantingComponent, ComponentStartup>(AntagStartSkillGrantingStartup);
         SubscribeLocalEvent<CommandSkillComponent, ComponentStartup>(CommandCompStartup);
         SubscribeLocalEvent<CommandSkillComponent, MindAddedMessage>(CommandCompStartup);
+        SubscribeLocalEvent<MindContainerComponent, SkillLevelChengeEvent>(AddCommandSkillToMind);
 
         //Wizden components
         SubscribeLocalEvent<SkillStaminaAjustmentComponent, SkillLevelChengeEvent>(SkillStaminaModification);
@@ -129,7 +130,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         int skillLevel = GetHighestSkillLevel(skillComp.SkillDic, requirmentsComp.Skill);
         float speedMod;
         speedMod = GetHighestModifier(requirmentsComp.ParsedModifiers, skillLevel);
-        speedMod *= GetCommandSkillBonus(skillComp, (EntityUid) mindContainer.Mind);
+        speedMod *= GetCommandSkillBonus(skillComp, userUid);
         return speedMod;
     }
     public float GetCommandSkillBonus(SkillHolderComponent effectReciverSkillComp, EntityUid entUid)
@@ -151,7 +152,8 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
             var refCords = Transform((EntityUid) mindComp.CurrentEntity).Coordinates;
             if (Transform((EntityUid) mindComp.CurrentEntity).MapID != refMapID) continue;
             if (Vector2.Distance(refCords.Position, centerCords.Position) > commandSkillComp.Range) continue;
-            float commandSpeedMod = GetHighestModifier(commandSkillComp.ParsedSpeedModifier, skillComp.SkillDic["command"]);
+            skillComp.SkillDic.TryGetValue("Command", out var commandLevel);
+            float commandSpeedMod = GetHighestModifier(commandSkillComp.ParsedSpeedModifier, commandLevel);
             if (highestSpeedMod < commandSpeedMod)
             {
                 highestSpeedMod = commandSpeedMod;
@@ -210,7 +212,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
             QueueDel(ent);
         }
         SkillLevelChengeEvent ev = new();
-        RaiseLocalEvent(ent, ref ev);
+        RaiseLocalEvent(args.User, ref ev);
     }
     public void ModifyToolSpeed(Entity<SkillRequermentComponent> ent, ref GotEquippedHandEvent args)
     {

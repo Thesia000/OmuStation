@@ -9,7 +9,6 @@
       state: NT
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
-      state: NT
     - type: SkillGranting
       skillDicMaxSkillLevel:
         Combat: 2
@@ -30,7 +29,6 @@
       state: syndicate
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
-      state: syndicate
     - type: SkillGranting
       skillDicMaxSkillLevel:
         Combat: 3 #syndicate agents start with combat 2 so this is a upgrade to that

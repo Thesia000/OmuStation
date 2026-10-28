@@ -9,7 +9,6 @@
       state: NT
     - type: Item
       sprite: _Omu/Objects/SkillTrainers.rsi
-      state: NT
     - type: SkillGranting
       skillDicMaxSkillLevel:
         Cargo: 5

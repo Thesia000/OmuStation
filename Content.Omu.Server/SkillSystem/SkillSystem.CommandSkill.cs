@@ -44,8 +44,11 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
         commandSkillComp.EffectedDepartments = bodyCommandSkillComp.EffectedDepartments;
         commandSkillComp.ParsedSpeedModifier = bodyCommandSkillComp.ParsedSpeedModifier;
     }
-    public void AddCommandSkillToMind(EntityUid mindUid, SkillHolderComponent skillHolderComp, ref SkillLevelChengeEvent args)
+    public void AddCommandSkillToMind(Entity<MindContainerComponent> ent, ref SkillLevelChengeEvent args)
     {
+        if (!ent.Comp.HasMind) return;
+        var mindUid = (EntityUid) ent.Comp.Mind;
+        if (!TryComp<SkillHolderComponent>(mindUid, out var skillHolderComp)) return;
         if (skillHolderComp.SkillDic.ContainsKey("Command"))
         {
             if (TryComp<CommandSkillComponent>(mindUid, out var _)) return;
