@@ -19,7 +19,7 @@ public sealed partial class RoundStartSkillGrantingComponent : Component
     [DataField]
     public HashSet<ProtoId<DepartmentNamePrototype>> Department = new();
     [DataField]
-    public HashSet<ProtoId<DepartmentNamePrototype>> CommandSkillDepartment = new("ERROR");
+    public HashSet<ProtoId<DepartmentNamePrototype>> CommandSkillDepartment = ["ERROR"];
 }
 [RegisterComponent]
 public sealed partial class AntagSkillGrantingComponent : Component
