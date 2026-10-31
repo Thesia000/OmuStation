@@ -112,7 +112,7 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         if (!TryComp<SkillRequermentComponent>(toolUid, out var requirmentComp)) return 1.0f;
         return GetSkillSpeedModifier(userUid, requirmentComp, out cancle);
     }
-    public float GetSkillSpeedModifier(EntityUid userUid, SkillRequermentComponent requirmentsComp, out bool cancle)
+    public float GetSkillSpeedModifier(EntityUid userUid, SkillRequermentComponent requirmentsComp, out bool cancle, bool intertedCommandBonus = false)
     {
         cancle = false;
         if (!TryComp<MindContainerComponent>(userUid, out var mindContainer)) return 1.0f;
@@ -130,10 +130,10 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
         int skillLevel = GetHighestSkillLevel(skillComp.SkillDic, requirmentsComp.Skill);
         float speedMod;
         speedMod = GetHighestModifier(requirmentsComp.ParsedModifiers, skillLevel);
-        speedMod *= GetCommandSkillBonus(skillComp, userUid);
+        speedMod *= GetCommandSkillBonus(skillComp, userUid, inverted: intertedCommandBonus);
         return speedMod;
     }
-    public float GetCommandSkillBonus(SkillHolderComponent effectReciverSkillComp, EntityUid entUid)
+    public float GetCommandSkillBonus(SkillHolderComponent effectReciverSkillComp, EntityUid entUid, bool inverted = false)
     {
         EntityCoordinates centerCords = Transform(entUid).Coordinates;
         var refMapID = Transform(entUid).MapID;
@@ -158,6 +158,10 @@ public partial class OmuSkillSystem : CommenOmuSkillSystem
             {
                 highestSpeedMod = commandSpeedMod;
             }
+        }
+        if (inverted)
+        {
+            highestSpeedMod = 1.0f / highestSpeedMod;
         }
         return highestSpeedMod;
     }

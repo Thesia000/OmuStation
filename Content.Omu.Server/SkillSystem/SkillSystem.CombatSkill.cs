@@ -13,7 +13,7 @@ public sealed partial class OmuSkillSystem : CommenOmuSkillSystem
     {
         if (args.User == null) return;
         //if (!TryComp<SkillRequermentComponent>(ent, out var _)) return; -> not needed as default is 1.0f
-        var modifier = GetSkillSpeedModifier((EntityUid) args.User, ent.Comp, out var cancle);
+        var modifier = GetSkillSpeedModifier((EntityUid) args.User, ent.Comp, out var cancle, intertedCommandBonus: true);
         args.MaxAngle *= modifier;
         args.MinAngle *= modifier;
     }
